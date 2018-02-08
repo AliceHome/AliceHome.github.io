@@ -293,6 +293,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/08/iOS组件化开发-概述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/08/iOS组件化开发-概述/" itemprop="url">iOS组件化开发 概述‘</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T16:37:28+08:00">
+                2018-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/02/iOS 问题札记/Umeng-劫持-NSSetUncaughtExceptionHandler/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -395,7 +536,7 @@
 <p>将之前对exception处理的handle进行保存，下一次处理的时候，重新调用之前的handle，将异常抛出给他们。</p>
 <h2 id="Umeng-劫持-Exception-问题"><a href="#Umeng-劫持-Exception-问题" class="headerlink" title="Umeng 劫持 Exception 问题"></a>Umeng 劫持 Exception 问题</h2><p>Umeng 应该也是用了上述方式对异常进行的处理，但是并没有将异常进行抛出，所以，当工程中使用了Umeng进行异常统计的时候，我们自己写的异常捕获有可能会失效。如果写在Umeng统计之前就会被Umeng替换掉，异常就无法捕捉。 但是，如果写在Umeng之后，就会造成Umeng统计失效（这个没有去验证）。所以我们就需要使用上面的方式进行处理。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="built_in">NSUncaughtExceptionHandler</span> *_umengHandler;</span><br><span class="line"><span class="comment">// 将Umeng异常处理保存</span></span><br><span class="line">_umengHandler = <span class="built_in">NSGetUncaughtExceptionHandler</span>();</span><br><span class="line"><span class="comment">// 设置自己处理 （UncaughtExceptionHandlerYourself 是你自己处理异常的函数）</span></span><br><span class="line"><span class="built_in">NSSetUncaughtExceptionHandler</span>(&amp;UncaughtExceptionHandlerYourself);</span><br></pre></td></tr></table></figure></p>
 <p>如上，首先保存Umeng的handler UncaughtExceptionHandlerYourself 使我们自己处理异常的handler，然后在自己处理完异常之后，调用一下之前保存的Umeng的handler<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_umengHandler(exception);</span><br></pre></td></tr></table></figure></p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://my.oschina.net/zhxx/blog/880909" target="_blank" rel="noopener">iOS友盟和其他崩溃收集库共存时的冲突问题</a></p>
+<p> <em>· 参考文档  ·</em><br><a href="https://my.oschina.net/zhxx/blog/880909" target="_blank" rel="noopener">iOS友盟和其他崩溃收集库共存时的冲突问题</a></p>
 
           
         
@@ -1022,6 +1163,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/02/NSFoundation/NSFoundation-NSInvocation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/02/NSFoundation/NSFoundation-NSInvocation/" itemprop="url">NSFoundation-NSInvocation</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-02T18:21:58+08:00">
+                2017-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NSFoundation/" itemprop="url" rel="index">
+                    <span itemprop="name">NSFoundation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><em>NSInvocation</em>继承自<em>NSObject</em>。</p>
+<p><em>参考</em><br><a href="https://developer.apple.com/documentation/foundation/nsinvocation?language=occ" target="_blank" rel="noopener">NSInvocation API</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/01/NSFoundation/Foundation-MapTable/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1322,6 +1606,7 @@
 </ul>
 </li>
 </ul>
+<hr>
 <h3 id="识别类"><a href="#识别类" class="headerlink" title="识别类"></a>识别类</h3><p>这里主要有三个类方法</p>
 <ul>
 <li>+ class , 返回类对象</li>
@@ -1332,9 +1617,44 @@
 <h5 id="讨论-7"><a href="#讨论-7" class="headerlink" title="讨论"></a>讨论</h5><p>要引用一个类，必须通过类的名字，初次之外其他的情况我们可以通过这个方法来获取一个类对象。</p>
 <h4 id="superclass"><a href="#superclass" class="headerlink" title="+ superclass"></a>+ superclass</h4><p>返回父类的类对象</p>
 <h4 id="isSubclassOfClass"><a href="#isSubclassOfClass" class="headerlink" title="+isSubclassOfClass:"></a>+isSubclassOfClass:</h4><p>验证调用该方法的类是否继承自参数给定的类（包括父类的父类也会返回YES）</p>
-<h3 id="测试类的方法"><a href="#测试类的方法" class="headerlink" title="测试类的方法"></a>测试类的方法</h3><h4 id="instancesRespondToSelector"><a href="#instancesRespondToSelector" class="headerlink" title="+ instancesRespondToSelector:"></a>+ instancesRespondToSelector:</h4><p>返回一个BOOL值，来表示实例是否能够相应方法</p>
+<h3 id="检测实例方法"><a href="#检测实例方法" class="headerlink" title="检测实例方法"></a>检测实例方法</h3><h4 id="instancesRespondToSelector"><a href="#instancesRespondToSelector" class="headerlink" title="+ instancesRespondToSelector:"></a>+ instancesRespondToSelector:</h4><p>返回一个BOOL值，来表示实例是否能够相应方法</p>
 <h4 id="方法声明-5"><a href="#方法声明-5" class="headerlink" title="方法声明"></a>方法声明</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">BOOL</span>)instancesRespondToSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
 <h4 id="讨论-8"><a href="#讨论-8" class="headerlink" title="讨论"></a>讨论</h4><p>该方法检测调用类中是否实现了某个实例方法（aSelector），而不是类方法，如果要检测类方法，那么可以调用协议<nsobect> 中的 <em>respondsToSelector:</em> 方法。<br>如果只是在 .h 文件中声明了该方法，而没有在 .m 中去实现这个方法，检测结果为 NO。</nsobect></p>
+<hr>
+<h4 id="检测协议"><a href="#检测协议" class="headerlink" title="检测协议"></a>检测协议</h4><p>返回一个BOOL值， 来表示调用该方法的类是否实现了对应的协议（参数）</p>
+<h5 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">BOOL</span>)conformsToProtocol:(Protocol *)protocol;</span><br></pre></td></tr></table></figure>
+<h5 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> canJoin = [MyClass conformsToProtocol:<span class="class"><span class="keyword">@protocol</span>(<span class="title">Joining</span>)];</span></span><br></pre></td></tr></table></figure>
+<h5 id="讨论-9"><a href="#讨论-9" class="headerlink" title="讨论"></a>讨论</h5><ol>
+<li><p>MyClass  实现了 AffiliationRequests  和 AffiliationRequests 协议</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">MyClass</span> : <span class="title">NSObject</span> &lt;<span class="title">AffiliationRequests</span>, <span class="title">Normalization</span>&gt;</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>协议之间的合并 AffiliationRequests 合并了 Joining 协议</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">AffiliationRequests</span> &lt;<span class="title">Joining</span>&gt;</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果 MyClass 实现了AffiliationRequests协议，同样实现了 Joining， <em>conformsToProtocol</em> 返回结果为YES</p>
+</li>
+<li><em>conformsToProtocol：</em> 该方法不会检测程序有没有实现协议中的方法，只会检测在类的声明后面有没有<protocol name="">。</protocol></li>
+<li>即使你实现了协议的方法，但是没有在类的声明后面通过尖括号包含协议的名字，那么该方法返回仍为NO</li>
+</ol>
+<hr>
+<h3 id="获取方法信息"><a href="#获取方法信息" class="headerlink" title="获取方法信息"></a>获取方法信息</h3><h4 id="methodForSelector"><a href="#methodForSelector" class="headerlink" title="- methodForSelector:"></a>- methodForSelector:</h4><p>返回方法实现的地址</p>
+<h5 id="方法声明-6"><a href="#方法声明-6" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (IMP)methodForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<p><em>IMP</em> 方法（函数）指针，也就是实现方法的地址<br>参数 <em>aSelector</em>必须合法，在传入作为参数之前，可以通过 <em>responseToSelector</em> 检查该参数指向的方法是否已经实现了</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MethodInfor *mObj = [MethodInfor new];</span><br><span class="line"><span class="keyword">if</span> ([mObj respondsToSelector:<span class="keyword">@selector</span>(sayHello)]) &#123;</span><br><span class="line">    IMP imp = [mObj methodForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>,imp);</span><br><span class="line">    imp();<span class="comment">// 执行了 sayHello 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="讨论-10"><a href="#讨论-10" class="headerlink" title="讨论"></a>讨论</h5><p>方法的调用者如果是 类 那么 aSelector 必须是类方法；<br>方法的调用者如果是 实例 那么 aSelector 必须是实例方法</p>
+<h4 id="instanceMethodForSelector"><a href="#instanceMethodForSelector" class="headerlink" title="+ instanceMethodForSelector:"></a>+ instanceMethodForSelector:</h4><p>返回实例方法实现的地址</p>
+<h5 id="方法声明-7"><a href="#方法声明-7" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (IMP)instanceMethodForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<p><em>IMP</em> 方法（函数）指针，也就是实现方法的地址<br>参数 <em>aSelector</em>必须合法，在传入作为参数之前，可以通过 <em>instanceMethodForSelector</em> 检查该参数指向的方法是否已经实现了</p>
+<h5 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([MethodInfor instancesRespondToSelector:<span class="keyword">@selector</span>(sayHello)]  ) &#123;</span><br><span class="line">    IMP imp = [MethodInfor instanceMethodForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>,imp);</span><br><span class="line">    imp();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="讨论-11"><a href="#讨论-11" class="headerlink" title="讨论"></a>讨论</h5><p>该方法只用来检测 类 中的实例有没有实现实例方法，不能检测类方法。检测类方法使用 <em>methodForSelector:</em> 。</p>
+<h4 id="instanceMethodSignatureForSelector"><a href="#instanceMethodSignatureForSelector" class="headerlink" title="+ instanceMethodSignatureForSelector:"></a>+ instanceMethodSignatureForSelector:</h4><p>返回方法签名对象<a href="https://developer.apple.com/documentation/foundation/nsmethodsignature?language=occ" target="_blank" rel="noopener">NSMethodSignature</a></p>
+<h5 id="方法声明-8"><a href="#方法声明-8" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSMethodSignature</span> *)instanceMethodSignatureForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<h5 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMethodSignature</span> *sayHelloSignature = [MethodInfor instanceMethodSignatureForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br></pre></td></tr></table></figure>
+<h5 id="讨论-12"><a href="#讨论-12" class="headerlink" title="讨论"></a>讨论</h5><p>该方法会返回一个方法的签名对象，如果类的对象不能响应这个方法，那么会返回一个 nil 对象。</p>
+<h4 id="methodSignatureForSelector"><a href="#methodSignatureForSelector" class="headerlink" title="- methodSignatureForSelector:"></a>- methodSignatureForSelector:</h4><p>返回方法签名对象<a href="https://developer.apple.com/documentation/foundation/nsmethodsignature?language=occ" target="_blank" rel="noopener">NSMethodSignature</a></p>
+<h5 id="方法声明-9"><a href="#方法声明-9" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSMethodSignature</span> *)methodSignatureForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<h5 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMethodSignature</span> *sayHelloSignature = [MethodInfor instanceMethodSignatureForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br></pre></td></tr></table></figure>
+<h5 id="讨论-13"><a href="#讨论-13" class="headerlink" title="讨论"></a>讨论</h5><p>该方法会返回一个方法的签名对象，如果类的对象不能响应这个方法，那么会返回一个 nil 对象。<br>该方法针对类和对象都可以。<br>这里与<br><em>This method is used in the implementation of protocols. This method is also used in situations where an NSInvocation object must be created, such as during message forwarding. If your object maintains a delegate or is capable of handling messages that it does not directly implement, you should override this method to return an appropriate method signature.</em> 没看懂，等了解了 NSInvocation 之后再来看看。</p>
 
           
         
@@ -1383,7 +1703,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/01/The Swift Programming Language/Swift01-The-Basics/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/02/iOS 问题札记/iOS-开发-Tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -1402,7 +1722,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/01/01/The Swift Programming Language/Swift01-The-Basics/" itemprop="url">Swift01-The Basics</a></h1>
+                <a class="post-title-link" href="/2015/02/02/iOS 问题札记/iOS-开发-Tips/" itemprop="url">iOS 开发 Tips</a></h1>
         
 
         <div class="post-meta">
@@ -1414,8 +1734,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-01-01T16:35:30+08:00">
-                2015-01-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-02-02T11:47:34+08:00">
+                2015-02-02
               </time>
             
 
@@ -1437,8 +1757,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -1476,135 +1796,11 @@
       
         
           
-            <p>Swift 是开发 iOS ， macOS 和 watchOS </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2013/07/13/Blog 发布/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2013/07/13/Blog 发布/" itemprop="url">Blog 发布</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-07-13T20:46:25+08:00">
-                2013-07-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="本地生成"><a href="#本地生成" class="headerlink" title="本地生成"></a>本地生成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="部署到远程"><a href="#部署到远程" class="headerlink" title="部署到远程"></a>部署到远程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+            <p>记录在开发过程中的一些小技巧的使用</p>
+<h2 id="TableView"><a href="#TableView" class="headerlink" title="TableView"></a>TableView</h2><h3 id="取消-table-view-的-section-悬停"><a href="#取消-table-view-的-section-悬停" class="headerlink" title="取消 table view 的 section 悬停"></a>取消 <em>table view</em> 的 <em>section</em> 悬停</h3><p>有时候，通过使用 <em>sectionView</em> 实现tableView的间隔效果，但是不想让这个间隔悬停。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CGFloat</span> sectionHeaderHeight = <span class="number">12</span>;</span><br><span class="line">    <span class="keyword">if</span> (scrollView.contentOffset.y&lt;=sectionHeaderHeight&amp;&amp;scrollView.contentOffset.y&gt;=<span class="number">0</span>) &#123;</span><br><span class="line">        scrollView.contentInset = <span class="built_in">UIEdgeInsetsMake</span>(-scrollView.contentOffset.y, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (scrollView.contentOffset.y&gt;=sectionHeaderHeight) &#123;</span><br><span class="line">        scrollView.contentInset = <span class="built_in">UIEdgeInsetsMake</span>(-sectionHeaderHeight, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="tableView-中有输入框，键盘隐藏-UITableViewController-的效果"><a href="#tableView-中有输入框，键盘隐藏-UITableViewController-的效果" class="headerlink" title="tableView 中有输入框，键盘隐藏 - UITableViewController 的效果"></a>tableView 中有输入框，键盘隐藏 - UITableViewController 的效果</h3><p>通过实现UITableViewController中控制键盘的效果，又不使用UITableViewController</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">UITableView</span> *)tableView &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_tableView) &#123;</span><br><span class="line"></span><br><span class="line">        _tableView = [[<span class="built_in">UITableView</span> alloc] initWithFrame:<span class="built_in">CGRectZero</span> style:<span class="built_in">UITableViewStylePlain</span>];</span><br><span class="line">        <span class="comment">//处理键盘弹出tableView自动像是移动一段距离</span></span><br><span class="line">        <span class="built_in">UITableViewController</span> *tvc = [[<span class="built_in">UITableViewController</span> alloc] initWithStyle:<span class="built_in">UITableViewStylePlain</span>];</span><br><span class="line">        [<span class="keyword">self</span> addChildViewController:tvc];</span><br><span class="line">        _tableView = tvc.tableView;</span><br><span class="line"></span><br><span class="line">        _tableView.delegate = <span class="keyword">self</span>;</span><br><span class="line">        _tableView.dataSource = <span class="keyword">self</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _tableView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2>
           
         
       
@@ -1642,6 +1838,10 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1685,7 +1885,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1696,7 +1896,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1707,7 +1907,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
