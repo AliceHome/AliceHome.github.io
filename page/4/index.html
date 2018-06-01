@@ -293,6 +293,305 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/26/iOS/LLVM-以及-BitCode-泛谈/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/26/iOS/LLVM-以及-BitCode-泛谈/" itemprop="url">LLVM 以及 BitCode 泛谈 - Chris Lattner 访谈录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-26T09:56:19+08:00">
+                2017-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这是看了LLVM之父 <a href="https://en.wikipedia.org/wiki/Chris_Lattner" target="_blank" rel="noopener">Chris Lattner</a> 访谈录，做的小结，只关注LLVM这块。<br><em>LLVM 起源</em><br>LLVM(Low Level Virtual Machine)</p>
+<p>LLVM: 一个模块化和可重用的编译器和工具链技术的集合，Clang是LLVM子项目，是C,C++和Objective-C编译器，因为多模块的复用，所以提供了惊人的编译速度，比GCC快 3 倍。</p>
+<p><em>LLVM 的 byteCode 和 Apple 现在的 bitCode区分</em><br>LLVM开始是开源的，将所有代码转换成二进制时就叫做 bytecode – Java 当年也是这么叫的。然而这部分问题很多，然后就有了LLVM2.0，而 2.0 采用的就是BitCode机制。<br>LLVM 2.0 将所有的代码以比特流（bit stream)而不是字节流(byte stream)的形式编码。</p>
+<p><em>Bitcode 优势：</em></p>
+<ol>
+<li>因为Bitcode机制，编译器可以通过编译不同代码来存储各种优化方法，这样下次再遇到类似的代码，编译器就会自动启动相关优化机制，使得效率提升。</li>
+<li>LLVM 可以让芯片的兼容性变的更好。因为Apple每年都会在芯片上推陈出现，它们转化成二进制的规则不尽相同，LLVM只要每次重新编码并传输成比特流就好了（没听懂）</li>
+</ol>
+<p>Bitcode 缺陷： 不能解决 32 位的APP在 64 位机器上的兼容问题。而 Chris Lattner 说这个问题其实应该依靠代码逻辑来解决。<br>问题：如何通过代码逻辑来解决 32 位 APP 在 64 位机器上的兼容问题。</p>
+<p><em>LLVM三层结构</em><br>第一层： Clang 编译器，负责编译各种语言；<br>第二层：代码优化器，通过模块化操作优化代码，是Bitcode逻辑的主要部分；<br>第三层：代码翻译器，针对不同平台和GPU将代码翻译成机器语言。</p>
+<p><em>LLDB</em> 一个有着REPL的特性和C++、python插件的开源调试器。LLDB绑定在Xcode内部，存在于主窗口底部的控制台中。</p>
+<p><em>libc++,libc++ ABI</em>: 高性能C++标准库实现，支持C++11</p>
+<p><em>compiler-rt</em>: 为 LLVM和Clang设计的编译器扩展函数库。针对 _fixunsdfdi 和其他目标机器上没有一个核心IR对应的短原生指令序列时(Oh,my god 这是什么）,提供高度调优过的底层代码生成支持。</p>
+<p><em>ABI是什么？</em><br>Application Binary Interface，应用二进制接口，是APP和操作系统、其应用之间的二进制接口。</p>
+<p>—-<em>*参考</em>——<br><a href="https://www.jianshu.com/p/66a76df0db95" target="_blank" rel="noopener">Chris Lattner 访谈录（上）</a><br><a href="http://atp.fm/205-chris-lattner-interview-transcript" target="_blank" rel="noopener">Transcript of episode 205, an interview of Chris Lattner on January 17, 2017</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/02/NSFoundation/NSFoundation-NSInvocation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/02/NSFoundation/NSFoundation-NSInvocation/" itemprop="url">NSFoundation-NSInvocation</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-02T18:21:58+08:00">
+                2017-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NSFoundation/" itemprop="url" rel="index">
+                    <span itemprop="name">NSFoundation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><em>NSInvocation</em>继承自<em>NSObject</em>。</p>
+<p><em>参考</em><br><a href="https://developer.apple.com/documentation/foundation/nsinvocation?language=occ" target="_blank" rel="noopener">NSInvocation API</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/01/NSFoundation/Foundation-MapTable/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -393,6 +692,152 @@
 <h2 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h2><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="https://developer.apple.com/documentation/foundation/nsmaptable" target="_blank" rel="noopener">NSMaptable API</a><br><a href="http://www.cocoawithlove.com/2008/07/nsmaptable-more-than-nsdictionary-for.html" target="_blank" rel="noopener">NSMapTable: more than an NSDictionary for weak pointers
 </a></p>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/01/Learning-SQLite-for-iOS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/01/Learning-SQLite-for-iOS/" itemprop="url">Learning SQLite for iOS</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-01T17:27:57+08:00">
+                2016-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/2016/12/01/Learning-SQLite-for-iOS/WX20180601-173012@2x.png" alt=""></p>
+<p>[TOC]</p>
+<h1 id="Chapter-1：介绍-SQL-和-SQLite"><a href="#Chapter-1：介绍-SQL-和-SQLite" class="headerlink" title="Chapter 1：介绍 SQL 和 SQLite"></a>Chapter 1：介绍 SQL 和 SQLite</h1><blockquote>
+<p>这一章节，介绍 SQL（structured query Language） 北京和移动数据库 —— SQLite.</p>
+</blockquote>
+<h1 id="Chapter-2：数据库设计概念"><a href="#Chapter-2：数据库设计概念" class="headerlink" title="Chapter 2：数据库设计概念"></a>Chapter 2：数据库设计概念</h1><h1 id="Chapter-3：管理数据库"><a href="#Chapter-3：管理数据库" class="headerlink" title="Chapter 3：管理数据库"></a>Chapter 3：管理数据库</h1><h1 id="Chapter-4：Essentials-of-SQL"><a href="#Chapter-4：Essentials-of-SQL" class="headerlink" title="Chapter 4：Essentials of SQL"></a>Chapter 4：Essentials of SQL</h1><h1 id="Chapter-5：C-API"><a href="#Chapter-5：C-API" class="headerlink" title="Chapter 5：C API"></a>Chapter 5：C API</h1><h1 id="Chapter-6：Swift-with-SQLite"><a href="#Chapter-6：Swift-with-SQLite" class="headerlink" title="Chapter 6：Swift with SQLite"></a>Chapter 6：Swift with SQLite</h1><h1 id="Chapter-7："><a href="#Chapter-7：" class="headerlink" title="Chapter 7："></a>Chapter 7：</h1><h1 id="Chapter-8："><a href="#Chapter-8：" class="headerlink" title="Chapter 8："></a>Chapter 8：</h1>
           
         
       
@@ -690,6 +1135,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/01/SQLite-FTS3-and-FTS4-Extensions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/06/01/SQLite-FTS3-and-FTS4-Extensions/" itemprop="url">SQLite FTS3 and FTS4 Extensions</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-01T11:07:27+08:00">
+                2015-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DataBase/" itemprop="url" rel="index">
+                    <span itemprop="name">DataBase</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ol>
+<li><a href="http://www.sqlite.org/fts3.html" target="_blank" rel="noopener">SQLite FTS3 and FTS4 Extensions</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/02/iOS 问题札记/iOS-开发-Tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -788,6 +1377,393 @@
 <h3 id="tableView-中有输入框，键盘隐藏-UITableViewController-的效果"><a href="#tableView-中有输入框，键盘隐藏-UITableViewController-的效果" class="headerlink" title="tableView 中有输入框，键盘隐藏 - UITableViewController 的效果"></a>tableView 中有输入框，键盘隐藏 - UITableViewController 的效果</h3><p>通过实现UITableViewController中控制键盘的效果，又不使用UITableViewController</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">UITableView</span> *)tableView &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_tableView) &#123;</span><br><span class="line"></span><br><span class="line">        _tableView = [[<span class="built_in">UITableView</span> alloc] initWithFrame:<span class="built_in">CGRectZero</span> style:<span class="built_in">UITableViewStylePlain</span>];</span><br><span class="line">        <span class="comment">//处理键盘弹出tableView自动像是移动一段距离</span></span><br><span class="line">        <span class="built_in">UITableViewController</span> *tvc = [[<span class="built_in">UITableViewController</span> alloc] initWithStyle:<span class="built_in">UITableViewStylePlain</span>];</span><br><span class="line">        [<span class="keyword">self</span> addChildViewController:tvc];</span><br><span class="line">        _tableView = tvc.tableView;</span><br><span class="line"></span><br><span class="line">        _tableView.delegate = <span class="keyword">self</span>;</span><br><span class="line">        _tableView.dataSource = <span class="keyword">self</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _tableView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/06/01/sqlite-tour/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/06/01/sqlite-tour/" itemprop="url">sqlite tour</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-06-01T11:33:21+08:00">
+                2014-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DataBase/" itemprop="url" rel="index">
+                    <span itemprop="name">DataBase</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h2 id="sqlite3-program"><a href="#sqlite3-program" class="headerlink" title="sqlite3 program"></a>sqlite3 program</h2><p>Mac OS 上已经预装了 sqlite3 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ which sqlite3</span><br><span class="line">/usr/bin/sqlite3</span><br></pre></td></tr></table></figure>
+<p>进入 sqlite3 命令行环境，并创建表格</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$sqlite3 ex1</span><br><span class="line">SQLite version 3.8.5 2014-05-29 12:36:14</span><br><span class="line">Enter &quot;.help&quot; for usage hints.</span><br><span class="line">sqlite&gt; create table tabl2 (</span><br><span class="line">   ...&gt; f1 varchar(30) primary key,</span><br><span class="line">   ...&gt; f2 text,</span><br><span class="line">   ...&gt; f3 real</span><br><span class="line">   ...&gt; );</span><br><span class="line">   </span><br><span class="line">insert into tabl2 values (&apos;Jack&apos;,&apos;male&apos;,12.6);</span><br><span class="line">insert into tabl2 values (&apos;Tome&apos;,&apos;male&apos;,12.6);</span><br><span class="line">insert into tabl2 values (&apos;Bob&apos;,&apos;male&apos;,12.6);</span><br><span class="line">insert into tabl2 values (&apos;Rose&apos;,&apos;fmale&apos;,12.6);</span><br></pre></td></tr></table></figure>
+<h2 id="dot-command"><a href="#dot-command" class="headerlink" title="dot-command"></a>dot-command</h2><p>点命令是 sqlite3 的设置输出命令，有一些规则需要遵循：</p>
+<ul>
+<li>必须以 “.” 开头；</li>
+<li>单行执行，不支持多行</li>
+<li>不能在 SQL 中</li>
+<li>不能够写注释</li>
+</ul>
+<p>通过 .help 可以查看所有的点命令</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>sqlite 中 SQL 语句不区分大小写；</li>
+<li>每个 SQL 语句都需要分号结束，如果没有分号，Enter 之后，sqlite3 会继续让你输入，知道遇到分号为止</li>
+</ul>
+<h3 id="dot-command-修改输出格式"><a href="#dot-command-修改输出格式" class="headerlink" title="dot-command 修改输出格式"></a>dot-command 修改输出格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .tables</span><br><span class="line">tabl2</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack|male|12.6</span><br><span class="line">Tome|male|12.6</span><br><span class="line">Bob|male|12.6</span><br><span class="line">Rose|fmale|12.6</span><br></pre></td></tr></table></figure>
+<p><em>.tables</em> 查看当前数据库中的表， <em>select </em> from tabl2;<em> 查看 </em>tabl2<em> 表中的数据，并且以 </em>list* 方式展示出来。 sqlite3 program 能够以 8 种方式展示输出结果：</p>
+<ul>
+<li>csv</li>
+<li>column </li>
+<li>html</li>
+<li>insert</li>
+<li>line</li>
+<li>list</li>
+<li>quote</li>
+<li>tabs</li>
+<li>tcl</li>
+</ul>
+<p>通过 .mode [方式名字] 可以修改当前的展示模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack|male|12.6</span><br><span class="line">Tome|male|12.6</span><br><span class="line">Bob|male|12.6</span><br><span class="line">Rose|fmale|12.6</span><br><span class="line">sqlite&gt; .mode list</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack|male|12.6</span><br><span class="line">Tome|male|12.6</span><br><span class="line">Bob|male|12.6</span><br><span class="line">Rose|fmale|12.6</span><br><span class="line">sqlite&gt; .mode csv</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack,male,12.6</span><br><span class="line">Tome,male,12.6</span><br><span class="line">Bob,male,12.6</span><br><span class="line">Rose,fmale,12.6</span><br><span class="line">sqlite&gt; .mode html</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">&lt;TR&gt;&lt;TD&gt;Jack&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;male&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;12.6&lt;/TD&gt;</span><br><span class="line">&lt;/TR&gt;</span><br><span class="line">&lt;TR&gt;&lt;TD&gt;Tome&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;male&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;12.6&lt;/TD&gt;</span><br><span class="line">&lt;/TR&gt;</span><br><span class="line">&lt;TR&gt;&lt;TD&gt;Bob&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;male&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;12.6&lt;/TD&gt;</span><br><span class="line">&lt;/TR&gt;</span><br><span class="line">&lt;TR&gt;&lt;TD&gt;Rose&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;fmale&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;12.6&lt;/TD&gt;</span><br><span class="line">&lt;/TR&gt;</span><br><span class="line">sqlite&gt; .mode tabs</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack	male	12.6</span><br><span class="line">Tome	male	12.6</span><br><span class="line">Bob	male	12.6</span><br><span class="line">Rose	fmale	12.6</span><br></pre></td></tr></table></figure>
+<p>默认是 <em>list</em> 模式，上面分别以 <em>list</em>、<em>csv</em>、<em>html</em>、<em>tabs</em> 模式进行展示。<br>除此之外，<em>.separator</em> 可以修改分隔符，比如我们以 “ ~ “ 作为分割</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .separator &quot; ~ &quot;</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack ~ male ~ 12.6</span><br><span class="line">Tome ~ male ~ 12.6</span><br><span class="line">Bob ~ male ~ 12.6</span><br><span class="line">Rose ~ fmale ~ 12.6</span><br><span class="line">sqlite&gt; .mode list</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack|male|12.6</span><br><span class="line">Tome|male|12.6</span><br><span class="line">Bob|male|12.6</span><br><span class="line">Rose|fmale|12.6</span><br></pre></td></tr></table></figure>
+<p>当然，如果通过 <em>.mode</em> 再次修改输出格式的话， <em>.separator</em> 的操作就会被重置，这一点需要注意。</p>
+<h3 id="line-amp-column-模式"><a href="#line-amp-column-模式" class="headerlink" title="line &amp; column 模式"></a>line &amp; column 模式</h3><p>通过 <em>.mode line</em> 和 <em>.mode column</em> 可以将输出格式修改成行和列模式，实现如下：</p>
+<ul>
+<li>行模式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .mode line</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">   f1 = Jack</span><br><span class="line">   f2 = male</span><br><span class="line">   f3 = 12.6</span><br><span class="line"></span><br><span class="line">   f1 = Tome</span><br><span class="line">   f2 = male</span><br><span class="line">   f3 = 12.6</span><br><span class="line"></span><br><span class="line">   f1 = Bob</span><br><span class="line">   f2 = male</span><br><span class="line">   f3 = 12.6</span><br><span class="line"></span><br><span class="line">   f1 = Rose</span><br><span class="line">   f2 = fmale</span><br><span class="line">   f3 = 12.6</span><br></pre></td></tr></table></figure>
+<ul>
+<li>列模式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .mode column</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack        male        12.6</span><br><span class="line">Tome        male        12.6</span><br><span class="line">Bob         male        12.6</span><br><span class="line">Rose        fmale       12.6</span><br></pre></td></tr></table></figure>
+<p>通过 <em>.header on/off</em>  列模式可以将 <em>header</em> 部分展示出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .header on</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">f1          f2          f3</span><br><span class="line">----------  ----------  ----------</span><br><span class="line">Jack        male        12.6</span><br><span class="line">Tome        male        12.6</span><br><span class="line">Bob         male        12.6</span><br><span class="line">Rose        fmale       12.6</span><br></pre></td></tr></table></figure>
+<p>修改列宽 <em>.width col1W col2W … colnW</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .width 1 10</span><br><span class="line">sqlite&gt; .mode column</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">f  f2          f3</span><br><span class="line">-  ----------  ----------</span><br><span class="line">J  male        12.6</span><br><span class="line">T  male        12.6</span><br><span class="line">B  male        12.6</span><br><span class="line">R  fmale       12.6</span><br><span class="line">sqlite&gt; .width 10 10 10</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">f1          f2          f3</span><br><span class="line">----------  ----------  ----------</span><br><span class="line">Jack        male        12.6</span><br><span class="line">Tome        male        12.6</span><br><span class="line">Bob         male        12.6</span><br><span class="line">Rose        fmale       12.6</span><br></pre></td></tr></table></figure>
+<p><em>.width</em> 后面跟着的数字分别表示第几行的宽度，如果没有就是没有限制</p>
+<h3 id="插入模式输出"><a href="#插入模式输出" class="headerlink" title="插入模式输出"></a>插入模式输出</h3><p>有时候，我们需要在另一个表中插入与当前表相同的数据，那么久可以通过 <em>insert</em> 模式来实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .mode insert new_table</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">INSERT INTO new_table(f1,f2,f3) VALUES(&apos;Jack&apos;,&apos;male&apos;,12.599999999999999644);</span><br><span class="line">INSERT INTO new_table(f1,f2,f3) VALUES(&apos;Tome&apos;,&apos;male&apos;,12.599999999999999644);</span><br><span class="line">INSERT INTO new_table(f1,f2,f3) VALUES(&apos;Bob&apos;,&apos;male&apos;,12.599999999999999644);</span><br><span class="line">INSERT INTO new_table(f1,f2,f3) VALUES(&apos;Rose&apos;,&apos;fmale&apos;,12.599999999999999644);</span><br></pre></td></tr></table></figure>
+<h3 id="将查询结果写入文件"><a href="#将查询结果写入文件" class="headerlink" title="将查询结果写入文件"></a>将查询结果写入文件</h3><p><em>.output</em> and <em>.once</em> 将 sqlite3 的标准输出重定向到指定文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$touch output.txt</span><br><span class="line"></span><br><span class="line">sqlite&gt; .output output.txt</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line"></span><br><span class="line">$ cat output.txt</span><br><span class="line">f1          f2          f3</span><br><span class="line">----------  ----------  ----------</span><br><span class="line">Jack        male        12.6</span><br><span class="line">Tome        male        12.6</span><br><span class="line">Bob         male        12.6</span><br><span class="line">Rose        fmale       12.6</span><br></pre></td></tr></table></figure>
+<p><em>.once</em> 用法与 <em>.output</em> 用法一致，只不过 <em>.once</em> 只会让 sliqte3 执行一次非标准输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .once output.txt</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">f1          f2          f3</span><br><span class="line">----------  ----------  ----------</span><br><span class="line">Jack        male        12.6</span><br><span class="line">Tome        male        12.6</span><br><span class="line">Bob         male        12.6</span><br><span class="line">Rose        fmale       12.6</span><br></pre></td></tr></table></figure>
+<p>通过 ‘|’ 打开保存的文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .once &apos;|open -f&apos;</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br></pre></td></tr></table></figure>
+<p>如图所示，会将结果存储到一个 txt 文件中，然后打开：</p>
+<p><img src="/2014/06/01/sqlite-tour/WX20180601-162145@2x.png" alt=""></p>
+<h2 id="File-I-O-Function"><a href="#File-I-O-Function" class="headerlink" title="File I/O Function"></a>File I/O Function</h2><p>以存储图片为例：</p>
+<ul>
+<li>新建一张 images 表</li>
+<li>在当前目录中添加一张图片， icon.png</li>
+<li>readfile(‘icon.png’)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; create table images</span><br><span class="line">   ...&gt; (</span><br><span class="line">   ...&gt; name text,</span><br><span class="line">   ...&gt; type text,</span><br><span class="line">   ...&gt; img blob</span><br><span class="line">   ...&gt; );</span><br><span class="line">sqlite&gt; insert into images(name,type,img) values (&apos;icon&apos;,&apos;png&apos;,readfile(&apos;icon.png&apos;));</span><br><span class="line">sqlite&gt; select  * from images;</span><br><span class="line">name        type        img</span><br><span class="line">----------  ----------  ----------</span><br><span class="line">icon        png         �PNG</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>读取数据库中的图片,writefile(x,y) 负责将图片写入与数据库相同的目录中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select writefile(&apos;img.png&apos;,img) from images where name = &apos;icon&apos;;</span><br><span class="line">writefile(&apos;img.png&apos;,img)</span><br><span class="line">------------------------</span><br><span class="line">0</span><br><span class="line">26348</span><br></pre></td></tr></table></figure>
+<p>上面实现了 sqlite3 对图片的存储和读取，分别用到了 readfile() 和 writefile() 函数，图片格式为 blob</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="http://www.sqlite.org/cli.html#getting_started" target="_blank" rel="noopener">Command Line Shell For SQLite</a></li>
+<li><a href="http://www.w3school.com.cn/sql/" target="_blank" rel="noopener">W3C-SQL</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/03/01/2014/Tool/CocoaPods体验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/03/01/2014/Tool/CocoaPods体验/" itemprop="url">CocoaPods体验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-03-01T09:32:27+08:00">
+                2014-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CocoaPods/" itemprop="url" rel="index">
+                    <span itemprop="name">CocoaPods</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<h2 id="CocoaPods-Wiki"><a href="#CocoaPods-Wiki" class="headerlink" title="CocoaPods Wiki"></a>CocoaPods Wiki</h2><p>CocoaPods 是一款针对 OC 和 Swift 包以来管理工具（application level dependency manager)。 当然也适合于其他基于 OC 运行时上的语言，比如 RubyMotion，CocoaPods 针对外部扩展库提供了标准格式。它是由 Eloy Duran 和 Fabio Pelosin 以及其他贡献者在 2011 年 8 月开始开发，并在概念 9 月 1 日份发布了第一个版本。 CocoaPods 的健壮性来源于 Ruby 项目 RubyGems 和 Bundler。</p>
+<p>CocoaPods 关注于第三方源代码的发布和集成（集成到 Xcode 工程中）。</p>
+<p>CocoaPods 在命令行中执行，同样也集成到了 APPCode 的 IDE 中。CocoaPods 通过标准的依赖进行源文件的集成，而不再是通过 Copy 源文件来完成。除此之外，所有的第三方库文件都在一个 git 仓库中进行管理，这个仓库位于 GitHub 上。</p>
+<p>CocoaPods 的依赖解决方案来源于 <a href="https://github.com/CocoaPods/Molinillo" target="_blank" rel="noopener">Molinillo</a>, Molinillo 同样被用于其他大型的项目，比如 <a href="https://bundler.io" target="_blank" rel="noopener">Bundler</a>、<a href="https://rubygems.org" target="_blank" rel="noopener">RubyGems</a>、<a href="https://github.com/CocoaPods/Molinillo" target="_blank" rel="noopener">Berkshelf</a>。</p>
+<h2 id="CocoaPods-使用总览"><a href="#CocoaPods-使用总览" class="headerlink" title="CocoaPods 使用总览"></a>CocoaPods 使用总览</h2><ul>
+<li>第一步： 创建 Xcode 工程</li>
+<li>第二部： 在 Xcode 工程的目录下执行： <em>pod init</em></li>
+<li>第三步： 如果遇到 <em>command not found: pod</em> 证明没有安装，执行 <em>sudo gem install cocoapods</em> ，输入密码即可,然后重复第二步</li>
+<li>第四步：关闭 Xcode 工程，通过 workspace 工程打开，即可， </li>
+<li>在 Podfile 中写入依赖库，执行 pod install / update 即可自动集成第三方库</li>
+<li>在项目相应的文件中引入库文件即可</li>
+</ul>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><ul>
+<li>创建 Podfile </li>
+</ul>
+<p>CocoaPods 提供了 <em>pod init</em> 这条快速创建 Podfile 的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">platform :ios, &apos;8.0&apos;</span><br><span class="line">use_frameworks!</span><br><span class="line"></span><br><span class="line">target &apos;MyApp&apos; do</span><br><span class="line">  pod &apos;AFNetworking&apos;, &apos;~&gt; 2.6&apos;</span><br><span class="line">  pod &apos;ORStackView&apos;, &apos;~&gt; 3.0&apos;</span><br><span class="line">  pod &apos;SwiftyJSON&apos;, &apos;~&gt; 2.3&apos;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pod install</span><br><span class="line">$ open App.xcworkspace</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Reachability/Reachability.h&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>CocoaPods 是一款包管理工具，可以通过它管理私有库，或者分发私有库。<br>当然，CocoaPds</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://en.wikipedia.org/wiki/CocoaPods" target="_blank" rel="noopener">CocoaPods wikipedia</a></li>
+<li><a href="https://cocoapods.org" target="_blank" rel="noopener">CocoaPods 官网</a></li>
+</ol>
+
           
         
       
@@ -999,7 +1975,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1010,7 +1986,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1021,7 +1997,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
