@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="SQLite," />
+  <meta name="keywords" content="Python," />
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="介绍Ref SQLite FTS3 and FTS4 Extensions">
-<meta name="keywords" content="SQLite">
+<meta name="description" content="在写 Python 的过程中，因为有些时候参考的代码是 Python2 写的，所以在 3.x 的环境中就容易抛出一些异常信息，在这里进行记录 类型异常byte 和 string在写 socket 的程序的时候， recv() 函数返回值在 2.x 中是字符串的格式，但是在 3.x 之后是 byte 的格式，这样在 print() 函数中输出 recv() 的结果的时候就会报异常信息： 1TypeE">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQLite FTS3 and FTS4 Extensions">
-<meta property="og:url" content="http://yoursite.com/2015/06/01/SQLite-FTS3-and-FTS4-Extensions/index.html">
+<meta property="og:title" content="Python2.x 过渡到 Python3.x 的那些错误">
+<meta property="og:url" content="http://yoursite.com/2017/06/03/Python2-x-过渡到-Python3-x-的那些错误/index.html">
 <meta property="og:site_name" content="Hi, this is Alice Home">
-<meta property="og:description" content="介绍Ref SQLite FTS3 and FTS4 Extensions">
+<meta property="og:description" content="在写 Python 的过程中，因为有些时候参考的代码是 Python2 写的，所以在 3.x 的环境中就容易抛出一些异常信息，在这里进行记录 类型异常byte 和 string在写 socket 的程序的时候， recv() 函数返回值在 2.x 中是字符串的格式，但是在 3.x 之后是 byte 的格式，这样在 print() 函数中输出 recv() 的结果的时候就会报异常信息： 1TypeE">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-01T03:21:05.495Z">
+<meta property="og:updated_time" content="2018-06-03T14:04:10.016Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQLite FTS3 and FTS4 Extensions">
-<meta name="twitter:description" content="介绍Ref SQLite FTS3 and FTS4 Extensions">
+<meta name="twitter:title" content="Python2.x 过渡到 Python3.x 的那些错误">
+<meta name="twitter:description" content="在写 Python 的过程中，因为有些时候参考的代码是 Python2 写的，所以在 3.x 的环境中就容易抛出一些异常信息，在这里进行记录 类型异常byte 和 string在写 socket 的程序的时候， recv() 函数返回值在 2.x 中是字符串的格式，但是在 3.x 之后是 byte 的格式，这样在 print() 函数中输出 recv() 的结果的时候就会报异常信息： 1TypeE">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/06/01/SQLite-FTS3-and-FTS4-Extensions/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/03/Python2-x-过渡到-Python3-x-的那些错误/"/>
 
 
 
 
 
-  <title>SQLite FTS3 and FTS4 Extensions | Hi, this is Alice Home</title>
+  <title>Python2.x 过渡到 Python3.x 的那些错误 | Hi, this is Alice Home</title>
   
 
 
@@ -293,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/01/SQLite-FTS3-and-FTS4-Extensions/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/03/Python2-x-过渡到-Python3-x-的那些错误/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -310,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SQLite FTS3 and FTS4 Extensions</h1>
+          <h1 class="post-title" itemprop="name headline">Python2.x 过渡到 Python3.x 的那些错误</h1>
         
 
         <div class="post-meta">
@@ -322,8 +322,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-01T11:07:27+08:00">
-                2015-06-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-03T18:57:39+08:00">
+                2017-06-03
               </time>
             
 
@@ -345,8 +345,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DataBase/" itemprop="url" rel="index">
-                    <span itemprop="name">DataBase</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -382,9 +382,11 @@
       
 
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ol>
-<li><a href="http://www.sqlite.org/fts3.html" target="_blank" rel="noopener">SQLite FTS3 and FTS4 Extensions</a></li>
-</ol>
+        <p>在写 Python 的过程中，因为有些时候参考的代码是 Python2 写的，所以在 3.x 的环境中就容易抛出一些异常信息，在这里进行记录</p>
+<h2 id="类型异常"><a href="#类型异常" class="headerlink" title="类型异常"></a>类型异常</h2><h3 id="byte-和-string"><a href="#byte-和-string" class="headerlink" title="byte 和 string"></a>byte 和 string</h3><p>在写 socket 的程序的时候， recv() 函数返回值在 2.x 中是字符串的格式，但是在 3.x 之后是 byte 的格式，这样在 print() 函数中输出 recv() 的结果的时候就会报异常信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: must be str, not bytes</span><br></pre></td></tr></table></figure>
+<p><strong>解决方案：</strong><br>通过 byte() 函数进行转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">byte = sk.recv(1024)</span><br><span class="line">byte(&apos;utf-8&apos;)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -402,7 +404,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SQLite/" rel="tag"># SQLite</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
           
         </div>
       
@@ -415,8 +417,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/02/02/iOS 问题札记/iOS-开发-Tips/" rel="next" title="iOS 开发 Tips">
-                <i class="fa fa-chevron-left"></i> iOS 开发 Tips
+              <a href="/2017/02/02/NSFoundation/NSFoundation-NSInvocation/" rel="next" title="NSFoundation-NSInvocation">
+                <i class="fa fa-chevron-left"></i> NSFoundation-NSInvocation
               </a>
             
           </div>
@@ -425,8 +427,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/01/01/NSFoundation/Foundation-NSObject/" rel="prev" title="Foundation-NSObject">
-                Foundation-NSObject <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/26/iOS/LLVM-以及-BitCode-泛谈/" rel="prev" title="LLVM 以及 BitCode 泛谈 - Chris Lattner 访谈录">
+                LLVM 以及 BitCode 泛谈 - Chris Lattner 访谈录 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -561,7 +563,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ref"><span class="nav-number">2.</span> <span class="nav-text">Ref</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类型异常"><span class="nav-number">1.</span> <span class="nav-text">类型异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#byte-和-string"><span class="nav-number">1.1.</span> <span class="nav-text">byte 和 string</span></a></li></ol></li></ol></div>
             
 
           </div>
