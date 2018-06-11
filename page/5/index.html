@@ -293,6 +293,767 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/01/Git/Git-上获取部分文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/01/Git/Git-上获取部分文件/" itemprop="url">Git 上获取部分文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-01T10:54:10+08:00">
+                2018-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近在开发的时候，遇到这么一种情况，公司的设计同事将 UI 设计稿放到了 <strong>git</strong> 上，但是这个 <strong>git</strong> 库已经 5+ G了。我为了看某一个版本的 UI 设计稿，要把所有的设计稿都拽下来，之前自己的本本硬盘比较足，还是不在乎的，最近换了个 256 的Mini，我卡，不行，不能拽一些没用的下来，so … 我需要一种技能 —— git pull 的时候，每次只拉去 Git 仓库中的某个文件夹。</p>
+<h3 id="一言蔽之"><a href="#一言蔽之" class="headerlink" title="一言蔽之"></a>一言蔽之</h3><p>从远程 Git 仓库获取某个目录下的内容。</p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="创建本地Git仓库目录"><a href="#创建本地Git仓库目录" class="headerlink" title="创建本地Git仓库目录"></a>创建本地<em>Git</em>仓库目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$mkdir myGit_folder</span><br><span class="line">$cd myGit_folder</span><br><span class="line">#/myGit_folder 目录下</span><br><span class="line">$git init</span><br><span class="line">Initialized empty Git repository in /your computer path/myGit_folder/.git/</span><br><span class="line">$ls -a</span><br><span class="line">.    ..   .git</span><br></pre></td></tr></table></figure>
+<p>如上所示，如果在你当前目录下看到了隐藏 <em>.git</em> 目录就证明OK了。</p>
+<h3 id="添加远程-Git-仓库地址"><a href="#添加远程-Git-仓库地址" class="headerlink" title="添加远程 Git 仓库地址"></a>添加远程 <em>Git</em> 仓库地址</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$git remote add -f origin &lt; your git url,like: http://youaresogreat:3000/lawyer/ui.git &gt;</span><br><span class="line"></span><br><span class="line">##这个时候在.git目录下的config文件是这个样子</span><br><span class="line">[core]</span><br><span class="line">repositoryformatversion = 0</span><br><span class="line">filemode = true</span><br><span class="line">bare = false</span><br><span class="line">logallrefupdates = true</span><br><span class="line">ignorecase = true</span><br><span class="line">precomposeunicode = true</span><br><span class="line">sparseCheckout = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">url = http://youaresogreat:3000/lawyer/ui.git</span><br><span class="line">fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure>
+<p>如果 <em>url = <a href="http://youaresogreat:3000/lawyer/ui.git" target="_blank" rel="noopener">http://youaresogreat:3000/lawyer/ui.git</a></em> 这一行添加到了 <em>.git/config</em> 文件中，就证明OK了。</p>
+<h3 id="开启-Git-仓库-Sparse-Checkout-模式"><a href="#开启-Git-仓库-Sparse-Checkout-模式" class="headerlink" title="开启 Git 仓库  Sparse Checkout 模式"></a>开启 <em>Git</em> 仓库  <em>Sparse Checkout</em> 模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git config core.sparsecheckout true</span><br></pre></td></tr></table></figure>
+<p>命令执行前：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#.git/config</span><br><span class="line">[core]</span><br><span class="line">repositoryformatversion = 0</span><br><span class="line">filemode = true</span><br><span class="line">bare = false</span><br><span class="line">logallrefupdates = true</span><br><span class="line">ignorecase = true</span><br><span class="line">precomposeunicode = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">url = http://youaresogreat:3000/lawyer/ui.git</span><br><span class="line">fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure></p>
+<p>命令执行后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#.git/config</span><br><span class="line">[core]</span><br><span class="line">repositoryformatversion = 0</span><br><span class="line">filemode = true</span><br><span class="line">bare = false</span><br><span class="line">logallrefupdates = true</span><br><span class="line">ignorecase = true</span><br><span class="line">precomposeunicode = true</span><br><span class="line">sparseCheckout = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">url = http://youaresogreat:3000/lawyer/ui.git</span><br><span class="line">fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure></p>
+<p>如果 <em>sparseCheckout = true</em> 这一行添加到了 <em>.git/config</em>目录下，就说明OK了。</p>
+<h3 id="进入到-git-info-配置要获取的文件夹路径"><a href="#进入到-git-info-配置要获取的文件夹路径" class="headerlink" title="进入到 .git/info/ 配置要获取的文件夹路径"></a>进入到 .git/info/ 配置要获取的文件夹路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$cd .git/info</span><br><span class="line">$ vim sparse-checkout</span><br><span class="line">/ui/HTML/2.4.0</span><br><span class="line">:wq</span><br><span class="line">$cd ...</span><br></pre></td></tr></table></figure>
+<p>这里是在 sparse-checkout 文件中设置你要获取的文件夹目录 - <em>/ui/HTML/2.4.0</em></p>
+<h3 id="拉取远程目录内容"><a href="#拉取远程目录内容" class="headerlink" title="拉取远程目录内容"></a>拉取远程目录内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+<h2 id="快速操作步骤："><a href="#快速操作步骤：" class="headerlink" title="快速操作步骤："></a>快速操作步骤：</h2><p>这是对上面罗里吧嗦的步骤的总汇<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$md myGit</span><br><span class="line">$cd myGit</span><br><span class="line">$(myGit/) git init</span><br><span class="line">$(myGit/) git remote add -f origin (your git url)</span><br><span class="line">$(myGit/) git config core.sparsecheckout true</span><br><span class="line">$(myGit/) cd .git/info</span><br><span class="line">$(myGit/.git/info) vim sparse-checkout</span><br><span class="line">/one/two/three/mywantFileDir/</span><br><span class="line">:wq</span><br><span class="line">$(myGit/.git/info) cd ...</span><br><span class="line">$(myGit/) git pull origin master</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p><strong>后记：本质就是开启git的 sparse checkout 模式，在 .git/config/sparse-checkout 文件中配置要拉取的文件夹路径。</strong></p>
+<h2 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h2><p>通过写一个脚本让操作更加简单  … …</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/07/Mac /Mac-修改文件编码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/07/Mac /Mac-修改文件编码/" itemprop="url">Mac 修改文件编码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T11:23:48+08:00">
+                2017-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mac/" itemprop="url" rel="index">
+                    <span itemprop="name">Mac</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Mac-修改文件编码"><a href="#Mac-修改文件编码" class="headerlink" title="Mac 修改文件编码"></a>Mac 修改文件编码</h2><p>最近，在使用 mac iterm 中的vim查看文件的时候，出现了乱码现象。</p>
+<h3 id="解决-vim-查看文件乱码"><a href="#解决-vim-查看文件乱码" class="headerlink" title="解决 vim 查看文件乱码"></a>解决 vim 查看文件乱码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.vimrc</span><br><span class="line">set encoding=urf-8 fileencodings=ucs-bom,utf-8,cp936</span><br></pre></td></tr></table></figure>
+<h2 id="enca-编码转换"><a href="#enca-编码转换" class="headerlink" title="enca 编码转换"></a>enca 编码转换</h2><ol>
+<li><p>查看文件编码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$file FileName</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo brew intsll enca</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前文件编码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enca -L zh_CN fileName</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$enca -L zh_CN -x utf-8 * #将当前目录下所有的文件都转换为 utf-8 编码</span><br><span class="line"></span><br><span class="line">$enca -L zh_CN -x UTF-8 fileName # 将名字为 fileName 的文件转换为 utf-8 编码</span><br><span class="line"></span><br><span class="line">$enca -L zh_CN -x UTF-8 &lt;fileName1&gt; fileName2 # 不想覆盖源文件</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/01/Mac /Mac-RAR-解压/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/01/Mac /Mac-RAR-解压/" itemprop="url">Mac RAR 解压</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T11:22:15+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mac/" itemprop="url" rel="index">
+                    <span itemprop="name">Mac</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> Mac 下使用命令行压缩和解压缩 <strong>rar</strong> 文件方法</p>
+<h3 id="step-1-下载工具"><a href="#step-1-下载工具" class="headerlink" title="step 1. 下载工具"></a>step 1. 下载工具</h3><p><a href="https://www.rarlab.com/download.html" target="_blank" rel="noopener">https://www.rarlab.com/download.html</a></p>
+<h3 id="step-2-解压，并进入-rar-目录"><a href="#step-2-解压，并进入-rar-目录" class="headerlink" title="step 2. 解压，并进入 rar 目录"></a>step 2. 解压，并进入 rar 目录</h3><h3 id="step-3-安装-rar-和-unrar-工具"><a href="#step-3-安装-rar-和-unrar-工具" class="headerlink" title="step 3. 安装 rar 和 unrar 工具"></a>step 3. 安装 rar 和 unrar 工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#rar</span><br><span class="line">$sudo install -c -o $USER rar /usr/local/bin/</span><br><span class="line"></span><br><span class="line">#unrar</span><br><span class="line">$sudo install -c -o $USER unrar /usr/local/bin</span><br></pre></td></tr></table></figure>
+<h3 id="step-4-解压，测试"><a href="#step-4-解压，测试" class="headerlink" title="step 4. 解压，测试"></a>step 4. 解压，测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unrar x file.rar</span><br><span class="line">rar a file</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/26/iOS/LLVM-以及-BitCode-泛谈/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/26/iOS/LLVM-以及-BitCode-泛谈/" itemprop="url">LLVM 以及 BitCode 泛谈 - Chris Lattner 访谈录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-26T09:56:19+08:00">
+                2017-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这是看了LLVM之父 <a href="https://en.wikipedia.org/wiki/Chris_Lattner" target="_blank" rel="noopener">Chris Lattner</a> 访谈录，做的小结，只关注LLVM这块。<br><em>LLVM 起源</em><br>LLVM(Low Level Virtual Machine)</p>
+<p>LLVM: 一个模块化和可重用的编译器和工具链技术的集合，Clang是LLVM子项目，是C,C++和Objective-C编译器，因为多模块的复用，所以提供了惊人的编译速度，比GCC快 3 倍。</p>
+<p><em>LLVM 的 byteCode 和 Apple 现在的 bitCode区分</em><br>LLVM开始是开源的，将所有代码转换成二进制时就叫做 bytecode – Java 当年也是这么叫的。然而这部分问题很多，然后就有了LLVM2.0，而 2.0 采用的就是BitCode机制。<br>LLVM 2.0 将所有的代码以比特流（bit stream)而不是字节流(byte stream)的形式编码。</p>
+<p><em>Bitcode 优势：</em></p>
+<ol>
+<li>因为Bitcode机制，编译器可以通过编译不同代码来存储各种优化方法，这样下次再遇到类似的代码，编译器就会自动启动相关优化机制，使得效率提升。</li>
+<li>LLVM 可以让芯片的兼容性变的更好。因为Apple每年都会在芯片上推陈出现，它们转化成二进制的规则不尽相同，LLVM只要每次重新编码并传输成比特流就好了（没听懂）</li>
+</ol>
+<p>Bitcode 缺陷： 不能解决 32 位的APP在 64 位机器上的兼容问题。而 Chris Lattner 说这个问题其实应该依靠代码逻辑来解决。<br>问题：如何通过代码逻辑来解决 32 位 APP 在 64 位机器上的兼容问题。</p>
+<p><em>LLVM三层结构</em><br>第一层： Clang 编译器，负责编译各种语言；<br>第二层：代码优化器，通过模块化操作优化代码，是Bitcode逻辑的主要部分；<br>第三层：代码翻译器，针对不同平台和GPU将代码翻译成机器语言。</p>
+<p><em>LLDB</em> 一个有着REPL的特性和C++、python插件的开源调试器。LLDB绑定在Xcode内部，存在于主窗口底部的控制台中。</p>
+<p><em>libc++,libc++ ABI</em>: 高性能C++标准库实现，支持C++11</p>
+<p><em>compiler-rt</em>: 为 LLVM和Clang设计的编译器扩展函数库。针对 _fixunsdfdi 和其他目标机器上没有一个核心IR对应的短原生指令序列时(Oh,my god 这是什么）,提供高度调优过的底层代码生成支持。</p>
+<p><em>ABI是什么？</em><br>Application Binary Interface，应用二进制接口，是APP和操作系统、其应用之间的二进制接口。</p>
+<p>—-<em>*参考</em>——<br><a href="https://www.jianshu.com/p/66a76df0db95" target="_blank" rel="noopener">Chris Lattner 访谈录（上）</a><br><a href="http://atp.fm/205-chris-lattner-interview-transcript" target="_blank" rel="noopener">Transcript of episode 205, an interview of Chris Lattner on January 17, 2017</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/03/Python2-x-过渡到-Python3-x-的那些错误/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/03/Python2-x-过渡到-Python3-x-的那些错误/" itemprop="url">Python2.x 过渡到 Python3.x 的那些错误</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-03T18:57:39+08:00">
+                2017-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在写 Python 的过程中，因为有些时候参考的代码是 Python2 写的，所以在 3.x 的环境中就容易抛出一些异常信息，在这里进行记录</p>
+<h2 id="类型异常"><a href="#类型异常" class="headerlink" title="类型异常"></a>类型异常</h2><h3 id="byte-和-string"><a href="#byte-和-string" class="headerlink" title="byte 和 string"></a>byte 和 string</h3><p>在写 socket 的程序的时候， recv() 函数返回值在 2.x 中是字符串的格式，但是在 3.x 之后是 byte 的格式，这样在 print() 函数中输出 recv() 的结果的时候就会报异常信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: must be str, not bytes</span><br></pre></td></tr></table></figure>
+<p><strong>解决方案：</strong><br>通过 byte() 函数进行转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">byte = sk.recv(1024)</span><br><span class="line">byte(&apos;utf-8&apos;)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/04/算法C描述之数据结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1022,959 +1783,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/03/2016/Python 绝技/Python-绝技/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/01/03/2016/Python 绝技/Python-绝技/" itemprop="url">Python 绝技 之 入门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T14:52:35+08:00">
-                2016-01-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="准备开发-amp-安装第三方库"><a href="#准备开发-amp-安装第三方库" class="headerlink" title="准备开发 &amp; 安装第三方库"></a>准备开发 &amp; 安装第三方库</h3><p>Python 环境在 Mac 上已经自带。并提供了 Python 标准库和解释器，以及一些内置模块，这些内置模块包括：内置数据类型、异常处理、numeric 和数学模块、文件处理模块、加密服务、与操作系统相互交互操作、网络、与 IP 协议交互以及其他有用模块。<br>同样 Python 也提供第三方软件包：<a href="https://pypi.org" target="_blank" rel="noopener">https://pypi.org</a></p>
-<p>三种方式：</p>
-<ul>
-<li>下载第三方库包，解压，然后通过 <em>python setup.py install</em> 命令进行安装</li>
-<li>sudo easy_install 包名字</li>
-</ul>
-<p>第二种方式，是 Python 为了使得包安装更加方便，在 setuptools 中提供了 easy_install 的模块，当执行这个模块的时候，我们需要将包名作为参数传递给它，然后它会自动到 Python 官网上搜索这个包，如果找到就下载并且自动安装。</p>
-<p>安装 <em>python-nmap</em> 模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> sudo easy_install python-nmap</span><br><span class="line">Password:</span><br><span class="line">Searching for python-nmap</span><br><span class="line">Reading https://pypi.python.org/simple/python-nmap/</span><br><span class="line">Best match: python-nmap 0.6.1</span><br><span class="line">Downloading https://files.pythonhosted.org/packages/dc/f2/9e1a2953d4d824e183ac033e3d223055e40e695fa6db2cb3e94a864eaa84/python-nmap-0.6.1.tar.gz#sha256=80ba0eb10a52283a54a633f40b5baa9c2ff08675d6621dd089ead942852f5bd3</span><br><span class="line">Processing python-nmap-0.6.1.tar.gz</span><br><span class="line">Writing /tmp/easy_install-kCnkg1/python-nmap-0.6.1/setup.cfg</span><br><span class="line">Running python-nmap-0.6.1/setup.py -q bdist_egg --dist-dir /tmp/easy_install-kCnkg1/python-nmap-0.6.1/egg-dist-tmp-hh31Lx</span><br><span class="line">/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: &apos;bugtrack_url&apos;</span><br><span class="line">  warnings.warn(msg)</span><br><span class="line">zip_safe flag not set; analyzing archive contents...</span><br><span class="line">Copying python_nmap-0.6.1-py2.7.egg to /Library/Python/2.7/site-packages</span><br><span class="line">Adding python-nmap 0.6.1 to easy-install.pth file</span><br><span class="line"></span><br><span class="line">Installed /Library/Python/2.7/site-packages/python_nmap-0.6.1-py2.7.egg</span><br><span class="line">Processing dependencies for python-nmap</span><br><span class="line">Finished processing dependencies for python-nmap</span><br></pre></td></tr></table></figure>
-<p>多个包一起安装也是可以的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo easy_install pyPdf pygeoip mechanize BeautifulSoup4</span><br></pre></td></tr></table></figure>
-<p>还有一些第三方库可能无法通过 easy_install 来安装，可以通过 apt-get install 进行安装， 这是 Linux 下默认的安装工具，在 Mac 下可以通过 brew 来代替， 但是还是有一些库可能 brew 没有，所以需要在 Mac 下装载 apt-get 命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="Python-标准库的关键组件"><a href="#Python-标准库的关键组件" class="headerlink" title="Python 标准库的关键组件"></a>Python 标准库的关键组件</h3><ul>
-<li>变量，不需要声明，类型自动匹配</li>
-<li>字符串，upper(),lower(),replace(),find()<h4 id="List-列表），就是数组元素"><a href="#List-列表），就是数组元素" class="headerlink" title="List(列表），就是数组元素"></a>List(列表），就是数组元素</h4></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">In [22]: portList=[]</span><br><span class="line"></span><br><span class="line">In [23]: type(portList)</span><br><span class="line">Out[23]: list</span><br><span class="line"></span><br><span class="line">In [24]: portList.append(21)</span><br><span class="line"></span><br><span class="line">In [25]: portList.append(25)</span><br><span class="line"></span><br><span class="line">In [26]: portList.append(443)</span><br><span class="line"></span><br><span class="line">In [27]: portList.append(80)</span><br><span class="line"></span><br><span class="line">In [28]: portList</span><br><span class="line">Out[28]: [21, 25, 443, 80]</span><br><span class="line"></span><br><span class="line">In [29]: portList.sort()</span><br><span class="line"></span><br><span class="line">In [30]: portList</span><br><span class="line">Out[30]: [21, 25, 80, 443]</span><br><span class="line"></span><br><span class="line">In [31]: portList.index(80)</span><br><span class="line">Out[31]: 2</span><br><span class="line"></span><br><span class="line">In [32]: len(portList)</span><br><span class="line">Out[32]: 4</span><br></pre></td></tr></table></figure>
-<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">In [15]: service=&#123;&apos;ftp&apos;:21,&apos;ssh&apos;:22,&apos;stmp&apos;:25,&apos;http&apos;:80&#125;</span><br><span class="line">In [17]: service.keys()</span><br><span class="line">Out[17]: dict_keys([&apos;ftp&apos;, &apos;ssh&apos;, &apos;stmp&apos;, &apos;http&apos;])</span><br><span class="line">In [19]: service.items()</span><br><span class="line">Out[19]: dict_items([(&apos;ftp&apos;, 21), (&apos;ssh&apos;, 22), (&apos;stmp&apos;, 25), (&apos;http&apos;, 80)])</span><br><span class="line">In [20]: service[&apos;ftp&apos;]</span><br><span class="line">Out[20]: 21</span><br><span class="line"></span><br><span class="line">In [21]: service[&apos;https&apos;]</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">KeyError                                  Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-21-07c66fb7e9f9&gt; in &lt;module&gt;()</span><br><span class="line">----&gt; 1 service[&apos;https&apos;]</span><br><span class="line"></span><br><span class="line">KeyError: &apos;https&apos;</span><br></pre></td></tr></table></figure>
-<h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><p>socket 模块提供了一个用 Python 进行网络连接的库。</p>
-<p>Client:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line">import socket </span><br><span class="line"></span><br><span class="line">ip_port = (&apos;127.0.0.1&apos;,8989)</span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.connect(ip_port)</span><br><span class="line"></span><br><span class="line">ans = sk.recv(1024)</span><br><span class="line"></span><br><span class="line">print(ans)</span><br></pre></td></tr></table></figure>
-<p>server：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">import socket</span><br><span class="line"></span><br><span class="line">ip_port = (&apos;127.0.0.1&apos;,8989)</span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.bind(ip_port)</span><br><span class="line">sk.listen(5)</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    conn,address =  sk.accept()</span><br><span class="line">    conn.sendall(&apos;220 FreeFloat Ftp Server (Version 1.00).&apos;)</span><br><span class="line">    conn.close()</span><br></pre></td></tr></table></figure>
-<h4 id="条件选择"><a href="#条件选择" class="headerlink" title="条件选择"></a>条件选择</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line">import socket </span><br><span class="line"></span><br><span class="line">ip_port = (&apos;127.0.0.1&apos;,8989)</span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.connect(ip_port)</span><br><span class="line"></span><br><span class="line">ans = sk.recv(1024)</span><br><span class="line"></span><br><span class="line">if (&quot;FreeFloat Ftp Server (Version 1.00).&quot; in ans):</span><br><span class="line">    print(&quot;FreeFloat FTP Server is vulnerable.&quot;)</span><br><span class="line">elif (&quot;3COm 3CDaemon FTP Server Version 2.0&quot; in ans):</span><br><span class="line">    print (&quot;3CDaemon FTP Server is vulnerable.&quot;)</span><br><span class="line">elif (&quot;Sami 3CDaemon FTP Server Version 2.0&quot; in ans):</span><br><span class="line">    print (&quot;Sami FTP Server is vulnerable.&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;no ftp server is vulnerable.&quot;)</span><br></pre></td></tr></table></figure>
-<p>执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python client.py</span><br><span class="line">FreeFloat FTP Server is vulnerable.</span><br></pre></td></tr></table></figure>
-<h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4><p>这里，还是通过上面的连接，将 ip 做一下修改，改为 127.0.1.1，然后设置超时时间为 3 秒，通过 try - except 进行异常处理</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket </span><br><span class="line">ip_port = (<span class="string">'127.0.1.1'</span>,<span class="number">8989</span>)</span><br><span class="line">socket.setdefaulttimeout(<span class="number">3</span>)</span><br><span class="line">sk = socket.socket()</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    sk.connect(ip_port)</span><br><span class="line"><span class="keyword">except</span> Exception, e:</span><br><span class="line">    print(<span class="string">"Error = "</span> + str(e))</span><br></pre></td></tr></table></figure>
-<p>运行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python client.py</span><br><span class="line">Error = timed out</span><br></pre></td></tr></table></figure>
-<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>创建一个函数完成连接到 FTP服务器并返回 banner 的操作：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">returnBanner</span><span class="params">(ip,port)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        socket.setdefaulttimeout(<span class="number">3</span>)</span><br><span class="line">        sk = socket.socket()</span><br><span class="line">        sk.connect((ip,port))</span><br><span class="line">        banner = sk.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">return</span> banner.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"Error = "</span> + str(e))</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    ip = <span class="string">'127.0.0.1'</span></span><br><span class="line">    port = <span class="number">8989</span></span><br><span class="line">    </span><br><span class="line">    print(ip + <span class="string">" "</span> + str(port) + <span class="string">": \n"</span> + returnBanner(ip,port))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-<h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><p>使用 for 循环遍历整个子网</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">255</span>):</span><br><span class="line">    print(<span class="string">"192.169.1."</span> + str(x))</span><br></pre></td></tr></table></figure>
-<p>output：</p>
-<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$python3</span> loop.py</span><br><span class="line"></span><br><span class="line">192.169.1.1</span><br><span class="line">192.169.1.2</span><br><span class="line">192.169.1.3</span><br><span class="line">192.169.1.4</span><br><span class="line">...</span><br><span class="line">192.169.1.252</span><br><span class="line">192.169.1.253</span><br><span class="line">192.169.1.254</span><br></pre></td></tr></table></figure>
-<p>接下来，通过遍历 list 中所有的端口以及输出所有的 ip 和 port 组合</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"所有子网:"</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">255</span>):</span><br><span class="line">    print(<span class="string">"192.169.1."</span> + str(x))</span><br><span class="line"></span><br><span class="line">postList = [<span class="number">21</span>,<span class="number">22</span>,<span class="number">25</span>,<span class="number">80</span>,<span class="number">110</span>]</span><br><span class="line">print(<span class="string">"所有端口："</span>)</span><br><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> postList:</span><br><span class="line">    print(port)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"ip 和 port 所有可能组合"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ip <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">255</span>):</span><br><span class="line">    <span class="keyword">for</span> port <span class="keyword">in</span> postList:</span><br><span class="line">        print(<span class="string">"192.169.1."</span> + str(ip) + <span class="string">":"</span> + str(port))</span><br></pre></td></tr></table></figure>
-<p>有了迭代 IP 和 port 的能力，就可以来检测子网中所有的 ip 地址，以及 telnet、ssh、smtp、http、imap 及 https 协议的端口</p>
-<h4 id="文件-I-O"><a href="#文件-I-O" class="headerlink" title="文件 I/O"></a>文件 I/O</h4><p>通过 readline() 函数读取文件 banners.txt 内容，与服务端中 banner 信息进行对比：</p>
-<p><strong>banner.txt</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">3Com 3CDame FTP Server Version 1.00</span><br><span class="line">Ability Server 2.34</span><br><span class="line">PSO Proxy 0.9</span><br><span class="line">Spipe 1.0</span><br><span class="line">TelServer FTP 1.20</span><br><span class="line">Xitmai</span><br><span class="line">Maple FTP 1.90</span><br><span class="line">FreeFloat2 Ftp Server (Version 1.00)</span><br><span class="line">FreeFloat Ftp Server (Version 1.00)</span><br><span class="line">IMAP Server 1.00</span><br><span class="line">Jack 1.0</span><br><span class="line">Tom 99</span><br></pre></td></tr></table></figure>
-<p><strong>service.py</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">ip_port = (<span class="string">'127.0.0.1'</span>,<span class="number">8989</span>)</span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.bind(ip_port)</span><br><span class="line">sk.listen(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    conn,address =  sk.accept()</span><br><span class="line">    conn.sendall(<span class="string">'220 FreeFloat Ftp Server (Version 1.00).'</span>)</span><br><span class="line">    conn.close()</span><br></pre></td></tr></table></figure>
-<p><strong>client.py</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkBanner</span><span class="params">(banner)</span>:</span></span><br><span class="line">    f = open(<span class="string">"banners.txt"</span>,<span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        <span class="keyword">if</span> line.strip(<span class="string">'\n'</span>) <span class="keyword">in</span> banner:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">returnBanner</span><span class="params">(ip,port)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        socket.setdefaulttimeout(<span class="number">3</span>)</span><br><span class="line">        sk = socket.socket()</span><br><span class="line">        sk.connect((ip,port))</span><br><span class="line">        banner = sk.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">if</span> checkBanner(banner.decode(<span class="string">'utf-8'</span>)):</span><br><span class="line">            <span class="keyword">return</span> banner.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"nothing"</span></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"Error = "</span> + str(e))</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    ip = <span class="string">'127.0.0.1'</span></span><br><span class="line">    port = <span class="number">8989</span></span><br><span class="line">    print(ip + <span class="string">" "</span> + str(port) + <span class="string">": \n"</span> + returnBanner(ip,port))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-<h4 id="sys"><a href="#sys" class="headerlink" title="sys"></a>sys</h4><p>通过内置 sys 模块，我们可以访问到有 Python 解释器使用或者维护的对象，其中包括标志、版本、整型数最大值、可用模块、hook 路径、标准错误/输入/输出的位置，以及调用解释器的命令行参数。<br>在线文档：<br><a href="http://docs.python.org/library/sys" target="_blank" rel="noopener">http://docs.python.org/library/sys/</a></p>
-<p>从外部读取文件名字：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)==<span class="number">2</span>:</span><br><span class="line">    filename = sys.argv[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"read the content from: "</span> + filename)</span><br></pre></td></tr></table></figure>
-<p>执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python sys.py banners.txt</span><br><span class="line"><span class="built_in">read</span> the content from: banners.txt</span><br></pre></td></tr></table></figure>
-<h4 id="OS-模块"><a href="#OS-模块" class="headerlink" title="OS 模块"></a>OS 模块</h4><p>内置 OS 模块提供了丰富的操作系统函数。这个模块允许程序独立的与操作系统环境、文件系统、用户数据库以及权限进行交互。比如上面我们在读取文件的时候提前检查一下文件是否存在：</p>
-<p>文件是否存在 API：<br><em>os.path.isfile(‘fileName’)</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: ls</span><br><span class="line">banners.txt  client.py    loop.py      service.py   sys.py</span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: os.path.isfile(<span class="string">"banner.txt"</span>)</span><br><span class="line">Out[<span class="number">3</span>]: <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: os.path.isfile(<span class="string">"banners.txt"</span>)</span><br><span class="line">Out[<span class="number">4</span>]: <span class="keyword">True</span></span><br></pre></td></tr></table></figure></p>
-<p>权限 API：<br><em>os.access(“fileName”,权限控制)</em></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: os.access(<span class="string">"a.out"</span>, os.R_OK)</span><br><span class="line">Out[<span class="number">2</span>]: <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: os.access(<span class="string">"a.out"</span>, os.W_OK)</span><br><span class="line">Out[<span class="number">3</span>]: <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: ls</span><br><span class="line">a.c          banners.txt  loop.py      sys.py</span><br><span class="line">a.out*       client.py    service.py</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: os.access(<span class="string">"/usr/bin/host"</span>, os.W_OK)</span><br><span class="line">Out[<span class="number">5</span>]: <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: os.access(<span class="string">"/usr/bin/host"</span>, os.R_OK)</span><br><span class="line">Out[<span class="number">6</span>]: <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>OVER&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/01/NSFoundation/Foundation-NSObject/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/01/01/NSFoundation/Foundation-NSObject/" itemprop="url">Foundation-NSObject</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-01T12:29:16+08:00">
-                2016-01-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NSFoundation/" itemprop="url" rel="index">
-                    <span itemprop="name">NSFoundation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>NSObject 是大部分OC类的父类，继承NSObject，可以获取访问运行时的接口，并且具备了OC对象的基本功能。<br>NSObject 实现了 <nsobject>协议，也就是拥有了一簇接口。</nsobject></p>
-<h3 id="初始化类"><a href="#初始化类" class="headerlink" title="初始化类"></a>初始化类</h3><p>初始化类，提供了两个API， <em>+ initialize</em> 和 <em>+ load</em> 。</p>
-<h4 id="initialize"><a href="#initialize" class="headerlink" title="+ initialize"></a>+ initialize</h4><p>在类收到第一条消息的时候初始化这个类。（即第一次使用这个类的时候，调用这个方法。如果项目中没有使用这个类，这个方法不会被调用）</p>
-<h5 id="方法声明"><a href="#方法声明" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)initialize</span><br></pre></td></tr></table></figure>
-<h5 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h5><p>在类或者子类收到第一条消息前，运行时向每个类发送 <em>initialize</em>消息。父类在子类之前收到这个消息。运行时向这些类发送 <em>initialize</em>消息是线程安全的。也就是当第一个线程向一个类发送消息的时候，其他的线程如果想这个类发送消息就会被阻塞，知道第一个线程的消息结束。</p>
-<p>如果子类没有实现 <em>initialize</em> 方法，父类中的 <em>initialize</em> 方法可能会被调用多次。如果你想让父类中的 <em>initialize</em> 方法只调用一次，可以使用下面的结构：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)initialize &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> == [ClassName <span class="keyword">self</span>]) &#123;</span><br><span class="line">    <span class="comment">// ... do the initialization ...</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>因为 <em>initialize</em> 是以阻塞的方式调用的，所以要控制好该方法中的工作量。尽量避免在该方法中使用线程锁，因为这可能导致死锁。除此之外，尽量减少在该方法中执行复杂的操作。</p>
-<h5 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h5><p>每个类只会调用一次 <em>initialize</em> 方法，如果你想独立的初始化一个类或者该类的类目，那么应该实现<em>+ load</em> 方法。</p>
-<h4 id="load"><a href="#load" class="headerlink" title="+ load"></a>+ load</h4><p>当类或者是类目被添加到运行时的时候，就会调用该方法。如果想对类做一些特别的处理，那么可以实现 <em>+load</em>方法。</p>
-<h5 id="方法声明-1"><a href="#方法声明-1" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)load;</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-1"><a href="#讨论-1" class="headerlink" title="讨论"></a>讨论</h5><p>初始化方法调用的顺序：</p>
-<ul>
-<li>父类的 <em>+ load</em> 方法先于子类的<em>+load</em> 方法调用；</li>
-<li>子类的 <em>+load</em> 方法先于类目的调用</li>
-</ul>
-<p><strong> 这里有一部分官方文档没看懂，先记记录调用顺序吧</strong></p>
-<h3 id="创建、拷贝和销毁对象"><a href="#创建、拷贝和销毁对象" class="headerlink" title="创建、拷贝和销毁对象"></a>创建、拷贝和销毁对象</h3><h4 id="alloc"><a href="#alloc" class="headerlink" title="+ alloc"></a>+ alloc</h4><p>为接收该消息者创建一个实例。</p>
-<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TheClass *newObject = [[TheClass alloc] init];</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-2"><a href="#讨论-2" class="headerlink" title="讨论"></a>讨论</h5><ul>
-<li>如果你想要初始化类中的某些东西，不要重写这个方法，应该去重写 init 方法</li>
-<li>因为历史原因， <em>alloc</em> 方法会调用 <em>allocWithZone:</em> 这个方法</li>
-</ul>
-<h4 id="allocWithZone"><a href="#allocWithZone" class="headerlink" title="+ allocWithZone:"></a>+ allocWithZone:</h4><p>为接收该消息者创建一个实例。</p>
-<h5 id="方法声明-2"><a href="#方法声明-2" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">instancetype</span>)allocWithZone:(<span class="keyword">struct</span> _NSZone *)zone;</span><br></pre></td></tr></table></figure>
-<p>参数 <em>zone</em> 被忽略了已经</p>
-<h5 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TheClass *newObject = [[TheClass allocWithZone:<span class="literal">nil</span>] init];</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-3"><a href="#讨论-3" class="headerlink" title="讨论"></a>讨论</h5><ul>
-<li>如果你想要初始化类中的某些东西，不要重写这个方法，应该去重写 init 方法</li>
-<li>这个方法的存在是历史遗留问题， memory zone 在 OC 中已经被丢弃了。</li>
-</ul>
-<h4 id="init"><a href="#init" class="headerlink" title="- init"></a>- init</h4><p>当一个对象分配到一块内存之后，这个方法用来初始化这个对象，并将初始化之后的对象返回</p>
-<h5 id="方法声明-3"><a href="#方法声明-3" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)init;</span><br></pre></td></tr></table></figure>
-<h5 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h5><p>两种情况：</p>
-<ul>
-<li>初始化之后的对象；</li>
-<li>nil ,如果在初始化的过程中出现未知异常，该方法可能会返回 nil<h5 id="讨论-4"><a href="#讨论-4" class="headerlink" title="讨论"></a>讨论</h5><em>init</em> 方法是和 <em>alloc</em>（或者 *allocWithZone:) 方法一起调用的。<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SomeClass *object = [[SomeClass alloc] init];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>一个对象如果没有通过（init） 方法初始化是不可以被使用的（也就是不可以接受消息）。<br>如果想要自定义这个方法的实现，首先要调用父类的 <em>init</em> 方法，然后再去做你自己的初始化以及返回一个新的对象。如果这个新对象没有初始化成功，那么必须返回 nil。比如，一个 <em>BuiltInCamera</em> 在一部没有摄像头的手机上运行时，初始化方法只能返回 nil。</p>
-<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)init &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) &#123;</span><br><span class="line">    <span class="comment">// Initialize self</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在 Xcode 中写 init 方法的时候 ，只需要输入 init 几个字母之后，就可以看到完整的方法提示了，注意不要输入 “-” 否则提示就不会出现了。</p>
-<h4 id="copy"><a href="#copy" class="headerlink" title="- copy"></a>- copy</h4><p>调用该方法，会返回一个 <em>copyWithZone</em> 方法的结果</p>
-<h5 id="方法声明-4"><a href="#方法声明-4" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)<span class="keyword">copy</span>;</span><br></pre></td></tr></table></figure>
-<h5 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h5><p>这个返回值是 <em>NSCopying</em> 协议中的 <em>copyWithZone:</em> 方法的返回值</p>
-<h5 id="讨论-5"><a href="#讨论-5" class="headerlink" title="讨论"></a>讨论</h5><p>这个方法很方便的让类可以实现 <em>NSCopying</em>协议。 如果调用 <em>copy</em>方法的类没有实现 <em>NSCopying</em>协议，那么就会抛出异常。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[Whale copyWithZone:]: unrecognized selector sent to instance 0x60400000ecc0'</span><br></pre></td></tr></table></figure></p>
-<p>Whale 这个类没有实现 copyWithZone: 这个方法，解决方法就是：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Whale.h</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Whale</span> : <span class="title">NSObject</span>&lt;<span class="title">NSCopying</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Whale.m</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Whale.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Whale</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone &#123;</span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<p>当然，如果缺少了 <em>@interface Whale : NSObject<nscopying></nscopying></em> 也是可以的，因为我们实现了 <em>copyWithZone:</em> 这个方法。此时程序不会报错。<br>值得注意的是， <em>NSObject</em> 类并不支持 <em>NSCopying</em> 协议，但是子类必须支持此协议，并且实现 <em>copyWithZone:</em> 这个方法，当然前提是你如果想要调用 <em>copy</em> 方法。<br> 如果子类不是直接继承了 NSObject 类，那么在实现<em>copyWithZone:</em> 方法的时候，首先要调用父类的<em>copyWithZone:</em> 方法，将父类的实现合并到子类中。例如， Whale 继承自 NSObject 那么它就不需要调用父类的 <em>copyWithZone:</em> ，但是 AliceWhale 继承自 Whale 类，那么就必须先调用父类的*copyWithZone:方法 ,合并父类的copy 内容：</p>
- <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">AliceWhale</span> : <span class="title">Whale</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">AliceWhale</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone &#123;</span><br><span class="line">    [<span class="keyword">super</span> copyWithZone:zone];</span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<h4 id="copyWithZone"><a href="#copyWithZone" class="headerlink" title="-copyWithZone:"></a>-copyWithZone:</h4><p>  没啥好说的<br>  <strong>This method exists so class objects can be used in situations where you need an object that conforms to the NSCopying protocol. For example, this method lets you use a class object as a key to an NSDictionary object. You should not override this method.</strong><br>  这一段话以后再去理解吧，没看懂。</p>
-<h4 id="mutableCopy"><a href="#mutableCopy" class="headerlink" title="- mutableCopy"></a>- mutableCopy</h4><p>  返回 mutableCopyWithZone: 的返回值<br>  具体使用逻辑和 copy 类似，只是一个是不可变的一个是可变的</p>
-<h4 id="dealloc"><a href="#dealloc" class="headerlink" title="- dealloc"></a>- dealloc</h4><p>  取消对象占用的内存的时候调用这个方法。</p>
-<h5 id="讨论-6"><a href="#讨论-6" class="headerlink" title="讨论"></a>讨论</h5><ul>
-<li>在该方法的实现中释放一些资源；</li>
-<li>不能直接调用此方法，该方法是runtime调用具体参见<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html#//apple_ref/doc/uid/10000011-SW1" target="_blank" rel="noopener">Advanced Memory Management Programming Guide</a></li>
-<li>ARC 下不能 [super dealloc]<ul>
-<li>MRC 下必须调用 [super dealloc]，而且必须写在方法最后</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="识别类"><a href="#识别类" class="headerlink" title="识别类"></a>识别类</h3><p>这里主要有三个类方法</p>
-<ul>
-<li>+ class , 返回类对象</li>
-<li>+ superclass， 返回父类类对象</li>
-<li>+ isSubclassOfClass: ， 返回一个 Boolean 值，</li>
-</ul>
-<h4 id="class"><a href="#class" class="headerlink" title="+ class"></a>+ class</h4><p>返回 类对象</p>
-<h5 id="讨论-7"><a href="#讨论-7" class="headerlink" title="讨论"></a>讨论</h5><p>要引用一个类，必须通过类的名字，初次之外其他的情况我们可以通过这个方法来获取一个类对象。</p>
-<h4 id="superclass"><a href="#superclass" class="headerlink" title="+ superclass"></a>+ superclass</h4><p>返回父类的类对象</p>
-<h4 id="isSubclassOfClass"><a href="#isSubclassOfClass" class="headerlink" title="+isSubclassOfClass:"></a>+isSubclassOfClass:</h4><p>验证调用该方法的类是否继承自参数给定的类（包括父类的父类也会返回YES）</p>
-<h3 id="检测实例方法"><a href="#检测实例方法" class="headerlink" title="检测实例方法"></a>检测实例方法</h3><h4 id="instancesRespondToSelector"><a href="#instancesRespondToSelector" class="headerlink" title="+ instancesRespondToSelector:"></a>+ instancesRespondToSelector:</h4><p>返回一个BOOL值，来表示实例是否能够相应方法</p>
-<h4 id="方法声明-5"><a href="#方法声明-5" class="headerlink" title="方法声明"></a>方法声明</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">BOOL</span>)instancesRespondToSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<h4 id="讨论-8"><a href="#讨论-8" class="headerlink" title="讨论"></a>讨论</h4><p>该方法检测调用类中是否实现了某个实例方法（aSelector），而不是类方法，如果要检测类方法，那么可以调用协议<nsobect> 中的 <em>respondsToSelector:</em> 方法。<br>如果只是在 .h 文件中声明了该方法，而没有在 .m 中去实现这个方法，检测结果为 NO。</nsobect></p>
-<hr>
-<h4 id="检测协议"><a href="#检测协议" class="headerlink" title="检测协议"></a>检测协议</h4><p>返回一个BOOL值， 来表示调用该方法的类是否实现了对应的协议（参数）</p>
-<h5 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">BOOL</span>)conformsToProtocol:(Protocol *)protocol;</span><br></pre></td></tr></table></figure>
-<h5 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> canJoin = [MyClass conformsToProtocol:<span class="class"><span class="keyword">@protocol</span>(<span class="title">Joining</span>)];</span></span><br></pre></td></tr></table></figure>
-<h5 id="讨论-9"><a href="#讨论-9" class="headerlink" title="讨论"></a>讨论</h5><ol>
-<li><p>MyClass  实现了 AffiliationRequests  和 AffiliationRequests 协议</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">MyClass</span> : <span class="title">NSObject</span> &lt;<span class="title">AffiliationRequests</span>, <span class="title">Normalization</span>&gt;</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>协议之间的合并 AffiliationRequests 合并了 Joining 协议</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">AffiliationRequests</span> &lt;<span class="title">Joining</span>&gt;</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果 MyClass 实现了AffiliationRequests协议，同样实现了 Joining， <em>conformsToProtocol</em> 返回结果为YES</p>
-</li>
-<li><em>conformsToProtocol：</em> 该方法不会检测程序有没有实现协议中的方法，只会检测在类的声明后面有没有<protocol name="">。</protocol></li>
-<li>即使你实现了协议的方法，但是没有在类的声明后面通过尖括号包含协议的名字，那么该方法返回仍为NO</li>
-</ol>
-<hr>
-<h3 id="获取方法信息"><a href="#获取方法信息" class="headerlink" title="获取方法信息"></a>获取方法信息</h3><h4 id="methodForSelector"><a href="#methodForSelector" class="headerlink" title="- methodForSelector:"></a>- methodForSelector:</h4><p>返回方法实现的地址</p>
-<h5 id="方法声明-6"><a href="#方法声明-6" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (IMP)methodForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<p><em>IMP</em> 方法（函数）指针，也就是实现方法的地址<br>参数 <em>aSelector</em>必须合法，在传入作为参数之前，可以通过 <em>responseToSelector</em> 检查该参数指向的方法是否已经实现了</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MethodInfor *mObj = [MethodInfor new];</span><br><span class="line"><span class="keyword">if</span> ([mObj respondsToSelector:<span class="keyword">@selector</span>(sayHello)]) &#123;</span><br><span class="line">    IMP imp = [mObj methodForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>,imp);</span><br><span class="line">    imp();<span class="comment">// 执行了 sayHello 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-10"><a href="#讨论-10" class="headerlink" title="讨论"></a>讨论</h5><p>方法的调用者如果是 类 那么 aSelector 必须是类方法；<br>方法的调用者如果是 实例 那么 aSelector 必须是实例方法</p>
-<h4 id="instanceMethodForSelector"><a href="#instanceMethodForSelector" class="headerlink" title="+ instanceMethodForSelector:"></a>+ instanceMethodForSelector:</h4><p>返回实例方法实现的地址</p>
-<h5 id="方法声明-7"><a href="#方法声明-7" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (IMP)instanceMethodForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<p><em>IMP</em> 方法（函数）指针，也就是实现方法的地址<br>参数 <em>aSelector</em>必须合法，在传入作为参数之前，可以通过 <em>instanceMethodForSelector</em> 检查该参数指向的方法是否已经实现了</p>
-<h5 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([MethodInfor instancesRespondToSelector:<span class="keyword">@selector</span>(sayHello)]  ) &#123;</span><br><span class="line">    IMP imp = [MethodInfor instanceMethodForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>,imp);</span><br><span class="line">    imp();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-11"><a href="#讨论-11" class="headerlink" title="讨论"></a>讨论</h5><p>该方法只用来检测 类 中的实例有没有实现实例方法，不能检测类方法。检测类方法使用 <em>methodForSelector:</em> 。</p>
-<h4 id="instanceMethodSignatureForSelector"><a href="#instanceMethodSignatureForSelector" class="headerlink" title="+ instanceMethodSignatureForSelector:"></a>+ instanceMethodSignatureForSelector:</h4><p>返回方法签名对象<a href="https://developer.apple.com/documentation/foundation/nsmethodsignature?language=occ" target="_blank" rel="noopener">NSMethodSignature</a></p>
-<h5 id="方法声明-8"><a href="#方法声明-8" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSMethodSignature</span> *)instanceMethodSignatureForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<h5 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMethodSignature</span> *sayHelloSignature = [MethodInfor instanceMethodSignatureForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-12"><a href="#讨论-12" class="headerlink" title="讨论"></a>讨论</h5><p>该方法会返回一个方法的签名对象，如果类的对象不能响应这个方法，那么会返回一个 nil 对象。</p>
-<h4 id="methodSignatureForSelector"><a href="#methodSignatureForSelector" class="headerlink" title="- methodSignatureForSelector:"></a>- methodSignatureForSelector:</h4><p>返回方法签名对象<a href="https://developer.apple.com/documentation/foundation/nsmethodsignature?language=occ" target="_blank" rel="noopener">NSMethodSignature</a></p>
-<h5 id="方法声明-9"><a href="#方法声明-9" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSMethodSignature</span> *)methodSignatureForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<h5 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMethodSignature</span> *sayHelloSignature = [MethodInfor instanceMethodSignatureForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-13"><a href="#讨论-13" class="headerlink" title="讨论"></a>讨论</h5><p>该方法会返回一个方法的签名对象，如果类的对象不能响应这个方法，那么会返回一个 nil 对象。<br>该方法针对类和对象都可以。<br>这里与<br><em>This method is used in the implementation of protocols. This method is also used in situations where an NSInvocation object must be created, such as during message forwarding. If your object maintains a delegate or is capable of handling messages that it does not directly implement, you should override this method to return an appropriate method signature.</em> 没看懂，等了解了 NSInvocation 之后再来看看。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/01/SQLite-FTS3-and-FTS4-Extensions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/06/01/SQLite-FTS3-and-FTS4-Extensions/" itemprop="url">SQLite FTS3 and FTS4 Extensions</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-01T11:07:27+08:00">
-                2015-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DataBase/" itemprop="url" rel="index">
-                    <span itemprop="name">DataBase</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ol>
-<li><a href="http://www.sqlite.org/fts3.html" target="_blank" rel="noopener">SQLite FTS3 and FTS4 Extensions</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/02/iOS 问题札记/iOS-开发-Tips/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/02/02/iOS 问题札记/iOS-开发-Tips/" itemprop="url">iOS 开发 Tips</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-02-02T11:47:34+08:00">
-                2015-02-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记录在开发过程中的一些小技巧的使用</p>
-<h2 id="TableView"><a href="#TableView" class="headerlink" title="TableView"></a>TableView</h2><h3 id="取消-table-view-的-section-悬停"><a href="#取消-table-view-的-section-悬停" class="headerlink" title="取消 table view 的 section 悬停"></a>取消 <em>table view</em> 的 <em>section</em> 悬停</h3><p>有时候，通过使用 <em>sectionView</em> 实现tableView的间隔效果，但是不想让这个间隔悬停。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CGFloat</span> sectionHeaderHeight = <span class="number">12</span>;</span><br><span class="line">    <span class="keyword">if</span> (scrollView.contentOffset.y&lt;=sectionHeaderHeight&amp;&amp;scrollView.contentOffset.y&gt;=<span class="number">0</span>) &#123;</span><br><span class="line">        scrollView.contentInset = <span class="built_in">UIEdgeInsetsMake</span>(-scrollView.contentOffset.y, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (scrollView.contentOffset.y&gt;=sectionHeaderHeight) &#123;</span><br><span class="line">        scrollView.contentInset = <span class="built_in">UIEdgeInsetsMake</span>(-sectionHeaderHeight, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="tableView-中有输入框，键盘隐藏-UITableViewController-的效果"><a href="#tableView-中有输入框，键盘隐藏-UITableViewController-的效果" class="headerlink" title="tableView 中有输入框，键盘隐藏 - UITableViewController 的效果"></a>tableView 中有输入框，键盘隐藏 - UITableViewController 的效果</h3><p>通过实现UITableViewController中控制键盘的效果，又不使用UITableViewController</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">UITableView</span> *)tableView &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_tableView) &#123;</span><br><span class="line"></span><br><span class="line">        _tableView = [[<span class="built_in">UITableView</span> alloc] initWithFrame:<span class="built_in">CGRectZero</span> style:<span class="built_in">UITableViewStylePlain</span>];</span><br><span class="line">        <span class="comment">//处理键盘弹出tableView自动像是移动一段距离</span></span><br><span class="line">        <span class="built_in">UITableViewController</span> *tvc = [[<span class="built_in">UITableViewController</span> alloc] initWithStyle:<span class="built_in">UITableViewStylePlain</span>];</span><br><span class="line">        [<span class="keyword">self</span> addChildViewController:tvc];</span><br><span class="line">        _tableView = tvc.tableView;</span><br><span class="line"></span><br><span class="line">        _tableView.delegate = <span class="keyword">self</span>;</span><br><span class="line">        _tableView.dataSource = <span class="keyword">self</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _tableView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/06/01/sqlite-tour/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/06/01/sqlite-tour/" itemprop="url">sqlite tour</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-06-01T11:33:21+08:00">
-                2014-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DataBase/" itemprop="url" rel="index">
-                    <span itemprop="name">DataBase</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[toc]</p>
-<h2 id="sqlite3-program"><a href="#sqlite3-program" class="headerlink" title="sqlite3 program"></a>sqlite3 program</h2><p>Mac OS 上已经预装了 sqlite3 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ which sqlite3</span><br><span class="line">/usr/bin/sqlite3</span><br></pre></td></tr></table></figure>
-<p>进入 sqlite3 命令行环境，并创建表格</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$sqlite3 ex1</span><br><span class="line">SQLite version 3.8.5 2014-05-29 12:36:14</span><br><span class="line">Enter &quot;.help&quot; for usage hints.</span><br><span class="line">sqlite&gt; create table tabl2 (</span><br><span class="line">   ...&gt; f1 varchar(30) primary key,</span><br><span class="line">   ...&gt; f2 text,</span><br><span class="line">   ...&gt; f3 real</span><br><span class="line">   ...&gt; );</span><br><span class="line">   </span><br><span class="line">insert into tabl2 values (&apos;Jack&apos;,&apos;male&apos;,12.6);</span><br><span class="line">insert into tabl2 values (&apos;Tome&apos;,&apos;male&apos;,12.6);</span><br><span class="line">insert into tabl2 values (&apos;Bob&apos;,&apos;male&apos;,12.6);</span><br><span class="line">insert into tabl2 values (&apos;Rose&apos;,&apos;fmale&apos;,12.6);</span><br></pre></td></tr></table></figure>
-<h2 id="dot-command"><a href="#dot-command" class="headerlink" title="dot-command"></a>dot-command</h2><p>点命令是 sqlite3 的设置输出命令，有一些规则需要遵循：</p>
-<ul>
-<li>必须以 “.” 开头；</li>
-<li>单行执行，不支持多行</li>
-<li>不能在 SQL 中</li>
-<li>不能够写注释</li>
-</ul>
-<p>通过 .help 可以查看所有的点命令</p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>sqlite 中 SQL 语句不区分大小写；</li>
-<li>每个 SQL 语句都需要分号结束，如果没有分号，Enter 之后，sqlite3 会继续让你输入，知道遇到分号为止</li>
-</ul>
-<h3 id="dot-command-修改输出格式"><a href="#dot-command-修改输出格式" class="headerlink" title="dot-command 修改输出格式"></a>dot-command 修改输出格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .tables</span><br><span class="line">tabl2</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack|male|12.6</span><br><span class="line">Tome|male|12.6</span><br><span class="line">Bob|male|12.6</span><br><span class="line">Rose|fmale|12.6</span><br></pre></td></tr></table></figure>
-<p><em>.tables</em> 查看当前数据库中的表， <em>select </em> from tabl2;<em> 查看 </em>tabl2<em> 表中的数据，并且以 </em>list* 方式展示出来。 sqlite3 program 能够以 8 种方式展示输出结果：</p>
-<ul>
-<li>csv</li>
-<li>column </li>
-<li>html</li>
-<li>insert</li>
-<li>line</li>
-<li>list</li>
-<li>quote</li>
-<li>tabs</li>
-<li>tcl</li>
-</ul>
-<p>通过 .mode [方式名字] 可以修改当前的展示模式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack|male|12.6</span><br><span class="line">Tome|male|12.6</span><br><span class="line">Bob|male|12.6</span><br><span class="line">Rose|fmale|12.6</span><br><span class="line">sqlite&gt; .mode list</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack|male|12.6</span><br><span class="line">Tome|male|12.6</span><br><span class="line">Bob|male|12.6</span><br><span class="line">Rose|fmale|12.6</span><br><span class="line">sqlite&gt; .mode csv</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack,male,12.6</span><br><span class="line">Tome,male,12.6</span><br><span class="line">Bob,male,12.6</span><br><span class="line">Rose,fmale,12.6</span><br><span class="line">sqlite&gt; .mode html</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">&lt;TR&gt;&lt;TD&gt;Jack&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;male&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;12.6&lt;/TD&gt;</span><br><span class="line">&lt;/TR&gt;</span><br><span class="line">&lt;TR&gt;&lt;TD&gt;Tome&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;male&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;12.6&lt;/TD&gt;</span><br><span class="line">&lt;/TR&gt;</span><br><span class="line">&lt;TR&gt;&lt;TD&gt;Bob&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;male&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;12.6&lt;/TD&gt;</span><br><span class="line">&lt;/TR&gt;</span><br><span class="line">&lt;TR&gt;&lt;TD&gt;Rose&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;fmale&lt;/TD&gt;</span><br><span class="line">&lt;TD&gt;12.6&lt;/TD&gt;</span><br><span class="line">&lt;/TR&gt;</span><br><span class="line">sqlite&gt; .mode tabs</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack	male	12.6</span><br><span class="line">Tome	male	12.6</span><br><span class="line">Bob	male	12.6</span><br><span class="line">Rose	fmale	12.6</span><br></pre></td></tr></table></figure>
-<p>默认是 <em>list</em> 模式，上面分别以 <em>list</em>、<em>csv</em>、<em>html</em>、<em>tabs</em> 模式进行展示。<br>除此之外，<em>.separator</em> 可以修改分隔符，比如我们以 “ ~ “ 作为分割</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .separator &quot; ~ &quot;</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack ~ male ~ 12.6</span><br><span class="line">Tome ~ male ~ 12.6</span><br><span class="line">Bob ~ male ~ 12.6</span><br><span class="line">Rose ~ fmale ~ 12.6</span><br><span class="line">sqlite&gt; .mode list</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack|male|12.6</span><br><span class="line">Tome|male|12.6</span><br><span class="line">Bob|male|12.6</span><br><span class="line">Rose|fmale|12.6</span><br></pre></td></tr></table></figure>
-<p>当然，如果通过 <em>.mode</em> 再次修改输出格式的话， <em>.separator</em> 的操作就会被重置，这一点需要注意。</p>
-<h3 id="line-amp-column-模式"><a href="#line-amp-column-模式" class="headerlink" title="line &amp; column 模式"></a>line &amp; column 模式</h3><p>通过 <em>.mode line</em> 和 <em>.mode column</em> 可以将输出格式修改成行和列模式，实现如下：</p>
-<ul>
-<li>行模式</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .mode line</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">   f1 = Jack</span><br><span class="line">   f2 = male</span><br><span class="line">   f3 = 12.6</span><br><span class="line"></span><br><span class="line">   f1 = Tome</span><br><span class="line">   f2 = male</span><br><span class="line">   f3 = 12.6</span><br><span class="line"></span><br><span class="line">   f1 = Bob</span><br><span class="line">   f2 = male</span><br><span class="line">   f3 = 12.6</span><br><span class="line"></span><br><span class="line">   f1 = Rose</span><br><span class="line">   f2 = fmale</span><br><span class="line">   f3 = 12.6</span><br></pre></td></tr></table></figure>
-<ul>
-<li>列模式</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .mode column</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">Jack        male        12.6</span><br><span class="line">Tome        male        12.6</span><br><span class="line">Bob         male        12.6</span><br><span class="line">Rose        fmale       12.6</span><br></pre></td></tr></table></figure>
-<p>通过 <em>.header on/off</em>  列模式可以将 <em>header</em> 部分展示出来</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .header on</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">f1          f2          f3</span><br><span class="line">----------  ----------  ----------</span><br><span class="line">Jack        male        12.6</span><br><span class="line">Tome        male        12.6</span><br><span class="line">Bob         male        12.6</span><br><span class="line">Rose        fmale       12.6</span><br></pre></td></tr></table></figure>
-<p>修改列宽 <em>.width col1W col2W … colnW</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .width 1 10</span><br><span class="line">sqlite&gt; .mode column</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">f  f2          f3</span><br><span class="line">-  ----------  ----------</span><br><span class="line">J  male        12.6</span><br><span class="line">T  male        12.6</span><br><span class="line">B  male        12.6</span><br><span class="line">R  fmale       12.6</span><br><span class="line">sqlite&gt; .width 10 10 10</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">f1          f2          f3</span><br><span class="line">----------  ----------  ----------</span><br><span class="line">Jack        male        12.6</span><br><span class="line">Tome        male        12.6</span><br><span class="line">Bob         male        12.6</span><br><span class="line">Rose        fmale       12.6</span><br></pre></td></tr></table></figure>
-<p><em>.width</em> 后面跟着的数字分别表示第几行的宽度，如果没有就是没有限制</p>
-<h3 id="插入模式输出"><a href="#插入模式输出" class="headerlink" title="插入模式输出"></a>插入模式输出</h3><p>有时候，我们需要在另一个表中插入与当前表相同的数据，那么久可以通过 <em>insert</em> 模式来实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .mode insert new_table</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">INSERT INTO new_table(f1,f2,f3) VALUES(&apos;Jack&apos;,&apos;male&apos;,12.599999999999999644);</span><br><span class="line">INSERT INTO new_table(f1,f2,f3) VALUES(&apos;Tome&apos;,&apos;male&apos;,12.599999999999999644);</span><br><span class="line">INSERT INTO new_table(f1,f2,f3) VALUES(&apos;Bob&apos;,&apos;male&apos;,12.599999999999999644);</span><br><span class="line">INSERT INTO new_table(f1,f2,f3) VALUES(&apos;Rose&apos;,&apos;fmale&apos;,12.599999999999999644);</span><br></pre></td></tr></table></figure>
-<h3 id="将查询结果写入文件"><a href="#将查询结果写入文件" class="headerlink" title="将查询结果写入文件"></a>将查询结果写入文件</h3><p><em>.output</em> and <em>.once</em> 将 sqlite3 的标准输出重定向到指定文件中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$touch output.txt</span><br><span class="line"></span><br><span class="line">sqlite&gt; .output output.txt</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line"></span><br><span class="line">$ cat output.txt</span><br><span class="line">f1          f2          f3</span><br><span class="line">----------  ----------  ----------</span><br><span class="line">Jack        male        12.6</span><br><span class="line">Tome        male        12.6</span><br><span class="line">Bob         male        12.6</span><br><span class="line">Rose        fmale       12.6</span><br></pre></td></tr></table></figure>
-<p><em>.once</em> 用法与 <em>.output</em> 用法一致，只不过 <em>.once</em> 只会让 sliqte3 执行一次非标准输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .once output.txt</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br><span class="line">f1          f2          f3</span><br><span class="line">----------  ----------  ----------</span><br><span class="line">Jack        male        12.6</span><br><span class="line">Tome        male        12.6</span><br><span class="line">Bob         male        12.6</span><br><span class="line">Rose        fmale       12.6</span><br></pre></td></tr></table></figure>
-<p>通过 ‘|’ 打开保存的文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .once &apos;|open -f&apos;</span><br><span class="line">sqlite&gt; select * from tabl2;</span><br></pre></td></tr></table></figure>
-<p>如图所示，会将结果存储到一个 txt 文件中，然后打开：</p>
-<p><img src="/2014/06/01/sqlite-tour/WX20180601-162145@2x.png" alt=""></p>
-<h2 id="File-I-O-Function"><a href="#File-I-O-Function" class="headerlink" title="File I/O Function"></a>File I/O Function</h2><p>以存储图片为例：</p>
-<ul>
-<li>新建一张 images 表</li>
-<li>在当前目录中添加一张图片， icon.png</li>
-<li>readfile(‘icon.png’)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; create table images</span><br><span class="line">   ...&gt; (</span><br><span class="line">   ...&gt; name text,</span><br><span class="line">   ...&gt; type text,</span><br><span class="line">   ...&gt; img blob</span><br><span class="line">   ...&gt; );</span><br><span class="line">sqlite&gt; insert into images(name,type,img) values (&apos;icon&apos;,&apos;png&apos;,readfile(&apos;icon.png&apos;));</span><br><span class="line">sqlite&gt; select  * from images;</span><br><span class="line">name        type        img</span><br><span class="line">----------  ----------  ----------</span><br><span class="line">icon        png         �PNG</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>读取数据库中的图片,writefile(x,y) 负责将图片写入与数据库相同的目录中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select writefile(&apos;img.png&apos;,img) from images where name = &apos;icon&apos;;</span><br><span class="line">writefile(&apos;img.png&apos;,img)</span><br><span class="line">------------------------</span><br><span class="line">0</span><br><span class="line">26348</span><br></pre></td></tr></table></figure>
-<p>上面实现了 sqlite3 对图片的存储和读取，分别用到了 readfile() 和 writefile() 函数，图片格式为 blob</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="http://www.sqlite.org/cli.html#getting_started" target="_blank" rel="noopener">Command Line Shell For SQLite</a></li>
-<li><a href="http://www.w3school.com.cn/sql/" target="_blank" rel="noopener">W3C-SQL</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2025,7 +1833,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2036,7 +1844,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2047,7 +1855,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
