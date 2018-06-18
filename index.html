@@ -293,6 +293,326 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/Cocopods-公共仓库创建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/18/Cocopods-公共仓库创建/" itemprop="url">Cocopods 公共仓库创建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-18T22:35:37+08:00">
+                2018-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>先前工作的时候通过私有的 Git 搭建了 CocoaPods 仓库，然后用到的控件或者自定义仓库就直接使用，甚至将业务模块也做成了仓库，这样做的好处是集成的时候非常方便，但是大部分都做成了私有仓库，Git 地址都是私有地址，这样就会出现一个问题，就是这些私有仓库一但不在公司网络中便没有办法操作了，所以这次就一些非业务的控件直接做成公共的仓库，在这里坐下记录：</p>
+<h2 id="模板搭架工程框架"><a href="#模板搭架工程框架" class="headerlink" title="模板搭架工程框架"></a>模板搭架工程框架</h2><p><strong>pod lib create</strong> 是 CocoaPods 提供的创建仓库模板的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">pod lib create MLRouterAction</span><br><span class="line">Cloning `https://github.com/CocoaPods/pod-template.git` into `MLRouterAction`.</span><br><span class="line">Configuring MLRouterAction template.</span><br><span class="line"></span><br><span class="line">------------------------------</span><br><span class="line"></span><br><span class="line">To get you started we need to ask a few questions, this should only take a minute.</span><br><span class="line"></span><br><span class="line">If this is your first time we recommend running through with the guide:</span><br><span class="line"> - https://guides.cocoapods.org/making/using-pod-lib-create.html</span><br><span class="line"> ( hold cmd and click links to open in a browser. )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">What platform do you want to use?? [ iOS / macOS ]</span><br><span class="line"> &gt; iOS</span><br><span class="line"></span><br><span class="line">What language do you want to use?? [ Swift / ObjC ]</span><br><span class="line"> &gt; ObjC</span><br><span class="line"></span><br><span class="line">Would you like to include a demo application with your library? [ Yes / No ]</span><br><span class="line"> &gt; Yes</span><br><span class="line"></span><br><span class="line">Which testing frameworks will you use? [ Specta / Kiwi / None ]</span><br><span class="line"> &gt; None</span><br><span class="line"></span><br><span class="line">Would you like to do view based testing? [ Yes / No ]</span><br><span class="line"> &gt; Yes</span><br><span class="line"></span><br><span class="line">What is your class prefix?</span><br><span class="line"> &gt; ML</span><br><span class="line"></span><br><span class="line">Running pod install on your new library.</span><br><span class="line"></span><br><span class="line">Analyzing dependencies</span><br><span class="line">Fetching podspec for `MLRouterAction` from `../`</span><br><span class="line">Downloading dependencies</span><br><span class="line">Installing FBSnapshotTestCase (2.1.4)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/14/重构改善既有代码的设计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/14/重构改善既有代码的设计/" itemprop="url">重构改善既有代码的设计</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T10:45:19+08:00">
+                2018-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Book/" itemprop="url" rel="index">
+                    <span itemprop="name">Book</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这本书已经看过一遍了，还做过一个分享，想来想去还是做下记录，这样更加熟悉些。</p>
+<h2 id="初读之感"><a href="#初读之感" class="headerlink" title="初读之感"></a>初读之感</h2><p>其实这本书是经典早已知道，随便看看一些列了计算机必读书目的地方都有这本书，我记得第一次读的时候没觉得怎样，但是当我看别人的代码的时候（当然是一些开源的项目）我发现了一些地方竟然与书中的描述不谋而合。说实话，读源码是一件痛苦的事情，你是在沙漠中寻找水源，而这不谋而合的一瞥便是一席绿洲之地，沁人心脾！这种感觉很棒，这也促使了我再次深入的去细细阅读这本书。</p>
+<p>这本书是需要有基础才可以阅读的，我觉得应该有的基础如下：</p>
+<ul>
+<li>懂得面向对象思想，至少应该写过几个类，类的每一分部的都要知道，比如构造方法、工厂方法、实例变量</li>
+<li>对面向对象的三大特征有一定的理解，不仅仅是知道，最好可以直接通过代码演示出来，个人觉得不要用 Objective-C 来演示，最好是 Java 、 C++ 或者是 Swift，因为 Objective-C 中的许多叫法和这本书中的叫法真的不一样</li>
+<li>懂得一些设计模式，不需要深入理解，但是至少对一些名词要有一些认知，可以看看 《大话设计模式》当然 F4 也未尝不可</li>
+<li>熟练的写过一两个项目，整体的布局都要知道</li>
+</ul>
+<p>如果对上面这些东西没有认知的话，这本书还是不要读了，因为你真的会不明白他的含义的。</p>
+<p>这是一本书需要入乡随俗的书籍，因为书中列举了大量的自造（或者大家达成共识，而你不知道这个共识）的方法词汇，大部分的地方就直接用了着样的名词来进行描述，所以如果你不知道这种名词的话，真的很难阅读下去，比如这一句 ”如果你发现继承体系中的某些类没有存在的必要，可以用 Collapse Hierarchy（344）将它们移除。“ 我第一次读到这里的时候，瞬间不想再读下去了，因为好多地方都是这么叙述的，真心看不懂怎么一个意思，其实这个和看源码也差不多，就是你读到了一个函数调用，然后再去看看函数里面实现了什么东西，如果见名知意的话，那么就可以继续往后阅读，如果不知道那么你就要进入函数，当然进入函数之前你要存储上下文，阅读的话你就需要用书签或者脑袋来存储上下文了。</p>
+<p>Collapse Hierarchy（344）这个的意思是：超类和子类没有太大的区别，那么就可以将子类去掉，直接使用超类，反过来也一样，只要合二为一就可以了，译文叫做——折叠继承体系</p>
+<h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><p>先看书的大体结构：</p>
+<ul>
+<li>去了书皮，第一页便是重构列表，根据字母顺序排列，第一个是 Add Parameter(添加参数)</li>
+<li>全书共 15 章节，其实感觉书本的目录便是一个学习资源从中阅读你就知道了这是什么</li>
+<li>前五章：什么是重构、那些地方需要重构（坏味道）、测试体系和重构列表</li>
+<li>第六章-第十一章，这一部分是具体的重构方法：组织、简化函数以及组织数据和处理逻辑数据等，这部分就是学习的具体细节了，深究体会</li>
+<li>最后是 12 ~ 15 这部分就是尾声了，可以放松下浏览一下</li>
+</ul>
+<h2 id="章节阅读记录"><a href="#章节阅读记录" class="headerlink" title="章节阅读记录"></a>章节阅读记录</h2><p>下面这部分就是阅读记录了，读取每一章节将我体会所得做以记录：</p>
+<h3 id="第-11-章-处理概括关系"><a href="#第-11-章-处理概括关系" class="headerlink" title="第 11 章 处理概括关系"></a>第 11 章 处理概括关系</h3><p>这一章节一共 12 个技巧，</p>
+<h4 id="Pull-Up-Field"><a href="#Pull-Up-Field" class="headerlink" title="Pull Up Field"></a>Pull Up Field</h4><p>两个子类拥有相同的字段，那么需要将着两个子类的相同字段移至超类。</p>
+<p>具体做法就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: Pull Up Field 重构:&gt;http://www.google.com[blank]</span><br><span class="line">e=&gt;end:&gt;http://www.google.com</span><br><span class="line">op1=&gt;operation: 观察并记录各个子类之间相同字段</span><br><span class="line">sub1=&gt;subroutine: 统一字段名字</span><br><span class="line">cond=&gt;condition: 相同字段名字是否一致?:&gt;http://www.google.com</span><br><span class="line">io1=&gt;operation: 编译测试</span><br><span class="line">io2=&gt;operation: 在超类中新建一个字段</span><br><span class="line">io3=&gt;operation: 移除子类字段</span><br><span class="line">io4=&gt;operation: 编译测试</span><br><span class="line">io4=&gt;operation: 选择性对超类新建字段使用 Self Encapsulate Field</span><br><span class="line">st-&gt;op1-&gt;cond</span><br><span class="line">cond(yes)-&gt;io1-&gt;io2-&gt;io3-&gt;io4-&gt;e</span><br><span class="line">cond(no)-&gt;sub1(right)-&gt;op1</span><br></pre></td></tr></table></figure>
+<p><strong>注意事项：</strong></p>
+<ol>
+<li>观察两个或者多个子类对这个字段行为是否一致，或者大体相似才能用这个技巧来进行优化</li>
+<li>如果子类的字段的是 private 的，那么提升到超类之后必须是 protected</li>
+<li>针对超类新建字段使用 <em>Self Encapsulate Filed(171)</em>， 就是为了解耦，通过封装方法来访问字段值，常见方式就是 <em>setter</em> 和 <em>getter</em> 方法</li>
+</ol>
+<p><strong>一句话：将子类字段提升到父类，减少了代码重复，降低了代码修改复杂度</strong></p>
+<h4 id="Pull-Up-Method"><a href="#Pull-Up-Method" class="headerlink" title="Pull Up Method"></a>Pull Up Method</h4><p>有些函数，在各个子类中产生完全相同的结果，可以将该函数移动到超类中。</p>
+<p>具体做法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: Pull Up Method 重构:&gt;http://www.google.com[blank]</span><br><span class="line">e=&gt;end:&gt;http://www.google.com</span><br><span class="line">op1=&gt;operation: 检查待提升函数，确定它们行为是否一致</span><br><span class="line">io1=&gt;operation: 修改不一致的地方，编译测试</span><br><span class="line">io2=&gt;operation: 在超类中新建一个函数，复制子类函数到父类</span><br><span class="line">io3=&gt;operation: 移除子类函数内容，每次一处都需要测试</span><br><span class="line">io4=&gt;operation: 编译测试</span><br><span class="line">io4=&gt;operation: 观察该函数的调用者，看看是否可以改为超类类型的帝乡</span><br><span class="line">st-&gt;op1-&gt;io1-&gt;io2-&gt;io3-&gt;io4-&gt;e</span><br></pre></td></tr></table></figure>
+<p><strong>一句话： 将子类中行为完全相同的函数提升到父类中，即使不完全相同也可以先调整让其相同再进行提升操作</strong></p>
+<h4 id="Pull-Up-Constructor-Body"><a href="#Pull-Up-Constructor-Body" class="headerlink" title="Pull Up Constructor Body"></a>Pull Up Constructor Body</h4><p>你在各个子类中拥有一些构造函数，它们的本体几乎完全一致。<br><strong>在超类中新建一个构造函数，并在子类构造函数中调用它</strong></p>
+<p>这个技巧主要是针对构造函数的，因为构造函数是创建对象的函数，所以比较特殊，在这里就有了这么一个专门处理的技巧。</p>
+<p>具体操作：</p>
+<ul>
+<li>在超类中定义一个构造函数</li>
+<li>将子类构造函数中的共同代码搬迁到超类的构造函数中：<ul>
+<li>被搬迁的可能是子类构造函数的全部内容，这种比较好操作</li>
+<li>如果不是全部，设法将共同代码搬移到构造函数起始处，然后再复制到父类构造函数中</li>
+</ul>
+</li>
+<li>将子类中共同代码删掉，改调动新建父类的构造函数</li>
+<li>测试（如果日后子类构造函数中再出现共同代码，可以首先使用 Extract Method 将那一部分单独提炼到一个独立函数中，然后使用 Pull Up Method 将该函数上移。</li>
+</ul>
+<h2 id="阅读技巧"><a href="#阅读技巧" class="headerlink" title="阅读技巧"></a>阅读技巧</h2><p>这里记录了在阅读这本的时候的小技巧：</p>
+<ul>
+<li>不要阅读电子版本的，你会崩溃的</li>
+<li>阅读之前准备几个书签放在旁边</li>
+<li>不要吝啬，不要懒惰，看到不明白的技巧名字就直接翻到那一页看看是什么意思，不明白不要紧</li>
+<li>书中代码都是 Java 的，最好用 Java 写过项目</li>
+</ul>
+<h2 id="读书心得"><a href="#读书心得" class="headerlink" title="读书心得"></a>读书心得</h2><h3 id="心得一：如果你不知道怎么把你的代码写好那就看看这本书"><a href="#心得一：如果你不知道怎么把你的代码写好那就看看这本书" class="headerlink" title="心得一：如果你不知道怎么把你的代码写好那就看看这本书"></a>心得一：如果你不知道怎么把你的代码写好那就看看这本书</h3><p>当你在写完代码之后，不知道自己到底写的好与不好的时候，该怎么办？以前我的做法是，到 GitHub 上去看看别人写的，或者是别人用的方法，然后结果还是没有找到我想要得到的。因为别人可能做的事情和你的大体类似，但是需求可能不一样，而想要知道代码的好与坏跟他们的实现其实关系不大，你要做的是让你的代码舒服，或者是没有坏的味道，那么首先你要知道哪些是坏味道？这本书中的每种技巧都是针对了每一种坏的味道，慢慢体会领悟，然后写几行代码看看，自然就知道是怎么回事，这样你就可以对着这本书的重构列表慢慢的看你自己写的类，写的方法，写的字段，就知道哪里哪里该怎么进行优化了，不要觉得这些小技巧没什么，他们综合起来就可以让代码质量上升为一个等级。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/GCD-全面解析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1452,297 +1772,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/绝技之分析网络流量’/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/04/绝技之分析网络流量’/" itemprop="url">Python 绝技之分析网络流量</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-04T16:28:09+08:00">
-                2018-06-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>定位 IP 流量地理位置</li>
-<li></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/Python-绝技之渗透测试/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/04/Python-绝技之渗透测试/" itemprop="url">Python 绝技 之 渗透测试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-04T16:17:55+08:00">
-                2018-06-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1788,7 +1822,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1799,7 +1833,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1810,7 +1844,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -293,6 +293,290 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/01/Git/Git-札记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/01/Git/Git-札记/" itemprop="url">Git 札记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-01T10:52:08+08:00">
+                2018-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git  常用命令"></a>Git  常用命令</h2><h3 id="推送一个本地新建分支到远端"><a href="#推送一个本地新建分支到远端" class="headerlink" title="推送一个本地新建分支到远端"></a>推送一个本地新建分支到远端</h3><p>某些时候，我们为了开发某个需求,于是乎就新建了一个分支，但是这个分支是在本地的。当开发完这个需求后，其他需求没有完成，这个分支需要等待，这时候放在本地不太安全，万一明天来了电脑死球了呢，所以最保险的办法是将这个分支推送到远端，而此时远端并没有这个分支。（还有一种情况，你为了开发一个新的需求，本地新建了一个分支，而在开发期间发现别人需要在你的分支上继续开发，所以你必须把这个本地分支推送到远端），废话不多说，命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">v2.4.3$ git push --set-upstream origin v2.4.3</span><br></pre></td></tr></table></figure>
+<p>如上，在当前分支上运行 <em>git push</em> 命令，加上后面的参数， v2.4.3 就是当前的分支名字。<br><strong>特殊技巧</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">v2.4.3$ git push</span><br><span class="line">fatal: The current branch v2.4.3 has no upstream branch.</span><br><span class="line">To push the current branch and set the remote as upstream, use</span><br><span class="line"></span><br><span class="line">	git push --set-upstream origin v2.4.3</span><br></pre></td></tr></table></figure></p>
+<p>什么意思呢？ git 是一个强大的交互工具，如果你忘记了这些个参数，那么直接输入 <strong>git push</strong> git 就会告诉你应该怎么做的。这里需要注意，<em>git push</em> 操作会影响远端，所以，粗心的我们在进行这些操作的时候一定要注意，万分谨慎，你必须要知道你要干嘛以及你干了什么事，切记切记。</p>
+<h3 id="获取一个本地没有的远程分支"><a href="#获取一个本地没有的远程分支" class="headerlink" title="获取一个本地没有的远程分支"></a>获取一个本地没有的远程分支</h3><ol>
+<li>git branch 查看本地分支;</li>
+<li><p>git branch -a 查看本地分支和远程分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">v2.4.3$ git branch -a</span><br><span class="line">	242</span><br><span class="line">	master</span><br><span class="line">* v2.4.3</span><br><span class="line">	remotes/origin/242</span><br><span class="line">	remotes/origin/HEAD -&gt; origin/master</span><br><span class="line">	remotes/origin/master</span><br><span class="line">	remotes/origin/segment</span><br><span class="line">	remotes/origin/v2.4.3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>git checkout -b 本地分支名字 origin/远程分子名字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">v2.4.3 $ git checkout -b segment origin/segment</span><br><span class="line">Branch segment set up to track remote branch segment from origin.</span><br><span class="line">Switched to a new branch &apos;segment&apos;</span><br><span class="line">segment$ git branch</span><br><span class="line">	242</span><br><span class="line">	master</span><br><span class="line">* segment</span><br><span class="line">	v2.4.3</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="为本地-Git-添加远程-Git-地址"><a href="#为本地-Git-添加远程-Git-地址" class="headerlink" title="为本地 Git 添加远程 Git 地址"></a>为本地 Git 添加远程 Git 地址</h3><ol>
+<li>在远端创建一个空的 Git</li>
+<li>进入本地仓库，添加远端 Git 地址<em>git remote add origin git@github.com:AliceHome/SwiftApprentice.git</em>，当然这之前需要在远端添加 ssh</li>
+<li>推送到远端 <em>git push -u origin master</em><h2 id="Git-思想"><a href="#Git-思想" class="headerlink" title="Git 思想"></a>Git 思想</h2></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/04/开发-IDE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/04/开发-IDE/" itemprop="url">开发 IDE</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-04T11:31:38+08:00">
+                2018-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>记录 IDE 使用方式以及配置，以备不时之需</p>
+<h2 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h2><h2 id="EMACS"><a href="#EMACS" class="headerlink" title="EMACS"></a>EMACS</h2><p><a href="http://www.gnu.org/software/emacs/index.html" target="_blank" rel="noopener">Emacs</a></p>
+<h3 id="安装-Emacs"><a href="#安装-Emacs" class="headerlink" title="安装 Emacs"></a>安装 Emacs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install emacs --with-cocoa</span><br></pre></td></tr></table></figure>
+<h2 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h2><h2 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h2><h2 id="Sublime"><a href="#Sublime" class="headerlink" title="Sublime"></a>Sublime</h2><h2 id="Atom"><a href="#Atom" class="headerlink" title="Atom"></a>Atom</h2><p>在使用<a href="https://atom.io" target="_blank" rel="noopener">Atom</a>之前，已经使用了一段时间的 <em>sublime</em>，这两款 IDE 功能很相似的，但是我倾向于 <em>Atom</em>，可能是因为 <em>Atom</em> 名字靠前吧！如果这么类比的话，<em>vim VS. Emacx</em> ，我会选择使用 <em>Emacs</em>，哈哈，什么毛病啊！</p>
+<p>Atom 是 GitHub 推出的一款编辑软件</p>
+<h2 id="MWeb"><a href="#MWeb" class="headerlink" title="MWeb"></a>MWeb</h2><p>Markdown 的写作工具，之前用过其他的，但是最终还是选择了这个，这篇博客就是用它写的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/极光开发汇总/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -891,6 +1175,173 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/Swift-Apprentice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/14/Swift-Apprentice/" itemprop="url">Swift Apprentice</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T14:14:31+08:00">
+                2017-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Chapter-11-Structures"><a href="#Chapter-11-Structures" class="headerlink" title="Chapter 11: Structures"></a>Chapter 11: Structures</h2><h3 id="结构体简介"><a href="#结构体简介" class="headerlink" title="结构体简介"></a>结构体简介</h3><p>### </p>
+<h2 id="Chapter-14-Class"><a href="#Chapter-14-Class" class="headerlink" title="Chapter 14: Class"></a>Chapter 14: Class</h2><h3 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h3><ul>
+<li>必须要有初始化方法</li>
+<li>所有的属性必须在初始化方法之前有个初始值</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> firstName: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> lastName: <span class="type">String</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.firstName = firstName</span><br><span class="line">        <span class="keyword">self</span>.lastName = lastName</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> fullName: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"\(firstName) \(lastName)"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> erik:<span class="type">Person</span> = <span class="type">Person</span>(firstName: <span class="string">"Erik"</span>, lastName: <span class="string">"Keber"</span>)</span><br><span class="line"><span class="built_in">print</span>(erik.fullName)</span><br></pre></td></tr></table></figure>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>类创建的对象是一种引用类型，也就是说当我们通过如下代码创建一个对象的时候</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">Employee</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> var1:<span class="type">Employee</span> = <span class="type">Employee</span>(name: <span class="string">"Jack"</span>)</span><br></pre></td></tr></table></figure>
+<p>实际上，变量存储的是该对象的地址，如果我们通过</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> var2 = var1</span><br></pre></td></tr></table></figure>
+<p>将该变量赋值给另一个变量，此时内存中只有一个对象，两个变量存放着相同的内存地址</p>
+<p>而结构体则是一种值类型，也就是变量存放的不再是地址，而是当前结构体实例的值</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Employee1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> var1 = <span class="type">Employee1</span>(name: <span class="string">"Jack"</span>)</span><br></pre></td></tr></table></figure>
+<p>如果我们通过赋值给另一个变量，其实 copy 了一份新的值给另一个变量</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> var2 = var1</span><br></pre></td></tr></table></figure>
+<p><strong>堆 vs. 栈</strong></p>
+<p>当我们创建一个对象（reference type） 的时候，实际上是存放到了内存的堆区上面，而结构体（value type）则是存放到内存的栈区上面，除非这个 value type 类型的值是对象的一部分。<br>堆区和栈区都是编程中必不可可少的部分，认识堆和栈可以帮助我们了解类和结构体：</p>
+<ul>
+<li>系统使用栈(stack)存放临时的东西，栈里的东西有系统自动管理和优化。比如一个变量在函数开始的时候声明，并存储到栈中，当函数结束的时候这个变量在栈区中的内存就会被自动回收。因此，栈的管理高效、方便、快速</li>
+<li>系统对堆（heap）的管理与栈不同，堆中存放得是一些应用的类型。一般堆的存储都比较大，而且需要应用自己申请和自己释放，当然优化工作也是需要应用自己来处理。所以与栈相比较而言，堆相对比较麻烦和慢。</li>
+</ul>
+<p>到这里有件事情很清晰了：</p>
+<ul>
+<li>通过类创建对象的时候，实际上是通过类的初始化方法在堆中申请了一块内存空间来存放 firstName 和 lastName。而变量和对象的地址则是存放到栈上</li>
+<li>通过结构体创建实例只是在栈上申请空间，与堆区没有任何关系</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/26/iOS/LLVM-以及-BitCode-泛谈/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -999,6 +1450,157 @@
 <p><em>compiler-rt</em>: 为 LLVM和Clang设计的编译器扩展函数库。针对 _fixunsdfdi 和其他目标机器上没有一个核心IR对应的短原生指令序列时(Oh,my god 这是什么）,提供高度调优过的底层代码生成支持。</p>
 <p><em>ABI是什么？</em><br>Application Binary Interface，应用二进制接口，是APP和操作系统、其应用之间的二进制接口。</p>
 <p>—-<em>*参考</em>——<br><a href="https://www.jianshu.com/p/66a76df0db95" target="_blank" rel="noopener">Chris Lattner 访谈录（上）</a><br><a href="http://atp.fm/205-chris-lattner-interview-transcript" target="_blank" rel="noopener">Transcript of episode 205, an interview of Chris Lattner on January 17, 2017</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/carthage-Tour/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/13/carthage-Tour/" itemprop="url">carthage Tour</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T23:38:22+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/carthage/" itemprop="url" rel="index">
+                    <span itemprop="name">carthage</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>carthage iOS  第三方管理工具，本来不打算学习这个东西了，但是最近在看一些工程总是会遇到它，索性在这里记录下如何去使用 carthage 。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>Mac 构建 carthage 环境 &amp; 了解 carthage</li>
+<li>carthage 引入第三方</li>
+<li>初步了解 carthage 的原理</li>
+<li>carthage 限制</li>
+<li>carthage 与 CocoaPods 同时使用</li>
+</ul>
+<h2 id="搭建-carthage-环境"><a href="#搭建-carthage-环境" class="headerlink" title="搭建 carthage 环境"></a>搭建 carthage 环境</h2><p>因为 Mac 有 brew 神器，闭着眼也知道怎么安装了 <em>brew install carthage</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ brew install carthage</span><br><span class="line">$ <span class="built_in">which</span> carthage</span><br><span class="line">/usr/<span class="built_in">local</span>/bin/carthage</span><br><span class="line">$ carthage <span class="built_in">help</span></span><br><span class="line">Available commands:</span><br><span class="line"></span><br><span class="line">   archive           Archives built frameworks into a zip that Carthage can use</span><br><span class="line">   bootstrap         Check out and build the project<span class="string">'s dependencies</span></span><br><span class="line"><span class="string">   build             Build the project'</span>s dependencies</span><br><span class="line">   checkout          Check out the project<span class="string">'s dependencies</span></span><br><span class="line"><span class="string">   copy-frameworks   In a Run Script build phase, copies each framework specified by a SCRIPT_INPUT_FILE environment variable into the built app bundle</span></span><br><span class="line"><span class="string">   fetch             Clones or fetches a Git repository ahead of time</span></span><br><span class="line"><span class="string">   help              Display general or command-specific help</span></span><br><span class="line"><span class="string">   outdated          Check for compatible updates to the project'</span>s dependencies</span><br><span class="line">   update            Update and rebuild the project<span class="string">'s dependencies</span></span><br><span class="line"><span class="string">   version           Display the current version of Carthage</span></span><br></pre></td></tr></table></figure>
 
           
         
@@ -1180,593 +1782,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/04/算法C描述之数据结构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/04/算法C描述之数据结构/" itemprop="url">算法C描述之数据结构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-04T07:05:49+08:00">
-                2017-03-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="自定义组件"><a href="#自定义组件" class="headerlink" title="自定义组件"></a>自定义组件</h2><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>数组是一组相同类型数据的固定集合，它们的存储空间相邻，可以通过索引访问。 C 语言中索引非负且小于数组大小。</p>
-<h3 id="埃拉托色尼筛选"><a href="#埃拉托色尼筛选" class="headerlink" title="埃拉托色尼筛选"></a>埃拉托色尼筛选</h3><h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h2 id="符合数据结构"><a href="#符合数据结构" class="headerlink" title="符合数据结构"></a>符合数据结构</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/02/NSFoundation/NSFoundation-NSInvocation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/02/NSFoundation/NSFoundation-NSInvocation/" itemprop="url">NSFoundation-NSInvocation</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-02T18:21:58+08:00">
-                2017-02-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NSFoundation/" itemprop="url" rel="index">
-                    <span itemprop="name">NSFoundation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><em>NSInvocation</em>继承自<em>NSObject</em>。</p>
-<p><em>参考</em><br><a href="https://developer.apple.com/documentation/foundation/nsinvocation?language=occ" target="_blank" rel="noopener">NSInvocation API</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/01/NSFoundation/Foundation-MapTable/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/01/NSFoundation/Foundation-MapTable/" itemprop="url">Foundation-MapTable</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-01T12:29:16+08:00">
-                2017-01-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NSFoundation/" itemprop="url" rel="index">
-                    <span itemprop="name">NSFoundation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>NSMapTable 是 iOS 6 之后， 苹果公开出的一个集合类。NSMapTable 与 NSDictionary/NSMutableDictionary 类似，可以对比学习。<br>NSMapTable 具有以下特性：</p>
-<ul>
-<li>NSMapleTable 对 键或者值得应用可以是弱引用，即其中之一被移除，那么在Map中存储的这一项也会被移除掉；<br>-</li>
-</ul>
-<h2 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h2><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="https://developer.apple.com/documentation/foundation/nsmaptable" target="_blank" rel="noopener">NSMaptable API</a><br><a href="http://www.cocoawithlove.com/2008/07/nsmaptable-more-than-nsdictionary-for.html" target="_blank" rel="noopener">NSMapTable: more than an NSDictionary for weak pointers
-</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/01/Learning-SQLite-for-iOS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/01/Learning-SQLite-for-iOS/" itemprop="url">Learning SQLite for iOS</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-01T17:27:57+08:00">
-                2016-12-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[TOC]</p>
-<h1 id="Chapter-1：介绍-SQL-和-SQLite-这一章节，介绍-SQL（structured-query-Language）-北京和移动数据库-——-SQLite"><a href="#Chapter-1：介绍-SQL-和-SQLite-这一章节，介绍-SQL（structured-query-Language）-北京和移动数据库-——-SQLite" class="headerlink" title="Chapter 1：介绍 SQL 和 SQLite 这一章节，介绍 SQL（structured query Language） 北京和移动数据库 —— SQLite."></a>Chapter 1：介绍 SQL 和 SQLite 这一章节，介绍 SQL（structured query Language） 北京和移动数据库 —— SQLite.</h1><h2 id="About-SQL"><a href="#About-SQL" class="headerlink" title="About SQL"></a>About SQL</h2><h2 id="Where-does-SQLite-stand-in-today‘s-industry"><a href="#Where-does-SQLite-stand-in-today‘s-industry" class="headerlink" title="Where does SQLite stand in today‘s industry ?"></a>Where does SQLite stand in today‘s industry ?</h2><h2 id="iOS-with-SQLite"><a href="#iOS-with-SQLite" class="headerlink" title="iOS with SQLite"></a>iOS with SQLite</h2><h2 id="Embedded-database"><a href="#Embedded-database" class="headerlink" title="Embedded database"></a>Embedded database</h2><h2 id="The-architecture-of-the-SQLite-database"><a href="#The-architecture-of-the-SQLite-database" class="headerlink" title="The architecture of the SQLite database"></a>The architecture of the SQLite database</h2><h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><h2 id="The-advantages-of-using-SQLite"><a href="#The-advantages-of-using-SQLite" class="headerlink" title="The advantages of using SQLite"></a>The advantages of using SQLite</h2><p>SQLite 数据的优点：</p>
-<ul>
-<li>SQLite 有数据限制特性以及编辑或者删除表不需要加载到内存中</li>
-<li>SQLite 的数据存储在硬盘上，速度比 Core Data 慢一些</li>
-<li>Core Data 没有数据限制，需要通过 app 的业务逻辑来限制数据量</li>
-<li><h2 id="Working-with-SQLite"><a href="#Working-with-SQLite" class="headerlink" title="Working with SQLite"></a>Working with SQLite</h2>SQLite 官网：www.sqlite.org，在这个官网上可以下载数据库二进制源码，可以查看文档和源代码。在这里，提供了 SQLite 的共享库以及 DLL，当然还有 CLP（command-line-program)，还支持 TCL 扩展，可以通过它进行数据库的链接和更新。<h2 id="The-examples-of-using-SQLite-with-iOS"><a href="#The-examples-of-using-SQLite-with-iOS" class="headerlink" title="The examples of using SQLite with iOS"></a>The examples of using SQLite with iOS</h2></li>
-</ul>
-<h1 id="Chapter-2：数据库设计概念"><a href="#Chapter-2：数据库设计概念" class="headerlink" title="Chapter 2：数据库设计概念"></a>Chapter 2：数据库设计概念</h1><h1 id="Chapter-3：管理数据库"><a href="#Chapter-3：管理数据库" class="headerlink" title="Chapter 3：管理数据库"></a>Chapter 3：管理数据库</h1><h1 id="Chapter-4：Essentials-of-SQL"><a href="#Chapter-4：Essentials-of-SQL" class="headerlink" title="Chapter 4：Essentials of SQL"></a>Chapter 4：Essentials of SQL</h1><h1 id="Chapter-5：Exposing-C-API"><a href="#Chapter-5：Exposing-C-API" class="headerlink" title="Chapter 5：Exposing C API"></a>Chapter 5：Exposing C API</h1><p>C API 的调用，通过这些 API我们可以很方便的在应用程序中访问数据库。大约有 200 多个 API  供调用。</p>
-<h1 id="Chapter-6：Swift-with-SQLite"><a href="#Chapter-6：Swift-with-SQLite" class="headerlink" title="Chapter 6：Swift with SQLite"></a>Chapter 6：Swift with SQLite</h1><h1 id="Chapter-7："><a href="#Chapter-7：" class="headerlink" title="Chapter 7："></a>Chapter 7：</h1><h1 id="Chapter-8："><a href="#Chapter-8：" class="headerlink" title="Chapter 8："></a>Chapter 8：</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1812,7 +1832,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1823,7 +1843,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1834,7 +1854,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
