@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="NSFoundation," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="NSObject 是大部分OC类的父类，继承NSObject，可以获取访问运行时的接口，并且具备了OC对象的基本功能。NSObject 实现了 协议，也就是拥有了一簇接口。 初始化类初始化类，提供了两个API， + initialize 和 + load 。 + initialize在类收到第一条消息的时候初始化这个类。（即第一次使用这个类的时候，调用这个方法。如果项目中没有使用这个类，这个方法不">
+<meta name="keywords" content="NSFoundation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Foundation-NSObject">
+<meta property="og:url" content="http://yoursite.com/2016/01/01/Pre/NSFoundation/Foundation-NSObject/index.html">
+<meta property="og:site_name" content="Hi, this is Alice Home">
+<meta property="og:description" content="NSObject 是大部分OC类的父类，继承NSObject，可以获取访问运行时的接口，并且具备了OC对象的基本功能。NSObject 实现了 协议，也就是拥有了一簇接口。 初始化类初始化类，提供了两个API， + initialize 和 + load 。 + initialize在类收到第一条消息的时候初始化这个类。（即第一次使用这个类的时候，调用这个方法。如果项目中没有使用这个类，这个方法不">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-02T10:58:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Foundation-NSObject">
+<meta name="twitter:description" content="NSObject 是大部分OC类的父类，继承NSObject，可以获取访问运行时的接口，并且具备了OC对象的基本功能。NSObject 实现了 协议，也就是拥有了一簇接口。 初始化类初始化类，提供了两个API， + initialize 和 + load 。 + initialize在类收到第一条消息的时候初始化这个类。（即第一次使用这个类的时候，调用这个方法。如果项目中没有使用这个类，这个方法不">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/01/01/Pre/NSFoundation/Foundation-NSObject/"/>
+
+
+
+
+
+  <title>Foundation-NSObject | Hi, this is Alice Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hi, this is Alice Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/01/Pre/NSFoundation/Foundation-NSObject/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Foundation-NSObject</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-01T12:29:16+08:00">
+                2016-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NSFoundation/" itemprop="url" rel="index">
+                    <span itemprop="name">NSFoundation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>NSObject 是大部分OC类的父类，继承NSObject，可以获取访问运行时的接口，并且具备了OC对象的基本功能。<br>NSObject 实现了 <nsobject>协议，也就是拥有了一簇接口。</nsobject></p>
+<h3 id="初始化类"><a href="#初始化类" class="headerlink" title="初始化类"></a>初始化类</h3><p>初始化类，提供了两个API， <em>+ initialize</em> 和 <em>+ load</em> 。</p>
+<h4 id="initialize"><a href="#initialize" class="headerlink" title="+ initialize"></a>+ initialize</h4><p>在类收到第一条消息的时候初始化这个类。（即第一次使用这个类的时候，调用这个方法。如果项目中没有使用这个类，这个方法不会被调用）</p>
+<h5 id="方法声明"><a href="#方法声明" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)initialize</span><br></pre></td></tr></table></figure>
+<h5 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h5><p>在类或者子类收到第一条消息前，运行时向每个类发送 <em>initialize</em>消息。父类在子类之前收到这个消息。运行时向这些类发送 <em>initialize</em>消息是线程安全的。也就是当第一个线程向一个类发送消息的时候，其他的线程如果想这个类发送消息就会被阻塞，知道第一个线程的消息结束。</p>
+<p>如果子类没有实现 <em>initialize</em> 方法，父类中的 <em>initialize</em> 方法可能会被调用多次。如果你想让父类中的 <em>initialize</em> 方法只调用一次，可以使用下面的结构：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)initialize &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> == [ClassName <span class="keyword">self</span>]) &#123;</span><br><span class="line">    <span class="comment">// ... do the initialization ...</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为 <em>initialize</em> 是以阻塞的方式调用的，所以要控制好该方法中的工作量。尽量避免在该方法中使用线程锁，因为这可能导致死锁。除此之外，尽量减少在该方法中执行复杂的操作。</p>
+<h5 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h5><p>每个类只会调用一次 <em>initialize</em> 方法，如果你想独立的初始化一个类或者该类的类目，那么应该实现<em>+ load</em> 方法。</p>
+<h4 id="load"><a href="#load" class="headerlink" title="+ load"></a>+ load</h4><p>当类或者是类目被添加到运行时的时候，就会调用该方法。如果想对类做一些特别的处理，那么可以实现 <em>+load</em>方法。</p>
+<h5 id="方法声明-1"><a href="#方法声明-1" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)load;</span><br></pre></td></tr></table></figure>
+<h5 id="讨论-1"><a href="#讨论-1" class="headerlink" title="讨论"></a>讨论</h5><p>初始化方法调用的顺序：</p>
+<ul>
+<li>父类的 <em>+ load</em> 方法先于子类的<em>+load</em> 方法调用；</li>
+<li>子类的 <em>+load</em> 方法先于类目的调用</li>
+</ul>
+<p><strong> 这里有一部分官方文档没看懂，先记记录调用顺序吧</strong></p>
+<h3 id="创建、拷贝和销毁对象"><a href="#创建、拷贝和销毁对象" class="headerlink" title="创建、拷贝和销毁对象"></a>创建、拷贝和销毁对象</h3><h4 id="alloc"><a href="#alloc" class="headerlink" title="+ alloc"></a>+ alloc</h4><p>为接收该消息者创建一个实例。</p>
+<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TheClass *newObject = [[TheClass alloc] init];</span><br></pre></td></tr></table></figure>
+<h5 id="讨论-2"><a href="#讨论-2" class="headerlink" title="讨论"></a>讨论</h5><ul>
+<li>如果你想要初始化类中的某些东西，不要重写这个方法，应该去重写 init 方法</li>
+<li>因为历史原因， <em>alloc</em> 方法会调用 <em>allocWithZone:</em> 这个方法</li>
+</ul>
+<h4 id="allocWithZone"><a href="#allocWithZone" class="headerlink" title="+ allocWithZone:"></a>+ allocWithZone:</h4><p>为接收该消息者创建一个实例。</p>
+<h5 id="方法声明-2"><a href="#方法声明-2" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">instancetype</span>)allocWithZone:(<span class="keyword">struct</span> _NSZone *)zone;</span><br></pre></td></tr></table></figure>
+<p>参数 <em>zone</em> 被忽略了已经</p>
+<h5 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TheClass *newObject = [[TheClass allocWithZone:<span class="literal">nil</span>] init];</span><br></pre></td></tr></table></figure>
+<h5 id="讨论-3"><a href="#讨论-3" class="headerlink" title="讨论"></a>讨论</h5><ul>
+<li>如果你想要初始化类中的某些东西，不要重写这个方法，应该去重写 init 方法</li>
+<li>这个方法的存在是历史遗留问题， memory zone 在 OC 中已经被丢弃了。</li>
+</ul>
+<h4 id="init"><a href="#init" class="headerlink" title="- init"></a>- init</h4><p>当一个对象分配到一块内存之后，这个方法用来初始化这个对象，并将初始化之后的对象返回</p>
+<h5 id="方法声明-3"><a href="#方法声明-3" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)init;</span><br></pre></td></tr></table></figure>
+<h5 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h5><p>两种情况：</p>
+<ul>
+<li>初始化之后的对象；</li>
+<li>nil ,如果在初始化的过程中出现未知异常，该方法可能会返回 nil<h5 id="讨论-4"><a href="#讨论-4" class="headerlink" title="讨论"></a>讨论</h5><em>init</em> 方法是和 <em>alloc</em>（或者 *allocWithZone:) 方法一起调用的。<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SomeClass *object = [[SomeClass alloc] init];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>一个对象如果没有通过（init） 方法初始化是不可以被使用的（也就是不可以接受消息）。<br>如果想要自定义这个方法的实现，首先要调用父类的 <em>init</em> 方法，然后再去做你自己的初始化以及返回一个新的对象。如果这个新对象没有初始化成功，那么必须返回 nil。比如，一个 <em>BuiltInCamera</em> 在一部没有摄像头的手机上运行时，初始化方法只能返回 nil。</p>
+<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)init &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) &#123;</span><br><span class="line">    <span class="comment">// Initialize self</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 Xcode 中写 init 方法的时候 ，只需要输入 init 几个字母之后，就可以看到完整的方法提示了，注意不要输入 “-” 否则提示就不会出现了。</p>
+<h4 id="copy"><a href="#copy" class="headerlink" title="- copy"></a>- copy</h4><p>调用该方法，会返回一个 <em>copyWithZone</em> 方法的结果</p>
+<h5 id="方法声明-4"><a href="#方法声明-4" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)<span class="keyword">copy</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h5><p>这个返回值是 <em>NSCopying</em> 协议中的 <em>copyWithZone:</em> 方法的返回值</p>
+<h5 id="讨论-5"><a href="#讨论-5" class="headerlink" title="讨论"></a>讨论</h5><p>这个方法很方便的让类可以实现 <em>NSCopying</em>协议。 如果调用 <em>copy</em>方法的类没有实现 <em>NSCopying</em>协议，那么就会抛出异常。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[Whale copyWithZone:]: unrecognized selector sent to instance 0x60400000ecc0'</span><br></pre></td></tr></table></figure></p>
+<p>Whale 这个类没有实现 copyWithZone: 这个方法，解决方法就是：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Whale.h</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Whale</span> : <span class="title">NSObject</span>&lt;<span class="title">NSCopying</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Whale.m</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Whale.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Whale</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone &#123;</span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>当然，如果缺少了 <em>@interface Whale : NSObject<nscopying></nscopying></em> 也是可以的，因为我们实现了 <em>copyWithZone:</em> 这个方法。此时程序不会报错。<br>值得注意的是， <em>NSObject</em> 类并不支持 <em>NSCopying</em> 协议，但是子类必须支持此协议，并且实现 <em>copyWithZone:</em> 这个方法，当然前提是你如果想要调用 <em>copy</em> 方法。<br> 如果子类不是直接继承了 NSObject 类，那么在实现<em>copyWithZone:</em> 方法的时候，首先要调用父类的<em>copyWithZone:</em> 方法，将父类的实现合并到子类中。例如， Whale 继承自 NSObject 那么它就不需要调用父类的 <em>copyWithZone:</em> ，但是 AliceWhale 继承自 Whale 类，那么就必须先调用父类的*copyWithZone:方法 ,合并父类的copy 内容：</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">AliceWhale</span> : <span class="title">Whale</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">AliceWhale</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone &#123;</span><br><span class="line">    [<span class="keyword">super</span> copyWithZone:zone];</span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h4 id="copyWithZone"><a href="#copyWithZone" class="headerlink" title="-copyWithZone:"></a>-copyWithZone:</h4><p>  没啥好说的<br>  <strong>This method exists so class objects can be used in situations where you need an object that conforms to the NSCopying protocol. For example, this method lets you use a class object as a key to an NSDictionary object. You should not override this method.</strong><br>  这一段话以后再去理解吧，没看懂。</p>
+<h4 id="mutableCopy"><a href="#mutableCopy" class="headerlink" title="- mutableCopy"></a>- mutableCopy</h4><p>  返回 mutableCopyWithZone: 的返回值<br>  具体使用逻辑和 copy 类似，只是一个是不可变的一个是可变的</p>
+<h4 id="dealloc"><a href="#dealloc" class="headerlink" title="- dealloc"></a>- dealloc</h4><p>  取消对象占用的内存的时候调用这个方法。</p>
+<h5 id="讨论-6"><a href="#讨论-6" class="headerlink" title="讨论"></a>讨论</h5><ul>
+<li>在该方法的实现中释放一些资源；</li>
+<li>不能直接调用此方法，该方法是runtime调用具体参见<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html#//apple_ref/doc/uid/10000011-SW1" target="_blank" rel="noopener">Advanced Memory Management Programming Guide</a></li>
+<li>ARC 下不能 [super dealloc]<ul>
+<li>MRC 下必须调用 [super dealloc]，而且必须写在方法最后</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="识别类"><a href="#识别类" class="headerlink" title="识别类"></a>识别类</h3><p>这里主要有三个类方法</p>
+<ul>
+<li>+ class , 返回类对象</li>
+<li>+ superclass， 返回父类类对象</li>
+<li>+ isSubclassOfClass: ， 返回一个 Boolean 值，</li>
+</ul>
+<h4 id="class"><a href="#class" class="headerlink" title="+ class"></a>+ class</h4><p>返回 类对象</p>
+<h5 id="讨论-7"><a href="#讨论-7" class="headerlink" title="讨论"></a>讨论</h5><p>要引用一个类，必须通过类的名字，初次之外其他的情况我们可以通过这个方法来获取一个类对象。</p>
+<h4 id="superclass"><a href="#superclass" class="headerlink" title="+ superclass"></a>+ superclass</h4><p>返回父类的类对象</p>
+<h4 id="isSubclassOfClass"><a href="#isSubclassOfClass" class="headerlink" title="+isSubclassOfClass:"></a>+isSubclassOfClass:</h4><p>验证调用该方法的类是否继承自参数给定的类（包括父类的父类也会返回YES）</p>
+<h3 id="检测实例方法"><a href="#检测实例方法" class="headerlink" title="检测实例方法"></a>检测实例方法</h3><h4 id="instancesRespondToSelector"><a href="#instancesRespondToSelector" class="headerlink" title="+ instancesRespondToSelector:"></a>+ instancesRespondToSelector:</h4><p>返回一个BOOL值，来表示实例是否能够相应方法</p>
+<h4 id="方法声明-5"><a href="#方法声明-5" class="headerlink" title="方法声明"></a>方法声明</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">BOOL</span>)instancesRespondToSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<h4 id="讨论-8"><a href="#讨论-8" class="headerlink" title="讨论"></a>讨论</h4><p>该方法检测调用类中是否实现了某个实例方法（aSelector），而不是类方法，如果要检测类方法，那么可以调用协议<nsobect> 中的 <em>respondsToSelector:</em> 方法。<br>如果只是在 .h 文件中声明了该方法，而没有在 .m 中去实现这个方法，检测结果为 NO。</nsobect></p>
+<hr>
+<h4 id="检测协议"><a href="#检测协议" class="headerlink" title="检测协议"></a>检测协议</h4><p>返回一个BOOL值， 来表示调用该方法的类是否实现了对应的协议（参数）</p>
+<h5 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">BOOL</span>)conformsToProtocol:(Protocol *)protocol;</span><br></pre></td></tr></table></figure>
+<h5 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> canJoin = [MyClass conformsToProtocol:<span class="class"><span class="keyword">@protocol</span>(<span class="title">Joining</span>)];</span></span><br></pre></td></tr></table></figure>
+<h5 id="讨论-9"><a href="#讨论-9" class="headerlink" title="讨论"></a>讨论</h5><ol>
+<li><p>MyClass  实现了 AffiliationRequests  和 AffiliationRequests 协议</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">MyClass</span> : <span class="title">NSObject</span> &lt;<span class="title">AffiliationRequests</span>, <span class="title">Normalization</span>&gt;</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>协议之间的合并 AffiliationRequests 合并了 Joining 协议</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">AffiliationRequests</span> &lt;<span class="title">Joining</span>&gt;</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果 MyClass 实现了AffiliationRequests协议，同样实现了 Joining， <em>conformsToProtocol</em> 返回结果为YES</p>
+</li>
+<li><em>conformsToProtocol：</em> 该方法不会检测程序有没有实现协议中的方法，只会检测在类的声明后面有没有<protocol name="">。</protocol></li>
+<li>即使你实现了协议的方法，但是没有在类的声明后面通过尖括号包含协议的名字，那么该方法返回仍为NO</li>
+</ol>
+<hr>
+<h3 id="获取方法信息"><a href="#获取方法信息" class="headerlink" title="获取方法信息"></a>获取方法信息</h3><h4 id="methodForSelector"><a href="#methodForSelector" class="headerlink" title="- methodForSelector:"></a>- methodForSelector:</h4><p>返回方法实现的地址</p>
+<h5 id="方法声明-6"><a href="#方法声明-6" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (IMP)methodForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<p><em>IMP</em> 方法（函数）指针，也就是实现方法的地址<br>参数 <em>aSelector</em>必须合法，在传入作为参数之前，可以通过 <em>responseToSelector</em> 检查该参数指向的方法是否已经实现了</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MethodInfor *mObj = [MethodInfor new];</span><br><span class="line"><span class="keyword">if</span> ([mObj respondsToSelector:<span class="keyword">@selector</span>(sayHello)]) &#123;</span><br><span class="line">    IMP imp = [mObj methodForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>,imp);</span><br><span class="line">    imp();<span class="comment">// 执行了 sayHello 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="讨论-10"><a href="#讨论-10" class="headerlink" title="讨论"></a>讨论</h5><p>方法的调用者如果是 类 那么 aSelector 必须是类方法；<br>方法的调用者如果是 实例 那么 aSelector 必须是实例方法</p>
+<h4 id="instanceMethodForSelector"><a href="#instanceMethodForSelector" class="headerlink" title="+ instanceMethodForSelector:"></a>+ instanceMethodForSelector:</h4><p>返回实例方法实现的地址</p>
+<h5 id="方法声明-7"><a href="#方法声明-7" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (IMP)instanceMethodForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<p><em>IMP</em> 方法（函数）指针，也就是实现方法的地址<br>参数 <em>aSelector</em>必须合法，在传入作为参数之前，可以通过 <em>instanceMethodForSelector</em> 检查该参数指向的方法是否已经实现了</p>
+<h5 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([MethodInfor instancesRespondToSelector:<span class="keyword">@selector</span>(sayHello)]  ) &#123;</span><br><span class="line">    IMP imp = [MethodInfor instanceMethodForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>,imp);</span><br><span class="line">    imp();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="讨论-11"><a href="#讨论-11" class="headerlink" title="讨论"></a>讨论</h5><p>该方法只用来检测 类 中的实例有没有实现实例方法，不能检测类方法。检测类方法使用 <em>methodForSelector:</em> 。</p>
+<h4 id="instanceMethodSignatureForSelector"><a href="#instanceMethodSignatureForSelector" class="headerlink" title="+ instanceMethodSignatureForSelector:"></a>+ instanceMethodSignatureForSelector:</h4><p>返回方法签名对象<a href="https://developer.apple.com/documentation/foundation/nsmethodsignature?language=occ" target="_blank" rel="noopener">NSMethodSignature</a></p>
+<h5 id="方法声明-8"><a href="#方法声明-8" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSMethodSignature</span> *)instanceMethodSignatureForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<h5 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMethodSignature</span> *sayHelloSignature = [MethodInfor instanceMethodSignatureForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br></pre></td></tr></table></figure>
+<h5 id="讨论-12"><a href="#讨论-12" class="headerlink" title="讨论"></a>讨论</h5><p>该方法会返回一个方法的签名对象，如果类的对象不能响应这个方法，那么会返回一个 nil 对象。</p>
+<h4 id="methodSignatureForSelector"><a href="#methodSignatureForSelector" class="headerlink" title="- methodSignatureForSelector:"></a>- methodSignatureForSelector:</h4><p>返回方法签名对象<a href="https://developer.apple.com/documentation/foundation/nsmethodsignature?language=occ" target="_blank" rel="noopener">NSMethodSignature</a></p>
+<h5 id="方法声明-9"><a href="#方法声明-9" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSMethodSignature</span> *)methodSignatureForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<h5 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMethodSignature</span> *sayHelloSignature = [MethodInfor instanceMethodSignatureForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br></pre></td></tr></table></figure>
+<h5 id="讨论-13"><a href="#讨论-13" class="headerlink" title="讨论"></a>讨论</h5><p>该方法会返回一个方法的签名对象，如果类的对象不能响应这个方法，那么会返回一个 nil 对象。<br>该方法针对类和对象都可以。<br>这里与<br><em>This method is used in the implementation of protocols. This method is also used in situations where an NSInvocation object must be created, such as during message forwarding. If your object maintains a delegate or is capable of handling messages that it does not directly implement, you should override this method to return an appropriate method signature.</em> 没看懂，等了解了 NSInvocation 之后再来看看。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NSFoundation/" rel="tag"># NSFoundation</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/06/01/Pre/SQLite-FTS3-and-FTS4-Extensions/" rel="next" title="SQLite FTS3 and FTS4 Extensions">
+                <i class="fa fa-chevron-left"></i> SQLite FTS3 and FTS4 Extensions
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/03/Pre/2016/Python 绝技/Python-绝技/" rel="prev" title="Python 绝技 之 入门">
+                Python 绝技 之 入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Alice" />
+          <p class="site-author-name" itemprop="name">Alice</p>
+           
+              <p class="site-description motion-element" itemprop="description">The Loneliest Whale in the World</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化类"><span class="nav-number">1.</span> <span class="nav-text">初始化类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#initialize"><span class="nav-number">1.1.</span> <span class="nav-text">+ initialize</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法声明"><span class="nav-number">1.1.1.</span> <span class="nav-text">方法声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论"><span class="nav-number">1.1.2.</span> <span class="nav-text">讨论</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#附加"><span class="nav-number">1.1.3.</span> <span class="nav-text">附加</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#load"><span class="nav-number">1.2.</span> <span class="nav-text">+ load</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法声明-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">方法声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">讨论</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建、拷贝和销毁对象"><span class="nav-number">2.</span> <span class="nav-text">创建、拷贝和销毁对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#alloc"><span class="nav-number">2.1.</span> <span class="nav-text">+ alloc</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#示例"><span class="nav-number">2.1.1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-2"><span class="nav-number">2.1.2.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#allocWithZone"><span class="nav-number">2.2.</span> <span class="nav-text">+ allocWithZone:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法声明-2"><span class="nav-number">2.2.1.</span> <span class="nav-text">方法声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#示例-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-3"><span class="nav-number">2.2.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#init"><span class="nav-number">2.3.</span> <span class="nav-text">- init</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法声明-3"><span class="nav-number">2.3.1.</span> <span class="nav-text">方法声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回值"><span class="nav-number">2.3.2.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-4"><span class="nav-number">2.3.3.</span> <span class="nav-text">讨论</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实例"><span class="nav-number">2.3.4.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#copy"><span class="nav-number">2.4.</span> <span class="nav-text">- copy</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法声明-4"><span class="nav-number">2.4.1.</span> <span class="nav-text">方法声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回值-1"><span class="nav-number">2.4.2.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-5"><span class="nav-number">2.4.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#copyWithZone"><span class="nav-number">2.5.</span> <span class="nav-text">-copyWithZone:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mutableCopy"><span class="nav-number">2.6.</span> <span class="nav-text">- mutableCopy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dealloc"><span class="nav-number">2.7.</span> <span class="nav-text">- dealloc</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-6"><span class="nav-number">2.7.1.</span> <span class="nav-text">讨论</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#识别类"><span class="nav-number">3.</span> <span class="nav-text">识别类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#class"><span class="nav-number">3.1.</span> <span class="nav-text">+ class</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-7"><span class="nav-number">3.1.1.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#superclass"><span class="nav-number">3.2.</span> <span class="nav-text">+ superclass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isSubclassOfClass"><span class="nav-number">3.3.</span> <span class="nav-text">+isSubclassOfClass:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测实例方法"><span class="nav-number">4.</span> <span class="nav-text">检测实例方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#instancesRespondToSelector"><span class="nav-number">4.1.</span> <span class="nav-text">+ instancesRespondToSelector:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法声明-5"><span class="nav-number">4.2.</span> <span class="nav-text">方法声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#讨论-8"><span class="nav-number">4.3.</span> <span class="nav-text">讨论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检测协议"><span class="nav-number">4.4.</span> <span class="nav-text">检测协议</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#声明"><span class="nav-number">4.4.1.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用示例"><span class="nav-number">4.4.2.</span> <span class="nav-text">使用示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-9"><span class="nav-number">4.4.3.</span> <span class="nav-text">讨论</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取方法信息"><span class="nav-number">5.</span> <span class="nav-text">获取方法信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#methodForSelector"><span class="nav-number">5.1.</span> <span class="nav-text">- methodForSelector:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法声明-6"><span class="nav-number">5.1.1.</span> <span class="nav-text">方法声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-10"><span class="nav-number">5.1.2.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instanceMethodForSelector"><span class="nav-number">5.2.</span> <span class="nav-text">+ instanceMethodForSelector:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法声明-7"><span class="nav-number">5.2.1.</span> <span class="nav-text">方法声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#示例-2"><span class="nav-number">5.2.2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-11"><span class="nav-number">5.2.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instanceMethodSignatureForSelector"><span class="nav-number">5.3.</span> <span class="nav-text">+ instanceMethodSignatureForSelector:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法声明-8"><span class="nav-number">5.3.1.</span> <span class="nav-text">方法声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#示例-3"><span class="nav-number">5.3.2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-12"><span class="nav-number">5.3.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#methodSignatureForSelector"><span class="nav-number">5.4.</span> <span class="nav-text">- methodSignatureForSelector:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法声明-9"><span class="nav-number">5.4.1.</span> <span class="nav-text">方法声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#示例-4"><span class="nav-number">5.4.2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#讨论-13"><span class="nav-number">5.4.3.</span> <span class="nav-text">讨论</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alice</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
