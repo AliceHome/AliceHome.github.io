@@ -97,16 +97,16 @@
 <meta name="description" content="样式 如上图所示，在 next 主题的基础上，实现 for me on GitHub 的功能，点击右上角的 GitHub 图标可以直接跳转到你的 GitHub 主页上。 实现Step 1：12345# maple @ iMac in ~/Maple/themes/next/layout [0:04:41]$ ls_custom       _partials     archive.swig  p">
 <meta name="keywords" content="Hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo (一) fork me on github">
+<meta property="og:title" content="Hexo (一) fork me on github">
 <meta property="og:url" content="http://yoursite.com/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/index.html">
 <meta property="og:site_name" content="Hi, this is Alice Home">
 <meta property="og:description" content="样式 如上图所示，在 next 主题的基础上，实现 for me on GitHub 的功能，点击右上角的 GitHub 图标可以直接跳转到你的 GitHub 主页上。 实现Step 1：12345# maple @ iMac in ~/Maple/themes/next/layout [0:04:41]$ ls_custom       _partials     archive.swig  p">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/forkme.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/githubCorners.png">
-<meta property="og:updated_time" content="2018-07-20T16:16:21.616Z">
+<meta property="og:updated_time" content="2018-07-20T16:20:27.276Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo (一) fork me on github">
+<meta name="twitter:title" content="Hexo (一) fork me on github">
 <meta name="twitter:description" content="样式 如上图所示，在 next 主题的基础上，实现 for me on GitHub 的功能，点击右上角的 GitHub 图标可以直接跳转到你的 GitHub 主页上。 实现Step 1：12345# maple @ iMac in ~/Maple/themes/next/layout [0:04:41]$ ls_custom       _partials     archive.swig  p">
 <meta name="twitter:image" content="http://yoursite.com/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/forkme.png">
 
@@ -143,7 +143,7 @@
 
 
 
-  <title>hexo (一) fork me on github | Hi, this is Alice Home</title>
+  <title>Hexo (一) fork me on github | Hi, this is Alice Home</title>
   
 
 
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo (一) fork me on github</h1>
+          <h1 class="post-title" itemprop="name headline">Hexo (一) fork me on github</h1>
         
 
         <div class="post-meta">
@@ -392,7 +392,7 @@
 <p>如上图所示，在 next 主题的基础上，实现 for me on GitHub 的功能，点击右上角的 GitHub 图标可以直接跳转到你的 GitHub 主页上。</p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="Step-1："><a href="#Step-1：" class="headerlink" title="Step 1："></a>Step 1：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> maple @ iMac in ~/Maple/themes/next/layout [0:04:41]</span><br><span class="line"><span class="meta">$</span> ls</span><br><span class="line">_custom       _partials     archive.swig  page.swig     tag.swig</span><br><span class="line">_layout.swig  _scripts      category.swig post.swig</span><br><span class="line">_macro        _third-party  index.swig    schedule.swig</span><br></pre></td></tr></table></figure>
 <p>进入到你的 Hexo 目录，然后找到文件 <code>_layout.swig</code> 通过文本编辑器打开</p>
-<h3 id="Step-2："><a href="#Step-2：" class="headerlink" title="Step 2："></a>Step 2：</h3><p>找到</p>
+<h3 id="Step-2："><a href="#Step-2：" class="headerlink" title="Step 2："></a>Step 2：</h3><p>找到 <code>_layout.swig</code> 中如下代码（全局搜索：headband ）</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"&#123;&#123; container_class &#125;&#125; &#123;% block page_class %&#125;&#123;% endblock %&#125; "</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"headband"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>然后打开：<a href="https://blog.github.com/2008-12-19-github-ribbons/" target="_blank" rel="noopener">GitHub Ribbons</a> 或者 <a href="http://tholman.com/github-corners/" target="_blank" rel="noopener">GitHub Corners</a></p>
 <p><img src="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/githubCorners.png" alt=""></p>
@@ -408,6 +408,25 @@
     
     
 
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>谢谢欣赏-------------</div>
+    
+</div>
+
+ 
+      
+    </div>
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/WechatIMG13.jpeg" alt="Alice wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信公众号还没弄好，先放上二维码吧！</div>
+</div>
+
+      </div>
     
 
     
@@ -440,6 +459,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/21/Hexo-二-添加‘文本结束‘-标记/" rel="prev" title="Hexo(二) 添加‘文本结束‘ 标记">
+                Hexo(二) 添加‘文本结束‘ 标记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -516,7 +539,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">69</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

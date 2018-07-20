@@ -296,6 +296,371 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/03/Pre/Python-Tour/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/03/Pre/Python-Tour/" itemprop="url">Python Tour</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-03T14:15:16+08:00">
+                2016-03-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Mac-OS-与-Python"><a href="#Mac-OS-与-Python" class="headerlink" title="Mac OS 与 Python"></a>Mac OS 与 Python</h2><p>Mac OS 自带了 Python 环境:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ which python</span><br><span class="line">/usr/bin/python</span><br><span class="line">$ /usr/bin/python; exit</span><br><span class="line">Python 2.7.10 (default, Oct  6 2017, 22:29:07)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.31)] on darwin</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> <span class="keyword">or</span> <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Pip"><a href="#Pip" class="headerlink" title="Pip"></a>Pip</h2><p>Python 的使用离不开 <a href="https://pypi.org/project/pip/" target="_blank" rel="noopener">pip</a>，如果当前的 Python 2  &gt;= 2.7.9 或者 Python 3 &gt;= 3.4 那么实际上已经安装了 pip 了。<br>pip 安装的方式有三种</p>
+<ul>
+<li>根据官网中的 install 模块进行安装，这种安装需要一些依赖模块</li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">python <span class="built_in">get</span>-pip.py</span><br><span class="line"></span><br><span class="line">Collecting pip</span><br><span class="line">  Downloading <span class="keyword">https</span>://<span class="built_in">files</span>.pythonhosted.org/packages/<span class="number">0</span>f/<span class="number">74</span>/ecd13431bcc456ed390b44c8a6e917c1820365cbebcb6a8974d1cd045ab4/pip<span class="number">-10.0</span><span class="number">.1</span>-py2.py3-<span class="literal">none</span>-<span class="keyword">any</span>.whl (<span class="number">1.3</span>MB)</span><br><span class="line">    <span class="number">100</span>% |████████████████████████████████| <span class="number">1.3</span>MB <span class="number">272</span>kB/s</span><br><span class="line">Collecting wheel</span><br><span class="line">  Downloading <span class="keyword">https</span>://<span class="built_in">files</span>.pythonhosted.org/packages/<span class="number">81</span>/<span class="number">30</span>/e935244ca6165187ae8be876b6316ae201b71485538ffac1d718843025a9/wheel<span class="number">-0.31</span><span class="number">.1</span>-py2.py3-<span class="literal">none</span>-<span class="keyword">any</span>.whl (<span class="number">41</span>kB)</span><br><span class="line">    <span class="number">100</span>% |████████████████████████████████| <span class="number">51</span>kB <span class="number">73</span>kB/s</span><br><span class="line">matplotlib <span class="number">1.3</span><span class="number">.1</span> requires nose, which is <span class="keyword">not</span> installed.</span><br><span class="line">matplotlib <span class="number">1.3</span><span class="number">.1</span> requires tornado, which is <span class="keyword">not</span> installed.</span><br><span class="line">Installing collected packages: pip, wheel</span><br><span class="line">Could <span class="keyword">not</span> install packages due <span class="built_in">to</span> <span class="keyword">an</span> EnvironmentError: [Errno <span class="number">13</span>] Permission denied: <span class="string">'/Library/Python/2.7/site-packages/pip-10.0.1.dist-info'</span></span><br><span class="line">Consider <span class="keyword">using</span> <span class="keyword">the</span> `<span class="comment">--user` option or check the permissions.</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>brew install pip 也是可以安装的，但是这种安装需要通过 brew install python 进行，这将会导致你的电脑上有两个版本的 python</li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Error: No available formula <span class="keyword">with</span> <span class="keyword">the</span> name <span class="string">"pip"</span></span><br><span class="line">Homebrew provides pip via: `brew install python`. However you will <span class="keyword">then</span></span><br><span class="line">have <span class="literal">two</span> Pythons installed <span class="keyword">on</span> <span class="title">your</span> <span class="title">Mac</span>, <span class="title">so</span> <span class="title">alternatively</span> <span class="title">you</span> <span class="title">can</span> <span class="title">install</span></span><br><span class="line">pip via <span class="keyword">the</span> instructions <span class="keyword">at</span>:</span><br><span class="line">  <span class="keyword">https</span>://pip.readthedocs.io/en/stable/installing/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>sudo easy_install pip </li>
+</ul>
+<p>因为前两种方式都需要一些额外的东西，所以我选择了第三种安装方式：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">$ sudo easy_install pip</span><br><span class="line">Password:</span><br><span class="line">Searching <span class="keyword">for</span> pip</span><br><span class="line">Reading http<span class="variable">s:</span>//pypi.<span class="keyword">python</span>.org/simple/pip/</span><br><span class="line">Best <span class="keyword">match</span>: pip <span class="number">10.0</span>.<span class="number">1</span></span><br><span class="line">Downloading http<span class="variable">s:</span>//<span class="keyword">files</span>.pythonhosted.org/packages/ae/e8/<span class="number">2340</span>d46ecadb1692a1e455f13f75e596d4eab3d11a57446f08259dee8f02/pip-<span class="number">10.0</span>.<span class="number">1</span>.tar.gz#sha256=f2bd08e0cd1b06e10218feaf6fef299f473ba706582eb3bd9d52203fdbd7ee68</span><br><span class="line">Processing pip-<span class="number">10.0</span>.<span class="number">1</span>.tar.gz</span><br><span class="line">Writing /tmp/easy_install-wo7aGC/pip-<span class="number">10.0</span>.<span class="number">1</span>/setup.cfg</span><br><span class="line">Running pip-<span class="number">10.0</span>.<span class="number">1</span>/setup.<span class="keyword">py</span> -q bdist_egg --dist-dir /tmp/easy_install-wo7aGC/pip-<span class="number">10.0</span>.<span class="number">1</span>/egg-dist-tmp-ny5uXk</span><br><span class="line">/System/Library/Frameworks/Python.framework/Versions/<span class="number">2.7</span>/lib/python2.<span class="number">7</span>/distutils/dist.<span class="keyword">py</span>:<span class="number">267</span>: UserWarnin<span class="variable">g:</span> Unknown distribution option: <span class="string">'python_requires'</span></span><br><span class="line">  warnings.warn(msg)</span><br><span class="line">warnin<span class="variable">g:</span> <span class="keyword">no</span> previously-included <span class="keyword">files</span> found matching <span class="string">'.coveragerc'</span></span><br><span class="line">warnin<span class="variable">g:</span> <span class="keyword">no</span> previously-included <span class="keyword">files</span> found matching <span class="string">'.mailmap'</span></span><br><span class="line">warnin<span class="variable">g:</span> <span class="keyword">no</span> previously-included <span class="keyword">files</span> found matching <span class="string">'.travis.yml'</span></span><br><span class="line">warnin<span class="variable">g:</span> <span class="keyword">no</span> previously-included <span class="keyword">files</span> found matching <span class="string">'.landscape.yml'</span></span><br><span class="line">warnin<span class="variable">g:</span> <span class="keyword">no</span> previously-included <span class="keyword">files</span> found matching <span class="string">'src/pip/_vendor/Makefile'</span></span><br><span class="line">warnin<span class="variable">g:</span> <span class="keyword">no</span> previously-included <span class="keyword">files</span> found matching <span class="string">'tox.ini'</span></span><br><span class="line">warnin<span class="variable">g:</span> <span class="keyword">no</span> previously-included <span class="keyword">files</span> found matching <span class="string">'*-requirements.txt'</span></span><br><span class="line">warnin<span class="variable">g:</span> <span class="keyword">no</span> previously-included <span class="keyword">files</span> found matching <span class="string">'appveyor.yml'</span></span><br><span class="line">warnin<span class="variable">g:</span> <span class="keyword">no</span> previously-included <span class="keyword">files</span> found matching <span class="string">'src/pip/_vendor/six'</span></span><br><span class="line">warnin<span class="variable">g:</span> <span class="keyword">no</span> previously-included <span class="keyword">files</span> matching <span class="string">'*.pyi'</span> found under directory <span class="string">'src/pip/_vendor'</span></span><br><span class="line"><span class="keyword">no</span> previously-included directories found matching <span class="string">'.github'</span></span><br><span class="line"><span class="keyword">no</span> previously-included directories found matching <span class="string">'.travis'</span></span><br><span class="line"><span class="keyword">no</span> previously-included directories found matching <span class="string">'docs/build'</span></span><br><span class="line"><span class="keyword">no</span> previously-included directories found matching <span class="string">'news'</span></span><br><span class="line"><span class="keyword">no</span> previously-included directories found matching <span class="string">'contrib'</span></span><br><span class="line"><span class="keyword">no</span> previously-included directories found matching <span class="string">'tasks'</span></span><br><span class="line"><span class="keyword">no</span> previously-included directories found matching <span class="string">'tests'</span></span><br><span class="line">creating /Library/Python/<span class="number">2.7</span>/site-packages/pip-<span class="number">10.0</span>.<span class="number">1</span>-py2.<span class="number">7</span>.egg</span><br><span class="line">Extracting pip-<span class="number">10.0</span>.<span class="number">1</span>-py2.<span class="number">7</span>.egg <span class="keyword">to</span> /Library/Python/<span class="number">2.7</span>/site-packages</span><br><span class="line">Adding pip <span class="number">10.0</span>.<span class="number">1</span> <span class="keyword">to</span> easy-install.pth <span class="keyword">file</span></span><br><span class="line">Installing pip script <span class="keyword">to</span> /usr/local/bin</span><br><span class="line">Installing pip2.<span class="number">7</span> script <span class="keyword">to</span> /usr/local/bin</span><br><span class="line">Installing pip2 script <span class="keyword">to</span> /usr/local/bin</span><br><span class="line"></span><br><span class="line">Installed /Library/Python/<span class="number">2.7</span>/site-packages/pip-<span class="number">10.0</span>.<span class="number">1</span>-py2.<span class="number">7</span>.egg</span><br><span class="line">Processing dependencies <span class="keyword">for</span> pip</span><br><span class="line">Finished processing dependencies <span class="keyword">for</span> pip</span><br><span class="line"></span><br><span class="line"># maple @ iMac in ~/Maple [<span class="number">14</span>:<span class="number">26</span>:<span class="number">43</span>]</span><br><span class="line">$ which pip</span><br><span class="line">/usr/local/bin/pip</span><br></pre></td></tr></table></figure>
+<h2 id="iPython"><a href="#iPython" class="headerlink" title="iPython"></a>iPython</h2><p><a href="http://ipython.org" target="_blank" rel="noopener">iPython</a> 这是一个很好 Python 交互环境开发工具 “brew install iPython” 就可以安装</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ipython</span><br><span class="line">Python <span class="number">3.6</span>.<span class="number">5</span> (<span class="keyword">default</span>, Apr <span class="number">25</span> <span class="number">2018</span>, <span class="number">14</span>:<span class="number">23</span>:<span class="number">58</span>)</span><br><span class="line"><span class="keyword">Type</span> <span class="string">'copyright'</span>, <span class="string">'credits'</span> <span class="keyword">or</span> <span class="string">'license'</span> <span class="keyword">for</span> more information</span><br><span class="line">IPython <span class="number">6.4</span>.<span class="number">0</span> -- An enhanced Interactive Python. <span class="keyword">Type</span> <span class="string">'?'</span> <span class="keyword">for</span> help.</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [<span class="number">1</span>]:</span><br></pre></td></tr></table></figure>
+<p>详细了解，可以通过 <a href="http://ipython.readthedocs.io/en/stable/index.html" target="_blank" rel="noopener">iPython Documentation</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/03/Pre/2016/Python 绝技/Python-绝技/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/01/03/Pre/2016/Python 绝技/Python-绝技/" itemprop="url">Python 绝技 之 入门</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T14:52:35+08:00">
+                2016-01-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="准备开发-amp-安装第三方库"><a href="#准备开发-amp-安装第三方库" class="headerlink" title="准备开发 &amp; 安装第三方库"></a>准备开发 &amp; 安装第三方库</h3><p>Python 环境在 Mac 上已经自带。并提供了 Python 标准库和解释器，以及一些内置模块，这些内置模块包括：内置数据类型、异常处理、numeric 和数学模块、文件处理模块、加密服务、与操作系统相互交互操作、网络、与 IP 协议交互以及其他有用模块。<br>同样 Python 也提供第三方软件包：<a href="https://pypi.org" target="_blank" rel="noopener">https://pypi.org</a></p>
+<p>三种方式：</p>
+<ul>
+<li>下载第三方库包，解压，然后通过 <em>python setup.py install</em> 命令进行安装</li>
+<li>sudo easy_install 包名字</li>
+</ul>
+<p>第二种方式，是 Python 为了使得包安装更加方便，在 setuptools 中提供了 easy_install 的模块，当执行这个模块的时候，我们需要将包名作为参数传递给它，然后它会自动到 Python 官网上搜索这个包，如果找到就下载并且自动安装。</p>
+<p>安装 <em>python-nmap</em> 模块</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> sudo easy_install python-nmap</span><br><span class="line"><span class="string">Password:</span></span><br><span class="line">Searching <span class="keyword">for</span> python-nmap</span><br><span class="line">Reading <span class="string">https:</span><span class="comment">//pypi.python.org/simple/python-nmap/</span></span><br><span class="line">Best <span class="string">match:</span> python-nmap <span class="number">0.6</span><span class="number">.1</span></span><br><span class="line">Downloading <span class="string">https:</span><span class="comment">//files.pythonhosted.org/packages/dc/f2/9e1a2953d4d824e183ac033e3d223055e40e695fa6db2cb3e94a864eaa84/python-nmap-0.6.1.tar.gz#sha256=80ba0eb10a52283a54a633f40b5baa9c2ff08675d6621dd089ead942852f5bd3</span></span><br><span class="line">Processing python-nmap<span class="number">-0.6</span><span class="number">.1</span>.tar.gz</span><br><span class="line">Writing <span class="regexp">/tmp/</span>easy_install-kCnkg1<span class="regexp">/python-nmap-0.6.1/</span>setup.cfg</span><br><span class="line">Running python-nmap<span class="number">-0.6</span><span class="number">.1</span><span class="regexp">/setup.py -q bdist_egg --dist-dir /</span>tmp<span class="regexp">/easy_install-kCnkg1/</span>python-nmap<span class="number">-0.6</span><span class="number">.1</span>/egg-dist-tmp-hh31Lx</span><br><span class="line"><span class="regexp">/System/</span>Library<span class="regexp">/Frameworks/</span>Python.framework<span class="regexp">/Versions/</span><span class="number">2.7</span><span class="regexp">/lib/</span>python2<span class="number">.7</span><span class="regexp">/distutils/</span>dist.<span class="string">py:</span><span class="number">267</span>: <span class="string">UserWarning:</span> Unknown distribution <span class="string">option:</span> <span class="string">'bugtrack_url'</span></span><br><span class="line">  warnings.warn(msg)</span><br><span class="line">zip_safe flag not set; analyzing archive contents...</span><br><span class="line">Copying python_nmap<span class="number">-0.6</span><span class="number">.1</span>-py2<span class="number">.7</span>.egg to <span class="regexp">/Library/</span>Python<span class="regexp">/2.7/</span>site-packages</span><br><span class="line">Adding python-nmap <span class="number">0.6</span><span class="number">.1</span> to easy-install.pth file</span><br><span class="line"></span><br><span class="line">Installed <span class="regexp">/Library/</span>Python<span class="regexp">/2.7/</span>site-packages/python_nmap<span class="number">-0.6</span><span class="number">.1</span>-py2<span class="number">.7</span>.egg</span><br><span class="line">Processing dependencies <span class="keyword">for</span> python-nmap</span><br><span class="line">Finished processing dependencies <span class="keyword">for</span> python-nmap</span><br></pre></td></tr></table></figure>
+<p>多个包一起安装也是可以的：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo easy_install pyPdf pygeoip mechanize BeautifulSoup4</span></span><br></pre></td></tr></table></figure>
+<p>还有一些第三方库可能无法通过 easy_install 来安装，可以通过 apt-get install 进行安装， 这是 Linux 下默认的安装工具，在 Mac 下可以通过 brew 来代替， 但是还是有一些库可能 brew 没有，所以需要在 Mac 下装载 apt-get 命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Python-标准库的关键组件"><a href="#Python-标准库的关键组件" class="headerlink" title="Python 标准库的关键组件"></a>Python 标准库的关键组件</h3><ul>
+<li>变量，不需要声明，类型自动匹配</li>
+<li>字符串，upper(),lower(),replace(),find()<h4 id="List-列表），就是数组元素"><a href="#List-列表），就是数组元素" class="headerlink" title="List(列表），就是数组元素"></a>List(列表），就是数组元素</h4></li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">In</span> [22]: portList=[]</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [23]: <span class="keyword">type</span>(portList)</span><br><span class="line"><span class="keyword">Out</span>[23]: <span class="keyword">list</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [24]: portList.<span class="keyword">append</span>(21)</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [25]: portList.<span class="keyword">append</span>(25)</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [26]: portList.<span class="keyword">append</span>(443)</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [27]: portList.<span class="keyword">append</span>(80)</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [28]: portList</span><br><span class="line"><span class="keyword">Out</span>[28]: [21, 25, 443, 80]</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [29]: portList.<span class="keyword">sort</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [30]: portList</span><br><span class="line"><span class="keyword">Out</span>[30]: [21, 25, 80, 443]</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [31]: portList.<span class="built_in">index</span>(80)</span><br><span class="line"><span class="keyword">Out</span>[31]: 2</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [32]: len(portList)</span><br><span class="line"><span class="keyword">Out</span>[32]: 4</span><br></pre></td></tr></table></figure>
+<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">In</span> [<span class="number">15</span>]: service=&#123;<span class="string">'ftp'</span>:<span class="number">21</span>,<span class="string">'ssh'</span>:<span class="number">22</span>,<span class="string">'stmp'</span>:<span class="number">25</span>,<span class="string">'http'</span>:<span class="number">80</span>&#125;</span><br><span class="line"><span class="symbol">In</span> [<span class="number">17</span>]: service.keys()</span><br><span class="line"><span class="symbol">Out</span>[<span class="number">17</span>]: dict_keys([<span class="string">'ftp'</span>, <span class="string">'ssh'</span>, <span class="string">'stmp'</span>, <span class="string">'http'</span>])</span><br><span class="line"><span class="symbol">In</span> [<span class="number">19</span>]: service.items()</span><br><span class="line"><span class="symbol">Out</span>[<span class="number">19</span>]: dict_items([(<span class="string">'ftp'</span>, <span class="number">21</span>), (<span class="string">'ssh'</span>, <span class="number">22</span>), (<span class="string">'stmp'</span>, <span class="number">25</span>), (<span class="string">'http'</span>, <span class="number">80</span>)])</span><br><span class="line"><span class="symbol">In</span> [<span class="number">20</span>]: service[<span class="string">'ftp'</span>]</span><br><span class="line"><span class="symbol">Out</span>[<span class="number">20</span>]: <span class="number">21</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">In</span> [<span class="number">21</span>]: service[<span class="string">'https'</span>]</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line"><span class="symbol">KeyError</span>                                  <span class="symbol">Traceback</span> (most recent call last)</span><br><span class="line">&lt;ipython-input<span class="number">-21</span><span class="number">-07</span>c66fb7e9f9&gt; in &lt;module&gt;()</span><br><span class="line">----&gt; <span class="number">1</span> service[<span class="string">'https'</span>]</span><br><span class="line"></span><br><span class="line"><span class="symbol">KeyError</span>: <span class="string">'https'</span></span><br></pre></td></tr></table></figure>
+<h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><p>socket 模块提供了一个用 Python 进行网络连接的库。</p>
+<p>Client:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">import socket </span><br><span class="line"></span><br><span class="line">ip_port = ('127.0.0.1',8989)</span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.connect(ip_port)</span><br><span class="line"></span><br><span class="line">ans = sk.recv(1024)</span><br><span class="line"></span><br><span class="line">print(ans)</span><br></pre></td></tr></table></figure>
+<p>server：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf<span class="number">-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line"><span class="title">ip_port</span> = ('<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>',<span class="number">8989</span>)</span><br><span class="line"><span class="title">sk</span> = socket.socket()</span><br><span class="line"><span class="title">sk</span>.bind(ip_<span class="keyword">port</span>)</span><br><span class="line">sk.listen(5)</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    conn,address =  sk.accept()</span><br><span class="line">    conn.sendall('220 <span class="type">FreeFloat</span> <span class="type">Ftp</span> <span class="type">Server</span> (<span class="type">Version</span> 1.00).')</span><br><span class="line">    conn.close()</span><br></pre></td></tr></table></figure>
+<h4 id="条件选择"><a href="#条件选择" class="headerlink" title="条件选择"></a>条件选择</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket </span><br><span class="line"></span><br><span class="line">ip_port = (<span class="string">'127.0.0.1'</span>,<span class="number">8989</span>)</span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.connect(ip_port)</span><br><span class="line"></span><br><span class="line">ans = sk.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="string">"FreeFloat Ftp Server (Version 1.00)."</span> <span class="keyword">in</span> ans):</span><br><span class="line">    print(<span class="string">"FreeFloat FTP Server is vulnerable."</span>)</span><br><span class="line"><span class="keyword">elif</span> (<span class="string">"3COm 3CDaemon FTP Server Version 2.0"</span> <span class="keyword">in</span> ans):</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"3CDaemon FTP Server is vulnerable."</span>)</span><br><span class="line"><span class="keyword">elif</span> (<span class="string">"Sami 3CDaemon FTP Server Version 2.0"</span> <span class="keyword">in</span> ans):</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"Sami FTP Server is vulnerable."</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"no ftp server is vulnerable."</span>)</span><br></pre></td></tr></table></figure>
+<p>执行：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python client.py</span><br><span class="line">FreeFloat FTP<span class="built_in"> Server </span>is vulnerable.</span><br></pre></td></tr></table></figure>
+<h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4><p>这里，还是通过上面的连接，将 ip 做一下修改，改为 127.0.1.1，然后设置超时时间为 3 秒，通过 try - except 进行异常处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket </span><br><span class="line">ip_port = (<span class="string">'127.0.1.1'</span>,<span class="number">8989</span>)</span><br><span class="line">socket.setdefaulttimeout(<span class="number">3</span>)</span><br><span class="line">sk = socket.socket()</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    sk.connect(ip_port)</span><br><span class="line"><span class="keyword">except</span> Exception, e:</span><br><span class="line">    print(<span class="string">"Error = "</span> + str(e))</span><br></pre></td></tr></table></figure>
+<p>运行：</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python client.py</span><br><span class="line"><span class="keyword">Error </span>= timed out</span><br></pre></td></tr></table></figure>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>创建一个函数完成连接到 FTP服务器并返回 banner 的操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">returnBanner</span><span class="params">(ip,port)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        socket.setdefaulttimeout(<span class="number">3</span>)</span><br><span class="line">        sk = socket.socket()</span><br><span class="line">        sk.connect((ip,port))</span><br><span class="line">        banner = sk.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">return</span> banner.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"Error = "</span> + str(e))</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    ip = <span class="string">'127.0.0.1'</span></span><br><span class="line">    port = <span class="number">8989</span></span><br><span class="line">    </span><br><span class="line">    print(ip + <span class="string">" "</span> + str(port) + <span class="string">": \n"</span> + returnBanner(ip,port))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><p>使用 for 循环遍历整个子网</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">255</span>):</span><br><span class="line">    print(<span class="string">"192.169.1."</span> + str(x))</span><br></pre></td></tr></table></figure>
+<p>output：</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$python3</span> loop.py</span><br><span class="line"></span><br><span class="line">192.169.1.1</span><br><span class="line">192.169.1.2</span><br><span class="line">192.169.1.3</span><br><span class="line">192.169.1.4</span><br><span class="line">...</span><br><span class="line">192.169.1.252</span><br><span class="line">192.169.1.253</span><br><span class="line">192.169.1.254</span><br></pre></td></tr></table></figure>
+<p>接下来，通过遍历 list 中所有的端口以及输出所有的 ip 和 port 组合</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"所有子网:"</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">255</span>):</span><br><span class="line">    print(<span class="string">"192.169.1."</span> + str(x))</span><br><span class="line"></span><br><span class="line">postList = [<span class="number">21</span>,<span class="number">22</span>,<span class="number">25</span>,<span class="number">80</span>,<span class="number">110</span>]</span><br><span class="line">print(<span class="string">"所有端口："</span>)</span><br><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> postList:</span><br><span class="line">    print(port)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"ip 和 port 所有可能组合"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ip <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">255</span>):</span><br><span class="line">    <span class="keyword">for</span> port <span class="keyword">in</span> postList:</span><br><span class="line">        print(<span class="string">"192.169.1."</span> + str(ip) + <span class="string">":"</span> + str(port))</span><br></pre></td></tr></table></figure>
+<p>有了迭代 IP 和 port 的能力，就可以来检测子网中所有的 ip 地址，以及 telnet、ssh、smtp、http、imap 及 https 协议的端口</p>
+<h4 id="文件-I-O"><a href="#文件-I-O" class="headerlink" title="文件 I/O"></a>文件 I/O</h4><p>通过 readline() 函数读取文件 banners.txt 内容，与服务端中 banner 信息进行对比：</p>
+<p><strong>banner.txt</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">3Com 3CDame FTP<span class="built_in"> Server </span>Version 1.00</span><br><span class="line">Ability<span class="built_in"> Server </span>2.34</span><br><span class="line">PSO<span class="built_in"> Proxy </span>0.9</span><br><span class="line">Spipe 1.0</span><br><span class="line">TelServer FTP 1.20</span><br><span class="line">Xitmai</span><br><span class="line">Maple FTP 1.90</span><br><span class="line">FreeFloat2 Ftp<span class="built_in"> Server </span>(Version 1.00)</span><br><span class="line">FreeFloat Ftp<span class="built_in"> Server </span>(Version 1.00)</span><br><span class="line">IMAP<span class="built_in"> Server </span>1.00</span><br><span class="line">Jack 1.0</span><br><span class="line">Tom 99</span><br></pre></td></tr></table></figure>
+<p><strong>service.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">ip_port = (<span class="string">'127.0.0.1'</span>,<span class="number">8989</span>)</span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.bind(ip_port)</span><br><span class="line">sk.listen(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    conn,address =  sk.accept()</span><br><span class="line">    conn.sendall(<span class="string">'220 FreeFloat Ftp Server (Version 1.00).'</span>)</span><br><span class="line">    conn.close()</span><br></pre></td></tr></table></figure>
+<p><strong>client.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkBanner</span><span class="params">(banner)</span>:</span></span><br><span class="line">    f = open(<span class="string">"banners.txt"</span>,<span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        <span class="keyword">if</span> line.strip(<span class="string">'\n'</span>) <span class="keyword">in</span> banner:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">returnBanner</span><span class="params">(ip,port)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        socket.setdefaulttimeout(<span class="number">3</span>)</span><br><span class="line">        sk = socket.socket()</span><br><span class="line">        sk.connect((ip,port))</span><br><span class="line">        banner = sk.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">if</span> checkBanner(banner.decode(<span class="string">'utf-8'</span>)):</span><br><span class="line">            <span class="keyword">return</span> banner.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"nothing"</span></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"Error = "</span> + str(e))</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    ip = <span class="string">'127.0.0.1'</span></span><br><span class="line">    port = <span class="number">8989</span></span><br><span class="line">    print(ip + <span class="string">" "</span> + str(port) + <span class="string">": \n"</span> + returnBanner(ip,port))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h4 id="sys"><a href="#sys" class="headerlink" title="sys"></a>sys</h4><p>通过内置 sys 模块，我们可以访问到有 Python 解释器使用或者维护的对象，其中包括标志、版本、整型数最大值、可用模块、hook 路径、标准错误/输入/输出的位置，以及调用解释器的命令行参数。<br>在线文档：<br><a href="http://docs.python.org/library/sys" target="_blank" rel="noopener">http://docs.python.org/library/sys/</a></p>
+<p>从外部读取文件名字：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)==<span class="number">2</span>:</span><br><span class="line">    filename = sys.argv[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"read the content from: "</span> + filename)</span><br></pre></td></tr></table></figure>
+<p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python sys.py banners.txt</span><br><span class="line"><span class="built_in">read</span> the content from: banners.txt</span><br></pre></td></tr></table></figure>
+<h4 id="OS-模块"><a href="#OS-模块" class="headerlink" title="OS 模块"></a>OS 模块</h4><p>内置 OS 模块提供了丰富的操作系统函数。这个模块允许程序独立的与操作系统环境、文件系统、用户数据库以及权限进行交互。比如上面我们在读取文件的时候提前检查一下文件是否存在：</p>
+<p>文件是否存在 API：<br><em>os.path.isfile(‘fileName’)</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: ls</span><br><span class="line">banners.txt  client.py    loop.py      service.py   sys.py</span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: os.path.isfile(<span class="string">"banner.txt"</span>)</span><br><span class="line">Out[<span class="number">3</span>]: <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: os.path.isfile(<span class="string">"banners.txt"</span>)</span><br><span class="line">Out[<span class="number">4</span>]: <span class="keyword">True</span></span><br></pre></td></tr></table></figure></p>
+<p>权限 API：<br><em>os.access(“fileName”,权限控制)</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: os.access(<span class="string">"a.out"</span>, os.R_OK)</span><br><span class="line">Out[<span class="number">2</span>]: <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: os.access(<span class="string">"a.out"</span>, os.W_OK)</span><br><span class="line">Out[<span class="number">3</span>]: <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: ls</span><br><span class="line">a.c          banners.txt  loop.py      sys.py</span><br><span class="line">a.out*       client.py    service.py</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: os.access(<span class="string">"/usr/bin/host"</span>, os.W_OK)</span><br><span class="line">Out[<span class="number">5</span>]: <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: os.access(<span class="string">"/usr/bin/host"</span>, os.R_OK)</span><br><span class="line">Out[<span class="number">6</span>]: <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>OVER&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/01/Pre/NSFoundation/Foundation-NSObject/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -507,6 +872,9 @@
     
     
 
+    <div>
+      
+    </div>
     
 
     
@@ -651,6 +1019,9 @@
     
     
 
+    <div>
+      
+    </div>
     
 
     
@@ -796,6 +1167,9 @@
     
     
 
+    <div>
+      
+    </div>
     
 
     
@@ -992,6 +1366,9 @@
     
     
 
+    <div>
+      
+    </div>
     
 
     
@@ -1207,6 +1584,9 @@
     
     
 
+    <div>
+      
+    </div>
     
 
     
@@ -1379,6 +1759,9 @@
     
     
 
+    <div>
+      
+    </div>
     
 
     
@@ -1506,6 +1889,9 @@
     
     
 
+    <div>
+      
+    </div>
     
 
     
@@ -1582,7 +1968,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">69</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
