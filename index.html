@@ -168,6 +168,9 @@
  ">
     <div class="headband"></div>
 
+<a href="https://github.com/AliceHome" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+{.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
@@ -293,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/细说-iOS-刷新控件-二）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -312,7 +315,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/20/细说-iOS-刷新控件-二）/" itemprop="url">细说 iOS 刷新控件(二）</a></h1>
+                <a class="post-title-link" href="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/" itemprop="url">hexo (一) fork me on github</a></h1>
         
 
         <div class="post-meta">
@@ -324,137 +327,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T14:25:52+08:00">
-                2018-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这一片介绍 MJRefresh 刷新控件原理，也不知道需要几篇。</p>
-<h2 id="MJRefresh-如何添加头部试图-？"><a href="#MJRefresh-如何添加头部试图-？" class="headerlink" title="MJRefresh 如何添加头部试图 ？"></a>MJRefresh 如何添加头部试图 ？</h2><p>答：通过类目和 <code>runtime</code> 方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">@class MJRefreshHeader, MJRefreshFooter;</span><br><span class="line"></span><br><span class="line">@interface UIScrollView (MJRefresh)</span><br><span class="line">/** 下拉刷新控件 */</span><br><span class="line">@property (strong, nonatomic) MJRefreshHeader *mj_header;</span><br><span class="line">/** 上拉刷新控件 */</span><br><span class="line">@property (strong, nonatomic) MJRefreshFooter *mj_footer;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>文件 UIScrollView+MJRefresh 中为 UIScrollView 添加了 MJRefresh 的类目<br>接下来看一下 <code>UIScrollView+MJRefresh.m</code> 中设置头部视图的实现，这里本质上是通过 <code>runtime</code> 的 <code>objc_setAssociatedObject</code> 函数为 <code>UIScrollView</code> 绑定了 mj_header 属性对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#pragma mark - header</span><br><span class="line">static const char MJRefreshHeaderKey = &apos;\0&apos;;</span><br><span class="line">- (void)setMj_header:(MJRefreshHeader *)mj_header</span><br><span class="line">&#123;</span><br><span class="line">    if (mj_header != self.mj_header) &#123;</span><br><span class="line">        // 删除旧的，添加新的</span><br><span class="line">        [self.mj_header removeFromSuperview];</span><br><span class="line">        [self insertSubview:mj_header atIndex:0];</span><br><span class="line">        </span><br><span class="line">        // 存储新的</span><br><span class="line">        objc_setAssociatedObject(self, &amp;MJRefreshHeaderKey,</span><br><span class="line">                                 mj_header, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (MJRefreshHeader *)mj_header</span><br><span class="line">&#123;</span><br><span class="line">    return objc_getAssociatedObject(self, &amp;MJRefreshHeaderKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从上面代码看到，当设定头部视图的时候，首先判断是否一致，然后删除之前的透视图，然后将传入的头部师徒插入到位置 0 ，然后通过 objc_setAssociatedObject() 函数将 mj_header 绑定成 UIScrollView 的对象，同理，当获取头部试图的时候，通过 objc_getAssociatedObject() 就可以得到头部视图 footer 也是一样的操作。</p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ol>
-<li>下拉刷新的 UI 控件是 UITableView 和 UICollectionView，所以对它们共有的父控件 UIScrollView 采取添加 header 的操作</li>
-<li>类目拓展功能在 iOS 封装组件中常用，比如 SDWebImage 中 UIImageView 的类目方式使用该框架设置图片</li>
-<li>类目不能添加属性，但是可以通过 runtime 的方式做到添加属性，在实现 set/get 放阿飞即可</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/current/June/细说iOS-刷新控件（一/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/20/current/June/细说iOS-刷新控件（一/" itemprop="url">细说 iOS 刷新控件（一)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T14:20:10+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T23:48:25+08:00">
                 2018-07-20
               </time>
             
@@ -477,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
                   </a>
                 </span>
 
@@ -516,14 +389,19 @@
       
         
           
-            <p>场景：</p>
-<p>UITableView 和 UICollectionView 加载下一页数据我们称之为上拉加载，当然下拉的时候刷新当前页面数据。这里需要注意两个事情：</p>
-<ol>
-<li>在适当的时机显示刷新视图</li>
-<li>加载数据，并移除刷新视图</li>
-</ol>
-<p>这一篇文章先关注 iOS 系统自带的刷新控件</p>
-<p>下一篇将介绍第三方 MJRefresh</p>
+            <h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><p><img src="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/forkme.png" alt=""></p>
+<p>如上图所示，在 next 主题的基础上，实现 for me on GitHub 的功能，点击右上角的 GitHub 图标可以直接跳转到你的 GitHub 主页上。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="Step-1："><a href="#Step-1：" class="headerlink" title="Step 1："></a>Step 1：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> maple @ iMac in ~/Maple/themes/next/layout [0:04:41]</span><br><span class="line"><span class="meta">$</span> ls</span><br><span class="line">_custom       _partials     archive.swig  page.swig     tag.swig</span><br><span class="line">_layout.swig  _scripts      category.swig post.swig</span><br><span class="line">_macro        _third-party  index.swig    schedule.swig</span><br></pre></td></tr></table></figure>
+<p>进入到你的 Hexo 目录，然后找到文件 <code>_layout.swig</code> 通过文本编辑器打开</p>
+<h3 id="Step-2："><a href="#Step-2：" class="headerlink" title="Step 2："></a>Step 2：</h3><p>找到</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"&#123;&#123; container_class &#125;&#125; &#123;% block page_class %&#125;&#123;% endblock %&#125; "</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"headband"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后打开：<a href="https://blog.github.com/2008-12-19-github-ribbons/" target="_blank" rel="noopener">GitHub Ribbons</a> 或者 <a href="http://tholman.com/github-corners/" target="_blank" rel="noopener">GitHub Corners</a></p>
+<p><img src="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/githubCorners.png" alt=""></p>
+<p>复制图标样式旁边的代码粘贴到上面的代码下面，效果如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"&#123;&#123; container_class &#125;&#125; &#123;% block page_class %&#125;&#123;% endblock %&#125; "</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"headband"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://github.com/AliceHome"</span> <span class="attr">class</span>=<span class="string">"github-corner"</span> <span class="attr">aria-label</span>=<span class="string">"View source on Github"</span>&gt;</span><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">"80"</span> <span class="attr">height</span>=<span class="string">"80"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 250 250"</span> <span class="attr">style</span>=<span class="string">"fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"</span> <span class="attr">fill</span>=<span class="string">"currentColor"</span> <span class="attr">style</span>=<span class="string">"transform-origin: 130px 106px;"</span> <span class="attr">class</span>=<span class="string">"octo-arm"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"</span> <span class="attr">fill</span>=<span class="string">"currentColor"</span> <span class="attr">class</span>=<span class="string">"octo-body"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined">.github-corner:hover .octo-arm&#123;animation:octocat-wave 560ms ease-in-out&#125;@keyframes octocat-wave&#123;0%,100%&#123;transform:rotate(0)&#125;20%,60%&#123;transform:rotate(-25deg)&#125;40%,80%&#123;transform:rotate(10deg)&#125;&#125;@media (max-width:500px)</span></span><br><span class="line"><span class="undefined">&#123;.github-corner:hover .octo-arm&#123;animation:none&#125;.github-corner .octo-arm&#123;animation:octocat-wave 560ms ease-in-out&#125;&#125;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="step-3"><a href="#step-3" class="headerlink" title="step 3:"></a>step 3:</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> hexo g</span><br><span class="line"><span class="meta">#</span> hexo s</span><br></pre></td></tr></table></figure>
+<p>验证效果，Done!</p>
+<p>感谢简书大神：<br><a href="https://www.jianshu.com/p/f054333ac9e6" target="_blank" rel="noopener">hexo的next主题个性化教程:打造炫酷网站</a></p>
 
           
         
@@ -692,6 +570,318 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/02/current/June/细说-iOS-刷新控件-二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/02/current/June/细说-iOS-刷新控件-二）/" itemprop="url">细说 iOS 刷新控件(二）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-02T14:25:52+08:00">
+                2018-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/刷新控件/" itemprop="url" rel="index">
+                    <span itemprop="name">刷新控件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这一片介绍 MJRefresh 刷新控件原理，也不知道需要几篇。</p>
+<h2 id="MJRefresh-如何添加头部试图-？"><a href="#MJRefresh-如何添加头部试图-？" class="headerlink" title="MJRefresh 如何添加头部试图 ？"></a>MJRefresh 如何添加头部试图 ？</h2><p>答：通过类目和 <code>runtime</code> 方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">@class MJRefreshHeader, MJRefreshFooter;</span><br><span class="line"></span><br><span class="line">@interface UIScrollView (MJRefresh)</span><br><span class="line">/** 下拉刷新控件 */</span><br><span class="line">@property (strong, nonatomic) MJRefreshHeader *mj_header;</span><br><span class="line">/** 上拉刷新控件 */</span><br><span class="line">@property (strong, nonatomic) MJRefreshFooter *mj_footer;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>文件 UIScrollView+MJRefresh 中为 UIScrollView 添加了 MJRefresh 的类目<br>接下来看一下 <code>UIScrollView+MJRefresh.m</code> 中设置头部视图的实现，这里本质上是通过 <code>runtime</code> 的 <code>objc_setAssociatedObject</code> 函数为 <code>UIScrollView</code> 绑定了 mj_header 属性对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#pragma mark - header</span><br><span class="line">static const char MJRefreshHeaderKey = &apos;\0&apos;;</span><br><span class="line">- (void)setMj_header:(MJRefreshHeader *)mj_header</span><br><span class="line">&#123;</span><br><span class="line">    if (mj_header != self.mj_header) &#123;</span><br><span class="line">        // 删除旧的，添加新的</span><br><span class="line">        [self.mj_header removeFromSuperview];</span><br><span class="line">        [self insertSubview:mj_header atIndex:0];</span><br><span class="line">        </span><br><span class="line">        // 存储新的</span><br><span class="line">        objc_setAssociatedObject(self, &amp;MJRefreshHeaderKey,</span><br><span class="line">                                 mj_header, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (MJRefreshHeader *)mj_header</span><br><span class="line">&#123;</span><br><span class="line">    return objc_getAssociatedObject(self, &amp;MJRefreshHeaderKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面代码看到，当设定头部视图的时候，首先判断是否一致，然后删除之前的透视图，然后将传入的头部师徒插入到位置 0 ，然后通过 objc_setAssociatedObject() 函数将 mj_header 绑定成 UIScrollView 的对象，同理，当获取头部试图的时候，通过 objc_getAssociatedObject() 就可以得到头部视图 footer 也是一样的操作。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ol>
+<li>下拉刷新的 UI 控件是 UITableView 和 UICollectionView，所以对它们共有的父控件 UIScrollView 采取添加 header 的操作</li>
+<li>类目拓展功能在 iOS 封装组件中常用，比如 SDWebImage 中 UIImageView 的类目方式使用该框架设置图片</li>
+<li>类目不能添加属性，但是可以通过 runtime 的方式做到添加属性，在实现 set/get 放阿飞即可</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/current/June/细说iOS-刷新控件（一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/01/current/June/细说iOS-刷新控件（一/" itemprop="url">细说 iOS 刷新控件（一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T14:20:10+08:00">
+                2018-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/刷新控件/" itemprop="url" rel="index">
+                    <span itemprop="name">刷新控件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://github.com/AliceHome/iOSRefreshDemo" target="_blank" rel="noopener">我是 demo 链接，欢迎点击！！！</a></p>
+<p>刷新数据，是 iOS 开发过程中一个重要的操作，操作频率也非常高！现在一般刷新控件都直接使用 MJRefresh 这个第三方控件，后面将会详细讲解其原理，这一篇首先介绍系统的刷新控件 —— UIRefreshControl</p>
+<h2 id="UIRefreshControl"><a href="#UIRefreshControl" class="headerlink" title="UIRefreshControl"></a>UIRefreshControl</h2><h3 id="UITableViewController-iOS-6-之后的属性-refreshControl"><a href="#UITableViewController-iOS-6-之后的属性-refreshControl" class="headerlink" title="UITableViewController iOS 6 之后的属性 refreshControl"></a>UITableViewController iOS 6 之后的属性 refreshControl</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span> (nonatomic, strong, nullable) UIRefreshControl *<span class="function">refreshControl <span class="title">NS_AVAILABLE_IOS</span><span class="params">(<span class="number">6</span>_0)</span> __TVOS_PROHIBITED</span>;</span><br></pre></td></tr></table></figure>
+<p>这是 UITableViewController 中的声明，由此可知：</p>
+<ol>
+<li>refreshControl 是 UITableViewController 的属性，我们如果使用这个控件，就必须使用 UITableViewController；</li>
+<li>后面的 NS_AVAILABLE_IOS(6_0) 说明是 iOS 6 才会支持这个控件</li>
+</ol>
+<h3 id="UIRefreshControl-1"><a href="#UIRefreshControl-1" class="headerlink" title="UIRefreshControl"></a>UIRefreshControl</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line">    </span><br><span class="line">NS_CLASS_AVAILABLE_IOS(<span class="number">6_0</span>) __TVOS_PROHIBITED <span class="meta">@interface</span> UIRefreshControl : UIControl</span><br><span class="line"></span><br><span class="line"><span class="comment">/* The designated initializer</span></span><br><span class="line"><span class="comment"> * This initializes a UIRefreshControl with a default height and width.</span></span><br><span class="line"><span class="comment"> * Once assigned to a UITableViewController, the frame of the control is managed automatically.</span></span><br><span class="line"><span class="comment"> * When a user has pulled-to-refresh, the UIRefreshControl fires its UIControlEventValueChanged event.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (instancetype)init;</span><br><span class="line"><span class="meta">@property</span> (nonatomic, readonly, getter=isRefreshing) BOOL refreshing;</span><br><span class="line"><span class="meta">@property</span> (null_resettable, nonatomic, strong) UIColor *tintColor;</span><br><span class="line"><span class="meta">@property</span> (nullable, nonatomic, strong) NSAttributedString *attributedTitle UI_APPEARANCE_SELECTOR;</span><br><span class="line"></span><br><span class="line"><span class="comment">// May be used to indicate to the refreshControl that an external event has initiated the refresh action</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="function">beginRefreshing <span class="title">NS_AVAILABLE_IOS</span><span class="params">(<span class="number">6</span>_0)</span></span>;</span><br><span class="line"><span class="comment">// Must be explicitly called when the refreshing has completed</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="function">endRefreshing <span class="title">NS_AVAILABLE_IOS</span><span class="params">(<span class="number">6</span>_0)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@end</span></span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
+<p>这是 UIRefreshControl 的 API，从中可以看出：</p>
+<ol>
+<li>通过 init 方法创建的控件有默认的 height 和 width</li>
+<li>在 UITableViewController 中这个控件 frame 会被自动管理</li>
+<li>当执行下拉刷新动作的时候，UIRefreshControl 会被 UIControlEventValueChanged 事件触发，所以我们可通过 addTarget 监听这个状态来执行相应的刷新方法</li>
+</ol>
+<p>关于该 API 其他的地方可以通过其他的文章查看，比如 NS_ASSUME_NONNULL_BEGIN、NS_ASSUME_NONNULL_END 这一对宏，以及 null_resettable、nullable 这中关键字，还有 UI_APPEARANCE_SELECTOR</p>
+<p>UITableViewController 中刷新控件具体使用参照代码：<a href="https://github.com/AliceHome/iOSRefreshDemo" target="_blank" rel="noopener">https://github.com/AliceHome/iOSRefreshDemo</a></p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>这里控件的使用是非常简单方便的，如果只是简单实现刷新的功能，或者修改下文案可以直接使用这个控件。当然，如果不满足当前项目开发需求，比如要做一些本地化的效果，那么就需要自定义刷新控件了，当然可以直接参照上面开发的 API 去设计自己的刷新控件。除此之外，就是使用其他第三方控件，比如 MJRefresh、EGORefresh（这个库当前也是挺好用的，但是不知不觉就被遗忘了）</p>
+<p>下期预告：将介绍第三方 MJRefresh<br>未来设想：如果有机会有时间可以参照系统的 API 自己实现以下 refresh control</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/Pre/Cocopods-公共仓库创建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -765,7 +955,7 @@
           
             <p>先前工作的时候通过私有的 Git 搭建了 CocoaPods 仓库，然后用到的控件或者自定义仓库就直接使用，甚至将业务模块也做成了仓库，这样做的好处是集成的时候非常方便，但是大部分都做成了私有仓库，Git 地址都是私有地址，这样就会出现一个问题，就是这些私有仓库一但不在公司网络中便没有办法操作了，所以这次就一些非业务的控件直接做成公共的仓库，在这里坐下记录：</p>
 <h2 id="模板搭架工程框架"><a href="#模板搭架工程框架" class="headerlink" title="模板搭架工程框架"></a>模板搭架工程框架</h2><p><a href="https://guides.cocoapods.org/making/using-pod-lib-create.html" target="_blank" rel="noopener"><strong>pod lib create</strong></a> 是 CocoaPods 提供的创建仓库模板的命令，可以通过设置 url 的方式通过模板来配置模板，也可以使用默认的（就是不适用url），然后通过选项来配置模板仓库。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">pod lib create MLRouterAction</span><br><span class="line">Cloning `https://github.com/CocoaPods/pod-template.git` into `MLRouterAction`.</span><br><span class="line">Configuring MLRouterAction template.</span><br><span class="line"></span><br><span class="line">------------------------------</span><br><span class="line"></span><br><span class="line">To get you started we need to ask a few questions, this should only take a minute.</span><br><span class="line"></span><br><span class="line">If this is your first time we recommend running through with the guide:</span><br><span class="line"> - https://guides.cocoapods.org/making/using-pod-lib-create.html</span><br><span class="line"> ( hold cmd and click links to open in a browser. )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">What platform do you want to use?? [ iOS / macOS ]</span><br><span class="line"> &gt; iOS</span><br><span class="line"></span><br><span class="line">What language do you want to use?? [ Swift / ObjC ]</span><br><span class="line"> &gt; ObjC</span><br><span class="line"></span><br><span class="line">Would you like to include a demo application with your library? [ Yes / No ]</span><br><span class="line"> &gt; Yes</span><br><span class="line"></span><br><span class="line">Which testing frameworks will you use? [ Specta / Kiwi / None ]</span><br><span class="line"> &gt; None</span><br><span class="line"></span><br><span class="line">Would you like to do view based testing? [ Yes / No ]</span><br><span class="line"> &gt; Yes</span><br><span class="line"></span><br><span class="line">What is your class prefix?</span><br><span class="line"> &gt; ML</span><br><span class="line"></span><br><span class="line">Running pod install on your new library.</span><br><span class="line"></span><br><span class="line">Analyzing dependencies</span><br><span class="line">Fetching podspec for `MLRouterAction` from `../`</span><br><span class="line">Downloading dependencies</span><br><span class="line">Installing FBSnapshotTestCase (2.1.4)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">pod lib <span class="keyword">create</span> MLRouterAction</span><br><span class="line">Cloning <span class="string">`https://github.com/CocoaPods/pod-template.git`</span> <span class="keyword">into</span> <span class="string">`MLRouterAction`</span>.</span><br><span class="line">Configuring MLRouterAction template.</span><br><span class="line"></span><br><span class="line"><span class="comment">------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">To</span> <span class="keyword">get</span> you started we need <span class="keyword">to</span> ask a few questions, this should <span class="keyword">only</span> take a minute.</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span> this <span class="keyword">is</span> your <span class="keyword">first</span> <span class="keyword">time</span> we recommend running <span class="keyword">through</span> <span class="keyword">with</span> the guide:</span><br><span class="line"> - https://guides.cocoapods.org/making/<span class="keyword">using</span>-pod-lib-create.html</span><br><span class="line"> ( hold cmd <span class="keyword">and</span> click links <span class="keyword">to</span> <span class="keyword">open</span> <span class="keyword">in</span> a browser. )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">What platform <span class="keyword">do</span> you want <span class="keyword">to</span> <span class="keyword">use</span>?? [ iOS / macOS ]</span><br><span class="line"> &gt; iOS</span><br><span class="line"></span><br><span class="line">What <span class="keyword">language</span> <span class="keyword">do</span> you want <span class="keyword">to</span> <span class="keyword">use</span>?? [ Swift / ObjC ]</span><br><span class="line"> &gt; ObjC</span><br><span class="line"></span><br><span class="line">Would you <span class="keyword">like</span> <span class="keyword">to</span> <span class="keyword">include</span> a demo application <span class="keyword">with</span> your <span class="keyword">library</span>? [ Yes / <span class="keyword">No</span> ]</span><br><span class="line"> &gt; Yes</span><br><span class="line"></span><br><span class="line">Which testing frameworks will you <span class="keyword">use</span>? [ Specta / Kiwi / <span class="keyword">None</span> ]</span><br><span class="line"> &gt; <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">Would you <span class="keyword">like</span> <span class="keyword">to</span> <span class="keyword">do</span> <span class="keyword">view</span> based testing? [ Yes / <span class="keyword">No</span> ]</span><br><span class="line"> &gt; Yes</span><br><span class="line"></span><br><span class="line">What <span class="keyword">is</span> your <span class="keyword">class</span> prefix?</span><br><span class="line"> &gt; ML</span><br><span class="line"></span><br><span class="line">Running pod <span class="keyword">install</span> <span class="keyword">on</span> your <span class="keyword">new</span> library.</span><br><span class="line"></span><br><span class="line">Analyzing dependencies</span><br><span class="line">Fetching podspec <span class="keyword">for</span> <span class="string">`MLRouterAction`</span> <span class="keyword">from</span> <span class="string">`../`</span></span><br><span class="line">Downloading dependencies</span><br><span class="line">Installing FBSnapshotTestCase (<span class="number">2.1</span><span class="number">.4</span>)</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1108,9 +1298,9 @@
             <h2 id="GCD-概要"><a href="#GCD-概要" class="headerlink" title="GCD 概要"></a>GCD 概要</h2><p><strong>Grand Central Dispatch</strong> </p>
 <h3 id="GCD-是什么？"><a href="#GCD-是什么？" class="headerlink" title="GCD 是什么？"></a>GCD 是什么？</h3><p>是异步执行任务的技术之一。通过非常简洁的方式，实现了极为复杂的多线程编程。说白了就是为了使得多线程编程更加简洁</p>
 <p>Objective-C</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (void)gcdTest &#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_queue_t queue = dispatch_queue_create(&quot;com.hello.world&quot;, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        //处理耗时操作</span><br><span class="line">        NSLog(@&quot;处理耗时操作 ...&quot;);</span><br><span class="line">        sleep(3);</span><br><span class="line">        dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">            NSLog(@&quot;refresh ui ...&quot;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)gcdTest &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">dispatch_queue_t</span> queue = dispatch_queue_create(<span class="string">"com.hello.world"</span>, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line">    <span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">        <span class="comment">//处理耗时操作</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"处理耗时操作 ..."</span>);</span><br><span class="line">        sleep(<span class="number">3</span>);</span><br><span class="line">        <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"refresh ui ..."</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Swift</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func gcdTestFunction() &#123;</span><br><span class="line">       let queue = DispatchQueue(label: &quot;queue0&quot;, qos: .default, attributes: .concurrent, autoreleaseFrequency: .never, target: nil)</span><br><span class="line">       queue.async &#123;</span><br><span class="line">           /*长时间处理任务*/</span><br><span class="line">           print(&quot;处理耗时操作&quot;)</span><br><span class="line">           sleep(3)</span><br><span class="line">           DispatchQueue.main.async &#123;</span><br><span class="line">               //主线程处理，比如用户界面更新</span><br><span class="line">               print(&quot;refresh ui ... &quot;)</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func gcdTestFunction() &#123;</span><br><span class="line">       let queue = DispatchQueue(<span class="selector-tag">label</span>: <span class="string">"queue0"</span>, qos: <span class="selector-class">.default</span>, attributes: <span class="selector-class">.concurrent</span>, autoreleaseFrequency: <span class="selector-class">.never</span>, target: nil)</span><br><span class="line">       queue<span class="selector-class">.async</span> &#123;</span><br><span class="line">           <span class="comment">/*长时间处理任务*/</span></span><br><span class="line">           print(<span class="string">"处理耗时操作"</span>)</span><br><span class="line">           sleep(<span class="number">3</span>)</span><br><span class="line">           DispatchQueue<span class="selector-class">.main</span><span class="selector-class">.async</span> &#123;</span><br><span class="line">               <span class="comment">//主线程处理，比如用户界面更新</span></span><br><span class="line">               print(<span class="string">"refresh ui ... "</span>)</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="多线程编程"><a href="#多线程编程" class="headerlink" title="多线程编程"></a>多线程编程</h3><p>一个 CPU 无分叉的执行一条条的指令路径，即为线程。<br>一个 CPU 在各条指令路径之间进行切换，即为多线程，而如果一个 CPU 有多个核，那么就是真正的同时执行多条指令路径，这就是多线程编程技术。</p>
 <p><strong>缺点：</strong></p>
 <ol>
@@ -1135,28 +1325,28 @@
 <h3 id="dispatch-set-target-queue"><a href="#dispatch-set-target-queue" class="headerlink" title="dispatch_set_target_queue"></a>dispatch_set_target_queue</h3><p>修改队列的优先级，因为通过 create 函数创建的队列没有优先级，那么可以通过这个函数来设置优先级。</p>
 <h3 id="dispatch-after"><a href="#dispatch-after" class="headerlink" title="dispatch_after"></a>dispatch_after</h3><p>这个函数是在指定时间后像当前队列中追加任务，至于任务合适执行要看当前的上下文了。</p>
 <h3 id="dispatch-group"><a href="#dispatch-group" class="headerlink" title="dispatch_group"></a>dispatch_group</h3><p>如果一串任务有序列执行，可以直接通过串行队列实现，但是如果多个任务无序执行结束之后，又有一个确定的任务必须等待前面的无序任务执行结束之后再去执行，那么这就需要用到这个函数了： dispatch_group</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">- (void)dispatch_group &#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">    dispatch_group_t group = dispatch_group_create();</span><br><span class="line">    </span><br><span class="line">    dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;one ...&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;two ...&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;three&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    dispatch_group_notify(group, dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        NSLog(@&quot;done&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">- (void)dispatch_group &#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_queue_t<span class="built_in"> queue </span>= dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">    dispatch_group_t<span class="built_in"> group </span>= dispatch_group_create();</span><br><span class="line">    </span><br><span class="line">    dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">        NSLog(@<span class="string">"one ..."</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">        NSLog(@<span class="string">"two ..."</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">        NSLog(@<span class="string">"three"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    dispatch_group_notify(group, dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        NSLog(@<span class="string">"done"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>one、two、three 三个任务追加到并发队列中，虽然这个三个任务执行顺序不定，但是 done 一定是在最后执行的。</p>
 <h3 id="dispatch-barrier-async"><a href="#dispatch-barrier-async" class="headerlink" title="dispatch_barrier_async"></a>dispatch_barrier_async</h3><p>执行读写任务，读任务是可以并发的，但是写任务相互之间不可以并发，与读任务可以控制着进行并发。<br>下面共有 8 个读取任务，执行完成四个读取任务之后，需要进行一次写任务，这个写入任务必须在前四个读取任务结束之后再执行，那么久可以通过 dispatch_barrier_async() 函数来实现这个操作了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">- (void)dispatch_barrier_async &#123;</span><br><span class="line">    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 1&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 2&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 3&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 4&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_barrier_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;writing ...&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 5&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 6&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 7&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 8&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">- (void)<span class="keyword">dispatch_barrier_async </span>&#123;</span><br><span class="line">    <span class="keyword">dispatch_queue_t </span>queue = <span class="keyword">dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, </span><span class="number">0</span>)<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</span><br><span class="line">        NSLog(@<span class="string">"reading ..... 1"</span>)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</span><br><span class="line">        NSLog(@<span class="string">"reading ..... 2"</span>)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</span><br><span class="line">        NSLog(@<span class="string">"reading ..... 3"</span>)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</span><br><span class="line">        NSLog(@<span class="string">"reading ..... 4"</span>)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">dispatch_barrier_async(queue, </span>^&#123;</span><br><span class="line">        NSLog(@<span class="string">"writing ..."</span>)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</span><br><span class="line">        NSLog(@<span class="string">"reading ..... 5"</span>)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</span><br><span class="line">        NSLog(@<span class="string">"reading ..... 6"</span>)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</span><br><span class="line">        NSLog(@<span class="string">"reading ..... 7"</span>)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</span><br><span class="line">        NSLog(@<span class="string">"reading ..... 8"</span>)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用 Concurrent Dispatch Queue 和 dispatch_barrier_async 函数可实现高效率的数据库访问和文件访问</p>
 <h3 id="dispatch-sync"><a href="#dispatch-sync" class="headerlink" title="dispatch_sync"></a>dispatch_sync</h3><p>同步追加任务到某个队列中。同步追加方式要等到之前的任务完成之后，才会追加进去，所以容易造成死锁：</p>
 <p>下面这两种方式就会造成死锁：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_sync(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    NSLog(@&quot;one ...&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;one&quot;, NULL);</span><br><span class="line">   dispatch_async(queue, ^&#123;</span><br><span class="line">       NSLog(@&quot;one ...&quot;);</span><br><span class="line">       dispatch_sync(queue, ^&#123;</span><br><span class="line">           NSLog(@&quot;Hello world&quot;);</span><br><span class="line">       &#125;);</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="dispatch-apply"><a href="#dispatch-apply" class="headerlink" title="dispatch_apply"></a>dispatch_apply</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t dispatch_global_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">dispatch_apply(10, dispatch_global_queue, ^(size_t t) &#123;</span><br><span class="line">    NSLog(@&quot;Hello world %zu&quot;, t);</span><br><span class="line">&#125;);</span><br><span class="line">NSLog(@&quot;done --- &quot;);</span><br><span class="line"></span><br><span class="line">dispatch_queue_t dispatch_serial_queue = dispatch_queue_create(&quot;com.maple.www&quot;, NULL);</span><br><span class="line">dispatch_apply(10, dispatch_serial_queue, ^(size_t t) &#123;</span><br><span class="line">    NSLog(@&quot;Hello world serial %zu&quot;, t);</span><br><span class="line">&#125;);</span><br><span class="line">NSLog(@&quot;done&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_sync(<span class="name">dispatch_get_main_queue</span>(), ^&#123;</span><br><span class="line">    NSLog(@<span class="string">"one ..."</span>)<span class="comment">;</span></span><br><span class="line">&#125;)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t<span class="built_in"> queue </span>= dispatch_queue_create(<span class="string">"one"</span>, <span class="literal">NULL</span>);</span><br><span class="line">   dispatch_async(queue, ^&#123;</span><br><span class="line">       NSLog(@<span class="string">"one ..."</span>);</span><br><span class="line">       dispatch_sync(queue, ^&#123;</span><br><span class="line">           NSLog(@<span class="string">"Hello world"</span>);</span><br><span class="line">       &#125;);</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="dispatch-apply"><a href="#dispatch-apply" class="headerlink" title="dispatch_apply"></a>dispatch_apply</h3><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t dispatch_global_queue = dispatch_get_global_queue(<span class="name">DISPATCH_QUEUE_PRIORITY_DEFAULT</span>, <span class="number">0</span>)<span class="comment">;</span></span><br><span class="line">dispatch_apply(<span class="number">10</span>, dispatch_global_queue, ^(<span class="name">size_t</span> <span class="literal">t</span>) &#123;</span><br><span class="line">    NSLog(@<span class="string">"Hello world %zu"</span>, <span class="literal">t</span>)<span class="comment">;</span></span><br><span class="line">&#125;)<span class="comment">;</span></span><br><span class="line">NSLog(@<span class="string">"done --- "</span>)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">dispatch_queue_t dispatch_serial_queue = dispatch_queue_create(<span class="string">"com.maple.www"</span>, NULL)<span class="comment">;</span></span><br><span class="line">dispatch_apply(<span class="number">10</span>, dispatch_serial_queue, ^(<span class="name">size_t</span> <span class="literal">t</span>) &#123;</span><br><span class="line">    NSLog(@<span class="string">"Hello world serial %zu"</span>, <span class="literal">t</span>)<span class="comment">;</span></span><br><span class="line">&#125;)<span class="comment">;</span></span><br><span class="line">NSLog(@<span class="string">"done"</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <p>这个函数像是 dispatch_sync 和 dispatch group 的组合版。该函数按照指定次将指定的 Block 追加都队列中，并且等待所有的任务执行完毕。</p>
 <p>可以通过这个函数来访问数组元素：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;one&quot;,@&quot;two&quot;,@&quot;three&quot;,@&quot;four&quot;,@&quot;five&quot;,@&quot;six&quot;];</span><br><span class="line"></span><br><span class="line">dispatch_apply([array count], dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(size_t index) &#123;</span><br><span class="line">    NSLog(@&quot;array[%zu] = %@&quot;,index,array[index]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@<span class="string">"one"</span>,@<span class="string">"two"</span>,@<span class="string">"three"</span>,@<span class="string">"four"</span>,@<span class="string">"five"</span>,@<span class="string">"six"</span>]<span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">dispatch_apply([array </span><span class="built_in">count</span>], <span class="keyword">dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, </span><span class="number">0</span>), ^(size_t index) &#123;</span><br><span class="line">    NSLog(@<span class="string">"array[%zu] = %@"</span>,index,array[index])<span class="comment">;</span></span><br><span class="line">&#125;)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <p>因为 dispatch_apply 函数和dispatch_sync 函数相同，所以最好在 dispatch_async 函数中非同步执行 dispatch_apply 函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NSArray *array = @[@&quot;one&quot;,@&quot;two&quot;,@&quot;three&quot;,@&quot;four&quot;,@&quot;five&quot;,@&quot;six&quot;];</span><br><span class="line">dispatch_queue_t dispatch_global_queue =    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line"></span><br><span class="line">dispatch_async(dispatch_global_queue, ^&#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_apply([array count], dispatch_global_queue, ^(size_t index) &#123;</span><br><span class="line">        NSLog(@&quot;array[%zu] = %@&quot;,index,array[index]);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    // 到这里已经处理完所有的事情</span><br><span class="line">    </span><br><span class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        //更新ui</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NSArray *<span class="built_in">array</span> = @[@<span class="string">"one"</span>,@<span class="string">"two"</span>,@<span class="string">"three"</span>,@<span class="string">"four"</span>,@<span class="string">"five"</span>,@<span class="string">"six"</span>];</span><br><span class="line"><span class="keyword">dispatch_queue_t</span> dispatch_global_queue =    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">dispatch_async(dispatch_global_queue, ^&#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_apply([<span class="built_in">array</span> count], dispatch_global_queue, ^(<span class="keyword">size_t</span> index) &#123;</span><br><span class="line">        NSLog(@<span class="string">"array[%zu] = %@"</span>,index,<span class="built_in">array</span>[index]);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 到这里已经处理完所有的事情</span></span><br><span class="line">    </span><br><span class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        <span class="comment">//更新ui</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h3 id="dispatch-suspend-dispatch-resume"><a href="#dispatch-suspend-dispatch-resume" class="headerlink" title="dispatch_suspend / dispatch_resume"></a>dispatch_suspend / dispatch_resume</h3><p>挂起和恢复队列</p>
 <h3 id="dispatch-semaphore"><a href="#dispatch-semaphore" class="headerlink" title="dispatch semaphore"></a>dispatch semaphore</h3><p>信号基数，如果我们直接通过 for 循环启动多个异步线程向数组中存入数据，那么会引发内存分配的错误。而 semaphore 是一种信号机制，当我们通过 create 函数创建一个 count 为 1 的信号时候，表示当前只能执行一次任务。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">- (void)semaphore &#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">    </span><br><span class="line">    NSMutableArray *mArray = [[NSMutableArray alloc] init];</span><br><span class="line">    </span><br><span class="line">    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; 100000; i ++) &#123;</span><br><span class="line">        dispatch_async(queue, ^&#123;</span><br><span class="line">            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</span><br><span class="line">            [mArray addObject:[NSNumber numberWithInt:i]];</span><br><span class="line">            dispatch_semaphore_signal(semaphore);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    NSLog(@&quot;over&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">- (void)semaphore &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">dispatch_queue_t </span>queue = <span class="keyword">dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, </span><span class="number">0</span>)<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    NSMutableArray *mArray = [[NSMutableArray alloc] init]<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">dispatch_semaphore_t </span>semaphore = <span class="keyword">dispatch_semaphore_create(1);</span></span><br><span class="line"><span class="keyword"> </span>   </span><br><span class="line">    for (int i = <span class="number">0</span><span class="comment">; i &lt; 100000; i ++) &#123;</span></span><br><span class="line">        <span class="keyword">dispatch_async(queue, </span>^&#123;</span><br><span class="line">            <span class="keyword">dispatch_semaphore_wait(semaphore, </span><span class="keyword">DISPATCH_TIME_FOREVER);</span></span><br><span class="line"><span class="keyword"> </span>           [mArray <span class="keyword">addObject:[NSNumber </span>numberWithInt:i]]<span class="comment">;</span></span><br><span class="line">            <span class="keyword">dispatch_semaphore_signal(semaphore);</span></span><br><span class="line"><span class="keyword"> </span>       &#125;)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    NSLog(@<span class="string">"over"</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="dipatch-once"><a href="#dipatch-once" class="headerlink" title="dipatch_once"></a>dipatch_once</h3><p>在当前应用程序中如果打算只执行一次任务，那么就可以通过 <em>dispatch_once</em> 来实现。一般用来生成单例对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">- (void)dispatch_onceFunc &#123;</span><br><span class="line">    </span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">            NSLog(@&quot;Hello world&quot;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">            NSLog(@&quot;Hello world&quot;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">            NSLog(@&quot;Hello world&quot;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">            NSLog(@&quot;Hello world&quot;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    static int initialized = NO;</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@&quot;Hello this is mine.&quot;);</span><br><span class="line">            initialized = YES;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@&quot;Hello this is mine.&quot;);</span><br><span class="line">            initialized = YES;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@&quot;Hello this is mine.&quot;);</span><br><span class="line">            initialized = YES;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@&quot;Hello this is mine.&quot;);</span><br><span class="line">            initialized = YES;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">- (void)<span class="keyword">dispatch_onceFunc </span>&#123;</span><br><span class="line">    </span><br><span class="line">    static <span class="keyword">dispatch_once_t </span>onceToken<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, </span><span class="number">0</span>), ^&#123;</span><br><span class="line">        <span class="keyword">dispatch_once(&amp;onceToken, </span>^&#123;</span><br><span class="line">            NSLog(@<span class="string">"Hello world"</span>)<span class="comment">;</span></span><br><span class="line">        &#125;)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, </span><span class="number">0</span>), ^&#123;</span><br><span class="line">        <span class="keyword">dispatch_once(&amp;onceToken, </span>^&#123;</span><br><span class="line">            NSLog(@<span class="string">"Hello world"</span>)<span class="comment">;</span></span><br><span class="line">        &#125;)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, </span><span class="number">0</span>), ^&#123;</span><br><span class="line">        <span class="keyword">dispatch_once(&amp;onceToken, </span>^&#123;</span><br><span class="line">            NSLog(@<span class="string">"Hello world"</span>)<span class="comment">;</span></span><br><span class="line">        &#125;)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, </span><span class="number">0</span>), ^&#123;</span><br><span class="line">        <span class="keyword">dispatch_once(&amp;onceToken, </span>^&#123;</span><br><span class="line">            NSLog(@<span class="string">"Hello world"</span>)<span class="comment">;</span></span><br><span class="line">        &#125;)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    static int initialized = NO<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, </span><span class="number">0</span>), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@<span class="string">"Hello this is mine."</span>)<span class="comment">;</span></span><br><span class="line">            initialized = YES<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, </span><span class="number">0</span>), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@<span class="string">"Hello this is mine."</span>)<span class="comment">;</span></span><br><span class="line">            initialized = YES<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, </span><span class="number">0</span>), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@<span class="string">"Hello this is mine."</span>)<span class="comment">;</span></span><br><span class="line">            initialized = YES<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, </span><span class="number">0</span>), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@<span class="string">"Hello this is mine."</span>)<span class="comment">;</span></span><br><span class="line">            initialized = YES<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GCDExample[79831:10334594] Hello world</span><br><span class="line">GCDExample[79831:10334575] Hello this is mine.</span><br><span class="line">GCDExample[79831:10334638] Hello this is mine.</span><br><span class="line">GCDExample[79831:10334639] Hello this is mine.</span><br><span class="line">GCDExample[79831:10334640] Hello this is mine.</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GCDExample[<span class="number">79831</span>:<span class="number">10334594</span>] Hello world</span><br><span class="line">GCDExample[<span class="number">79831</span>:<span class="number">10334575</span>] Hello <span class="keyword">this</span> <span class="keyword">is</span> mine.</span><br><span class="line">GCDExample[<span class="number">79831</span>:<span class="number">10334638</span>] Hello <span class="keyword">this</span> <span class="keyword">is</span> mine.</span><br><span class="line">GCDExample[<span class="number">79831</span>:<span class="number">10334639</span>] Hello <span class="keyword">this</span> <span class="keyword">is</span> mine.</span><br><span class="line">GCDExample[<span class="number">79831</span>:<span class="number">10334640</span>] Hello <span class="keyword">this</span> <span class="keyword">is</span> mine.</span><br></pre></td></tr></table></figure>
 <p>使用 dispatch_once 保证了线程安全。</p>
 <h3 id="Dispatch-I-O"><a href="#Dispatch-I-O" class="headerlink" title="Dispatch I/O"></a>Dispatch I/O</h3><p>当我们读取较大的文件的时候，如果将文件分成合适大小并使用 Global Dispatch Queue 并列读取的话，应该比一般的读取速度会快很多。</p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>GCD 的 Dispatch Queue 非常方便，那么它究竟是怎么实现的 ？</p>
@@ -1620,125 +1810,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/Pre/Node-搭建本地-http-服务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/07/Pre/Node-搭建本地-http-服务/" itemprop="url">Node 搭建本地 http 服务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T12:46:52+08:00">
-                2018-06-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1789,7 +1860,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-count">67</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1800,7 +1871,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
