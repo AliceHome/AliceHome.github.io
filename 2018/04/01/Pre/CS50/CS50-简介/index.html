@@ -475,9 +475,9 @@
 <li>可以通过 <em>man get_string</em> 本地查看文档，也可以通过 <a href="https://reference.cs50.net" target="_blank" rel="noopener">reference.cs50.net/cs50</a> 在线查看文档，推荐线上查看比较清晰</li>
 </ul>
 <p>test.c 内容：</p>
-<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cs50.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">int</span> <span class="built_in">number</span> = get_int(<span class="string">"input: "</span>)<span class="comment">;</span></span><br><span class="line">    printf(<span class="string">"hello %d"</span>,<span class="built_in">number</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int number = get_int(&quot;input: &quot;);</span><br><span class="line">    printf(&quot;hello %d&quot;,number);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$clang</span> test<span class="selector-class">.c</span> -lcs50</span><br><span class="line">$./<span class="selector-tag">a</span>.out</span><br><span class="line"><span class="variable">$input</span>: <span class="number">12</span></span><br><span class="line"><span class="variable">$hello</span> <span class="number">12</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$clang test.c -lcs50</span><br><span class="line">$./a.out</span><br><span class="line">$input: 12</span><br><span class="line">$hello 12</span><br></pre></td></tr></table></figure>
 <p><strong>注意：</strong></p>
 <ul>
 <li>头文件引入，按照字母顺序，方便查找</li>
@@ -632,7 +632,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -654,7 +654,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -766,6 +766,8 @@
   
 
 
+  
+
 
 
 
@@ -793,6 +795,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
@@ -871,6 +876,7 @@
   
 
   
+
 
 </body>
 </html>

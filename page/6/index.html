@@ -296,6 +296,166 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/01/Pre/Git/Git-上获取部分文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/01/Pre/Git/Git-上获取部分文件/" itemprop="url">Git 上获取部分文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-01T10:54:10+08:00">
+                2018-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近在开发的时候，遇到这么一种情况，公司的设计同事将 UI 设计稿放到了 <strong>git</strong> 上，但是这个 <strong>git</strong> 库已经 5+ G了。我为了看某一个版本的 UI 设计稿，要把所有的设计稿都拽下来，之前自己的本本硬盘比较足，还是不在乎的，最近换了个 256 的Mini，我卡，不行，不能拽一些没用的下来，so … 我需要一种技能 —— git pull 的时候，每次只拉去 Git 仓库中的某个文件夹。</p>
+<h3 id="一言蔽之"><a href="#一言蔽之" class="headerlink" title="一言蔽之"></a>一言蔽之</h3><p>从远程 Git 仓库获取某个目录下的内容。</p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="创建本地Git仓库目录"><a href="#创建本地Git仓库目录" class="headerlink" title="创建本地Git仓库目录"></a>创建本地<em>Git</em>仓库目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$mkdir myGit_folder</span><br><span class="line">$cd myGit_folder</span><br><span class="line">#/myGit_folder 目录下</span><br><span class="line">$git init</span><br><span class="line">Initialized empty Git repository in /your computer path/myGit_folder/.git/</span><br><span class="line">$ls -a</span><br><span class="line">.    ..   .git</span><br></pre></td></tr></table></figure>
+<p>如上所示，如果在你当前目录下看到了隐藏 <em>.git</em> 目录就证明OK了。</p>
+<h3 id="添加远程-Git-仓库地址"><a href="#添加远程-Git-仓库地址" class="headerlink" title="添加远程 Git 仓库地址"></a>添加远程 <em>Git</em> 仓库地址</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$git remote add -f origin &lt; your git url,like: http://youaresogreat:3000/lawyer/ui.git &gt;</span><br><span class="line"></span><br><span class="line">##这个时候在.git目录下的config文件是这个样子</span><br><span class="line">[core]</span><br><span class="line">repositoryformatversion = 0</span><br><span class="line">filemode = true</span><br><span class="line">bare = false</span><br><span class="line">logallrefupdates = true</span><br><span class="line">ignorecase = true</span><br><span class="line">precomposeunicode = true</span><br><span class="line">sparseCheckout = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">url = http://youaresogreat:3000/lawyer/ui.git</span><br><span class="line">fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure>
+<p>如果 <em>url = <a href="http://youaresogreat:3000/lawyer/ui.git" target="_blank" rel="noopener">http://youaresogreat:3000/lawyer/ui.git</a></em> 这一行添加到了 <em>.git/config</em> 文件中，就证明OK了。</p>
+<h3 id="开启-Git-仓库-Sparse-Checkout-模式"><a href="#开启-Git-仓库-Sparse-Checkout-模式" class="headerlink" title="开启 Git 仓库  Sparse Checkout 模式"></a>开启 <em>Git</em> 仓库  <em>Sparse Checkout</em> 模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git config core.sparsecheckout true</span><br></pre></td></tr></table></figure>
+<p>命令执行前：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#.git/config</span><br><span class="line">[core]</span><br><span class="line">repositoryformatversion = 0</span><br><span class="line">filemode = true</span><br><span class="line">bare = false</span><br><span class="line">logallrefupdates = true</span><br><span class="line">ignorecase = true</span><br><span class="line">precomposeunicode = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">url = http://youaresogreat:3000/lawyer/ui.git</span><br><span class="line">fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure></p>
+<p>命令执行后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#.git/config</span><br><span class="line">[core]</span><br><span class="line">repositoryformatversion = 0</span><br><span class="line">filemode = true</span><br><span class="line">bare = false</span><br><span class="line">logallrefupdates = true</span><br><span class="line">ignorecase = true</span><br><span class="line">precomposeunicode = true</span><br><span class="line">sparseCheckout = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">url = http://youaresogreat:3000/lawyer/ui.git</span><br><span class="line">fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure></p>
+<p>如果 <em>sparseCheckout = true</em> 这一行添加到了 <em>.git/config</em>目录下，就说明OK了。</p>
+<h3 id="进入到-git-info-配置要获取的文件夹路径"><a href="#进入到-git-info-配置要获取的文件夹路径" class="headerlink" title="进入到 .git/info/ 配置要获取的文件夹路径"></a>进入到 .git/info/ 配置要获取的文件夹路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$cd .git/info</span><br><span class="line">$ vim sparse-checkout</span><br><span class="line">/ui/HTML/2.4.0</span><br><span class="line">:wq</span><br><span class="line">$cd ...</span><br></pre></td></tr></table></figure>
+<p>这里是在 sparse-checkout 文件中设置你要获取的文件夹目录 - <em>/ui/HTML/2.4.0</em></p>
+<h3 id="拉取远程目录内容"><a href="#拉取远程目录内容" class="headerlink" title="拉取远程目录内容"></a>拉取远程目录内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+<h2 id="快速操作步骤："><a href="#快速操作步骤：" class="headerlink" title="快速操作步骤："></a>快速操作步骤：</h2><p>这是对上面罗里吧嗦的步骤的总汇<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$md myGit</span><br><span class="line">$cd myGit</span><br><span class="line">$(myGit/) git init</span><br><span class="line">$(myGit/) git remote add -f origin (your git url)</span><br><span class="line">$(myGit/) git config core.sparsecheckout true</span><br><span class="line">$(myGit/) cd .git/info</span><br><span class="line">$(myGit/.git/info) vim sparse-checkout</span><br><span class="line">/one/two/three/mywantFileDir/</span><br><span class="line">:wq</span><br><span class="line">$(myGit/.git/info) cd ...</span><br><span class="line">$(myGit/) git pull origin master</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p><strong>后记：本质就是开启git的 sparse checkout 模式，在 .git/config/sparse-checkout 文件中配置要拉取的文件夹路径。</strong></p>
+<h2 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h2><p>通过写一个脚本让操作更加简单  … …</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/07/Pre/Mac /Mac-修改文件编码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -390,19 +550,19 @@
         
           
             <h2 id="Mac-修改文件编码"><a href="#Mac-修改文件编码" class="headerlink" title="Mac 修改文件编码"></a>Mac 修改文件编码</h2><p>最近，在使用 mac iterm 中的vim查看文件的时候，出现了乱码现象。</p>
-<h3 id="解决-vim-查看文件乱码"><a href="#解决-vim-查看文件乱码" class="headerlink" title="解决 vim 查看文件乱码"></a>解决 vim 查看文件乱码</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.vimrc</span><br><span class="line"><span class="builtin-name">set</span> <span class="attribute">encoding</span>=urf-8 <span class="attribute">fileencodings</span>=ucs-bom,utf-8,cp936</span><br></pre></td></tr></table></figure>
+<h3 id="解决-vim-查看文件乱码"><a href="#解决-vim-查看文件乱码" class="headerlink" title="解决 vim 查看文件乱码"></a>解决 vim 查看文件乱码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.vimrc</span><br><span class="line">set encoding=urf-8 fileencodings=ucs-bom,utf-8,cp936</span><br></pre></td></tr></table></figure>
 <h2 id="enca-编码转换"><a href="#enca-编码转换" class="headerlink" title="enca 编码转换"></a>enca 编码转换</h2><ol>
 <li><p>查看文件编码：</p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">$file</span> FileName</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$file FileName</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装工具</p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">$sudo</span> brew intsll enca</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo brew intsll enca</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看当前文件编码</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">enca</span> -L zh_CN fileName</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enca -L zh_CN fileName</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>转换</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">enca -L zh_CN -x utf-8 * <span class="comment">#将当前目录下所有的文件都转换为 utf-8 编码</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">enca -L zh_CN -x UTF-8 fileName <span class="comment"># 将名字为 fileName 的文件转换为 utf-8 编码</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">enca -L zh_CN -x UTF-8 &lt;fileName1&gt; fileName2 <span class="comment"># 不想覆盖源文件</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$enca -L zh_CN -x utf-8 * #将当前目录下所有的文件都转换为 utf-8 编码</span><br><span class="line"></span><br><span class="line">$enca -L zh_CN -x UTF-8 fileName # 将名字为 fileName 的文件转换为 utf-8 编码</span><br><span class="line"></span><br><span class="line">$enca -L zh_CN -x UTF-8 &lt;fileName1&gt; fileName2 # 不想覆盖源文件</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -551,8 +711,8 @@
           
             <p> Mac 下使用命令行压缩和解压缩 <strong>rar</strong> 文件方法</p>
 <h3 id="step-1-下载工具"><a href="#step-1-下载工具" class="headerlink" title="step 1. 下载工具"></a>step 1. 下载工具</h3><p><a href="https://www.rarlab.com/download.html" target="_blank" rel="noopener">https://www.rarlab.com/download.html</a></p>
-<h3 id="step-2-解压，并进入-rar-目录"><a href="#step-2-解压，并进入-rar-目录" class="headerlink" title="step 2. 解压，并进入 rar 目录"></a>step 2. 解压，并进入 rar 目录</h3><h3 id="step-3-安装-rar-和-unrar-工具"><a href="#step-3-安装-rar-和-unrar-工具" class="headerlink" title="step 3. 安装 rar 和 unrar 工具"></a>step 3. 安装 rar 和 unrar 工具</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">rar</span></span><br><span class="line"><span class="meta">$</span><span class="bash">sudo install -c -o <span class="variable">$USER</span> rar /usr/<span class="built_in">local</span>/bin/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">unrar</span></span><br><span class="line"><span class="meta">$</span><span class="bash">sudo install -c -o <span class="variable">$USER</span> unrar /usr/<span class="built_in">local</span>/bin</span></span><br></pre></td></tr></table></figure>
-<h3 id="step-4-解压，测试"><a href="#step-4-解压，测试" class="headerlink" title="step 4. 解压，测试"></a>step 4. 解压，测试</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unrar x file.rar</span><br><span class="line">rar <span class="selector-tag">a</span> file</span><br></pre></td></tr></table></figure>
+<h3 id="step-2-解压，并进入-rar-目录"><a href="#step-2-解压，并进入-rar-目录" class="headerlink" title="step 2. 解压，并进入 rar 目录"></a>step 2. 解压，并进入 rar 目录</h3><h3 id="step-3-安装-rar-和-unrar-工具"><a href="#step-3-安装-rar-和-unrar-工具" class="headerlink" title="step 3. 安装 rar 和 unrar 工具"></a>step 3. 安装 rar 和 unrar 工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#rar</span><br><span class="line">$sudo install -c -o $USER rar /usr/local/bin/</span><br><span class="line"></span><br><span class="line">#unrar</span><br><span class="line">$sudo install -c -o $USER unrar /usr/local/bin</span><br></pre></td></tr></table></figure>
+<h3 id="step-4-解压，测试"><a href="#step-4-解压，测试" class="headerlink" title="step 4. 解压，测试"></a>step 4. 解压，测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unrar x file.rar</span><br><span class="line">rar a file</span><br></pre></td></tr></table></figure>
 
           
         
@@ -702,7 +862,7 @@
 <li>必须要有初始化方法</li>
 <li>所有的属性必须在初始化方法之前有个初始值</li>
 </ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> firstName: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> lastName: <span class="type">String</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.firstName = firstName</span><br><span class="line">        <span class="keyword">self</span>.lastName = lastName</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> fullName: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"<span class="subst">\(firstName)</span> <span class="subst">\(lastName)</span>"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> erik:<span class="type">Person</span> = <span class="type">Person</span>(firstName: <span class="string">"Erik"</span>, lastName: <span class="string">"Keber"</span>)</span><br><span class="line"><span class="built_in">print</span>(erik.fullName)</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> firstName: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> lastName: <span class="type">String</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.firstName = firstName</span><br><span class="line">        <span class="keyword">self</span>.lastName = lastName</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> fullName: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"\(firstName) \(lastName)"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> erik:<span class="type">Person</span> = <span class="type">Person</span>(firstName: <span class="string">"Erik"</span>, lastName: <span class="string">"Keber"</span>)</span><br><span class="line"><span class="built_in">print</span>(erik.fullName)</span><br></pre></td></tr></table></figure>
 <h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>类创建的对象是一种引用类型，也就是说当我们通过如下代码创建一个对象的时候</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">Employee</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> var1:<span class="type">Employee</span> = <span class="type">Employee</span>(name: <span class="string">"Jack"</span>)</span><br></pre></td></tr></table></figure>
 <p>实际上，变量存储的是该对象的地址，如果我们通过</p>
@@ -1182,9 +1342,9 @@
           
             <p>在写 Python 的过程中，因为有些时候参考的代码是 Python2 写的，所以在 3.x 的环境中就容易抛出一些异常信息，在这里进行记录</p>
 <h2 id="类型异常"><a href="#类型异常" class="headerlink" title="类型异常"></a>类型异常</h2><h3 id="byte-和-string"><a href="#byte-和-string" class="headerlink" title="byte 和 string"></a>byte 和 string</h3><p>在写 socket 的程序的时候， recv() 函数返回值在 2.x 中是字符串的格式，但是在 3.x 之后是 byte 的格式，这样在 print() 函数中输出 recv() 的结果的时候就会报异常信息：</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">TypeError</span>: must <span class="keyword">be </span><span class="keyword">str, </span>not <span class="keyword">bytes</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: must be str, not bytes</span><br></pre></td></tr></table></figure>
 <p><strong>解决方案：</strong><br>通过 byte() 函数进行转换</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">byte = sk.recv(<span class="number">1024</span>)</span><br><span class="line"><span class="function"><span class="title">byte</span><span class="params">(<span class="string">'utf-8'</span>)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">byte = sk.recv(1024)</span><br><span class="line">byte(&apos;utf-8&apos;)</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1664,159 +1824,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/01/Pre/Learning-SQLite-for-iOS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/01/Pre/Learning-SQLite-for-iOS/" itemprop="url">Learning SQLite for iOS</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-01T17:27:57+08:00">
-                2016-12-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[TOC]</p>
-<h1 id="Chapter-1：介绍-SQL-和-SQLite-这一章节，介绍-SQL（structured-query-Language）-北京和移动数据库-——-SQLite"><a href="#Chapter-1：介绍-SQL-和-SQLite-这一章节，介绍-SQL（structured-query-Language）-北京和移动数据库-——-SQLite" class="headerlink" title="Chapter 1：介绍 SQL 和 SQLite 这一章节，介绍 SQL（structured query Language） 北京和移动数据库 —— SQLite."></a>Chapter 1：介绍 SQL 和 SQLite 这一章节，介绍 SQL（structured query Language） 北京和移动数据库 —— SQLite.</h1><h2 id="About-SQL"><a href="#About-SQL" class="headerlink" title="About SQL"></a>About SQL</h2><h2 id="Where-does-SQLite-stand-in-today‘s-industry"><a href="#Where-does-SQLite-stand-in-today‘s-industry" class="headerlink" title="Where does SQLite stand in today‘s industry ?"></a>Where does SQLite stand in today‘s industry ?</h2><h2 id="iOS-with-SQLite"><a href="#iOS-with-SQLite" class="headerlink" title="iOS with SQLite"></a>iOS with SQLite</h2><h2 id="Embedded-database"><a href="#Embedded-database" class="headerlink" title="Embedded database"></a>Embedded database</h2><h2 id="The-architecture-of-the-SQLite-database"><a href="#The-architecture-of-the-SQLite-database" class="headerlink" title="The architecture of the SQLite database"></a>The architecture of the SQLite database</h2><h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><h2 id="The-advantages-of-using-SQLite"><a href="#The-advantages-of-using-SQLite" class="headerlink" title="The advantages of using SQLite"></a>The advantages of using SQLite</h2><p>SQLite 数据的优点：</p>
-<ul>
-<li>SQLite 有数据限制特性以及编辑或者删除表不需要加载到内存中</li>
-<li>SQLite 的数据存储在硬盘上，速度比 Core Data 慢一些</li>
-<li>Core Data 没有数据限制，需要通过 app 的业务逻辑来限制数据量</li>
-<li><h2 id="Working-with-SQLite"><a href="#Working-with-SQLite" class="headerlink" title="Working with SQLite"></a>Working with SQLite</h2>SQLite 官网：www.sqlite.org，在这个官网上可以下载数据库二进制源码，可以查看文档和源代码。在这里，提供了 SQLite 的共享库以及 DLL，当然还有 CLP（command-line-program)，还支持 TCL 扩展，可以通过它进行数据库的链接和更新。<h2 id="The-examples-of-using-SQLite-with-iOS"><a href="#The-examples-of-using-SQLite-with-iOS" class="headerlink" title="The examples of using SQLite with iOS"></a>The examples of using SQLite with iOS</h2></li>
-</ul>
-<h1 id="Chapter-2：数据库设计概念"><a href="#Chapter-2：数据库设计概念" class="headerlink" title="Chapter 2：数据库设计概念"></a>Chapter 2：数据库设计概念</h1><h1 id="Chapter-3：管理数据库"><a href="#Chapter-3：管理数据库" class="headerlink" title="Chapter 3：管理数据库"></a>Chapter 3：管理数据库</h1><h1 id="Chapter-4：Essentials-of-SQL"><a href="#Chapter-4：Essentials-of-SQL" class="headerlink" title="Chapter 4：Essentials of SQL"></a>Chapter 4：Essentials of SQL</h1><h1 id="Chapter-5：Exposing-C-API"><a href="#Chapter-5：Exposing-C-API" class="headerlink" title="Chapter 5：Exposing C API"></a>Chapter 5：Exposing C API</h1><p>C API 的调用，通过这些 API我们可以很方便的在应用程序中访问数据库。大约有 200 多个 API  供调用。</p>
-<h1 id="Chapter-6：Swift-with-SQLite"><a href="#Chapter-6：Swift-with-SQLite" class="headerlink" title="Chapter 6：Swift with SQLite"></a>Chapter 6：Swift with SQLite</h1><h1 id="Chapter-7："><a href="#Chapter-7：" class="headerlink" title="Chapter 7："></a>Chapter 7：</h1><h1 id="Chapter-8："><a href="#Chapter-8：" class="headerlink" title="Chapter 8："></a>Chapter 8：</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1867,7 +1874,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1889,7 +1896,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1985,6 +1992,8 @@
   
 
 
+  
+
 
 
 
@@ -2012,6 +2021,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
@@ -2090,6 +2102,7 @@
   
 
   
+
 
 </body>
 </html>

@@ -386,19 +386,19 @@
 
       
         <h2 id="Mac-修改文件编码"><a href="#Mac-修改文件编码" class="headerlink" title="Mac 修改文件编码"></a>Mac 修改文件编码</h2><p>最近，在使用 mac iterm 中的vim查看文件的时候，出现了乱码现象。</p>
-<h3 id="解决-vim-查看文件乱码"><a href="#解决-vim-查看文件乱码" class="headerlink" title="解决 vim 查看文件乱码"></a>解决 vim 查看文件乱码</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.vimrc</span><br><span class="line"><span class="builtin-name">set</span> <span class="attribute">encoding</span>=urf-8 <span class="attribute">fileencodings</span>=ucs-bom,utf-8,cp936</span><br></pre></td></tr></table></figure>
+<h3 id="解决-vim-查看文件乱码"><a href="#解决-vim-查看文件乱码" class="headerlink" title="解决 vim 查看文件乱码"></a>解决 vim 查看文件乱码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.vimrc</span><br><span class="line">set encoding=urf-8 fileencodings=ucs-bom,utf-8,cp936</span><br></pre></td></tr></table></figure>
 <h2 id="enca-编码转换"><a href="#enca-编码转换" class="headerlink" title="enca 编码转换"></a>enca 编码转换</h2><ol>
 <li><p>查看文件编码：</p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">$file</span> FileName</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$file FileName</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装工具</p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">$sudo</span> brew intsll enca</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo brew intsll enca</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看当前文件编码</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">enca</span> -L zh_CN fileName</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enca -L zh_CN fileName</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>转换</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">enca -L zh_CN -x utf-8 * <span class="comment">#将当前目录下所有的文件都转换为 utf-8 编码</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">enca -L zh_CN -x UTF-8 fileName <span class="comment"># 将名字为 fileName 的文件转换为 utf-8 编码</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">enca -L zh_CN -x UTF-8 &lt;fileName1&gt; fileName2 <span class="comment"># 不想覆盖源文件</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$enca -L zh_CN -x utf-8 * #将当前目录下所有的文件都转换为 utf-8 编码</span><br><span class="line"></span><br><span class="line">$enca -L zh_CN -x UTF-8 fileName # 将名字为 fileName 的文件转换为 utf-8 编码</span><br><span class="line"></span><br><span class="line">$enca -L zh_CN -x UTF-8 &lt;fileName1&gt; fileName2 # 不想覆盖源文件</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -539,7 +539,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -561,7 +561,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -673,6 +673,8 @@
   
 
 
+  
+
 
 
 
@@ -700,6 +702,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
@@ -778,6 +783,7 @@
   
 
   
+
 
 </body>
 </html>

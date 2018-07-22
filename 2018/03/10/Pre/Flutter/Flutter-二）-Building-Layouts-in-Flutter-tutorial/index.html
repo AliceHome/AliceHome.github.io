@@ -384,16 +384,16 @@
 <li>选择一种你想是使用的 widget（这里使用Center，<a href="https://flutter.io/widgets/" target="_blank" rel="noopener">更多布局组件</a>）</li>
 <li>创建一个包含可显示内容的widget</li>
 </ol>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文本 widget</span></span><br><span class="line"><span class="keyword">new</span> Text(<span class="string">'Hello world'</span>, <span class="string">style:</span> <span class="keyword">new</span> TextStyle(<span class="string">fontSize:</span><span class="number">32.0</span>))</span><br><span class="line"><span class="comment">// 图片 widget，这里涉及到向工程中添加图片资源</span></span><br><span class="line"><span class="keyword">new</span> Image.asset(<span class="string">'images/myPic.jpg'</span>, <span class="string">fit:</span> BoxFit.cover)</span><br><span class="line"><span class="comment">// 图标 widget</span></span><br><span class="line"><span class="keyword">new</span> Icon(Icons.star, <span class="string">color:</span> Color.ret[<span class="number">500</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 文本 widget</span><br><span class="line">new Text(&apos;Hello world&apos;, style: new TextStyle(fontSize:32.0))</span><br><span class="line">// 图片 widget，这里涉及到向工程中添加图片资源</span><br><span class="line">new Image.asset(&apos;images/myPic.jpg&apos;, fit: BoxFit.cover)</span><br><span class="line">// 图标 widget</span><br><span class="line">new Icon(Icons.star, color: Color.ret[500])</span><br></pre></td></tr></table></figure>
 <ol>
 <li><p>将可视化的widget添加到布局widget上<br>所有的布局widget，都有 <em>child</em> 属性，或者是 <em>children</em> 属性，这取决于你要向布局widget中添加怎样的 widget。</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new Center (</span><br><span class="line">child: new Text('Hello world， style：new TextStyle(<span class="name">fontSize</span><span class="symbol">:f</span> <span class="number">32.0</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new Center (</span><br><span class="line">child: new Text(&apos;Hello world， style：new TextStyle(fontSize:f 32.0))</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>将 布局 widget 添加到页面上</p>
 </li>
 </ol>
-<p>标准 widgets<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="symbol">'package</span>:flutter/material.dart';</span><br><span class="line"></span><br><span class="line">void main() &#123;</span><br><span class="line">runApp(<span class="keyword">new</span> <span class="type">MyApp</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    <span class="type">Widget</span> build(<span class="type">BuildContext</span> context) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">Container</span>(</span><br><span class="line">    decoration: <span class="keyword">new</span> <span class="type">BoxDecoration</span>(color: <span class="type">Colors</span>.white),</span><br><span class="line">    child: <span class="keyword">new</span> <span class="type">Center</span>(</span><br><span class="line">    child: <span class="keyword">new</span> <span class="type">Text</span>(<span class="symbol">'Hello</span> <span class="type">World</span>',</span><br><span class="line">    style: <span class="keyword">new</span> <span class="type">TextStyle</span>(fontSize: <span class="number">40.0</span>, color: <span class="type">Colors</span>.black87)),</span><br><span class="line">    ),</span><br><span class="line">    );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>material widget<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() =&gt; runApp(<span class="keyword">new</span> MyApp());</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> &#123;</span></span><br><span class="line"><span class="comment">// This widget is the root of your application.</span></span><br><span class="line"><span class="meta">@override</span></span><br><span class="line">Widget build(BuildContext context) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> Container(</span><br><span class="line"><span class="string">decoration:</span> <span class="keyword">new</span> BoxDecoration(<span class="string">color:</span> Colors.white),</span><br><span class="line"><span class="string">child:</span> <span class="keyword">new</span> Center(</span><br><span class="line"><span class="string">child:</span> <span class="keyword">new</span> Text(<span class="string">'Hello world'</span>,</span><br><span class="line"><span class="string">style:</span> <span class="keyword">new</span> TextStyle(<span class="string">fontSize:</span> <span class="number">40.0</span>, <span class="string">color:</span> Colors.black87),</span><br><span class="line"><span class="string">textDirection:</span> TextDirection.ltr,),</span><br><span class="line"></span><br><span class="line">),</span><br><span class="line">);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>标准 widgets<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import &apos;package:flutter/material.dart&apos;;</span><br><span class="line"></span><br><span class="line">void main() &#123;</span><br><span class="line">runApp(new MyApp());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyApp extends StatelessWidget &#123;</span><br><span class="line">    @override</span><br><span class="line">    Widget build(BuildContext context) &#123;</span><br><span class="line">    return new Container(</span><br><span class="line">    decoration: new BoxDecoration(color: Colors.white),</span><br><span class="line">    child: new Center(</span><br><span class="line">    child: new Text(&apos;Hello World&apos;,</span><br><span class="line">    style: new TextStyle(fontSize: 40.0, color: Colors.black87)),</span><br><span class="line">    ),</span><br><span class="line">    );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>material widget<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import &apos;package:flutter/material.dart&apos;;</span><br><span class="line"></span><br><span class="line">void main() =&gt; runApp(new MyApp());</span><br><span class="line"></span><br><span class="line">class MyApp extends StatelessWidget &#123;</span><br><span class="line">// This widget is the root of your application.</span><br><span class="line">@override</span><br><span class="line">Widget build(BuildContext context) &#123;</span><br><span class="line">return new Container(</span><br><span class="line">decoration: new BoxDecoration(color: Colors.white),</span><br><span class="line">child: new Center(</span><br><span class="line">child: new Text(&apos;Hello world&apos;,</span><br><span class="line">style: new TextStyle(fontSize: 40.0, color: Colors.black87),</span><br><span class="line">textDirection: TextDirection.ltr,),</span><br><span class="line"></span><br><span class="line">),</span><br><span class="line">);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="从竖直和水平两个方向布局多个widgets"><a href="#从竖直和水平两个方向布局多个widgets" class="headerlink" title="从竖直和水平两个方向布局多个widgets"></a>从竖直和水平两个方向布局多个widgets</h3><p>最常用的一种布局模式是根据竖直和水平方向排列widgets。使用 Row widget 排列水平方向，使用 Column布局竖直方向。</p>
 <ol>
 <li>Row 和 Column 是最常见的布局模式；</li>
@@ -540,7 +540,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -562,7 +562,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -674,6 +674,8 @@
   
 
 
+  
+
 
 
 
@@ -701,6 +703,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
@@ -779,6 +784,7 @@
   
 
   
+
 
 </body>
 </html>

@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="next," />
 
 
 
@@ -94,16 +94,18 @@
 
 
 
+<meta name="description" content="添加微信二维码，在文章的最后，方便阅读文章的人联系你！ 这个功能和上一篇中的设置最后的结束语类似，用到的步骤是上一篇的第三步. Step1：修改 _config.yml全局搜索 WeChat ，可以搜索到如下的语句，下面展示的时候删除了注释的代码。 WechatIMG13.jpeg 是图片的名字。 12345# Wechat Subscriberwechat_subscriber:  enabl">
+<meta name="keywords" content="next">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo(三) 添加微信二维码">
 <meta property="og:url" content="http://yoursite.com/2018/07/21/current/June/Hexo-三-添加微信二维码/index.html">
 <meta property="og:site_name" content="Hi, this is Alice Home">
+<meta property="og:description" content="添加微信二维码，在文章的最后，方便阅读文章的人联系你！ 这个功能和上一篇中的设置最后的结束语类似，用到的步骤是上一篇的第三步. Step1：修改 _config.yml全局搜索 WeChat ，可以搜索到如下的语句，下面展示的时候删除了注释的代码。 WechatIMG13.jpeg 是图片的名字。 12345# Wechat Subscriberwechat_subscriber:  enabl">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/07/21/current/June/Hexo-三-添加微信二维码/WeChat.png">
-<meta property="og:updated_time" content="2018-07-20T17:14:18.083Z">
+<meta property="og:updated_time" content="2018-07-21T16:46:36.734Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo(三) 添加微信二维码">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/21/current/June/Hexo-三-添加微信二维码/WeChat.png">
+<meta name="twitter:description" content="添加微信二维码，在文章的最后，方便阅读文章的人联系你！ 这个功能和上一篇中的设置最后的结束语类似，用到的步骤是上一篇的第三步. Step1：修改 _config.yml全局搜索 WeChat ，可以搜索到如下的语句，下面展示的时候删除了注释的代码。 WechatIMG13.jpeg 是图片的名字。 12345# Wechat Subscriberwechat_subscriber:  enabl">
 
 
 
@@ -334,6 +336,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -361,7 +385,12 @@
       
 
       
-        <p><img src="/2018/07/21/current/June/Hexo-三-添加微信二维码/WeChat.png" alt=""></p>
+        <p> 添加微信二维码，在文章的最后，方便阅读文章的人联系你！<br> 这个功能和上一篇中的设置最后的结束语类似，用到的步骤是上一篇的第三步.</p>
+<h2 id="Step1：修改-config-yml"><a href="#Step1：修改-config-yml" class="headerlink" title="Step1：修改 _config.yml"></a>Step1：修改 _config.yml</h2><p>全局搜索 WeChat ，可以搜索到如下的语句，下面展示的时候删除了注释的代码。 <code>WechatIMG13.jpeg</code> 是图片的名字。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Wechat Subscriber</span><br><span class="line">wechat_subscriber:</span><br><span class="line">  enabled: true</span><br><span class="line">  qcode: /uploads/WechatIMG13.jpeg</span><br><span class="line">  description: 微信公众号还没弄好，先放上二维码吧！</span><br></pre></td></tr></table></figure>
+<h2 id="Step2：添加图片"><a href="#Step2：添加图片" class="headerlink" title="Step2：添加图片"></a>Step2：添加图片</h2><p>从微信中获取到二维码，然后添加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Maple/source/uploads</span><br></pre></td></tr></table></figure>
+<p>博客 source 目录下的 uploads（如果没有这个目录新建一个就是了），然后将图片拷贝进去，测试即可。效果看下面结束语之后</p>
 
       
     </div>
@@ -396,6 +425,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/next/" rel="tag"># next</a>
+          
+        </div>
+      
 
       
       
@@ -414,6 +449,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/22/Hexo-四-添加动态背景效果canvas-nest/" rel="prev" title="Hexo(四) 添加动态背景效果canvas-nest">
+                Hexo(四) 添加动态背景效果canvas-nest <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -465,8 +504,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -481,7 +529,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -503,7 +551,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -528,6 +576,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step1：修改-config-yml"><span class="nav-number">1.</span> <span class="nav-text">Step1：修改 _config.yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step2：添加图片"><span class="nav-number">2.</span> <span class="nav-text">Step2：添加图片</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -599,6 +663,8 @@
   
 
 
+  
+
 
 
 
@@ -626,6 +692,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
@@ -704,6 +773,7 @@
   
 
   
+
 
 </body>
 </html>

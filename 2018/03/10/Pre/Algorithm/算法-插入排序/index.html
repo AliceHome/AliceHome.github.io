@@ -387,7 +387,7 @@
       
         <p>《算法导论》第一个算法，插入排序。</p>
 <h2 id="伪代码-降序"><a href="#伪代码-降序" class="headerlink" title="伪代码 - 降序"></a>伪代码 - 降序</h2><p>缩进表示包含<br>A 代表数组</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> j = <span class="number">2</span> to A.len</span><br><span class="line">    <span class="selector-tag">i</span> = j - <span class="number">1</span></span><br><span class="line">    K = A[j]</span><br><span class="line">    while <span class="selector-tag">i</span> &gt; <span class="number">0</span> and A[i] &gt; K</span><br><span class="line">        A[i+<span class="number">1</span>]= A[i]</span><br><span class="line">        <span class="selector-tag">i</span> = <span class="selector-tag">i</span> - <span class="number">1</span></span><br><span class="line">    A[<span class="selector-tag">i</span> + <span class="number">1</span>] = K</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for j = 2 to A.len</span><br><span class="line">    i = j - 1</span><br><span class="line">    K = A[j]</span><br><span class="line">    while i &gt; 0 and A[i] &gt; K</span><br><span class="line">        A[i+1]= A[i]</span><br><span class="line">        i = i - 1</span><br><span class="line">    A[i + 1] = K</span><br></pre></td></tr></table></figure>
 <p>如果要写升序呢？伪代码该怎么改？？？</p>
 <h2 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h2><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><p>Python 实现入了大坑， &amp;  和  and</p>
 <h3 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h3><h3 id="Dart"><a href="#Dart" class="headerlink" title="Dart"></a>Dart</h3>
@@ -528,7 +528,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -550,7 +550,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -662,6 +662,8 @@
   
 
 
+  
+
 
 
 
@@ -689,6 +691,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
@@ -767,6 +772,7 @@
   
 
   
+
 
 </body>
 </html>

@@ -390,11 +390,11 @@
         <p>之前在写文章时候，总会在写完的地方，手动写一个 Done 字，标志着这篇博客结束了，这次通过设置在每篇文章中自动添加结束标志，样式如下,看文章的底部就可以了，对，就是这样式的。</p>
 <p>这种结束标识如何实现的呢？</p>
 <h2 id="Step1：创建文件-passage-end-tag-swig"><a href="#Step1：创建文件-passage-end-tag-swig" class="headerlink" title="Step1：创建文件 passage-end-tag.swig"></a>Step1：创建文件 passage-end-tag.swig</h2><p>进入到博客目录的主题目录中：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> /Users/maple/Maple/themes/next/layout/_macro</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> /Users/maple/Maple/themes/next/layout/_macro</span></span><br></pre></td></tr></table></figure>
 <p>在此目录下创建文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> touch passage-end-tag.swig</span><br><span class="line"><span class="meta">$</span> vim passage-end-tag.swig</span><br><span class="line"><span class="meta">#</span>添加内容</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &#123;% if not is_index %&#125;</span><br><span class="line">        &lt;div style="text-align:center;color: #ccc;font-size:14px;"&gt;-------------本文结束&lt;i class="fa fa-paw"&gt;&lt;/i&gt;再接再厉-------------&lt;/div&gt;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch passage-end-tag.swig</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vim passage-end-tag.swig</span></span><br><span class="line"><span class="meta">#</span><span class="bash">添加内容</span></span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &#123;% if not is_index %&#125;</span><br><span class="line">        &lt;div style="text-align:center;color: #ccc;font-size:14px;"&gt;-------------本文结束&lt;i class="fa fa-paw"&gt;&lt;/i&gt;再接再厉-------------&lt;/div&gt;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="Step2：生效"><a href="#Step2：生效" class="headerlink" title="Step2：生效"></a>Step2：生效</h2><p>打开 post.swig 文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>vim /Users/maple/Maple/themes/next/layout/_macro/post.swig</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">vim /Users/maple/Maple/themes/next/layout/_macro/post.swig</span></span><br></pre></td></tr></table></figure>
 <p>搜索 end post 然后将下图的红色框内代码粘贴上图</p>
 <p><img src="/2018/07/21/current/June/Hexo-二-添加‘文本结束‘-标记/end.png" alt=""></p>
 <p>代码如下：</p>
@@ -540,7 +540,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -562,7 +562,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -674,6 +674,8 @@
   
 
 
+  
+
 
 
 
@@ -701,6 +703,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
@@ -779,6 +784,7 @@
   
 
   
+
 
 </body>
 </html>

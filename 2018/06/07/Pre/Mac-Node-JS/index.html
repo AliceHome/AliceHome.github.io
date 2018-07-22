@@ -388,10 +388,10 @@
         <h2 id="Node-JS"><a href="#Node-JS" class="headerlink" title="Node JS ?"></a>Node JS ?</h2><p>NodeJS 是 js 的一个解析器，可以让 js 独立于浏览器执行。执行在浏览器中的 js 的解析器就是浏览器。</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="http://nodejs.cn/download/" target="_blank" rel="noopener">Node js 下载地址</a>，下载 apk ,双击安装.</p>
 <p>终端输入：</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ which <span class="keyword">node</span><span class="title"></span></span><br><span class="line"><span class="title">/usr</span>/local/bin/<span class="keyword">node</span><span class="title"></span></span><br><span class="line"><span class="title">$</span> <span class="keyword">node</span><span class="title"></span></span><br><span class="line"><span class="title">&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ which node</span><br><span class="line">/usr/local/bin/node</span><br><span class="line">$ node</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 <p>表示安装成功。</p>
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><h3 id="解析器模式"><a href="#解析器模式" class="headerlink" title="解析器模式"></a>解析器模式</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> node</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> 1 + 2</span></span><br><span class="line">3</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> console.log(<span class="string">"hello node"</span>);</span></span><br><span class="line">hello node</span><br><span class="line">undefined</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="keyword">function</span> <span class="function"><span class="title">hello</span></span>() &#123;</span></span><br><span class="line">... console.log("hello world");</span><br><span class="line">... &#125;</span><br><span class="line">undefined</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> hello()</span></span><br><span class="line">hello world</span><br><span class="line">undefined</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
-<h3 id="xxx-js-文件方式"><a href="#xxx-js-文件方式" class="headerlink" title="xxx.js 文件方式"></a>xxx.js 文件方式</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/workspace/NODEJS [11:12:53]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat hello.js</span></span><br><span class="line">function hello()</span><br><span class="line">&#123;</span><br><span class="line">    console.log("Hello world");</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hello();</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/workspace/NODEJS [11:18:28]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> node hello.js</span></span><br><span class="line">Hello world</span><br></pre></td></tr></table></figure>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><h3 id="解析器模式"><a href="#解析器模式" class="headerlink" title="解析器模式"></a>解析器模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ node</span><br><span class="line">&gt; 1 + 2</span><br><span class="line">3</span><br><span class="line">&gt; console.log(&quot;hello node&quot;);</span><br><span class="line">hello node</span><br><span class="line">undefined</span><br><span class="line">&gt; function hello() &#123;</span><br><span class="line">... console.log(&quot;hello world&quot;);</span><br><span class="line">... &#125;</span><br><span class="line">undefined</span><br><span class="line">&gt; hello()</span><br><span class="line">hello world</span><br><span class="line">undefined</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="xxx-js-文件方式"><a href="#xxx-js-文件方式" class="headerlink" title="xxx.js 文件方式"></a>xxx.js 文件方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># maple @ iMac in ~/workspace/NODEJS [11:12:53]</span><br><span class="line">$ cat hello.js</span><br><span class="line">function hello()</span><br><span class="line">&#123;</span><br><span class="line">    console.log(&quot;Hello world&quot;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hello();</span><br><span class="line"></span><br><span class="line"># maple @ iMac in ~/workspace/NODEJS [11:18:28]</span><br><span class="line">$ node hello.js</span><br><span class="line">Hello world</span><br></pre></td></tr></table></figure>
 <h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>Node JS 可以直接解析 JS code 文件并输出结果，可以将工程通过 JS 文件来进行划分，那么划分出来的各个模块之间的沟通便是一个问题。</p>
 <p>例如，当前目录下两个文件 main.js &amp; one.js</p>
 <h3 id="exports-导出模块函数"><a href="#exports-导出模块函数" class="headerlink" title="exports 导出模块函数"></a>exports 导出模块函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"this is hello funciton"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.hello = hello;</span><br></pre></td></tr></table></figure>
@@ -535,7 +535,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -557,7 +557,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -669,6 +669,8 @@
   
 
 
+  
+
 
 
 
@@ -696,6 +698,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
@@ -774,6 +779,7 @@
   
 
   
+
 
 </body>
 </html>

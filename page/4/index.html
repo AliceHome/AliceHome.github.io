@@ -296,6 +296,129 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/Pre/iOS/开拓者SPDY/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/26/Pre/iOS/开拓者SPDY/" itemprop="url">开拓者SPDY</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T11:26:46+08:00">
+                2018-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>傻逼了，以前就知道写 …<br>今天看了SPDY，真的是 …<br>每次谈到客户端与服务端进行通信的时候，就是老生常淡，只能客户端发起请求，服务端负责响应。但是，但是 … 但是真的有很多场景需要相互推送消息的，每次都是WebSocket什么鬼的，熟不知市场上已经有好多方案了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/Pre/iOS/iOS-protobuf-使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1478,16 +1601,16 @@
 <li>选择一种你想是使用的 widget（这里使用Center，<a href="https://flutter.io/widgets/" target="_blank" rel="noopener">更多布局组件</a>）</li>
 <li>创建一个包含可显示内容的widget</li>
 </ol>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文本 widget</span></span><br><span class="line"><span class="keyword">new</span> Text(<span class="string">'Hello world'</span>, <span class="string">style:</span> <span class="keyword">new</span> TextStyle(<span class="string">fontSize:</span><span class="number">32.0</span>))</span><br><span class="line"><span class="comment">// 图片 widget，这里涉及到向工程中添加图片资源</span></span><br><span class="line"><span class="keyword">new</span> Image.asset(<span class="string">'images/myPic.jpg'</span>, <span class="string">fit:</span> BoxFit.cover)</span><br><span class="line"><span class="comment">// 图标 widget</span></span><br><span class="line"><span class="keyword">new</span> Icon(Icons.star, <span class="string">color:</span> Color.ret[<span class="number">500</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 文本 widget</span><br><span class="line">new Text(&apos;Hello world&apos;, style: new TextStyle(fontSize:32.0))</span><br><span class="line">// 图片 widget，这里涉及到向工程中添加图片资源</span><br><span class="line">new Image.asset(&apos;images/myPic.jpg&apos;, fit: BoxFit.cover)</span><br><span class="line">// 图标 widget</span><br><span class="line">new Icon(Icons.star, color: Color.ret[500])</span><br></pre></td></tr></table></figure>
 <ol>
 <li><p>将可视化的widget添加到布局widget上<br>所有的布局widget，都有 <em>child</em> 属性，或者是 <em>children</em> 属性，这取决于你要向布局widget中添加怎样的 widget。</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new Center (</span><br><span class="line">child: new Text('Hello world， style：new TextStyle(<span class="name">fontSize</span><span class="symbol">:f</span> <span class="number">32.0</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new Center (</span><br><span class="line">child: new Text(&apos;Hello world， style：new TextStyle(fontSize:f 32.0))</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>将 布局 widget 添加到页面上</p>
 </li>
 </ol>
-<p>标准 widgets<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="symbol">'package</span>:flutter/material.dart';</span><br><span class="line"></span><br><span class="line">void main() &#123;</span><br><span class="line">runApp(<span class="keyword">new</span> <span class="type">MyApp</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    <span class="type">Widget</span> build(<span class="type">BuildContext</span> context) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">Container</span>(</span><br><span class="line">    decoration: <span class="keyword">new</span> <span class="type">BoxDecoration</span>(color: <span class="type">Colors</span>.white),</span><br><span class="line">    child: <span class="keyword">new</span> <span class="type">Center</span>(</span><br><span class="line">    child: <span class="keyword">new</span> <span class="type">Text</span>(<span class="symbol">'Hello</span> <span class="type">World</span>',</span><br><span class="line">    style: <span class="keyword">new</span> <span class="type">TextStyle</span>(fontSize: <span class="number">40.0</span>, color: <span class="type">Colors</span>.black87)),</span><br><span class="line">    ),</span><br><span class="line">    );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>material widget<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() =&gt; runApp(<span class="keyword">new</span> MyApp());</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> &#123;</span></span><br><span class="line"><span class="comment">// This widget is the root of your application.</span></span><br><span class="line"><span class="meta">@override</span></span><br><span class="line">Widget build(BuildContext context) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> Container(</span><br><span class="line"><span class="string">decoration:</span> <span class="keyword">new</span> BoxDecoration(<span class="string">color:</span> Colors.white),</span><br><span class="line"><span class="string">child:</span> <span class="keyword">new</span> Center(</span><br><span class="line"><span class="string">child:</span> <span class="keyword">new</span> Text(<span class="string">'Hello world'</span>,</span><br><span class="line"><span class="string">style:</span> <span class="keyword">new</span> TextStyle(<span class="string">fontSize:</span> <span class="number">40.0</span>, <span class="string">color:</span> Colors.black87),</span><br><span class="line"><span class="string">textDirection:</span> TextDirection.ltr,),</span><br><span class="line"></span><br><span class="line">),</span><br><span class="line">);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>标准 widgets<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import &apos;package:flutter/material.dart&apos;;</span><br><span class="line"></span><br><span class="line">void main() &#123;</span><br><span class="line">runApp(new MyApp());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyApp extends StatelessWidget &#123;</span><br><span class="line">    @override</span><br><span class="line">    Widget build(BuildContext context) &#123;</span><br><span class="line">    return new Container(</span><br><span class="line">    decoration: new BoxDecoration(color: Colors.white),</span><br><span class="line">    child: new Center(</span><br><span class="line">    child: new Text(&apos;Hello World&apos;,</span><br><span class="line">    style: new TextStyle(fontSize: 40.0, color: Colors.black87)),</span><br><span class="line">    ),</span><br><span class="line">    );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>material widget<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import &apos;package:flutter/material.dart&apos;;</span><br><span class="line"></span><br><span class="line">void main() =&gt; runApp(new MyApp());</span><br><span class="line"></span><br><span class="line">class MyApp extends StatelessWidget &#123;</span><br><span class="line">// This widget is the root of your application.</span><br><span class="line">@override</span><br><span class="line">Widget build(BuildContext context) &#123;</span><br><span class="line">return new Container(</span><br><span class="line">decoration: new BoxDecoration(color: Colors.white),</span><br><span class="line">child: new Center(</span><br><span class="line">child: new Text(&apos;Hello world&apos;,</span><br><span class="line">style: new TextStyle(fontSize: 40.0, color: Colors.black87),</span><br><span class="line">textDirection: TextDirection.ltr,),</span><br><span class="line"></span><br><span class="line">),</span><br><span class="line">);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="从竖直和水平两个方向布局多个widgets"><a href="#从竖直和水平两个方向布局多个widgets" class="headerlink" title="从竖直和水平两个方向布局多个widgets"></a>从竖直和水平两个方向布局多个widgets</h3><p>最常用的一种布局模式是根据竖直和水平方向排列widgets。使用 Row widget 排列水平方向，使用 Column布局竖直方向。</p>
 <ol>
 <li>Row 和 Column 是最常见的布局模式；</li>
@@ -1648,146 +1771,10 @@
           
             <p>《算法导论》第一个算法，插入排序。</p>
 <h2 id="伪代码-降序"><a href="#伪代码-降序" class="headerlink" title="伪代码 - 降序"></a>伪代码 - 降序</h2><p>缩进表示包含<br>A 代表数组</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> j = <span class="number">2</span> to A.len</span><br><span class="line">    <span class="selector-tag">i</span> = j - <span class="number">1</span></span><br><span class="line">    K = A[j]</span><br><span class="line">    while <span class="selector-tag">i</span> &gt; <span class="number">0</span> and A[i] &gt; K</span><br><span class="line">        A[i+<span class="number">1</span>]= A[i]</span><br><span class="line">        <span class="selector-tag">i</span> = <span class="selector-tag">i</span> - <span class="number">1</span></span><br><span class="line">    A[<span class="selector-tag">i</span> + <span class="number">1</span>] = K</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for j = 2 to A.len</span><br><span class="line">    i = j - 1</span><br><span class="line">    K = A[j]</span><br><span class="line">    while i &gt; 0 and A[i] &gt; K</span><br><span class="line">        A[i+1]= A[i]</span><br><span class="line">        i = i - 1</span><br><span class="line">    A[i + 1] = K</span><br></pre></td></tr></table></figure>
 <p>如果要写升序呢？伪代码该怎么改？？？</p>
 <h2 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h2><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><p>Python 实现入了大坑， &amp;  和  and</p>
 <h3 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h3><h3 id="Dart"><a href="#Dart" class="headerlink" title="Dart"></a>Dart</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/10/Pre/Flutter/Flutter-是什么？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/10/Pre/Flutter/Flutter-是什么？/" itemprop="url">Flutter 是什么？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T12:56:57+08:00">
-                2018-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>初识 Flutter 是在 吴小龙同学 个人微信账号的推送消息见到。不知道为什么突然对这个东西感兴趣了，于是在第二天就自己搭建了环境，做了官网上的demo试了下效果。下午的时候通过和安卓同学的了解，觉得对于安卓同学来说，做这个东西会相对简单很多，因为 Flutter的语言 Dart和 Kotlin以及 Java 的语法很相似。</p>
-<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>Android Studio<br>之前没有怎么用过 Android Studio，只是用他来编译过安卓程序，其他的就没怎么了解了。这次在安装Flutter环境的时候，通过 Flutter Doctor 检测的时候，输出信息告诉我要安装 Android Studio，于是乎就安装了。</p>
-<p>Xcode 当然是需要的，如果直接安装Xcode 然后能够打包 iOS 项目，Flutter Doctor 检测会直接通过的。还会输出一条命令让你打开模拟器（open -a Simulator)。当然在检测的时候需要通过brew做些配置的修改通过控制台信息进行修改就是了，没什么难点。</p>
-<h2 id="开发语言"><a href="#开发语言" class="headerlink" title="开发语言"></a>开发语言</h2><p>Dart 语言，其实到现在我都不知道是个什么语法，只是照着葫芦画瓢，将官网上的示例代码敲了一遍。感觉和 Swift 差不多，当然除了OC之外，感觉其他语言 – Java， Swift 等面向对象语言的语法都差不多。</p>
-<h2 id="Demo-过程"><a href="#Demo-过程" class="headerlink" title="Demo 过程"></a>Demo 过程</h2><ol>
-<li>首先就是展示普通的界面（创建项目之后就会有）</li>
-<li>做些简单的修改，改改文字啊，改改属性啊</li>
-<li>导入一个包，是个语言包，搞这个的时候费了些时间，因为老是超时，多搞几次就好了，我重启了一次电脑</li>
-<li>写了个列表，添加了交互以及页面的跳转，还有主题的修改</li>
-<li>齐活。</li>
-</ol>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>学习并尝试新的东西，提升自己的兴趣，虽然现在 iOS 和 安卓不火了，但是学习一个东西，去学习通用的东西，比如 Flutter怎么实现的跨平台，与 JS 有什么异同，以及其设计理念等。我觉得对于自己以后的技术之路还是有很大帮助的，您说呢 … … 哈哈 just one day 感觉理清了好多东西，从未知到相识，nice！</p>
-<p><strong>————–参考网站—————-</strong></p>
-<p><a href="https://flutter.io/" target="_blank" rel="noopener">官网</a><br><a href="http://www.infoq.com/cn/articles/why-is-flutter-revolutionary" target="_blank" rel="noopener">InforQ - 为什么说Flutter是革命性的？</a><br><a href="http://www.infoq.com/cn/news/2017/11/Why-native-app-developer-Flutter?utm_source=infoq&amp;utm_medium=related_content_link&amp;utm_campaign=relatedContent_articles_clk" target="_blank" rel="noopener">为什么原生应用开发者需要关注Flutter</a></p>
-
           
         
       
@@ -1875,7 +1862,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1897,7 +1884,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1993,6 +1980,8 @@
   
 
 
+  
+
 
 
 
@@ -2020,6 +2009,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
@@ -2098,6 +2090,7 @@
   
 
   
+
 
 </body>
 </html>

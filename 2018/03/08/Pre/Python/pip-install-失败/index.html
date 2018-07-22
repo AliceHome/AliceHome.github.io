@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="最近换了一台电脑开发，在安装python的模块的时候出现了权限问题。在这里记录下解决方案。 我的是Mac电脑，系统是 High Sierra（10.13.1） 问题 一 12345678910111213141516Exception:Traceback (most recent call last):File &quot;/Library/Python/2.7/site-packages/pip-9.0.">
+<meta name="description" content="最近换了一台电脑开发，在安装python的模块的时候出现了权限问题。在这里记录下解决方案。 我的是Mac电脑，系统是 High Sierra（10.13.1） 问题 一 12345678910111213141516Exception:Traceback (most recent call last):File &amp;quot;/Library/Python/2.7/site-packages/pip">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pip install 失败">
 <meta property="og:url" content="http://yoursite.com/2018/03/08/Pre/Python/pip-install-失败/index.html">
 <meta property="og:site_name" content="Hi, this is Alice Home">
-<meta property="og:description" content="最近换了一台电脑开发，在安装python的模块的时候出现了权限问题。在这里记录下解决方案。 我的是Mac电脑，系统是 High Sierra（10.13.1） 问题 一 12345678910111213141516Exception:Traceback (most recent call last):File &quot;/Library/Python/2.7/site-packages/pip-9.0.">
+<meta property="og:description" content="最近换了一台电脑开发，在安装python的模块的时候出现了权限问题。在这里记录下解决方案。 我的是Mac电脑，系统是 High Sierra（10.13.1） 问题 一 12345678910111213141516Exception:Traceback (most recent call last):File &amp;quot;/Library/Python/2.7/site-packages/pip">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-03-08T07:08:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pip install 失败">
-<meta name="twitter:description" content="最近换了一台电脑开发，在安装python的模块的时候出现了权限问题。在这里记录下解决方案。 我的是Mac电脑，系统是 High Sierra（10.13.1） 问题 一 12345678910111213141516Exception:Traceback (most recent call last):File &quot;/Library/Python/2.7/site-packages/pip-9.0.">
+<meta name="twitter:description" content="最近换了一台电脑开发，在安装python的模块的时候出现了权限问题。在这里记录下解决方案。 我的是Mac电脑，系统是 High Sierra（10.13.1） 问题 一 12345678910111213141516Exception:Traceback (most recent call last):File &amp;quot;/Library/Python/2.7/site-packages/pip">
 
 
 
@@ -364,16 +364,16 @@
       
         <p>最近换了一台电脑开发，在安装python的模块的时候出现了权限问题。在这里记录下解决方案。</p>
 <p>我的是Mac电脑，系统是 High Sierra（10.13.1）</p>
-<h2 id="问题-一"><a href="#问题-一" class="headerlink" title="问题 一"></a>问题 一</h2> <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Exception:</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line"><span class="keyword">File</span> <span class="string">"/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/basecommand.py"</span>, <span class="keyword">line</span> 215, <span class="keyword">in</span> main</span><br><span class="line">status = self.<span class="keyword">run</span>(options, <span class="keyword">args</span>)</span><br><span class="line"><span class="keyword">File</span> <span class="string">"/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/commands/install.py"</span>, <span class="keyword">line</span> 342, <span class="keyword">in</span> <span class="keyword">run</span></span><br><span class="line">prefix=options.prefix_path,</span><br><span class="line"><span class="keyword">File</span> <span class="string">"/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/req/req_set.py"</span>, <span class="keyword">line</span> 778, <span class="keyword">in</span> install</span><br><span class="line">requirement.uninstall(auto_confirm=True)</span><br><span class="line"><span class="keyword">File</span> <span class="string">"/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/req/req_install.py"</span>, <span class="keyword">line</span> 754, <span class="keyword">in</span> uninstall</span><br><span class="line">paths_to_remove.remove(auto_confirm)</span><br><span class="line"><span class="keyword">File</span> <span class="string">"/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/req/req_uninstall.py"</span>, <span class="keyword">line</span> 115, <span class="keyword">in</span> remove</span><br><span class="line">renames(path, new_path)</span><br><span class="line"><span class="keyword">File</span> <span class="string">"/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/utils/__init__.py"</span>, <span class="keyword">line</span> 267, <span class="keyword">in</span> renames</span><br><span class="line">shutil.<span class="keyword">move</span>(old, new)</span><br><span class="line"><span class="keyword">File</span> <span class="string">"/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/shutil.py"</span>, <span class="keyword">line</span> 302, <span class="keyword">in</span> <span class="keyword">move</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h2 id="问题-一"><a href="#问题-一" class="headerlink" title="问题 一"></a>问题 一</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Exception:</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">File &quot;/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/basecommand.py&quot;, line 215, in main</span><br><span class="line">status = self.run(options, args)</span><br><span class="line">File &quot;/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/commands/install.py&quot;, line 342, in run</span><br><span class="line">prefix=options.prefix_path,</span><br><span class="line">File &quot;/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/req/req_set.py&quot;, line 778, in install</span><br><span class="line">requirement.uninstall(auto_confirm=True)</span><br><span class="line">File &quot;/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/req/req_install.py&quot;, line 754, in uninstall</span><br><span class="line">paths_to_remove.remove(auto_confirm)</span><br><span class="line">File &quot;/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/req/req_uninstall.py&quot;, line 115, in remove</span><br><span class="line">renames(path, new_path)</span><br><span class="line">File &quot;/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/utils/__init__.py&quot;, line 267, in renames</span><br><span class="line">shutil.move(old, new)</span><br><span class="line">File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/shutil.py&quot;, line 302, in move</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>解决： 关闭 sip 机制，重启电脑，按住 cmd +R 让电脑进入系统恢复模式，找到终端输入</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">csrutil <span class="built_in">disable</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$csrutil disable</span><br></pre></td></tr></table></figure>
 <p>当然，在关闭电脑之前你也可以通过 <em>csrutil status</em>来查看当前的sip状态</p>
-<h2 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">IOError:</span> [Errno <span class="number">13</span>] Permission <span class="string">denied:</span> <span class="string">'/Library/Python/2.7/site-packages/ipython_genutils/tempdir.py'</span></span><br></pre></td></tr></table></figure>
-<p>这是没权限, 执行<br> <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip <span class="keyword">install</span> ipython</span><br></pre></td></tr></table></figure></p>
-<h2 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h2> <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Requirement already <span class="string">satisfied:</span> ipython <span class="keyword">in</span> <span class="regexp">/Library/</span>Python<span class="regexp">/2.7/</span>site-packages</span><br><span class="line">Requirement already <span class="string">satisfied:</span> traitlets&gt;=<span class="number">4.2</span> <span class="keyword">in</span> <span class="regexp">/Library/</span>Python<span class="regexp">/2.7/</span>site-packages (from ipython)</span><br><span class="line">Requirement already <span class="string">satisfied:</span> setuptools&gt;=<span class="number">18.5</span> <span class="keyword">in</span> <span class="regexp">/System/</span>Library<span class="regexp">/Frameworks/</span>Python.framework<span class="regexp">/Versions/</span><span class="number">2.7</span><span class="regexp">/Extras/</span>lib/python (from ipython)</span><br><span class="line">Requirement already <span class="string">satisfied:</span> simplegeneric&gt;<span class="number">0.8</span> <span class="keyword">in</span> <span class="regexp">/Library/</span>Python<span class="regexp">/2.7/</span>site-packages (from ipython)</span><br><span class="line">Requirement already <span class="string">satisfied:</span> backports.shutil-get-terminal-size; python_version == <span class="string">"2.7"</span> <span class="keyword">in</span> <span class="regexp">/Library/</span>Python<span class="regexp">/2.7/</span>site-packages (from ipython)</span><br><span class="line">Requirement already <span class="string">satisfied:</span> pygmen</span><br></pre></td></tr></table></figure>
+<h2 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IOError: [Errno 13] Permission denied: &apos;/Library/Python/2.7/site-packages/ipython_genutils/tempdir.py&apos;</span><br></pre></td></tr></table></figure>
+<p>这是没权限, 执行<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install ipython</span><br></pre></td></tr></table></figure></p>
+<h2 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Requirement already satisfied: ipython in /Library/Python/2.7/site-packages</span><br><span class="line">Requirement already satisfied: traitlets&gt;=4.2 in /Library/Python/2.7/site-packages (from ipython)</span><br><span class="line">Requirement already satisfied: setuptools&gt;=18.5 in /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python (from ipython)</span><br><span class="line">Requirement already satisfied: simplegeneric&gt;0.8 in /Library/Python/2.7/site-packages (from ipython)</span><br><span class="line">Requirement already satisfied: backports.shutil-get-terminal-size; python_version == &quot;2.7&quot; in /Library/Python/2.7/site-packages (from ipython)</span><br><span class="line">Requirement already satisfied: pygmen</span><br></pre></td></tr></table></figure>
 <p> 这种问题是你已经安装过，需要忽略</p>
-<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">sudo</span> <span class="comment">pip</span> <span class="comment">install</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">upgrade</span> <span class="comment">ipython</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">ignore</span><span class="literal">-</span><span class="comment">installed</span> <span class="comment">six</span></span><br></pre></td></tr></table></figure>
-<h2 id="问题-四"><a href="#问题-四" class="headerlink" title="问题 四"></a>问题 四</h2><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">File</span> <span class="string">"/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/_vendor/requests/packages/urllib3/response.py"</span>, <span class="literal">line</span> <span class="number">246</span>, <span class="keyword">in</span> _error_catcher</span><br><span class="line">raise ReadTimeoutError(self._pool, None, <span class="symbol">'Read</span> timed <span class="keyword">out</span>.')</span><br><span class="line">ReadTimeoutError: HTTPSConnectionPool(host=<span class="symbol">'pypi</span>.python.org', <span class="keyword">port</span>=<span class="number">443</span>): Read timed <span class="keyword">out</span>.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install --upgrade ipython --ignore-installed six</span><br></pre></td></tr></table></figure>
+<h2 id="问题-四"><a href="#问题-四" class="headerlink" title="问题 四"></a>问题 四</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File &quot;/Library/Python/2.7/site-packages/pip-9.0.1-py2.7.egg/pip/_vendor/requests/packages/urllib3/response.py&quot;, line 246, in _error_catcher</span><br><span class="line">raise ReadTimeoutError(self._pool, None, &apos;Read timed out.&apos;)</span><br><span class="line">ReadTimeoutError: HTTPSConnectionPool(host=&apos;pypi.python.org&apos;, port=443): Read timed out.</span><br></pre></td></tr></table></figure>
 <p>这个科学上网就好了。</p>
 <p>这些方法不一定好使，当时目前我遇到的情况通过这几步都已经解决。再遇到问题再继续解决。当然也可以通过虚拟机的方式。</p>
 
@@ -508,7 +508,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -530,7 +530,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -642,6 +642,8 @@
   
 
 
+  
+
 
 
 
@@ -669,6 +671,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
@@ -747,6 +752,7 @@
   
 
   
+
 
 </body>
 </html>
