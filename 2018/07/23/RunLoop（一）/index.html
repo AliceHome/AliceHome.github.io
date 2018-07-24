@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="RunLoop ，运行时循环。在写这篇博客之前，我的理解是：iOS App 启动之后，当前进程">
+<meta name="description" content="故事RunLoop ，运行时循环。 iOS App 启动之后，当前进程开启主线程之后，为了保证主线程一直在运行就在主线程中开启了 RunLoop。RunLoop 在运行过程中，如果有事件（比如 timer、Source、Observe）就会进行处理，如果没有事件就会在一种休眠状态。 在真正了解 RunLoop 之前，估计我就只能说出上面这一串解释说明了，如果再继续说的话，就应该是响应者链了。但是，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RunLoop（一）">
 <meta property="og:url" content="http://yoursite.com/2018/07/23/RunLoop（一）/index.html">
 <meta property="og:site_name" content="Hi, this is Alice Home">
-<meta property="og:description" content="RunLoop ，运行时循环。在写这篇博客之前，我的理解是：iOS App 启动之后，当前进程">
+<meta property="og:description" content="故事RunLoop ，运行时循环。 iOS App 启动之后，当前进程开启主线程之后，为了保证主线程一直在运行就在主线程中开启了 RunLoop。RunLoop 在运行过程中，如果有事件（比如 timer、Source、Observe）就会进行处理，如果没有事件就会在一种休眠状态。 在真正了解 RunLoop 之前，估计我就只能说出上面这一串解释说明了，如果再继续说的话，就应该是响应者链了。但是，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-23T14:47:18.697Z">
+<meta property="og:updated_time" content="2018-07-24T03:46:15.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RunLoop（一）">
-<meta name="twitter:description" content="RunLoop ，运行时循环。在写这篇博客之前，我的理解是：iOS App 启动之后，当前进程">
+<meta name="twitter:description" content="故事RunLoop ，运行时循环。 iOS App 启动之后，当前进程开启主线程之后，为了保证主线程一直在运行就在主线程中开启了 RunLoop。RunLoop 在运行过程中，如果有事件（比如 timer、Source、Observe）就会进行处理，如果没有事件就会在一种休眠状态。 在真正了解 RunLoop 之前，估计我就只能说出上面这一串解释说明了，如果再继续说的话，就应该是响应者链了。但是，">
 
 
 
@@ -384,7 +384,21 @@
       
 
       
-        <p>RunLoop ，运行时循环。<br>在写这篇博客之前，我的理解是：<br>iOS App 启动之后，当前进程</p>
+        <h2 id="故事"><a href="#故事" class="headerlink" title="故事"></a>故事</h2><p>RunLoop ，运行时循环。</p>
+<p>iOS App 启动之后，当前进程开启主线程之后，为了保证主线程一直在运行就在主线程中开启了 RunLoop。RunLoop 在运行过程中，如果有事件（比如 timer、Source、Observe）就会进行处理，如果没有事件就会在一种休眠状态。</p>
+<p>在真正了解 RunLoop 之前，估计我就只能说出上面这一串解释说明了，如果再继续说的话，就应该是响应者链了。但是，经过最近一段时间学习发现 RunLoop 真是无处不在，只不过我们没有注意吧了。</p>
+<p>比如：</p>
+<ol>
+<li>Timer 的运行与 RunLoop 有关，主要是 mode 方面；</li>
+<li>GCD 的 dispatch_get_mainQueue 也与 RunLoop 有关系，毕竟都是在主线程中的事情；</li>
+<li>ScrollView/TextView 的滑动业余 RunLoop 有关，主要是模式之间的切换；</li>
+<li>App 的卡顿与 RunLoop 也有关，这个我倒是还不知道什么事情</li>
+</ol>
+<p>…</p>
+<p>真心发现 RunLoop 是一个很大的模块，之前一直忽略了，这次抽时间好好的细致的了解一下 RunLoop 中的知识。</p>
+<h2 id="RunLoop-API"><a href="#RunLoop-API" class="headerlink" title="RunLoop API"></a>RunLoop API</h2><p>RunLoop 的 API 有两套，一套是 OC 的，名字是 NSRunLoop； 另一套是 C 语言的 CFRunLoop。 后者是开源的</p>
+<p>针对于 NSRunLoop，可以看一下文档介绍，大体意思为：<br>NSRunLoop 是编程接口，这套编程接口主要用来处理输源。<br>一个 NSRunLoop 对象负责处理键盘、鼠标、NSPort、NSConnection 以及 NSTimer 事件。你的应用开发中不能直接创建和管理 NSRunLoop。每一个 NSThread 对象，包括 mainThread 都包含了一个 NSRunLoop 对象，这个对象根据需要自动创建。如果你想要查看当前的 RunLoop 对象，可以通过 currentRunLoop 获取。</p>
+<p>需要注意的是：<br>NSRunLoop 不是线程安全的，所以不要在多线程中使用 NSRunLoop。</p>
 
       
     </div>
@@ -488,8 +502,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -526,7 +549,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -551,6 +574,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#故事"><span class="nav-number">1.</span> <span class="nav-text">故事</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RunLoop-API"><span class="nav-number">2.</span> <span class="nav-text">RunLoop API</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
