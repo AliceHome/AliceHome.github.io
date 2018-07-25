@@ -296,6 +296,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/Pre/2017/Swift Apprentice/Swift-Apprentice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/14/Pre/2017/Swift Apprentice/Swift-Apprentice/" itemprop="url">Swift Apprentice</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T14:14:31+08:00">
+                2017-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Chapter-11-Structures"><a href="#Chapter-11-Structures" class="headerlink" title="Chapter 11: Structures"></a>Chapter 11: Structures</h2><p>在写 Objective-C 代码的时候，使用结构体的时候非常少的，但是对于 Swift  而言，结构体却是经常会用到</p>
+<h3 id="结构体简介"><a href="#结构体简介" class="headerlink" title="结构体简介"></a>结构体简介</h3><h2 id="Chapter-14-Class"><a href="#Chapter-14-Class" class="headerlink" title="Chapter 14: Class"></a>Chapter 14: Class</h2><h3 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h3><ul>
+<li>必须要有初始化方法</li>
+<li>所有的属性必须在初始化方法之前有个初始值</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> firstName: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> lastName: <span class="type">String</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.firstName = firstName</span><br><span class="line">        <span class="keyword">self</span>.lastName = lastName</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> fullName: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"\(firstName) \(lastName)"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> erik:<span class="type">Person</span> = <span class="type">Person</span>(firstName: <span class="string">"Erik"</span>, lastName: <span class="string">"Keber"</span>)</span><br><span class="line"><span class="built_in">print</span>(erik.fullName)</span><br></pre></td></tr></table></figure>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>类创建的对象是一种引用类型，也就是说当我们通过如下代码创建一个对象的时候</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">Employee</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> var1:<span class="type">Employee</span> = <span class="type">Employee</span>(name: <span class="string">"Jack"</span>)</span><br></pre></td></tr></table></figure>
+<p>实际上，变量存储的是该对象的地址，如果我们通过</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> var2 = var1</span><br></pre></td></tr></table></figure>
+<p>将该变量赋值给另一个变量，此时内存中只有一个对象，两个变量存放着相同的内存地址</p>
+<p>而结构体则是一种值类型，也就是变量存放的不再是地址，而是当前结构体实例的值</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Employee1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> var1 = <span class="type">Employee1</span>(name: <span class="string">"Jack"</span>)</span><br></pre></td></tr></table></figure>
+<p>如果我们通过赋值给另一个变量，其实 copy 了一份新的值给另一个变量</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> var2 = var1</span><br></pre></td></tr></table></figure>
+<p><strong>堆 vs. 栈</strong></p>
+<p>当我们创建一个对象（reference type） 的时候，实际上是存放到了内存的堆区上面，而结构体（value type）则是存放到内存的栈区上面，除非这个 value type 类型的值是对象的一部分。<br>堆区和栈区都是编程中必不可可少的部分，认识堆和栈可以帮助我们了解类和结构体：</p>
+<ul>
+<li>系统使用栈(stack)存放临时的东西，栈里的东西有系统自动管理和优化。比如一个变量在函数开始的时候声明，并存储到栈中，当函数结束的时候这个变量在栈区中的内存就会被自动回收。因此，栈的管理高效、方便、快速</li>
+<li>系统对堆（heap）的管理与栈不同，堆中存放得是一些应用的类型。一般堆的存储都比较大，而且需要应用自己申请和自己释放，当然优化工作也是需要应用自己来处理。所以与栈相比较而言，堆相对比较麻烦和慢。</li>
+</ul>
+<p>到这里有件事情很清晰了：</p>
+<ul>
+<li>通过类创建对象的时候，实际上是通过类的初始化方法在堆中申请了一块内存空间来存放 firstName 和 lastName。而变量和对象的地址则是存放到栈上</li>
+<li>通过结构体创建实例只是在栈上申请空间，与堆区没有任何关系</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/26/Pre/iOS/LLVM-以及-BitCode-泛谈/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1661,172 +1831,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/24/current/June/Copy-（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/24/current/June/Copy-（一）/" itemprop="url">Copy （一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-24T12:53:32+08:00">
-                2016-07-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Copy/" itemprop="url" rel="index">
-                    <span itemprop="name">Copy</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在 iOS 开发中经常会用到 copy 关键字，主要的应用方面就是 @property 属性的修饰。这篇文章主要关心:</p>
-<blockquote>
-<p>数组（NSArray、NSMutableArray）与 copy</p>
-</blockquote>
-<h2 id="NSMutableArray-作为属性该使用-strong-还是-copy-修饰？"><a href="#NSMutableArray-作为属性该使用-strong-还是-copy-修饰？" class="headerlink" title="NSMutableArray 作为属性该使用 strong 还是 copy 修饰？"></a>NSMutableArray 作为属性该使用 strong 还是 copy 修饰？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@interface</span> Person : NSObject</span><br><span class="line"></span><br><span class="line"><span class="meta">@property</span> (nonatomic, copy) NSMutableArray *catNames;</span><br><span class="line"></span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
-<p>比如，这里有个 Person 类，有一个属性是 catNames，用于存放猫的名字, 我们使用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person *p = [Person <span class="keyword">new</span>];</span><br><span class="line">p.cats = [NSMutableArray arrayWithCapacity:<span class="number">10</span>];</span><br><span class="line">[p.cats addObject:@<span class="string">"Tom"</span>];</span><br></pre></td></tr></table></figure>
-<p>这段程序运行的结果是：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2018-07-24 12:51:11.928550+0800 CopyDemo[5781:3493921] *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[__NSArray0 addObject:]: unrecognized selector sent to instance 0x60400000cdc0'</span><br></pre></td></tr></table></figure>
-<p>crash 了！！！</p>
-<p><strong>为什么会 Crash 呢？</strong><br>首先，crash 的语言是找不到方法（unrecognized selector sent to instance)。<br>其次，我们通过 <code>@property (nonatomic, copy) NSMutableArray *catNames;</code> 做了什么，是让系统自动为我们生成了 setter 和 getter 方法，而 copy 就控制着这些方法的生成细节。如果不修改这段声明的话，可以在 Person 的实现中修改 setter 方法的实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setCats:(NSMutableArray *)cats &#123;</span><br><span class="line">    _cats = [cats mutableCopy];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setCats:(NSMutableArray *)cats &#123;</span><br><span class="line">    _cats = cats;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>本质就是：一个 NSMutableArray 的对象，经过 copy 方法生成对象其实是一个 NSArray 对象，也就是上面 <code>p.cats = [NSMutableArray arrayWithCapacity:10];</code> 赋值运算符左侧其实是一个不可变数组了，而右侧是可变数组。</p>
-<p><strong>综上，针对于可变数组，我们使用 strong 来进行修饰，不用 copy。</strong></p>
-<h2 id="NSArray-作为属性该使用-strong-还是-copy-修饰？"><a href="#NSArray-作为属性该使用-strong-还是-copy-修饰？" class="headerlink" title="NSArray 作为属性该使用 strong 还是 copy 修饰？"></a>NSArray 作为属性该使用 strong 还是 copy 修饰？</h2><p>上面已经说明了，针对 NSMutableArray 我们使用 strong 来进行修饰，那么 NSArray 呢？</p>
-<p>首先，我们来看一下，使用 <code>strong</code> 来修饰，会怎样？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@interface</span> Person : NSObject</span><br><span class="line"></span><br><span class="line"><span class="meta">@property</span> (nonatomic, strong) NSArray *phones;</span><br><span class="line"></span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
-<p>为 Person 类添加了属性 phones，标识当前人对象拥有的手机，从 API 的定义可以看出，是不可变数组，所以当我们为这个人对象设置了 phones 属性之后，我们不希望手机数量会发生变化，接下来看是具体使用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)addPhones &#123;</span><br><span class="line">    </span><br><span class="line">    Person *p = [Person <span class="keyword">new</span>];</span><br><span class="line">    NSMutableArray *phones = [NSMutableArray arrayWithObjects:@<span class="string">"iPhone 5s"</span>,@<span class="string">"iPhone 6"</span>, nil];</span><br><span class="line">    p.phones = phones;<span class="comment">// 多态 p.phones = @[@"iPhone 5s",@"iPhone 6"];</span></span><br><span class="line">    [phones addObject:@<span class="string">"iPhone 6s"</span>];</span><br><span class="line">    NSLog(@<span class="string">"%@"</span>,p.phones);<span class="comment">//("iPhone 5s","iPhone 6","iPhone 6s")</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从上面可以看出，如果我们通过 strong 来进行修饰的话，就不能空着 NSArray 的不可变性了，所以对于 NSArray 我们使用 copy 来修饰会更好一些，这样可以保证类属性的封装性。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1877,7 +1881,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1888,7 +1892,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
