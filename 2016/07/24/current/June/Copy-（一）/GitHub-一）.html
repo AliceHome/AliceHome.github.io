@@ -10,3 +10,21 @@
 <li>修改本地邮箱，git config –global user.email ‘xxxx@gmail.com’(查看本地的直接用 git config user.email)</li>
 </ol>
 <p>修改完成后，提交一下，就可以看到绿色的格子了 … 有些事你还真得多想想！</p>
+<h2 id="Git-命令指南"><a href="#Git-命令指南" class="headerlink" title="Git 命令指南"></a>Git 命令指南</h2><pre><code class="shell">
+<span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:30:37]</span>
+<span class="meta">$</span><span class="bash"> git config user.email</span>
+18576759510@163.com
+
+<span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:30:45]</span>
+<span class="meta">$</span><span class="bash"> git config --global user.email <span class="string">'huidragonaijy@gmail.com'</span></span>
+
+<span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:31:08]</span>
+<span class="meta">$</span><span class="bash"> git config user.email</span>
+huidragonaijy@gmail.com
+</code></pre>
+<p>上面的命令：</p>
+<ol>
+<li>查看本地 Git Email 地址；</li>
+<li>修改本地 Git Email 地址；</li>
+<li>再次查看是否修改成功</li>
+</ol>
