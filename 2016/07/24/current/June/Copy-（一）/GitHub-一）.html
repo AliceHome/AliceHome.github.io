@@ -1,0 +1,12 @@
+<hr>
+<p>title: GitHub （一）<br>date: 2018-07-25 14:01:09<br>tags:</p>
+<h2 id="categories-GitHub"><a href="#categories-GitHub" class="headerlink" title="categories: GitHub"></a>categories: GitHub</h2><p>这篇就解决一个问题: 为什么在 GitHub 上提交了代码，然而上面的格子却没有变成绿色 ？</p>
+<p>我提交 Git 的时间应该还是算比较频繁的，但是发现一个问题，就是今天提交了，但是格子却没有变成绿色，先前一直没有注意这个问题</p>
+<p><img src="GitHub-一）/Git.png" alt=""></p>
+<p>其实我基本上每天都是有一些提交的，但是就是不显示绿色 …<br>但我还是发现了规律，如果我创建过 Git 仓库，那么那天就会变成绿色，我傻傻的以为，这个格子只有在创建了仓库之后才会变成绿色，😶</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>原因就一句话：GitHub 上绑定的邮箱和 Git 提交的邮箱不一致，我之前本地因为工作的原因全局设置了 @163 的邮箱，但是 GitHub 上绑定的是 @gmail 邮箱。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
+<li>修改 GitHub 上的邮箱，这个我没有实际修改过，一致就 OK 吧</li>
+<li>修改本地邮箱，git config –global user.email ‘xxxx@gmail.com’(查看本地的直接用 git config user.email)</li>
+</ol>
+<p>修改完成后，提交一下，就可以看到绿色的格子了 … 有些事你还真得多想想！</p>
