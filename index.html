@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/current/June/Copy-（一）/GitHub-一）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/current/June/GitHub-一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -315,7 +315,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/25/current/June/Copy-（一）/GitHub-一）/" itemprop="url">GitHub （一）</a></h1>
+                <a class="post-title-link" href="/2018/07/25/current/June/GitHub-一）/" itemprop="url">GitHub （一）</a></h1>
         
 
         <div class="post-meta">
@@ -391,7 +391,7 @@
           
             <p>这篇就解决一个问题: 为什么在 GitHub 上提交了代码，然而上面的格子却没有变成绿色 ？</p>
 <p>我提交 Git 的时间应该还是算比较频繁的，但是发现一个问题，就是今天提交了，但是格子却没有变成绿色，先前一直没有注意这个问题</p>
-<p><img src="/2018/07/25/current/June/Copy-（一）/GitHub-一）/Git.png" alt=""></p>
+<p><img src="/2018/07/25/current/June/GitHub-一）/Git.png" alt=""></p>
 <p>其实我基本上每天都是有一些提交的，但是就是不显示绿色 …<br>但我还是发现了规律，如果我创建过 Git 仓库，那么那天就会变成绿色，我傻傻的以为，这个格子只有在创建了仓库之后才会变成绿色，😶</p>
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>原因就一句话：GitHub 上绑定的邮箱和 Git 提交的邮箱不一致，我之前本地因为工作的原因全局设置了 @163 的邮箱，但是 GitHub 上绑定的是 @gmail 邮箱。</p>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
@@ -399,7 +399,7 @@
 <li>修改本地邮箱，git config –global user.email ‘xxxx@gmail.com’(查看本地的直接用 git config user.email)</li>
 </ol>
 <p>修改完成后，提交一下，就可以看到绿色的格子了 … 有些事你还真得多想想！</p>
-<h2 id="Git-命令指南"><a href="#Git-命令指南" class="headerlink" title="Git 命令指南"></a>Git 命令指南</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:30:37]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config user.email</span></span><br><span class="line">18576759510@163.com</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:30:45]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config --global user.email <span class="string">'huidragonaijy@gmail.com'</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:31:08]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config user.email</span></span><br><span class="line">huidragonaijy@gmail.com</span><br></pre></td></tr></table></figure>
+<h2 id="Git-命令指南"><a href="#Git-命令指南" class="headerlink" title="Git 命令指南"></a>Git 命令指南</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#</span> maple @ iMac in ~/Maple [14:30:37]</span><br><span class="line"><span class="meta">$</span> git config user.email</span><br><span class="line">18576759510@163.com</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> maple @ iMac in ~/Maple [14:30:45]</span><br><span class="line"><span class="meta">$</span> git config --global user.email 'huidragonaijy@gmail.com'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> maple @ iMac in ~/Maple [14:31:08]</span><br><span class="line"><span class="meta">$</span> git config user.email</span><br><span class="line">huidragonaijy@gmail.com</span><br></pre></td></tr></table></figure>
 <p>上面的命令：</p>
 <ol>
 <li>查看本地 Git Email 地址；</li>
