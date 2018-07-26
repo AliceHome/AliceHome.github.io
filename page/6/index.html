@@ -296,6 +296,459 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/10/Pre/Flutter/Flutter-二）-Building-Layouts-in-Flutter-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/10/Pre/Flutter/Flutter-二）-Building-Layouts-in-Flutter-tutorial/" itemprop="url">Flutter(二） Building Layouts in Flutter tutorial </a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T21:59:51+08:00">
+                2018-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这部分是 Flutter 官网中 Learn More 模块中的布局课程。布局在Flutter应用中作用很大，学习时间2天。</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>首先通过一个例子介绍了整体的布局，直观。<br>后面介绍一些布局原理和细节。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>Flutter中引入了一个新的概念，叫做widget，这里面包含了可视化的UI和布局模型。</p>
+<h3 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h3><h3 id="单个结构分析"><a href="#单个结构分析" class="headerlink" title="单个结构分析"></a>单个结构分析</h3><h3 id="整体展示"><a href="#整体展示" class="headerlink" title="整体展示"></a>整体展示</h3><h2 id="Widget-布局详解"><a href="#Widget-布局详解" class="headerlink" title="Widget 布局详解"></a>Widget 布局详解</h2><h3 id="Flutter-布局方法"><a href="#Flutter-布局方法" class="headerlink" title="Flutter 布局方法"></a>Flutter 布局方法</h3><ol>
+<li>Widgets 是UI元素</li>
+<li>Widgets 是布局元素</li>
+<li>通过简单的 Widgets 组成复杂的 Widgets</li>
+</ol>
+<p>Widgets 是布局核心部分。在 Flutter中，几乎所有的东西都是 widget，甚至布局模型也是。图片，图标，文本所有能看到的东西都是widgets。但是有些你看不到的依然是widget，比如行，列以及格子。</p>
+<h3 id="布局一个-widget"><a href="#布局一个-widget" class="headerlink" title="布局一个 widget"></a>布局一个 widget</h3><ol>
+<li>app 本身就是widget</li>
+<li>创建添加以及布局一个widget很简单</li>
+<li>将布局widget添加到app的widget上，就会显示到设备上</li>
+<li>Scaffold，是 Material 组件库中的一个widget，有一些默认的设置可供使用</li>
+<li>我们可以通过是使用标准的widgets创建app</li>
+</ol>
+<p>这一部分主要是创建并添加一个简单的 widget，包括创建一个简单的app。</p>
+<p>在flutter中，只需要简单几步就可以将文本，icon还有图片显示到屏幕上：</p>
+<ol>
+<li>选择一种你想是使用的 widget（这里使用Center，<a href="https://flutter.io/widgets/" target="_blank" rel="noopener">更多布局组件</a>）</li>
+<li>创建一个包含可显示内容的widget</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 文本 widget</span><br><span class="line">new Text(&apos;Hello world&apos;, style: new TextStyle(fontSize:32.0))</span><br><span class="line">// 图片 widget，这里涉及到向工程中添加图片资源</span><br><span class="line">new Image.asset(&apos;images/myPic.jpg&apos;, fit: BoxFit.cover)</span><br><span class="line">// 图标 widget</span><br><span class="line">new Icon(Icons.star, color: Color.ret[500])</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>将可视化的widget添加到布局widget上<br>所有的布局widget，都有 <em>child</em> 属性，或者是 <em>children</em> 属性，这取决于你要向布局widget中添加怎样的 widget。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new Center (</span><br><span class="line">child: new Text(&apos;Hello world， style：new TextStyle(fontSize:f 32.0))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将 布局 widget 添加到页面上</p>
+</li>
+</ol>
+<p>标准 widgets<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import &apos;package:flutter/material.dart&apos;;</span><br><span class="line"></span><br><span class="line">void main() &#123;</span><br><span class="line">runApp(new MyApp());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyApp extends StatelessWidget &#123;</span><br><span class="line">    @override</span><br><span class="line">    Widget build(BuildContext context) &#123;</span><br><span class="line">    return new Container(</span><br><span class="line">    decoration: new BoxDecoration(color: Colors.white),</span><br><span class="line">    child: new Center(</span><br><span class="line">    child: new Text(&apos;Hello World&apos;,</span><br><span class="line">    style: new TextStyle(fontSize: 40.0, color: Colors.black87)),</span><br><span class="line">    ),</span><br><span class="line">    );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>material widget<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import &apos;package:flutter/material.dart&apos;;</span><br><span class="line"></span><br><span class="line">void main() =&gt; runApp(new MyApp());</span><br><span class="line"></span><br><span class="line">class MyApp extends StatelessWidget &#123;</span><br><span class="line">// This widget is the root of your application.</span><br><span class="line">@override</span><br><span class="line">Widget build(BuildContext context) &#123;</span><br><span class="line">return new Container(</span><br><span class="line">decoration: new BoxDecoration(color: Colors.white),</span><br><span class="line">child: new Center(</span><br><span class="line">child: new Text(&apos;Hello world&apos;,</span><br><span class="line">style: new TextStyle(fontSize: 40.0, color: Colors.black87),</span><br><span class="line">textDirection: TextDirection.ltr,),</span><br><span class="line"></span><br><span class="line">),</span><br><span class="line">);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="从竖直和水平两个方向布局多个widgets"><a href="#从竖直和水平两个方向布局多个widgets" class="headerlink" title="从竖直和水平两个方向布局多个widgets"></a>从竖直和水平两个方向布局多个widgets</h3><p>最常用的一种布局模式是根据竖直和水平方向排列widgets。使用 Row widget 排列水平方向，使用 Column布局竖直方向。</p>
+<ol>
+<li>Row 和 Column 是最常见的布局模式；</li>
+<li>行和列可以通过 child 属性交叉排列；</li>
+<li>一个 child widget 可以是  Row ，Column 或者其他的复杂 widget</li>
+<li>Row 和 Column 可以定义自己的方向和子widget</li>
+<li>可以拉伸或者约束某个widget</li>
+<li>没看懂这句 ‘You can specify how child widgets use the Row’s or Column’s available space.’</li>
+</ol>
+<h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><p><strong>——————————————————————参考文章—————————————————————–</strong></p>
+<ol>
+<li><a href="https://flutter.io/tutorials/layout/" target="_blank" rel="noopener">Building Layouts in Flutter</a></li>
+<li><a href="http://www.infoq.com/cn/articles/why-is-flutter-revolutionary" target="_blank" rel="noopener">为什么说Flutter是革命性的？</a>)</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/10/Pre/Algorithm/算法-插入排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/10/Pre/Algorithm/算法-插入排序/" itemprop="url">算法 - 插入排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T13:24:55+08:00">
+                2018-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>《算法导论》第一个算法，插入排序。</p>
+<h2 id="伪代码-降序"><a href="#伪代码-降序" class="headerlink" title="伪代码 - 降序"></a>伪代码 - 降序</h2><p>缩进表示包含<br>A 代表数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for j = 2 to A.len</span><br><span class="line">    i = j - 1</span><br><span class="line">    K = A[j]</span><br><span class="line">    while i &gt; 0 and A[i] &gt; K</span><br><span class="line">        A[i+1]= A[i]</span><br><span class="line">        i = i - 1</span><br><span class="line">    A[i + 1] = K</span><br></pre></td></tr></table></figure>
+<p>如果要写升序呢？伪代码该怎么改？？？</p>
+<h2 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h2><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><p>Python 实现入了大坑， &amp;  和  and</p>
+<h3 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h3><h3 id="Dart"><a href="#Dart" class="headerlink" title="Dart"></a>Dart</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/10/Pre/Flutter/Flutter-是什么？/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/10/Pre/Flutter/Flutter-是什么？/" itemprop="url">Flutter 是什么？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T12:56:57+08:00">
+                2018-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>初识 Flutter 是在 吴小龙同学 个人微信账号的推送消息见到。不知道为什么突然对这个东西感兴趣了，于是在第二天就自己搭建了环境，做了官网上的demo试了下效果。下午的时候通过和安卓同学的了解，觉得对于安卓同学来说，做这个东西会相对简单很多，因为 Flutter的语言 Dart和 Kotlin以及 Java 的语法很相似。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>Android Studio<br>之前没有怎么用过 Android Studio，只是用他来编译过安卓程序，其他的就没怎么了解了。这次在安装Flutter环境的时候，通过 Flutter Doctor 检测的时候，输出信息告诉我要安装 Android Studio，于是乎就安装了。</p>
+<p>Xcode 当然是需要的，如果直接安装Xcode 然后能够打包 iOS 项目，Flutter Doctor 检测会直接通过的。还会输出一条命令让你打开模拟器（open -a Simulator)。当然在检测的时候需要通过brew做些配置的修改通过控制台信息进行修改就是了，没什么难点。</p>
+<h2 id="开发语言"><a href="#开发语言" class="headerlink" title="开发语言"></a>开发语言</h2><p>Dart 语言，其实到现在我都不知道是个什么语法，只是照着葫芦画瓢，将官网上的示例代码敲了一遍。感觉和 Swift 差不多，当然除了OC之外，感觉其他语言 – Java， Swift 等面向对象语言的语法都差不多。</p>
+<h2 id="Demo-过程"><a href="#Demo-过程" class="headerlink" title="Demo 过程"></a>Demo 过程</h2><ol>
+<li>首先就是展示普通的界面（创建项目之后就会有）</li>
+<li>做些简单的修改，改改文字啊，改改属性啊</li>
+<li>导入一个包，是个语言包，搞这个的时候费了些时间，因为老是超时，多搞几次就好了，我重启了一次电脑</li>
+<li>写了个列表，添加了交互以及页面的跳转，还有主题的修改</li>
+<li>齐活。</li>
+</ol>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>学习并尝试新的东西，提升自己的兴趣，虽然现在 iOS 和 安卓不火了，但是学习一个东西，去学习通用的东西，比如 Flutter怎么实现的跨平台，与 JS 有什么异同，以及其设计理念等。我觉得对于自己以后的技术之路还是有很大帮助的，您说呢 … … 哈哈 just one day 感觉理清了好多东西，从未知到相识，nice！</p>
+<p><strong>————–参考网站—————-</strong></p>
+<p><a href="https://flutter.io/" target="_blank" rel="noopener">官网</a><br><a href="http://www.infoq.com/cn/articles/why-is-flutter-revolutionary" target="_blank" rel="noopener">InforQ - 为什么说Flutter是革命性的？</a><br><a href="http://www.infoq.com/cn/news/2017/11/Why-native-app-developer-Flutter?utm_source=infoq&amp;utm_medium=related_content_link&amp;utm_campaign=relatedContent_articles_clk" target="_blank" rel="noopener">为什么原生应用开发者需要关注Flutter</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/08/Pre/Python/pip-install-失败/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1268,436 +1721,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/04/Pre/开发-IDE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/04/Pre/开发-IDE/" itemprop="url">开发 IDE</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-04T11:31:38+08:00">
-                2018-01-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记录 IDE 使用方式以及配置，以备不时之需</p>
-<h2 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h2><h2 id="EMACS"><a href="#EMACS" class="headerlink" title="EMACS"></a>EMACS</h2><p><a href="http://www.gnu.org/software/emacs/index.html" target="_blank" rel="noopener">Emacs</a></p>
-<h3 id="安装-Emacs"><a href="#安装-Emacs" class="headerlink" title="安装 Emacs"></a>安装 Emacs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install emacs --with-cocoa</span><br></pre></td></tr></table></figure>
-<h2 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h2><h2 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h2><h2 id="Sublime"><a href="#Sublime" class="headerlink" title="Sublime"></a>Sublime</h2><h2 id="Atom"><a href="#Atom" class="headerlink" title="Atom"></a>Atom</h2><p>在使用<a href="https://atom.io" target="_blank" rel="noopener">Atom</a>之前，已经使用了一段时间的 <em>sublime</em>，这两款 IDE 功能很相似的，但是我倾向于 <em>Atom</em>，可能是因为 <em>Atom</em> 名字靠前吧！如果这么类比的话，<em>vim VS. Emacx</em> ，我会选择使用 <em>Emacs</em>，哈哈，什么毛病啊！</p>
-<p>Atom 是 GitHub 推出的一款编辑软件</p>
-<h2 id="MWeb"><a href="#MWeb" class="headerlink" title="MWeb"></a>MWeb</h2><p>Markdown 的写作工具，之前用过其他的，但是最终还是选择了这个，这篇博客就是用它写的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/Pre/极光开发汇总/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/02/Pre/极光开发汇总/" itemprop="url">极光开发汇总</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T14:37:41+08:00">
-                2018-01-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>开发了几款应用之后，大多数都用到了极光的推送，这里记录下极光的资源：</p>
-<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://docs.jiguang.cn" target="_blank" rel="noopener">极光官方文档</a>， 这个文档里包含了</p>
-<ul>
-<li>推送</li>
-<li>统计</li>
-<li>IM</li>
-<li>短信</li>
-<li>分享</li>
-</ul>
-<p>文档很全了已经 </p>
-<h2 id="极光开发者（GitHub）"><a href="#极光开发者（GitHub）" class="headerlink" title="极光开发者（GitHub）"></a>极光开发者（GitHub）</h2><p><a href="https://github.com/jpush?utf8=✓&amp;q=&amp;type=&amp;language=" target="_blank" rel="noopener">极光开发者</a>，极光的 GitHub 里面有各种版本的 demo，算是个百宝箱吧！</p>
-<h2 id="集成经验"><a href="#集成经验" class="headerlink" title="集成经验"></a>集成经验</h2><p>最好知道你在做什么，要达到什么效果。在集成推送的时候，遇到了好多人问我，这个怎么不起作用，这个怎么了啊 … 其实，使用别人的东西的时候一定要知道用了什么达到什么效果，否则的话真的是盲人摸象。</p>
-<h3 id="iOS-推送集成"><a href="#iOS-推送集成" class="headerlink" title="iOS 推送集成"></a>iOS 推送集成</h3><ul>
-<li>注册极光开发者</li>
-<li>创建应用</li>
-<li>配置应用的证书</li>
-<li>到 apple 开发者那里生成证书，主要是生成 xxx.cer 然后下载到本地，导出 pl2 文件上传到极光上去</li>
-<li>创建 demo，建议通过 CocoaPods 集成，根据文档添加代码</li>
-<li>在极光后台测试推送（需要demo的 register id）</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/01/Pre/Git/Git-上获取部分文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/01/Pre/Git/Git-上获取部分文件/" itemprop="url">Git 上获取部分文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-01T10:54:10+08:00">
-                2018-01-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近在开发的时候，遇到这么一种情况，公司的设计同事将 UI 设计稿放到了 <strong>git</strong> 上，但是这个 <strong>git</strong> 库已经 5+ G了。我为了看某一个版本的 UI 设计稿，要把所有的设计稿都拽下来，之前自己的本本硬盘比较足，还是不在乎的，最近换了个 256 的Mini，我卡，不行，不能拽一些没用的下来，so … 我需要一种技能 —— git pull 的时候，每次只拉去 Git 仓库中的某个文件夹。</p>
-<h3 id="一言蔽之"><a href="#一言蔽之" class="headerlink" title="一言蔽之"></a>一言蔽之</h3><p>从远程 Git 仓库获取某个目录下的内容。</p>
-<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="创建本地Git仓库目录"><a href="#创建本地Git仓库目录" class="headerlink" title="创建本地Git仓库目录"></a>创建本地<em>Git</em>仓库目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$mkdir myGit_folder</span><br><span class="line">$cd myGit_folder</span><br><span class="line">#/myGit_folder 目录下</span><br><span class="line">$git init</span><br><span class="line">Initialized empty Git repository in /your computer path/myGit_folder/.git/</span><br><span class="line">$ls -a</span><br><span class="line">.    ..   .git</span><br></pre></td></tr></table></figure>
-<p>如上所示，如果在你当前目录下看到了隐藏 <em>.git</em> 目录就证明OK了。</p>
-<h3 id="添加远程-Git-仓库地址"><a href="#添加远程-Git-仓库地址" class="headerlink" title="添加远程 Git 仓库地址"></a>添加远程 <em>Git</em> 仓库地址</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$git remote add -f origin &lt; your git url,like: http://youaresogreat:3000/lawyer/ui.git &gt;</span><br><span class="line"></span><br><span class="line">##这个时候在.git目录下的config文件是这个样子</span><br><span class="line">[core]</span><br><span class="line">repositoryformatversion = 0</span><br><span class="line">filemode = true</span><br><span class="line">bare = false</span><br><span class="line">logallrefupdates = true</span><br><span class="line">ignorecase = true</span><br><span class="line">precomposeunicode = true</span><br><span class="line">sparseCheckout = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">url = http://youaresogreat:3000/lawyer/ui.git</span><br><span class="line">fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure>
-<p>如果 <em>url = <a href="http://youaresogreat:3000/lawyer/ui.git" target="_blank" rel="noopener">http://youaresogreat:3000/lawyer/ui.git</a></em> 这一行添加到了 <em>.git/config</em> 文件中，就证明OK了。</p>
-<h3 id="开启-Git-仓库-Sparse-Checkout-模式"><a href="#开启-Git-仓库-Sparse-Checkout-模式" class="headerlink" title="开启 Git 仓库  Sparse Checkout 模式"></a>开启 <em>Git</em> 仓库  <em>Sparse Checkout</em> 模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git config core.sparsecheckout true</span><br></pre></td></tr></table></figure>
-<p>命令执行前：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#.git/config</span><br><span class="line">[core]</span><br><span class="line">repositoryformatversion = 0</span><br><span class="line">filemode = true</span><br><span class="line">bare = false</span><br><span class="line">logallrefupdates = true</span><br><span class="line">ignorecase = true</span><br><span class="line">precomposeunicode = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">url = http://youaresogreat:3000/lawyer/ui.git</span><br><span class="line">fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure></p>
-<p>命令执行后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#.git/config</span><br><span class="line">[core]</span><br><span class="line">repositoryformatversion = 0</span><br><span class="line">filemode = true</span><br><span class="line">bare = false</span><br><span class="line">logallrefupdates = true</span><br><span class="line">ignorecase = true</span><br><span class="line">precomposeunicode = true</span><br><span class="line">sparseCheckout = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">url = http://youaresogreat:3000/lawyer/ui.git</span><br><span class="line">fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure></p>
-<p>如果 <em>sparseCheckout = true</em> 这一行添加到了 <em>.git/config</em>目录下，就说明OK了。</p>
-<h3 id="进入到-git-info-配置要获取的文件夹路径"><a href="#进入到-git-info-配置要获取的文件夹路径" class="headerlink" title="进入到 .git/info/ 配置要获取的文件夹路径"></a>进入到 .git/info/ 配置要获取的文件夹路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$cd .git/info</span><br><span class="line">$ vim sparse-checkout</span><br><span class="line">/ui/HTML/2.4.0</span><br><span class="line">:wq</span><br><span class="line">$cd ...</span><br></pre></td></tr></table></figure>
-<p>这里是在 sparse-checkout 文件中设置你要获取的文件夹目录 - <em>/ui/HTML/2.4.0</em></p>
-<h3 id="拉取远程目录内容"><a href="#拉取远程目录内容" class="headerlink" title="拉取远程目录内容"></a>拉取远程目录内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
-<h2 id="快速操作步骤："><a href="#快速操作步骤：" class="headerlink" title="快速操作步骤："></a>快速操作步骤：</h2><p>这是对上面罗里吧嗦的步骤的总汇<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$md myGit</span><br><span class="line">$cd myGit</span><br><span class="line">$(myGit/) git init</span><br><span class="line">$(myGit/) git remote add -f origin (your git url)</span><br><span class="line">$(myGit/) git config core.sparsecheckout true</span><br><span class="line">$(myGit/) cd .git/info</span><br><span class="line">$(myGit/.git/info) vim sparse-checkout</span><br><span class="line">/one/two/three/mywantFileDir/</span><br><span class="line">:wq</span><br><span class="line">$(myGit/.git/info) cd ...</span><br><span class="line">$(myGit/) git pull origin master</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p><strong>后记：本质就是开启git的 sparse checkout 模式，在 .git/config/sparse-checkout 文件中配置要拉取的文件夹路径。</strong></p>
-<h2 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h2><p>通过写一个脚本让操作更加简单  … …</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1748,7 +1771,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1759,7 +1782,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

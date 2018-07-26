@@ -296,6 +296,303 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/Data-Structure-一-Linked-List/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/26/Data-Structure-一-Linked-List/" itemprop="url">Data Structure(一) Linked List</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-26T23:33:37+08:00">
+                2018-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Data-Structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Data Structure</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><p>链表是数据结构中经常会用到的一种数据结构，是指一串数据项，每一个数据项称之为节点（Node）。</p>
+<p><strong>链表主要有两种：</strong></p>
+<p><em>单链表</em>，链表中的每个节点只有向后的索引</p>
+<p><img src="/2018/07/26/Data-Structure-一-Linked-List/singleLinkedList.png" alt=""></p>
+<p><em>双链表</em>，链表除了向后的索引之外，还有指向前一个的索引</p>
+<p><img src="/2018/07/26/Data-Structure-一-Linked-List/doubleLinkedList.png" alt=""></p>
+<p>我们对链表的跟踪是通过 head 和 tail 这两个节点进行的：</p>
+<h2 id="定义节点"><a href="#定义节点" class="headerlink" title="定义节点"></a>定义节点</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ListNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> val: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> next: <span class="type">ListNode</span>?</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">init</span>(<span class="number">_</span> val: <span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.val = val</span><br><span class="line">        <span class="keyword">self</span>.next = <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="定义链表"><a href="#定义链表" class="headerlink" title="定义链表"></a>定义链表</h2><h2 id="空链表"><a href="#空链表" class="headerlink" title="空链表"></a>空链表</h2><h2 id="头-尾-节点"><a href="#头-尾-节点" class="headerlink" title="头/尾 节点"></a>头/尾 节点</h2><h2 id="添加节点"><a href="#添加节点" class="headerlink" title="添加节点"></a>添加节点</h2><h2 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h2><h2 id="删除所有节点"><a href="#删除所有节点" class="headerlink" title="删除所有节点"></a>删除所有节点</h2><h2 id="删除指定节点"><a href="#删除指定节点" class="headerlink" title="删除指定节点"></a>删除指定节点</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/Swift-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/26/Swift-一/" itemprop="url">Swift (一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-26T22:58:18+08:00">
+                2018-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Swift 访问控制</p>
+<h2 id="private"><a href="#private" class="headerlink" title="private"></a>private</h2><h2 id="filePrivate"><a href="#filePrivate" class="headerlink" title="filePrivate"></a>filePrivate</h2><h2 id="internal"><a href="#internal" class="headerlink" title="internal"></a>internal</h2><h2 id="public"><a href="#public" class="headerlink" title="public"></a>public</h2><h2 id="open"><a href="#open" class="headerlink" title="open"></a>open</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/current/June/iOS-离屏渲染/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1455,310 +1752,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/" itemprop="url">Hexo (一) fork me on github</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T23:48:25+08:00">
-                2018-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><p><img src="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/forkme.png" alt=""></p>
-<p>如上图所示，在 next 主题的基础上，实现 for me on GitHub 的功能，点击右上角的 GitHub 图标可以直接跳转到你的 GitHub 主页上。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="Step-1："><a href="#Step-1：" class="headerlink" title="Step 1："></a>Step 1：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple/themes/next/layout [0:04:41]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">_custom       _partials     archive.swig  page.swig     tag.swig</span><br><span class="line">_layout.swig  _scripts      category.swig post.swig</span><br><span class="line">_macro        _third-party  index.swig    schedule.swig</span><br></pre></td></tr></table></figure>
-<p>进入到你的 Hexo 目录，然后找到文件 <code>_layout.swig</code> 通过文本编辑器打开</p>
-<h3 id="Step-2："><a href="#Step-2：" class="headerlink" title="Step 2："></a>Step 2：</h3><p>找到 <code>_layout.swig</code> 中如下代码（全局搜索：headband ）</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"&#123;&#123; container_class &#125;&#125; &#123;% block page_class %&#125;&#123;% endblock %&#125; "</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"headband"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>然后打开：<a href="https://blog.github.com/2008-12-19-github-ribbons/" target="_blank" rel="noopener">GitHub Ribbons</a> 或者 <a href="http://tholman.com/github-corners/" target="_blank" rel="noopener">GitHub Corners</a></p>
-<p><img src="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/githubCorners.png" alt=""></p>
-<p>复制图标样式旁边的代码粘贴到上面的代码下面，效果如下</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"&#123;&#123; container_class &#125;&#125; &#123;% block page_class %&#125;&#123;% endblock %&#125; "</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"headband"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://github.com/AliceHome"</span> <span class="attr">class</span>=<span class="string">"github-corner"</span> <span class="attr">aria-label</span>=<span class="string">"View source on Github"</span>&gt;</span><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">"80"</span> <span class="attr">height</span>=<span class="string">"80"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 250 250"</span> <span class="attr">style</span>=<span class="string">"fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"</span> <span class="attr">fill</span>=<span class="string">"currentColor"</span> <span class="attr">style</span>=<span class="string">"transform-origin: 130px 106px;"</span> <span class="attr">class</span>=<span class="string">"octo-arm"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"</span> <span class="attr">fill</span>=<span class="string">"currentColor"</span> <span class="attr">class</span>=<span class="string">"octo-body"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined">.github-corner:hover .octo-arm&#123;animation:octocat-wave 560ms ease-in-out&#125;@keyframes octocat-wave&#123;0%,100%&#123;transform:rotate(0)&#125;20%,60%&#123;transform:rotate(-25deg)&#125;40%,80%&#123;transform:rotate(10deg)&#125;&#125;@media (max-width:500px)</span></span><br><span class="line"><span class="undefined">&#123;.github-corner:hover .octo-arm&#123;animation:none&#125;.github-corner .octo-arm&#123;animation:octocat-wave 560ms ease-in-out&#125;&#125;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="step-3"><a href="#step-3" class="headerlink" title="step 3:"></a>step 3:</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> hexo g</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> hexo s</span></span><br></pre></td></tr></table></figure>
-<p>验证效果，Done!</p>
-<p>感谢简书大神：<br><a href="https://www.jianshu.com/p/f054333ac9e6" target="_blank" rel="noopener">hexo的next主题个性化教程:打造炫酷网站</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/current/June/Hexo-零-问题列表/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/19/current/June/Hexo-零-问题列表/" itemprop="url">Hexo(零) 问题列表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T11:57:19+08:00">
-                2018-07-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Cannot-set-property-‘lastIndex’-of-undefined"><a href="#Cannot-set-property-‘lastIndex’-of-undefined" class="headerlink" title="Cannot set property ‘lastIndex’ of undefined"></a>Cannot set property ‘lastIndex’ of undefined</h2><h3 id="问题详细："><a href="#问题详细：" class="headerlink" title="问题详细："></a>问题详细：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> maple @ iMac in ~/Maple [11:05:09]</span><br><span class="line">$ hexo g</span><br><span class="line">INFO  Start processing</span><br><span class="line">FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</span><br><span class="line">TypeError: Cannot set property &apos;lastIndex&apos; of undefined</span><br><span class="line">    at highlight (/Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:511:35)</span><br><span class="line">    at /Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:561:21</span><br><span class="line">    at Array.forEach (&lt;anonymous&gt;)</span><br><span class="line">    at Object.highlightAuto (/Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:560:40)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:117:25</span><br><span class="line">    at highlight (/Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:120:7)</span><br><span class="line">    at highlightUtil (/Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:22:14)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo/lib/plugins/filter/before_post_render/backtick_code_block.js:62:15</span><br><span class="line">    at String.replace (&lt;anonymous&gt;)</span><br><span class="line">    at Hexo.backtickCodeBlock (/Users/maple/Maple/node_modules/hexo/lib/plugins/filter/before_post_render/backtick_code_block.js:14:31)</span><br><span class="line">    at Hexo.tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Hexo.&lt;anonymous&gt; (/Users/maple/Maple/node_modules/bluebird/js/release/method.js:15:34)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo/lib/extend/filter.js:68:35</span><br><span class="line">    at tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Object.gotValue (/Users/maple/Maple/node_modules/bluebird/js/release/reduce.js:155:18)</span><br><span class="line">    at Object.gotAccum (/Users/maple/Maple/node_modules/bluebird/js/release/reduce.js:144:25)</span><br><span class="line">    at Object.tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Promise._settlePromiseFromHandler (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:512:31)</span><br><span class="line">    at Promise._settlePromise (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:569:18)</span><br><span class="line">    at Promise._settlePromiseCtx (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:606:10)</span><br><span class="line">    at Async._drainQueue (/Users/maple/Maple/node_modules/bluebird/js/release/async.js:138:12)</span><br><span class="line">    at Async._drainQueues (/Users/maple/Maple/node_modules/bluebird/js/release/async.js:143:10)</span><br></pre></td></tr></table></figure>
-<h3 id="修改方案："><a href="#修改方案：" class="headerlink" title="修改方案："></a>修改方案：</h3><p>在 _config.yml 修改 auto_detect: 的 true 为 false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">highlight:</span><br><span class="line">  enable: true</span><br><span class="line">  line_number: true</span><br><span class="line">  auto_detect: false</span><br><span class="line">  tab_replace:</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1809,7 +1802,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1820,7 +1813,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
