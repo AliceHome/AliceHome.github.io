@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/29/Swift-二-swift-中的原型模式/Dog.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/29/Swift-二-swift-中的原型模式/tianyuan.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/29/Swift-二-swift-中的原型模式/tianyuanr.png">
-<meta property="og:updated_time" content="2018-07-29T07:47:28.780Z">
+<meta property="og:updated_time" content="2018-07-29T08:17:09.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift (二) swift 中的原型模式">
 <meta name="twitter:description" content="代码链接 继承自 NSObject 类  可以看到直接调用 copy 方法是可以的，但是程序会报错，这是以为 copy 是 NSObject 的方法，但是 NSObject 类并没有实现 NSCopying 协议，所以： 123456789101112131415class Person: NSObject, NSCopying &amp;#123;    var name: String?    fun">
@@ -340,28 +340,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -389,7 +367,7 @@
       
 
       
-        <p><a href="">代码链接</a></p>
+        <p><a href="https://github.com/AliceHome/SwiftTips" target="_blank" rel="noopener">代码链接</a></p>
 <h2 id="继承自-NSObject-类"><a href="#继承自-NSObject-类" class="headerlink" title="继承自 NSObject 类"></a>继承自 NSObject 类</h2><p><img src="/2018/07/29/Swift-二-swift-中的原型模式/error.png" alt=""> </p>
 <p>可以看到直接调用 copy 方法是可以的，但是程序会报错，这是以为 copy 是 NSObject 的方法，但是 NSObject 类并没有实现 NSCopying 协议，所以：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Person: NSObject, NSCopying &#123;</span><br><span class="line"></span><br><span class="line">    var name: String?</span><br><span class="line">    func copy(with zone: NSZone? = nil) -&gt; Any &#123;</span><br><span class="line">        let newP = Person()</span><br><span class="line">        newP.name = name</span><br><span class="line">        return newP</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let p = Person()</span><br><span class="line">let p2 = p.copy() as! Person</span><br><span class="line">if let name = p2.name  &#123;</span><br><span class="line">   print(name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -455,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/27/current/June/设计模式-一-6-个原则/" rel="next" title="设计模式(一) 6 个原则">
-                <i class="fa fa-chevron-left"></i> 设计模式(一) 6 个原则
+              <a href="/2018/07/29/current/June/Swift/Swift-二-swift-中的原型模式/" rel="next" title="Swift (二) swift 中的原型模式">
+                <i class="fa fa-chevron-left"></i> Swift (二) swift 中的原型模式
               </a>
             
           </div>
@@ -540,7 +518,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">91</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
