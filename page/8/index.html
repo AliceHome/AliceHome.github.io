@@ -296,6 +296,641 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/26/Pre/iOS/LLVM-以及-BitCode-泛谈/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/26/Pre/iOS/LLVM-以及-BitCode-泛谈/" itemprop="url">LLVM 以及 BitCode 泛谈 - Chris Lattner 访谈录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-26T09:56:19+08:00">
+                2017-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这是看了LLVM之父 <a href="https://en.wikipedia.org/wiki/Chris_Lattner" target="_blank" rel="noopener">Chris Lattner</a> 访谈录，做的小结，只关注LLVM这块。<br><em>LLVM 起源</em><br>LLVM(Low Level Virtual Machine)</p>
+<p>LLVM: 一个模块化和可重用的编译器和工具链技术的集合，Clang是LLVM子项目，是C,C++和Objective-C编译器，因为多模块的复用，所以提供了惊人的编译速度，比GCC快 3 倍。</p>
+<p><em>LLVM 的 byteCode 和 Apple 现在的 bitCode区分</em><br>LLVM开始是开源的，将所有代码转换成二进制时就叫做 bytecode – Java 当年也是这么叫的。然而这部分问题很多，然后就有了LLVM2.0，而 2.0 采用的就是BitCode机制。<br>LLVM 2.0 将所有的代码以比特流（bit stream)而不是字节流(byte stream)的形式编码。</p>
+<p><em>Bitcode 优势：</em></p>
+<ol>
+<li>因为Bitcode机制，编译器可以通过编译不同代码来存储各种优化方法，这样下次再遇到类似的代码，编译器就会自动启动相关优化机制，使得效率提升。</li>
+<li>LLVM 可以让芯片的兼容性变的更好。因为Apple每年都会在芯片上推陈出现，它们转化成二进制的规则不尽相同，LLVM只要每次重新编码并传输成比特流就好了（没听懂）</li>
+</ol>
+<p>Bitcode 缺陷： 不能解决 32 位的APP在 64 位机器上的兼容问题。而 Chris Lattner 说这个问题其实应该依靠代码逻辑来解决。<br>问题：如何通过代码逻辑来解决 32 位 APP 在 64 位机器上的兼容问题。</p>
+<p><em>LLVM三层结构</em><br>第一层： Clang 编译器，负责编译各种语言；<br>第二层：代码优化器，通过模块化操作优化代码，是Bitcode逻辑的主要部分；<br>第三层：代码翻译器，针对不同平台和GPU将代码翻译成机器语言。</p>
+<p><em>LLDB</em> 一个有着REPL的特性和C++、python插件的开源调试器。LLDB绑定在Xcode内部，存在于主窗口底部的控制台中。</p>
+<p><em>libc++,libc++ ABI</em>: 高性能C++标准库实现，支持C++11</p>
+<p><em>compiler-rt</em>: 为 LLVM和Clang设计的编译器扩展函数库。针对 _fixunsdfdi 和其他目标机器上没有一个核心IR对应的短原生指令序列时(Oh,my god 这是什么）,提供高度调优过的底层代码生成支持。</p>
+<p><em>ABI是什么？</em><br>Application Binary Interface，应用二进制接口，是APP和操作系统、其应用之间的二进制接口。</p>
+<p>—-<em>*参考</em>——<br><a href="https://www.jianshu.com/p/66a76df0db95" target="_blank" rel="noopener">Chris Lattner 访谈录（上）</a><br><a href="http://atp.fm/205-chris-lattner-interview-transcript" target="_blank" rel="noopener">Transcript of episode 205, an interview of Chris Lattner on January 17, 2017</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/24/current/June/Network-二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/24/current/June/Network-二/" itemprop="url">Network (二)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-24T10:09:33+08:00">
+                2017-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://github.com/AliceHome/Network" target="_blank" rel="noopener">我是demo</a></p>
+<p>上一篇通过 Node JS 和 NSURLSession 实现了简单的 GET 请求，这一篇实现 POST 请求</p>
+<h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">var</span> queryString = <span class="built_in">require</span>(<span class="string">'querystring'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建服务器</span></span><br><span class="line"><span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.url)</span><br><span class="line">    <span class="built_in">console</span>.log(req.method.toLocaleLowerCase())</span><br><span class="line">    <span class="keyword">if</span> (req.method.toLocaleLowerCase() === <span class="string">'post'</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> alldata = <span class="string">''</span></span><br><span class="line">        req.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">            alldata += chunk</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        req.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            res.end(<span class="string">'Success'</span>)</span><br><span class="line">            <span class="keyword">var</span> dataString = alldata.toString()</span><br><span class="line">            <span class="keyword">var</span> dataObjc = queryString.parse(dataString)</span><br><span class="line">            <span class="built_in">console</span>.log(dataObjc)</span><br><span class="line">            <span class="built_in">console</span>.log(dataObjc.username)</span><br><span class="line">            <span class="built_in">console</span>.log(dataObjc.password)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">9000</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'server is running '</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>Server 地址： <a href="http://127.0.0.1:9000" target="_blank" rel="noopener">http://127.0.0.1:9000</a><br>POST 请求格式： username=’maple’&amp;password=’xxxx’</p>
+<h2 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)update &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//构造 Request 对象，设置 url 和 POST 请求方法 以及请求体</span></span><br><span class="line">    NSURL *url = [NSURL URLWithString:@<span class="string">"http://127.0.0.1:9000"</span>];</span><br><span class="line">    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];</span><br><span class="line">    [request setHTTPMethod:@<span class="string">"POST"</span>];</span><br><span class="line">    [request setHTTPBody:[@<span class="string">"username=maple&amp;password=xxx"</span> dataUsingEncoding:NSUTF8StringEncoding]];</span><br><span class="line">    <span class="comment">//构造网络请求</span></span><br><span class="line">    NSURLSession *session = [NSURLSession sharedSession];</span><br><span class="line">    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</span><br><span class="line">        NSLog(@<span class="string">"%@ %@ %@ %@"</span>, data, response, error, [NSThread currentThread]);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="comment">//启动任务</span></span><br><span class="line">    [task resume];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里是通过 NSURLSession 实现 POST 请求，所以需要做的事情有：</p>
+<ol>
+<li>创建可变的请求对象；</li>
+<li>设置 url <code>requestWithURL:</code>；</li>
+<li>设置请求方法 <code>setHTTPMethod:</code>；</li>
+<li>设置请求体：<code>setHTTPBody:</code>；</li>
+<li>创建 session，通过 <code>shareSession</code> 单例实现；</li>
+<li>通过 <code>dataTaskWithRequest: completionHandler:</code> 实现网络构造；</li>
+<li><code>resume</code> 启动</li>
+</ol>
+<h2 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h2><p>当客户端发起请求的时候，在 Node 服务端，通过 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.log(dataObjc)</span><br><span class="line">console.log(dataObjc.username)</span><br><span class="line">console.log(dataObjc.password)</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; username: 'maple', password: 'xxx' &#125;</span><br><span class="line">maple</span><br><span class="line">xxx</span><br></pre></td></tr></table></figure>
+<p>结束，这就是一个完整的 POST 请求过程</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/23/current/June/Network-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/23/current/June/Network-一/" itemprop="url">Network(一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-23T08:53:14+08:00">
+                2017-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://github.com/AliceHome/Network" target="_blank" rel="noopener">我是demo</a></p>
+<p>iOS 7.0 之后，苹果推出了新的网络 API —— NSURLSession。 <code>NSURLSession supports the HTTP/1.1, SPDY, and HTTP/2 protocols.</code> 从文档这句话中可以看出，新的网络库支持 HTTP 1.0 和 2.0 以及 Google 的 SPDY 网络协议。从这些特性上来讲，目前开发的 APP 都应该将网络库替换成 NSURLSession 了。首先探索下该网络库的使用。</p>
+<h2 id="Node-JS-启动后台服务"><a href="#Node-JS-启动后台服务" class="headerlink" title="Node JS 启动后台服务"></a>Node JS 启动后台服务</h2><p>网络请求就是客户端发起请求，服务端做出响应。作为 iOS 开发，如果没有后台数据的支持，只能到网络上找 API 了，但是我们可以通过 Node JS 实现简单的数据返回。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">var</span> server = http.createServer()</span><br><span class="line"></span><br><span class="line">server.on(<span class="string">'request'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> jsonData = [&#123;</span><br><span class="line">        name:<span class="string">'Jack'</span>,</span><br><span class="line">        age: <span class="number">12</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        name:<span class="string">'Rose'</span>,</span><br><span class="line">        age: <span class="number">13</span></span><br><span class="line">    &#125;]</span><br><span class="line">    res.end(<span class="built_in">JSON</span>.stringify(jsonData))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">9000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'server is running ...'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上面这段代码解释为：<br>接口：<a href="http://127.0.0.1:9000" target="_blank" rel="noopener">http://127.0.0.1:9000</a><br>数据：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[&#123;</span><br><span class="line">    name:'Jack',</span><br><span class="line">    age: 12</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    name:'Rose',</span><br><span class="line">    age: 13</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<p>通过 <code>curl</code> 验证：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [8:53:14]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> curl http://127.0.0.1:9000</span></span><br><span class="line">[&#123;"name":"Jack","age":12&#125;,&#123;"name":"Rose","age":13&#125;]%</span><br></pre></td></tr></table></figure>
+<p>OK， 目前为止服务端的数据已经有了。</p>
+<h2 id="NSURLSession-Tour"><a href="#NSURLSession-Tour" class="headerlink" title="NSURLSession Tour"></a>NSURLSession Tour</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)loadData &#123;</span><br><span class="line">    NSURLSession *session = [NSURLSession sharedSession];</span><br><span class="line">    NSURL *url = [NSURL URLWithString:@<span class="string">"http://127.0.0.1:9000"</span>];</span><br><span class="line">    NSURLSessionDataTask *task = [session dataTaskWithURL:url</span><br><span class="line">                                        completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</span><br><span class="line">        </span><br><span class="line">        id obj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves</span><br><span class="line">                                                   error:nil];</span><br><span class="line">        NSLog(@<span class="string">"%@ %@ %@ %@"</span>, obj, response, error, [NSThread currentThread]);</span><br><span class="line">    &#125;];</span><br><span class="line">    [task resume];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过 NSURLSession 请求网络的步骤：</p>
+<p>Step1：创建 NSURLSession 对象；<br>Step2：构造 url；<br>Step3：通过 NSURLSession 的实例方法 dataTaskWithURL: completionHandler: 构造网络请求，返回 NSURLSessionDataTask 对象<br>Step3： NSURLSessionDataTask 对象通过 resume 方法启动网络请求</p>
+<p>这里 <code>id obj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];</code> 实现了 JSON 数据的序列化，obj 的类型是数组。</p>
+<p>操作非常的简单，当然上面的请求是 GET 请求，下一篇看一下 POST 请求。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/Pre/carthage-Tour/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/13/Pre/carthage-Tour/" itemprop="url">carthage Tour</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T23:38:22+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/carthage/" itemprop="url" rel="index">
+                    <span itemprop="name">carthage</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>carthage iOS  第三方管理工具，本来不打算学习这个东西了，但是最近在看一些工程总是会遇到它，索性在这里记录下如何去使用 carthage 。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>Mac 构建 carthage 环境 &amp; 了解 carthage</li>
+<li>carthage 引入第三方</li>
+<li>初步了解 carthage 的原理</li>
+<li>carthage 限制</li>
+<li>carthage 与 CocoaPods 同时使用</li>
+</ul>
+<h2 id="搭建-carthage-环境"><a href="#搭建-carthage-环境" class="headerlink" title="搭建 carthage 环境"></a>搭建 carthage 环境</h2><p>因为 Mac 有 brew 神器，闭着眼也知道怎么安装了 <em>brew install carthage</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ brew install carthage</span><br><span class="line">$ <span class="built_in">which</span> carthage</span><br><span class="line">/usr/<span class="built_in">local</span>/bin/carthage</span><br><span class="line">$ carthage <span class="built_in">help</span></span><br><span class="line">Available commands:</span><br><span class="line"></span><br><span class="line">   archive           Archives built frameworks into a zip that Carthage can use</span><br><span class="line">   bootstrap         Check out and build the project<span class="string">'s dependencies</span></span><br><span class="line"><span class="string">   build             Build the project'</span>s dependencies</span><br><span class="line">   checkout          Check out the project<span class="string">'s dependencies</span></span><br><span class="line"><span class="string">   copy-frameworks   In a Run Script build phase, copies each framework specified by a SCRIPT_INPUT_FILE environment variable into the built app bundle</span></span><br><span class="line"><span class="string">   fetch             Clones or fetches a Git repository ahead of time</span></span><br><span class="line"><span class="string">   help              Display general or command-specific help</span></span><br><span class="line"><span class="string">   outdated          Check for compatible updates to the project'</span>s dependencies</span><br><span class="line">   update            Update and rebuild the project<span class="string">'s dependencies</span></span><br><span class="line"><span class="string">   version           Display the current version of Carthage</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/03/Pre/Python2-x-过渡到-Python3-x-的那些错误/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1192,771 +1827,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/03/Pre/Python-Tour/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/03/Pre/Python-Tour/" itemprop="url">Python Tour</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-03T14:15:16+08:00">
-                2016-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Mac-OS-与-Python"><a href="#Mac-OS-与-Python" class="headerlink" title="Mac OS 与 Python"></a>Mac OS 与 Python</h2><p>Mac OS 自带了 Python 环境:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ which python</span><br><span class="line">/usr/bin/python</span><br><span class="line">$ /usr/bin/python; exit</span><br><span class="line">Python 2.7.10 (default, Oct  6 2017, 22:29:07)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.31)] on darwin</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="Pip"><a href="#Pip" class="headerlink" title="Pip"></a>Pip</h2><p>Python 的使用离不开 <a href="https://pypi.org/project/pip/" target="_blank" rel="noopener">pip</a>，如果当前的 Python 2  &gt;= 2.7.9 或者 Python 3 &gt;= 3.4 那么实际上已经安装了 pip 了。<br>pip 安装的方式有三种</p>
-<ul>
-<li>根据官网中的 install 模块进行安装，这种安装需要一些依赖模块</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">python get-pip.py</span><br><span class="line"></span><br><span class="line">Collecting pip</span><br><span class="line">  Downloading https://files.pythonhosted.org/packages/0f/74/ecd13431bcc456ed390b44c8a6e917c1820365cbebcb6a8974d1cd045ab4/pip-10.0.1-py2.py3-none-any.whl (1.3MB)</span><br><span class="line">    100% |████████████████████████████████| 1.3MB 272kB/s</span><br><span class="line">Collecting wheel</span><br><span class="line">  Downloading https://files.pythonhosted.org/packages/81/30/e935244ca6165187ae8be876b6316ae201b71485538ffac1d718843025a9/wheel-0.31.1-py2.py3-none-any.whl (41kB)</span><br><span class="line">    100% |████████████████████████████████| 51kB 73kB/s</span><br><span class="line">matplotlib 1.3.1 requires nose, which is not installed.</span><br><span class="line">matplotlib 1.3.1 requires tornado, which is not installed.</span><br><span class="line">Installing collected packages: pip, wheel</span><br><span class="line">Could not install packages due to an EnvironmentError: [Errno 13] Permission denied: &apos;/Library/Python/2.7/site-packages/pip-10.0.1.dist-info&apos;</span><br><span class="line">Consider using the `--user` option or check the permissions.</span><br></pre></td></tr></table></figure>
-<ul>
-<li>brew install pip 也是可以安装的，但是这种安装需要通过 brew install python 进行，这将会导致你的电脑上有两个版本的 python</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Error: No available formula with the name &quot;pip&quot;</span><br><span class="line">Homebrew provides pip via: `brew install python`. However you will then</span><br><span class="line">have two Pythons installed on your Mac, so alternatively you can install</span><br><span class="line">pip via the instructions at:</span><br><span class="line">  https://pip.readthedocs.io/en/stable/installing/</span><br></pre></td></tr></table></figure>
-<ul>
-<li>sudo easy_install pip </li>
-</ul>
-<p>因为前两种方式都需要一些额外的东西，所以我选择了第三种安装方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">$ sudo easy_install pip</span><br><span class="line">Password:</span><br><span class="line">Searching for pip</span><br><span class="line">Reading https://pypi.python.org/simple/pip/</span><br><span class="line">Best match: pip 10.0.1</span><br><span class="line">Downloading https://files.pythonhosted.org/packages/ae/e8/2340d46ecadb1692a1e455f13f75e596d4eab3d11a57446f08259dee8f02/pip-10.0.1.tar.gz#sha256=f2bd08e0cd1b06e10218feaf6fef299f473ba706582eb3bd9d52203fdbd7ee68</span><br><span class="line">Processing pip-10.0.1.tar.gz</span><br><span class="line">Writing /tmp/easy_install-wo7aGC/pip-10.0.1/setup.cfg</span><br><span class="line">Running pip-10.0.1/setup.py -q bdist_egg --dist-dir /tmp/easy_install-wo7aGC/pip-10.0.1/egg-dist-tmp-ny5uXk</span><br><span class="line">/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: &apos;python_requires&apos;</span><br><span class="line">  warnings.warn(msg)</span><br><span class="line">warning: no previously-included files found matching &apos;.coveragerc&apos;</span><br><span class="line">warning: no previously-included files found matching &apos;.mailmap&apos;</span><br><span class="line">warning: no previously-included files found matching &apos;.travis.yml&apos;</span><br><span class="line">warning: no previously-included files found matching &apos;.landscape.yml&apos;</span><br><span class="line">warning: no previously-included files found matching &apos;src/pip/_vendor/Makefile&apos;</span><br><span class="line">warning: no previously-included files found matching &apos;tox.ini&apos;</span><br><span class="line">warning: no previously-included files found matching &apos;*-requirements.txt&apos;</span><br><span class="line">warning: no previously-included files found matching &apos;appveyor.yml&apos;</span><br><span class="line">warning: no previously-included files found matching &apos;src/pip/_vendor/six&apos;</span><br><span class="line">warning: no previously-included files matching &apos;*.pyi&apos; found under directory &apos;src/pip/_vendor&apos;</span><br><span class="line">no previously-included directories found matching &apos;.github&apos;</span><br><span class="line">no previously-included directories found matching &apos;.travis&apos;</span><br><span class="line">no previously-included directories found matching &apos;docs/build&apos;</span><br><span class="line">no previously-included directories found matching &apos;news&apos;</span><br><span class="line">no previously-included directories found matching &apos;contrib&apos;</span><br><span class="line">no previously-included directories found matching &apos;tasks&apos;</span><br><span class="line">no previously-included directories found matching &apos;tests&apos;</span><br><span class="line">creating /Library/Python/2.7/site-packages/pip-10.0.1-py2.7.egg</span><br><span class="line">Extracting pip-10.0.1-py2.7.egg to /Library/Python/2.7/site-packages</span><br><span class="line">Adding pip 10.0.1 to easy-install.pth file</span><br><span class="line">Installing pip script to /usr/local/bin</span><br><span class="line">Installing pip2.7 script to /usr/local/bin</span><br><span class="line">Installing pip2 script to /usr/local/bin</span><br><span class="line"></span><br><span class="line">Installed /Library/Python/2.7/site-packages/pip-10.0.1-py2.7.egg</span><br><span class="line">Processing dependencies for pip</span><br><span class="line">Finished processing dependencies for pip</span><br><span class="line"></span><br><span class="line"># maple @ iMac in ~/Maple [14:26:43]</span><br><span class="line">$ which pip</span><br><span class="line">/usr/local/bin/pip</span><br></pre></td></tr></table></figure>
-<h2 id="iPython"><a href="#iPython" class="headerlink" title="iPython"></a>iPython</h2><p><a href="http://ipython.org" target="_blank" rel="noopener">iPython</a> 这是一个很好 Python 交互环境开发工具 “brew install iPython” 就可以安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ipython</span><br><span class="line">Python 3.6.5 (default, Apr 25 2018, 14:23:58)</span><br><span class="line">Type &apos;copyright&apos;, &apos;credits&apos; or &apos;license&apos; for more information</span><br><span class="line">IPython 6.4.0 -- An enhanced Interactive Python. Type &apos;?&apos; for help.</span><br><span class="line"></span><br><span class="line">In [1]:</span><br></pre></td></tr></table></figure>
-<p>详细了解，可以通过 <a href="http://ipython.readthedocs.io/en/stable/index.html" target="_blank" rel="noopener">iPython Documentation</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/03/Pre/2016/Python 绝技/Python-绝技/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/01/03/Pre/2016/Python 绝技/Python-绝技/" itemprop="url">Python 绝技 之 入门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T14:52:35+08:00">
-                2016-01-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="准备开发-amp-安装第三方库"><a href="#准备开发-amp-安装第三方库" class="headerlink" title="准备开发 &amp; 安装第三方库"></a>准备开发 &amp; 安装第三方库</h3><p>Python 环境在 Mac 上已经自带。并提供了 Python 标准库和解释器，以及一些内置模块，这些内置模块包括：内置数据类型、异常处理、numeric 和数学模块、文件处理模块、加密服务、与操作系统相互交互操作、网络、与 IP 协议交互以及其他有用模块。<br>同样 Python 也提供第三方软件包：<a href="https://pypi.org" target="_blank" rel="noopener">https://pypi.org</a></p>
-<p>三种方式：</p>
-<ul>
-<li>下载第三方库包，解压，然后通过 <em>python setup.py install</em> 命令进行安装</li>
-<li>sudo easy_install 包名字</li>
-</ul>
-<p>第二种方式，是 Python 为了使得包安装更加方便，在 setuptools 中提供了 easy_install 的模块，当执行这个模块的时候，我们需要将包名作为参数传递给它，然后它会自动到 Python 官网上搜索这个包，如果找到就下载并且自动安装。</p>
-<p>安装 <em>python-nmap</em> 模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> sudo easy_install python-nmap</span><br><span class="line">Password:</span><br><span class="line">Searching for python-nmap</span><br><span class="line">Reading https://pypi.python.org/simple/python-nmap/</span><br><span class="line">Best match: python-nmap 0.6.1</span><br><span class="line">Downloading https://files.pythonhosted.org/packages/dc/f2/9e1a2953d4d824e183ac033e3d223055e40e695fa6db2cb3e94a864eaa84/python-nmap-0.6.1.tar.gz#sha256=80ba0eb10a52283a54a633f40b5baa9c2ff08675d6621dd089ead942852f5bd3</span><br><span class="line">Processing python-nmap-0.6.1.tar.gz</span><br><span class="line">Writing /tmp/easy_install-kCnkg1/python-nmap-0.6.1/setup.cfg</span><br><span class="line">Running python-nmap-0.6.1/setup.py -q bdist_egg --dist-dir /tmp/easy_install-kCnkg1/python-nmap-0.6.1/egg-dist-tmp-hh31Lx</span><br><span class="line">/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: &apos;bugtrack_url&apos;</span><br><span class="line">  warnings.warn(msg)</span><br><span class="line">zip_safe flag not set; analyzing archive contents...</span><br><span class="line">Copying python_nmap-0.6.1-py2.7.egg to /Library/Python/2.7/site-packages</span><br><span class="line">Adding python-nmap 0.6.1 to easy-install.pth file</span><br><span class="line"></span><br><span class="line">Installed /Library/Python/2.7/site-packages/python_nmap-0.6.1-py2.7.egg</span><br><span class="line">Processing dependencies for python-nmap</span><br><span class="line">Finished processing dependencies for python-nmap</span><br></pre></td></tr></table></figure>
-<p>多个包一起安装也是可以的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo easy_install pyPdf pygeoip mechanize BeautifulSoup4</span><br></pre></td></tr></table></figure>
-<p>还有一些第三方库可能无法通过 easy_install 来安装，可以通过 apt-get install 进行安装， 这是 Linux 下默认的安装工具，在 Mac 下可以通过 brew 来代替， 但是还是有一些库可能 brew 没有，所以需要在 Mac 下装载 apt-get 命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="Python-标准库的关键组件"><a href="#Python-标准库的关键组件" class="headerlink" title="Python 标准库的关键组件"></a>Python 标准库的关键组件</h3><ul>
-<li>变量，不需要声明，类型自动匹配</li>
-<li>字符串，upper(),lower(),replace(),find()<h4 id="List-列表），就是数组元素"><a href="#List-列表），就是数组元素" class="headerlink" title="List(列表），就是数组元素"></a>List(列表），就是数组元素</h4></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">In [22]: portList=[]</span><br><span class="line"></span><br><span class="line">In [23]: type(portList)</span><br><span class="line">Out[23]: list</span><br><span class="line"></span><br><span class="line">In [24]: portList.append(21)</span><br><span class="line"></span><br><span class="line">In [25]: portList.append(25)</span><br><span class="line"></span><br><span class="line">In [26]: portList.append(443)</span><br><span class="line"></span><br><span class="line">In [27]: portList.append(80)</span><br><span class="line"></span><br><span class="line">In [28]: portList</span><br><span class="line">Out[28]: [21, 25, 443, 80]</span><br><span class="line"></span><br><span class="line">In [29]: portList.sort()</span><br><span class="line"></span><br><span class="line">In [30]: portList</span><br><span class="line">Out[30]: [21, 25, 80, 443]</span><br><span class="line"></span><br><span class="line">In [31]: portList.index(80)</span><br><span class="line">Out[31]: 2</span><br><span class="line"></span><br><span class="line">In [32]: len(portList)</span><br><span class="line">Out[32]: 4</span><br></pre></td></tr></table></figure>
-<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">In [15]: service=&#123;&apos;ftp&apos;:21,&apos;ssh&apos;:22,&apos;stmp&apos;:25,&apos;http&apos;:80&#125;</span><br><span class="line">In [17]: service.keys()</span><br><span class="line">Out[17]: dict_keys([&apos;ftp&apos;, &apos;ssh&apos;, &apos;stmp&apos;, &apos;http&apos;])</span><br><span class="line">In [19]: service.items()</span><br><span class="line">Out[19]: dict_items([(&apos;ftp&apos;, 21), (&apos;ssh&apos;, 22), (&apos;stmp&apos;, 25), (&apos;http&apos;, 80)])</span><br><span class="line">In [20]: service[&apos;ftp&apos;]</span><br><span class="line">Out[20]: 21</span><br><span class="line"></span><br><span class="line">In [21]: service[&apos;https&apos;]</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">KeyError                                  Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-21-07c66fb7e9f9&gt; in &lt;module&gt;()</span><br><span class="line">----&gt; 1 service[&apos;https&apos;]</span><br><span class="line"></span><br><span class="line">KeyError: &apos;https&apos;</span><br></pre></td></tr></table></figure>
-<h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><p>socket 模块提供了一个用 Python 进行网络连接的库。</p>
-<p>Client:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line">import socket </span><br><span class="line"></span><br><span class="line">ip_port = (&apos;127.0.0.1&apos;,8989)</span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.connect(ip_port)</span><br><span class="line"></span><br><span class="line">ans = sk.recv(1024)</span><br><span class="line"></span><br><span class="line">print(ans)</span><br></pre></td></tr></table></figure>
-<p>server：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">import socket</span><br><span class="line"></span><br><span class="line">ip_port = (&apos;127.0.0.1&apos;,8989)</span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.bind(ip_port)</span><br><span class="line">sk.listen(5)</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    conn,address =  sk.accept()</span><br><span class="line">    conn.sendall(&apos;220 FreeFloat Ftp Server (Version 1.00).&apos;)</span><br><span class="line">    conn.close()</span><br></pre></td></tr></table></figure>
-<h4 id="条件选择"><a href="#条件选择" class="headerlink" title="条件选择"></a>条件选择</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line">import socket </span><br><span class="line"></span><br><span class="line">ip_port = (&apos;127.0.0.1&apos;,8989)</span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.connect(ip_port)</span><br><span class="line"></span><br><span class="line">ans = sk.recv(1024)</span><br><span class="line"></span><br><span class="line">if (&quot;FreeFloat Ftp Server (Version 1.00).&quot; in ans):</span><br><span class="line">    print(&quot;FreeFloat FTP Server is vulnerable.&quot;)</span><br><span class="line">elif (&quot;3COm 3CDaemon FTP Server Version 2.0&quot; in ans):</span><br><span class="line">    print (&quot;3CDaemon FTP Server is vulnerable.&quot;)</span><br><span class="line">elif (&quot;Sami 3CDaemon FTP Server Version 2.0&quot; in ans):</span><br><span class="line">    print (&quot;Sami FTP Server is vulnerable.&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;no ftp server is vulnerable.&quot;)</span><br></pre></td></tr></table></figure>
-<p>执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python client.py</span><br><span class="line">FreeFloat FTP Server is vulnerable.</span><br></pre></td></tr></table></figure>
-<h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4><p>这里，还是通过上面的连接，将 ip 做一下修改，改为 127.0.1.1，然后设置超时时间为 3 秒，通过 try - except 进行异常处理</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket </span><br><span class="line">ip_port = (<span class="string">'127.0.1.1'</span>,<span class="number">8989</span>)</span><br><span class="line">socket.setdefaulttimeout(<span class="number">3</span>)</span><br><span class="line">sk = socket.socket()</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    sk.connect(ip_port)</span><br><span class="line"><span class="keyword">except</span> Exception, e:</span><br><span class="line">    print(<span class="string">"Error = "</span> + str(e))</span><br></pre></td></tr></table></figure>
-<p>运行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python client.py</span><br><span class="line">Error = timed out</span><br></pre></td></tr></table></figure>
-<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>创建一个函数完成连接到 FTP服务器并返回 banner 的操作：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">returnBanner</span><span class="params">(ip,port)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        socket.setdefaulttimeout(<span class="number">3</span>)</span><br><span class="line">        sk = socket.socket()</span><br><span class="line">        sk.connect((ip,port))</span><br><span class="line">        banner = sk.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">return</span> banner.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"Error = "</span> + str(e))</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    ip = <span class="string">'127.0.0.1'</span></span><br><span class="line">    port = <span class="number">8989</span></span><br><span class="line">    </span><br><span class="line">    print(ip + <span class="string">" "</span> + str(port) + <span class="string">": \n"</span> + returnBanner(ip,port))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-<h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><p>使用 for 循环遍历整个子网</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">255</span>):</span><br><span class="line">    print(<span class="string">"192.169.1."</span> + str(x))</span><br></pre></td></tr></table></figure>
-<p>output：</p>
-<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$python3</span> loop.py</span><br><span class="line"></span><br><span class="line">192.169.1.1</span><br><span class="line">192.169.1.2</span><br><span class="line">192.169.1.3</span><br><span class="line">192.169.1.4</span><br><span class="line">...</span><br><span class="line">192.169.1.252</span><br><span class="line">192.169.1.253</span><br><span class="line">192.169.1.254</span><br></pre></td></tr></table></figure>
-<p>接下来，通过遍历 list 中所有的端口以及输出所有的 ip 和 port 组合</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"所有子网:"</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">255</span>):</span><br><span class="line">    print(<span class="string">"192.169.1."</span> + str(x))</span><br><span class="line"></span><br><span class="line">postList = [<span class="number">21</span>,<span class="number">22</span>,<span class="number">25</span>,<span class="number">80</span>,<span class="number">110</span>]</span><br><span class="line">print(<span class="string">"所有端口："</span>)</span><br><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> postList:</span><br><span class="line">    print(port)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"ip 和 port 所有可能组合"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ip <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">255</span>):</span><br><span class="line">    <span class="keyword">for</span> port <span class="keyword">in</span> postList:</span><br><span class="line">        print(<span class="string">"192.169.1."</span> + str(ip) + <span class="string">":"</span> + str(port))</span><br></pre></td></tr></table></figure>
-<p>有了迭代 IP 和 port 的能力，就可以来检测子网中所有的 ip 地址，以及 telnet、ssh、smtp、http、imap 及 https 协议的端口</p>
-<h4 id="文件-I-O"><a href="#文件-I-O" class="headerlink" title="文件 I/O"></a>文件 I/O</h4><p>通过 readline() 函数读取文件 banners.txt 内容，与服务端中 banner 信息进行对比：</p>
-<p><strong>banner.txt</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">3Com 3CDame FTP Server Version 1.00</span><br><span class="line">Ability Server 2.34</span><br><span class="line">PSO Proxy 0.9</span><br><span class="line">Spipe 1.0</span><br><span class="line">TelServer FTP 1.20</span><br><span class="line">Xitmai</span><br><span class="line">Maple FTP 1.90</span><br><span class="line">FreeFloat2 Ftp Server (Version 1.00)</span><br><span class="line">FreeFloat Ftp Server (Version 1.00)</span><br><span class="line">IMAP Server 1.00</span><br><span class="line">Jack 1.0</span><br><span class="line">Tom 99</span><br></pre></td></tr></table></figure>
-<p><strong>service.py</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">ip_port = (<span class="string">'127.0.0.1'</span>,<span class="number">8989</span>)</span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.bind(ip_port)</span><br><span class="line">sk.listen(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    conn,address =  sk.accept()</span><br><span class="line">    conn.sendall(<span class="string">'220 FreeFloat Ftp Server (Version 1.00).'</span>)</span><br><span class="line">    conn.close()</span><br></pre></td></tr></table></figure>
-<p><strong>client.py</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkBanner</span><span class="params">(banner)</span>:</span></span><br><span class="line">    f = open(<span class="string">"banners.txt"</span>,<span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        <span class="keyword">if</span> line.strip(<span class="string">'\n'</span>) <span class="keyword">in</span> banner:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">returnBanner</span><span class="params">(ip,port)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        socket.setdefaulttimeout(<span class="number">3</span>)</span><br><span class="line">        sk = socket.socket()</span><br><span class="line">        sk.connect((ip,port))</span><br><span class="line">        banner = sk.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">if</span> checkBanner(banner.decode(<span class="string">'utf-8'</span>)):</span><br><span class="line">            <span class="keyword">return</span> banner.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"nothing"</span></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"Error = "</span> + str(e))</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    ip = <span class="string">'127.0.0.1'</span></span><br><span class="line">    port = <span class="number">8989</span></span><br><span class="line">    print(ip + <span class="string">" "</span> + str(port) + <span class="string">": \n"</span> + returnBanner(ip,port))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-<h4 id="sys"><a href="#sys" class="headerlink" title="sys"></a>sys</h4><p>通过内置 sys 模块，我们可以访问到有 Python 解释器使用或者维护的对象，其中包括标志、版本、整型数最大值、可用模块、hook 路径、标准错误/输入/输出的位置，以及调用解释器的命令行参数。<br>在线文档：<br><a href="http://docs.python.org/library/sys" target="_blank" rel="noopener">http://docs.python.org/library/sys/</a></p>
-<p>从外部读取文件名字：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)==<span class="number">2</span>:</span><br><span class="line">    filename = sys.argv[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"read the content from: "</span> + filename)</span><br></pre></td></tr></table></figure>
-<p>执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python sys.py banners.txt</span><br><span class="line"><span class="built_in">read</span> the content from: banners.txt</span><br></pre></td></tr></table></figure>
-<h4 id="OS-模块"><a href="#OS-模块" class="headerlink" title="OS 模块"></a>OS 模块</h4><p>内置 OS 模块提供了丰富的操作系统函数。这个模块允许程序独立的与操作系统环境、文件系统、用户数据库以及权限进行交互。比如上面我们在读取文件的时候提前检查一下文件是否存在：</p>
-<p>文件是否存在 API：<br><em>os.path.isfile(‘fileName’)</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: ls</span><br><span class="line">banners.txt  client.py    loop.py      service.py   sys.py</span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: os.path.isfile(<span class="string">"banner.txt"</span>)</span><br><span class="line">Out[<span class="number">3</span>]: <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: os.path.isfile(<span class="string">"banners.txt"</span>)</span><br><span class="line">Out[<span class="number">4</span>]: <span class="keyword">True</span></span><br></pre></td></tr></table></figure></p>
-<p>权限 API：<br><em>os.access(“fileName”,权限控制)</em></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: os.access(<span class="string">"a.out"</span>, os.R_OK)</span><br><span class="line">Out[<span class="number">2</span>]: <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: os.access(<span class="string">"a.out"</span>, os.W_OK)</span><br><span class="line">Out[<span class="number">3</span>]: <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: ls</span><br><span class="line">a.c          banners.txt  loop.py      sys.py</span><br><span class="line">a.out*       client.py    service.py</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: os.access(<span class="string">"/usr/bin/host"</span>, os.W_OK)</span><br><span class="line">Out[<span class="number">5</span>]: <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: os.access(<span class="string">"/usr/bin/host"</span>, os.R_OK)</span><br><span class="line">Out[<span class="number">6</span>]: <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>OVER&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/01/Pre/NSFoundation/Foundation-NSObject/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/01/01/Pre/NSFoundation/Foundation-NSObject/" itemprop="url">Foundation-NSObject</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-01T12:29:16+08:00">
-                2016-01-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NSFoundation/" itemprop="url" rel="index">
-                    <span itemprop="name">NSFoundation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>NSObject 是大部分OC类的父类，继承NSObject，可以获取访问运行时的接口，并且具备了OC对象的基本功能。<br>NSObject 实现了 <nsobject>协议，也就是拥有了一簇接口。</nsobject></p>
-<h3 id="初始化类"><a href="#初始化类" class="headerlink" title="初始化类"></a>初始化类</h3><p>初始化类，提供了两个API， <em>+ initialize</em> 和 <em>+ load</em> 。</p>
-<h4 id="initialize"><a href="#initialize" class="headerlink" title="+ initialize"></a>+ initialize</h4><p>在类收到第一条消息的时候初始化这个类。（即第一次使用这个类的时候，调用这个方法。如果项目中没有使用这个类，这个方法不会被调用）</p>
-<h5 id="方法声明"><a href="#方法声明" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)initialize</span><br></pre></td></tr></table></figure>
-<h5 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h5><p>在类或者子类收到第一条消息前，运行时向每个类发送 <em>initialize</em>消息。父类在子类之前收到这个消息。运行时向这些类发送 <em>initialize</em>消息是线程安全的。也就是当第一个线程向一个类发送消息的时候，其他的线程如果想这个类发送消息就会被阻塞，知道第一个线程的消息结束。</p>
-<p>如果子类没有实现 <em>initialize</em> 方法，父类中的 <em>initialize</em> 方法可能会被调用多次。如果你想让父类中的 <em>initialize</em> 方法只调用一次，可以使用下面的结构：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)initialize &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> == [ClassName <span class="keyword">self</span>]) &#123;</span><br><span class="line">    <span class="comment">// ... do the initialization ...</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>因为 <em>initialize</em> 是以阻塞的方式调用的，所以要控制好该方法中的工作量。尽量避免在该方法中使用线程锁，因为这可能导致死锁。除此之外，尽量减少在该方法中执行复杂的操作。</p>
-<h5 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h5><p>每个类只会调用一次 <em>initialize</em> 方法，如果你想独立的初始化一个类或者该类的类目，那么应该实现<em>+ load</em> 方法。</p>
-<h4 id="load"><a href="#load" class="headerlink" title="+ load"></a>+ load</h4><p>当类或者是类目被添加到运行时的时候，就会调用该方法。如果想对类做一些特别的处理，那么可以实现 <em>+load</em>方法。</p>
-<h5 id="方法声明-1"><a href="#方法声明-1" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)load;</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-1"><a href="#讨论-1" class="headerlink" title="讨论"></a>讨论</h5><p>初始化方法调用的顺序：</p>
-<ul>
-<li>父类的 <em>+ load</em> 方法先于子类的<em>+load</em> 方法调用；</li>
-<li>子类的 <em>+load</em> 方法先于类目的调用</li>
-</ul>
-<p><strong> 这里有一部分官方文档没看懂，先记记录调用顺序吧</strong></p>
-<h3 id="创建、拷贝和销毁对象"><a href="#创建、拷贝和销毁对象" class="headerlink" title="创建、拷贝和销毁对象"></a>创建、拷贝和销毁对象</h3><h4 id="alloc"><a href="#alloc" class="headerlink" title="+ alloc"></a>+ alloc</h4><p>为接收该消息者创建一个实例。</p>
-<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TheClass *newObject = [[TheClass alloc] init];</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-2"><a href="#讨论-2" class="headerlink" title="讨论"></a>讨论</h5><ul>
-<li>如果你想要初始化类中的某些东西，不要重写这个方法，应该去重写 init 方法</li>
-<li>因为历史原因， <em>alloc</em> 方法会调用 <em>allocWithZone:</em> 这个方法</li>
-</ul>
-<h4 id="allocWithZone"><a href="#allocWithZone" class="headerlink" title="+ allocWithZone:"></a>+ allocWithZone:</h4><p>为接收该消息者创建一个实例。</p>
-<h5 id="方法声明-2"><a href="#方法声明-2" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">instancetype</span>)allocWithZone:(<span class="keyword">struct</span> _NSZone *)zone;</span><br></pre></td></tr></table></figure>
-<p>参数 <em>zone</em> 被忽略了已经</p>
-<h5 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TheClass *newObject = [[TheClass allocWithZone:<span class="literal">nil</span>] init];</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-3"><a href="#讨论-3" class="headerlink" title="讨论"></a>讨论</h5><ul>
-<li>如果你想要初始化类中的某些东西，不要重写这个方法，应该去重写 init 方法</li>
-<li>这个方法的存在是历史遗留问题， memory zone 在 OC 中已经被丢弃了。</li>
-</ul>
-<h4 id="init"><a href="#init" class="headerlink" title="- init"></a>- init</h4><p>当一个对象分配到一块内存之后，这个方法用来初始化这个对象，并将初始化之后的对象返回</p>
-<h5 id="方法声明-3"><a href="#方法声明-3" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)init;</span><br></pre></td></tr></table></figure>
-<h5 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h5><p>两种情况：</p>
-<ul>
-<li>初始化之后的对象；</li>
-<li>nil ,如果在初始化的过程中出现未知异常，该方法可能会返回 nil<h5 id="讨论-4"><a href="#讨论-4" class="headerlink" title="讨论"></a>讨论</h5><em>init</em> 方法是和 <em>alloc</em>（或者 *allocWithZone:) 方法一起调用的。<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SomeClass *object = [[SomeClass alloc] init];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>一个对象如果没有通过（init） 方法初始化是不可以被使用的（也就是不可以接受消息）。<br>如果想要自定义这个方法的实现，首先要调用父类的 <em>init</em> 方法，然后再去做你自己的初始化以及返回一个新的对象。如果这个新对象没有初始化成功，那么必须返回 nil。比如，一个 <em>BuiltInCamera</em> 在一部没有摄像头的手机上运行时，初始化方法只能返回 nil。</p>
-<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)init &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) &#123;</span><br><span class="line">    <span class="comment">// Initialize self</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在 Xcode 中写 init 方法的时候 ，只需要输入 init 几个字母之后，就可以看到完整的方法提示了，注意不要输入 “-” 否则提示就不会出现了。</p>
-<h4 id="copy"><a href="#copy" class="headerlink" title="- copy"></a>- copy</h4><p>调用该方法，会返回一个 <em>copyWithZone</em> 方法的结果</p>
-<h5 id="方法声明-4"><a href="#方法声明-4" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)<span class="keyword">copy</span>;</span><br></pre></td></tr></table></figure>
-<h5 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h5><p>这个返回值是 <em>NSCopying</em> 协议中的 <em>copyWithZone:</em> 方法的返回值</p>
-<h5 id="讨论-5"><a href="#讨论-5" class="headerlink" title="讨论"></a>讨论</h5><p>这个方法很方便的让类可以实现 <em>NSCopying</em>协议。 如果调用 <em>copy</em>方法的类没有实现 <em>NSCopying</em>协议，那么就会抛出异常。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[Whale copyWithZone:]: unrecognized selector sent to instance 0x60400000ecc0'</span><br></pre></td></tr></table></figure></p>
-<p>Whale 这个类没有实现 copyWithZone: 这个方法，解决方法就是：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Whale.h</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Whale</span> : <span class="title">NSObject</span>&lt;<span class="title">NSCopying</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Whale.m</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Whale.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Whale</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone &#123;</span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<p>当然，如果缺少了 <em>@interface Whale : NSObject<nscopying></nscopying></em> 也是可以的，因为我们实现了 <em>copyWithZone:</em> 这个方法。此时程序不会报错。<br>值得注意的是， <em>NSObject</em> 类并不支持 <em>NSCopying</em> 协议，但是子类必须支持此协议，并且实现 <em>copyWithZone:</em> 这个方法，当然前提是你如果想要调用 <em>copy</em> 方法。<br> 如果子类不是直接继承了 NSObject 类，那么在实现<em>copyWithZone:</em> 方法的时候，首先要调用父类的<em>copyWithZone:</em> 方法，将父类的实现合并到子类中。例如， Whale 继承自 NSObject 那么它就不需要调用父类的 <em>copyWithZone:</em> ，但是 AliceWhale 继承自 Whale 类，那么就必须先调用父类的*copyWithZone:方法 ,合并父类的copy 内容：</p>
- <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">AliceWhale</span> : <span class="title">Whale</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">AliceWhale</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone &#123;</span><br><span class="line">    [<span class="keyword">super</span> copyWithZone:zone];</span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<h4 id="copyWithZone"><a href="#copyWithZone" class="headerlink" title="-copyWithZone:"></a>-copyWithZone:</h4><p>  没啥好说的<br>  <strong>This method exists so class objects can be used in situations where you need an object that conforms to the NSCopying protocol. For example, this method lets you use a class object as a key to an NSDictionary object. You should not override this method.</strong><br>  这一段话以后再去理解吧，没看懂。</p>
-<h4 id="mutableCopy"><a href="#mutableCopy" class="headerlink" title="- mutableCopy"></a>- mutableCopy</h4><p>  返回 mutableCopyWithZone: 的返回值<br>  具体使用逻辑和 copy 类似，只是一个是不可变的一个是可变的</p>
-<h4 id="dealloc"><a href="#dealloc" class="headerlink" title="- dealloc"></a>- dealloc</h4><p>  取消对象占用的内存的时候调用这个方法。</p>
-<h5 id="讨论-6"><a href="#讨论-6" class="headerlink" title="讨论"></a>讨论</h5><ul>
-<li>在该方法的实现中释放一些资源；</li>
-<li>不能直接调用此方法，该方法是runtime调用具体参见<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html#//apple_ref/doc/uid/10000011-SW1" target="_blank" rel="noopener">Advanced Memory Management Programming Guide</a></li>
-<li>ARC 下不能 [super dealloc]<ul>
-<li>MRC 下必须调用 [super dealloc]，而且必须写在方法最后</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="识别类"><a href="#识别类" class="headerlink" title="识别类"></a>识别类</h3><p>这里主要有三个类方法</p>
-<ul>
-<li>+ class , 返回类对象</li>
-<li>+ superclass， 返回父类类对象</li>
-<li>+ isSubclassOfClass: ， 返回一个 Boolean 值，</li>
-</ul>
-<h4 id="class"><a href="#class" class="headerlink" title="+ class"></a>+ class</h4><p>返回 类对象</p>
-<h5 id="讨论-7"><a href="#讨论-7" class="headerlink" title="讨论"></a>讨论</h5><p>要引用一个类，必须通过类的名字，初次之外其他的情况我们可以通过这个方法来获取一个类对象。</p>
-<h4 id="superclass"><a href="#superclass" class="headerlink" title="+ superclass"></a>+ superclass</h4><p>返回父类的类对象</p>
-<h4 id="isSubclassOfClass"><a href="#isSubclassOfClass" class="headerlink" title="+isSubclassOfClass:"></a>+isSubclassOfClass:</h4><p>验证调用该方法的类是否继承自参数给定的类（包括父类的父类也会返回YES）</p>
-<h3 id="检测实例方法"><a href="#检测实例方法" class="headerlink" title="检测实例方法"></a>检测实例方法</h3><h4 id="instancesRespondToSelector"><a href="#instancesRespondToSelector" class="headerlink" title="+ instancesRespondToSelector:"></a>+ instancesRespondToSelector:</h4><p>返回一个BOOL值，来表示实例是否能够相应方法</p>
-<h4 id="方法声明-5"><a href="#方法声明-5" class="headerlink" title="方法声明"></a>方法声明</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">BOOL</span>)instancesRespondToSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<h4 id="讨论-8"><a href="#讨论-8" class="headerlink" title="讨论"></a>讨论</h4><p>该方法检测调用类中是否实现了某个实例方法（aSelector），而不是类方法，如果要检测类方法，那么可以调用协议<nsobect> 中的 <em>respondsToSelector:</em> 方法。<br>如果只是在 .h 文件中声明了该方法，而没有在 .m 中去实现这个方法，检测结果为 NO。</nsobect></p>
-<hr>
-<h4 id="检测协议"><a href="#检测协议" class="headerlink" title="检测协议"></a>检测协议</h4><p>返回一个BOOL值， 来表示调用该方法的类是否实现了对应的协议（参数）</p>
-<h5 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">BOOL</span>)conformsToProtocol:(Protocol *)protocol;</span><br></pre></td></tr></table></figure>
-<h5 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> canJoin = [MyClass conformsToProtocol:<span class="class"><span class="keyword">@protocol</span>(<span class="title">Joining</span>)];</span></span><br></pre></td></tr></table></figure>
-<h5 id="讨论-9"><a href="#讨论-9" class="headerlink" title="讨论"></a>讨论</h5><ol>
-<li><p>MyClass  实现了 AffiliationRequests  和 AffiliationRequests 协议</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">MyClass</span> : <span class="title">NSObject</span> &lt;<span class="title">AffiliationRequests</span>, <span class="title">Normalization</span>&gt;</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>协议之间的合并 AffiliationRequests 合并了 Joining 协议</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">AffiliationRequests</span> &lt;<span class="title">Joining</span>&gt;</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果 MyClass 实现了AffiliationRequests协议，同样实现了 Joining， <em>conformsToProtocol</em> 返回结果为YES</p>
-</li>
-<li><em>conformsToProtocol：</em> 该方法不会检测程序有没有实现协议中的方法，只会检测在类的声明后面有没有<protocol name="">。</protocol></li>
-<li>即使你实现了协议的方法，但是没有在类的声明后面通过尖括号包含协议的名字，那么该方法返回仍为NO</li>
-</ol>
-<hr>
-<h3 id="获取方法信息"><a href="#获取方法信息" class="headerlink" title="获取方法信息"></a>获取方法信息</h3><h4 id="methodForSelector"><a href="#methodForSelector" class="headerlink" title="- methodForSelector:"></a>- methodForSelector:</h4><p>返回方法实现的地址</p>
-<h5 id="方法声明-6"><a href="#方法声明-6" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (IMP)methodForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<p><em>IMP</em> 方法（函数）指针，也就是实现方法的地址<br>参数 <em>aSelector</em>必须合法，在传入作为参数之前，可以通过 <em>responseToSelector</em> 检查该参数指向的方法是否已经实现了</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MethodInfor *mObj = [MethodInfor new];</span><br><span class="line"><span class="keyword">if</span> ([mObj respondsToSelector:<span class="keyword">@selector</span>(sayHello)]) &#123;</span><br><span class="line">    IMP imp = [mObj methodForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>,imp);</span><br><span class="line">    imp();<span class="comment">// 执行了 sayHello 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-10"><a href="#讨论-10" class="headerlink" title="讨论"></a>讨论</h5><p>方法的调用者如果是 类 那么 aSelector 必须是类方法；<br>方法的调用者如果是 实例 那么 aSelector 必须是实例方法</p>
-<h4 id="instanceMethodForSelector"><a href="#instanceMethodForSelector" class="headerlink" title="+ instanceMethodForSelector:"></a>+ instanceMethodForSelector:</h4><p>返回实例方法实现的地址</p>
-<h5 id="方法声明-7"><a href="#方法声明-7" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (IMP)instanceMethodForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<p><em>IMP</em> 方法（函数）指针，也就是实现方法的地址<br>参数 <em>aSelector</em>必须合法，在传入作为参数之前，可以通过 <em>instanceMethodForSelector</em> 检查该参数指向的方法是否已经实现了</p>
-<h5 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([MethodInfor instancesRespondToSelector:<span class="keyword">@selector</span>(sayHello)]  ) &#123;</span><br><span class="line">    IMP imp = [MethodInfor instanceMethodForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>,imp);</span><br><span class="line">    imp();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-11"><a href="#讨论-11" class="headerlink" title="讨论"></a>讨论</h5><p>该方法只用来检测 类 中的实例有没有实现实例方法，不能检测类方法。检测类方法使用 <em>methodForSelector:</em> 。</p>
-<h4 id="instanceMethodSignatureForSelector"><a href="#instanceMethodSignatureForSelector" class="headerlink" title="+ instanceMethodSignatureForSelector:"></a>+ instanceMethodSignatureForSelector:</h4><p>返回方法签名对象<a href="https://developer.apple.com/documentation/foundation/nsmethodsignature?language=occ" target="_blank" rel="noopener">NSMethodSignature</a></p>
-<h5 id="方法声明-8"><a href="#方法声明-8" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSMethodSignature</span> *)instanceMethodSignatureForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<h5 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMethodSignature</span> *sayHelloSignature = [MethodInfor instanceMethodSignatureForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-12"><a href="#讨论-12" class="headerlink" title="讨论"></a>讨论</h5><p>该方法会返回一个方法的签名对象，如果类的对象不能响应这个方法，那么会返回一个 nil 对象。</p>
-<h4 id="methodSignatureForSelector"><a href="#methodSignatureForSelector" class="headerlink" title="- methodSignatureForSelector:"></a>- methodSignatureForSelector:</h4><p>返回方法签名对象<a href="https://developer.apple.com/documentation/foundation/nsmethodsignature?language=occ" target="_blank" rel="noopener">NSMethodSignature</a></p>
-<h5 id="方法声明-9"><a href="#方法声明-9" class="headerlink" title="方法声明"></a>方法声明</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSMethodSignature</span> *)methodSignatureForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<h5 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMethodSignature</span> *sayHelloSignature = [MethodInfor instanceMethodSignatureForSelector:<span class="keyword">@selector</span>(sayHello)];</span><br></pre></td></tr></table></figure>
-<h5 id="讨论-13"><a href="#讨论-13" class="headerlink" title="讨论"></a>讨论</h5><p>该方法会返回一个方法的签名对象，如果类的对象不能响应这个方法，那么会返回一个 nil 对象。<br>该方法针对类和对象都可以。<br>这里与<br><em>This method is used in the implementation of protocols. This method is also used in situations where an NSInvocation object must be created, such as during message forwarding. If your object maintains a delegate or is capable of handling messages that it does not directly implement, you should override this method to return an appropriate method signature.</em> 没看懂，等了解了 NSInvocation 之后再来看看。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/01/Pre/SQLite-FTS3-and-FTS4-Extensions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/06/01/Pre/SQLite-FTS3-and-FTS4-Extensions/" itemprop="url">SQLite FTS3 and FTS4 Extensions</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-01T11:07:27+08:00">
-                2015-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DataBase/" itemprop="url" rel="index">
-                    <span itemprop="name">DataBase</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ol>
-<li><a href="http://www.sqlite.org/fts3.html" target="_blank" rel="noopener">SQLite FTS3 and FTS4 Extensions</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2007,7 +1877,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2018,7 +1888,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
