@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="The Loneliest Whale in the World">
+<meta name="description" content="数据结构 - 树树结构可以帮助我们解决很多重要问题：  代表对象之间有层次依赖的关系 快速查找 提供一种排序的列表数据 文本中的前缀匹配  树种的术语Root 根节点树结构中第 0 层的节点称为 root 节点，这个节点作为树的入口 Node 节点Node 是树结构中的基本单位，是树中分装数据的结构， root 也是一种 node Leaf 叶子节点最底层的 node 节点，没有孩子节点 Swif">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Data Structure (二) Tree">
 <meta property="og:url" content="http://yoursite.com/2018/07/31/Data-Structure-二-Tree/index.html">
 <meta property="og:site_name" content="Hi, this is Alice Home">
-<meta property="og:description" content="The Loneliest Whale in the World">
+<meta property="og:description" content="数据结构 - 树树结构可以帮助我们解决很多重要问题：  代表对象之间有层次依赖的关系 快速查找 提供一种排序的列表数据 文本中的前缀匹配  树种的术语Root 根节点树结构中第 0 层的节点称为 root 节点，这个节点作为树的入口 Node 节点Node 是树结构中的基本单位，是树中分装数据的结构， root 也是一种 node Leaf 叶子节点最底层的 node 节点，没有孩子节点 Swif">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-31T01:19:56.979Z">
+<meta property="og:updated_time" content="2018-08-02T16:39:36.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Data Structure (二) Tree">
-<meta name="twitter:description" content="The Loneliest Whale in the World">
+<meta name="twitter:description" content="数据结构 - 树树结构可以帮助我们解决很多重要问题：  代表对象之间有层次依赖的关系 快速查找 提供一种排序的列表数据 文本中的前缀匹配  树种的术语Root 根节点树结构中第 0 层的节点称为 root 节点，这个节点作为树的入口 Node 节点Node 是树结构中的基本单位，是树中分装数据的结构， root 也是一种 node Leaf 叶子节点最底层的 node 节点，没有孩子节点 Swif">
 
 
 
@@ -384,7 +384,17 @@
       
 
       
-        
+        <h2 id="数据结构-树"><a href="#数据结构-树" class="headerlink" title="数据结构 - 树"></a>数据结构 - 树</h2><p>树结构可以帮助我们解决很多重要问题：</p>
+<ul>
+<li>代表对象之间有层次依赖的关系</li>
+<li>快速查找</li>
+<li>提供一种排序的列表数据</li>
+<li>文本中的前缀匹配</li>
+</ul>
+<h2 id="树种的术语"><a href="#树种的术语" class="headerlink" title="树种的术语"></a>树种的术语</h2><h3 id="Root-根节点"><a href="#Root-根节点" class="headerlink" title="Root 根节点"></a>Root 根节点</h3><p>树结构中第 0 层的节点称为 root 节点，这个节点作为树的入口</p>
+<h3 id="Node-节点"><a href="#Node-节点" class="headerlink" title="Node 节点"></a>Node 节点</h3><p>Node 是树结构中的基本单位，是树中分装数据的结构， root 也是一种 node</p>
+<h3 id="Leaf-叶子节点"><a href="#Leaf-叶子节点" class="headerlink" title="Leaf 叶子节点"></a>Leaf 叶子节点</h3><p>最底层的 node 节点，没有孩子节点</p>
+<h2 id="Swift-实现树结构"><a href="#Swift-实现树结构" class="headerlink" title="Swift 实现树结构"></a>Swift 实现树结构</h2>
       
     </div>
     
@@ -437,6 +447,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/08/03/排序-一-冒泡排序/" rel="prev" title="排序(一) 冒泡排序">
+                排序(一) 冒泡排序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -487,8 +501,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -503,7 +526,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">94</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -514,7 +537,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -550,6 +573,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构-树"><span class="nav-number">1.</span> <span class="nav-text">数据结构 - 树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树种的术语"><span class="nav-number">2.</span> <span class="nav-text">树种的术语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Root-根节点"><span class="nav-number">2.1.</span> <span class="nav-text">Root 根节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-节点"><span class="nav-number">2.2.</span> <span class="nav-text">Node 节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Leaf-叶子节点"><span class="nav-number">2.3.</span> <span class="nav-text">Leaf 叶子节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift-实现树结构"><span class="nav-number">3.</span> <span class="nav-text">Swift 实现树结构</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -296,6 +296,163 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/排序-一-冒泡排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/03/排序-一-冒泡排序/" itemprop="url">排序(一) 冒泡排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-03T00:56:59+08:00">
+                2018-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/排序/" itemprop="url" rel="index">
+                    <span itemprop="name">排序</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://github.com/AliceHome/Sort" target="_blank" rel="noopener">代码链接</a></p>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>轻者上浮，冒泡排序就是依次对比两个元素的大小，如果顺序错误就把它们进行交换。</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><ul>
+<li>取第一个元素和第二个元素进行比较，如果第一个大就交换；</li>
+<li>对第三个、第四个、… 执行相同操作，直到最后一个元素，这样结束后，最后一个元素最大</li>
+<li>重复上面的步骤，但是不除去最后一个元素</li>
+<li>重复上面的步骤，直到排序完成</li>
+</ul>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">bubbleSort</span><span class="params">(<span class="number">_</span> array: [Int])</span></span> -&gt; [<span class="type">Int</span>] &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> arr = array</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span> ..&lt; arr.<span class="built_in">count</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="number">0</span> ..&lt; arr.<span class="built_in">count</span>  - <span class="number">1</span> - i &#123;</span><br><span class="line">            <span class="keyword">if</span> arr[j] &gt; arr[j + <span class="number">1</span>]&#123;</span><br><span class="line">                arr.swapAt(j, j + <span class="number">1</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><ol>
+<li>时间复杂度： O(n²)</li>
+<li>空间复杂度： O(1)</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/Data-Structure-二-Tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -389,7 +546,17 @@
       
         
           
-            
+            <h2 id="数据结构-树"><a href="#数据结构-树" class="headerlink" title="数据结构 - 树"></a>数据结构 - 树</h2><p>树结构可以帮助我们解决很多重要问题：</p>
+<ul>
+<li>代表对象之间有层次依赖的关系</li>
+<li>快速查找</li>
+<li>提供一种排序的列表数据</li>
+<li>文本中的前缀匹配</li>
+</ul>
+<h2 id="树种的术语"><a href="#树种的术语" class="headerlink" title="树种的术语"></a>树种的术语</h2><h3 id="Root-根节点"><a href="#Root-根节点" class="headerlink" title="Root 根节点"></a>Root 根节点</h3><p>树结构中第 0 层的节点称为 root 节点，这个节点作为树的入口</p>
+<h3 id="Node-节点"><a href="#Node-节点" class="headerlink" title="Node 节点"></a>Node 节点</h3><p>Node 是树结构中的基本单位，是树中分装数据的结构， root 也是一种 node</p>
+<h3 id="Leaf-叶子节点"><a href="#Leaf-叶子节点" class="headerlink" title="Leaf 叶子节点"></a>Leaf 叶子节点</h3><p>最底层的 node 节点，没有孩子节点</p>
+<h2 id="Swift-实现树结构"><a href="#Swift-实现树结构" class="headerlink" title="Swift 实现树结构"></a>Swift 实现树结构</h2>
           
         
       
@@ -1059,7 +1226,7 @@
 </ul>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//测试</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testLinkedListAppend</span><span class="params">()</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> link = <span class="type">LinkedList</span>()</span><br><span class="line">    link.append(<span class="number">10</span>)</span><br><span class="line">    <span class="built_in">assert</span>(!link.isEmpty, <span class="string">"非空链表"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">assert</span>(link.first?.value == <span class="number">10</span>, <span class="string">"head 节点为 10"</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">10</span>, <span class="string">"tail 节点为 10"</span>)</span><br><span class="line">    link.append(<span class="number">20</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">20</span>, <span class="string">"tail 节点为 20"</span>)</span><br><span class="line">    link.append(<span class="number">30</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">30</span>, <span class="string">"tail 节点为 30"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testLinkedListAppend()</span><br></pre></td></tr></table></figure>
 <h2 id="输出链表"><a href="#输出链表" class="headerlink" title="输出链表"></a>输出链表</h2><p>当我们学会插入节点之后，第一时间就行看看链表中的内容。目前如果只是简单的 print(link) 的话是不能打印出处链表的信息的，为了实现输出链表信息，做如下操作：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LinkedList</span>: <span class="title">CustomStringConvertible</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> description: <span class="type">String</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> text = <span class="string">"["</span></span><br><span class="line">        <span class="keyword">var</span> node = head</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">            text += <span class="string">"\(node!.value)"</span></span><br><span class="line">            node = node!.next</span><br><span class="line">            <span class="keyword">if</span> node != <span class="literal">nil</span> &#123; text += <span class="string">" -&gt; "</span> &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> text + <span class="string">"]"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LinkedList</span>: <span class="title">CustomStringConvertible</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> description: <span class="type">String</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> text = <span class="string">"["</span></span><br><span class="line">        <span class="keyword">var</span> node = head</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">            text += <span class="string">"<span class="subst">\(node!.value)</span>"</span></span><br><span class="line">            node = node!.next</span><br><span class="line">            <span class="keyword">if</span> node != <span class="literal">nil</span> &#123; text += <span class="string">" -&gt; "</span> &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> text + <span class="string">"]"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>说明：</strong></p>
 <ul>
 <li>首先为 LinkedList 声明 extension，然后实现 CustomStringConvertible 协议，这个协议要求你实现 computed property description：String</li>
@@ -1735,135 +1902,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/current/June/我读过的博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/23/current/June/我读过的博客/" itemprop="url">我读过的博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T21:19:41+08:00">
-                2018-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><ol>
-<li><a href="http://tech.glowing.com/cn/" target="_blank" rel="noopener">Glow 技术团队博客</a>， 这是 Glow 团队的技术博客，其中印象比较深刻的有：runtime 的黑魔法，以及 ScrollView 的自动布局等其他用法，UITableView 图片加载的优化，还有一个是 KVO 的原理以及自己实现，这里的博客不仅仅有 iOS 的还有 Android 和 后台以及统计等方面的，非常适合阅读，我是花了一早上时间翻阅了所有的博客的，记忆深刻的是 Https 的过程</li>
-<li><a href="https://www.objc.io/" target="_blank" rel="noopener"> objc.io 英文</a> &amp; <a href="https://www.objccn.io/" target="_blank" rel="noopener">objc.io 中文</a>，这里全部都是 iOS 的了，推荐直接看中文的吧，感觉每一篇都比较深刻，不是读一遍两遍可以体会到东西的，反正目前我还没有读完 … … 不知道是读不懂，还是怎么样，看着不错，但是读完了却没有学习到什么，可能是太深刻了</li>
-<li><a href="https://nshipster.cn/" target="_blank" rel="noopener">NSHipster 中文</a>,这里的博客也是深度好文，不过觉得也是浅尝辄止吧，如果要学习东西的话，还是需要搜索其他的相关信息</li>
-<li><a href="https://www.jianshu.com/u/815d10a4bdce" target="_blank" rel="noopener">落影</a> 博客里面有关于算法和音视频方面的知识，以及一些面试指导 还有 OpenGL</li>
-<li><a href="https://www.jianshu.com/u/9c51a213b02e" target="_blank" rel="noopener">Joy__博客</a>,质量比较高，是通过趣直播发现的，然后看了下博客以及 GitHub，目前应该是就只与今日头条。博客中的内容主要是针对于 app 性能检测的，偏底层多一些</li>
-</ol>
-<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><h2 id="Node-JS"><a href="#Node-JS" class="headerlink" title="Node JS"></a>Node JS</h2><h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><h2 id="混合"><a href="#混合" class="headerlink" title="混合"></a>混合</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1914,7 +1952,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">94</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1925,7 +1963,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
