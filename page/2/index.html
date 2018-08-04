@@ -296,6 +296,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/current/June/RunLoop（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/23/current/June/RunLoop（一）/" itemprop="url">RunLoop（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T22:46:19+08:00">
+                2018-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/RunLoop/" itemprop="url" rel="index">
+                    <span itemprop="name">RunLoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="故事"><a href="#故事" class="headerlink" title="故事"></a>故事</h2><p>RunLoop ，运行时循环。</p>
+<p>iOS App 启动之后，当前进程开启主线程之后，为了保证主线程一直在运行就在主线程中开启了 RunLoop。RunLoop 在运行过程中，如果有事件（比如 timer、Source、Observe）就会进行处理，如果没有事件就会在一种休眠状态。</p>
+<p>在真正了解 RunLoop 之前，估计我就只能说出上面这一串解释说明了，如果再继续说的话，就应该是响应者链了。但是，经过最近一段时间学习发现 RunLoop 真是无处不在，只不过我们没有注意吧了。</p>
+<p>比如：</p>
+<ol>
+<li>Timer 的运行与 RunLoop 有关，主要是 mode 方面；</li>
+<li>GCD 的 dispatch_get_mainQueue 也与 RunLoop 有关系，毕竟都是在主线程中的事情；</li>
+<li>ScrollView/TextView 的滑动业余 RunLoop 有关，主要是模式之间的切换；</li>
+<li>App 的卡顿与 RunLoop 也有关，这个我倒是还不知道什么事情</li>
+</ol>
+<p>…</p>
+<p>真心发现 RunLoop 是一个很大的模块，之前一直忽略了，这次抽时间好好的细致的了解一下 RunLoop 中的知识。</p>
+<h2 id="RunLoop-API"><a href="#RunLoop-API" class="headerlink" title="RunLoop API"></a>RunLoop API</h2><p>RunLoop 的 API 有两套，一套是 OC 的，名字是 NSRunLoop； 另一套是 C 语言的 CFRunLoop。 后者是开源的</p>
+<p>针对于 NSRunLoop，可以看一下文档介绍，大体意思为：<br>NSRunLoop 是编程接口，这套编程接口主要用来处理输源。<br>一个 NSRunLoop 对象负责处理键盘、鼠标、NSPort、NSConnection 以及 NSTimer 事件。你的应用开发中不能直接创建和管理 NSRunLoop。每一个 NSThread 对象，包括 mainThread 都包含了一个 NSRunLoop 对象，这个对象根据需要自动创建。如果你想要查看当前的 RunLoop 对象，可以通过 currentRunLoop 获取。</p>
+<p>需要注意的是：<br>NSRunLoop 不是线程安全的，所以不要在多线程中使用 NSRunLoop。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/current/June/我读过的博客/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1573,169 +1732,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/current/June/细说iOS-刷新控件（一/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/01/current/June/细说iOS-刷新控件（一/" itemprop="url">细说 iOS 刷新控件（一)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T14:20:10+08:00">
-                2018-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/刷新控件/" itemprop="url" rel="index">
-                    <span itemprop="name">刷新控件</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://github.com/AliceHome/iOSRefreshDemo" target="_blank" rel="noopener">我是 demo 链接，欢迎点击！！！</a></p>
-<p>刷新数据，是 iOS 开发过程中一个重要的操作，操作频率也非常高！现在一般刷新控件都直接使用 MJRefresh 这个第三方控件，后面将会详细讲解其原理，这一篇首先介绍系统的刷新控件 —— UIRefreshControl</p>
-<h2 id="UIRefreshControl"><a href="#UIRefreshControl" class="headerlink" title="UIRefreshControl"></a>UIRefreshControl</h2><h3 id="UITableViewController-iOS-6-之后的属性-refreshControl"><a href="#UITableViewController-iOS-6-之后的属性-refreshControl" class="headerlink" title="UITableViewController iOS 6 之后的属性 refreshControl"></a>UITableViewController iOS 6 之后的属性 refreshControl</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span> (nonatomic, strong, nullable) UIRefreshControl *<span class="function">refreshControl <span class="title">NS_AVAILABLE_IOS</span><span class="params">(<span class="number">6</span>_0)</span> __TVOS_PROHIBITED</span>;</span><br></pre></td></tr></table></figure>
-<p>这是 UITableViewController 中的声明，由此可知：</p>
-<ol>
-<li>refreshControl 是 UITableViewController 的属性，我们如果使用这个控件，就必须使用 UITableViewController；</li>
-<li>后面的 NS_AVAILABLE_IOS(6_0) 说明是 iOS 6 才会支持这个控件</li>
-</ol>
-<h3 id="UIRefreshControl-1"><a href="#UIRefreshControl-1" class="headerlink" title="UIRefreshControl"></a>UIRefreshControl</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line">    </span><br><span class="line">NS_CLASS_AVAILABLE_IOS(<span class="number">6_0</span>) __TVOS_PROHIBITED <span class="meta">@interface</span> UIRefreshControl : UIControl</span><br><span class="line"></span><br><span class="line"><span class="comment">/* The designated initializer</span></span><br><span class="line"><span class="comment"> * This initializes a UIRefreshControl with a default height and width.</span></span><br><span class="line"><span class="comment"> * Once assigned to a UITableViewController, the frame of the control is managed automatically.</span></span><br><span class="line"><span class="comment"> * When a user has pulled-to-refresh, the UIRefreshControl fires its UIControlEventValueChanged event.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (instancetype)init;</span><br><span class="line"><span class="meta">@property</span> (nonatomic, readonly, getter=isRefreshing) BOOL refreshing;</span><br><span class="line"><span class="meta">@property</span> (null_resettable, nonatomic, strong) UIColor *tintColor;</span><br><span class="line"><span class="meta">@property</span> (nullable, nonatomic, strong) NSAttributedString *attributedTitle UI_APPEARANCE_SELECTOR;</span><br><span class="line"></span><br><span class="line"><span class="comment">// May be used to indicate to the refreshControl that an external event has initiated the refresh action</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="function">beginRefreshing <span class="title">NS_AVAILABLE_IOS</span><span class="params">(<span class="number">6</span>_0)</span></span>;</span><br><span class="line"><span class="comment">// Must be explicitly called when the refreshing has completed</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="function">endRefreshing <span class="title">NS_AVAILABLE_IOS</span><span class="params">(<span class="number">6</span>_0)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@end</span></span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
-<p>这是 UIRefreshControl 的 API，从中可以看出：</p>
-<ol>
-<li>通过 init 方法创建的控件有默认的 height 和 width</li>
-<li>在 UITableViewController 中这个控件 frame 会被自动管理</li>
-<li>当执行下拉刷新动作的时候，UIRefreshControl 会被 UIControlEventValueChanged 事件触发，所以我们可通过 addTarget 监听这个状态来执行相应的刷新方法</li>
-</ol>
-<p>关于该 API 其他的地方可以通过其他的文章查看，比如 NS_ASSUME_NONNULL_BEGIN、NS_ASSUME_NONNULL_END 这一对宏，以及 null_resettable、nullable 这中关键字，还有 UI_APPEARANCE_SELECTOR</p>
-<p>UITableViewController 中刷新控件具体使用参照代码：<a href="https://github.com/AliceHome/iOSRefreshDemo" target="_blank" rel="noopener">https://github.com/AliceHome/iOSRefreshDemo</a></p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>这里控件的使用是非常简单方便的，如果只是简单实现刷新的功能，或者修改下文案可以直接使用这个控件。当然，如果不满足当前项目开发需求，比如要做一些本地化的效果，那么就需要自定义刷新控件了，当然可以直接参照上面开发的 API 去设计自己的刷新控件。除此之外，就是使用其他第三方控件，比如 MJRefresh、EGORefresh（这个库当前也是挺好用的，但是不知不觉就被遗忘了）</p>
-<p>下期预告：将介绍第三方 MJRefresh<br>未来设想：如果有机会有时间可以参照系统的 API 自己实现以下 refresh control</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1786,7 +1782,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">94</span>
+                <span class="site-state-item-count">95</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

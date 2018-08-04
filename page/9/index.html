@@ -296,6 +296,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/03/Pre/Python2-x-过渡到-Python3-x-的那些错误/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/03/Pre/Python2-x-过渡到-Python3-x-的那些错误/" itemprop="url">Python2.x 过渡到 Python3.x 的那些错误</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-03T18:57:39+08:00">
+                2017-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在写 Python 的过程中，因为有些时候参考的代码是 Python2 写的，所以在 3.x 的环境中就容易抛出一些异常信息，在这里进行记录</p>
+<h2 id="类型异常"><a href="#类型异常" class="headerlink" title="类型异常"></a>类型异常</h2><h3 id="byte-和-string"><a href="#byte-和-string" class="headerlink" title="byte 和 string"></a>byte 和 string</h3><p>在写 socket 的程序的时候， recv() 函数返回值在 2.x 中是字符串的格式，但是在 3.x 之后是 byte 的格式，这样在 print() 函数中输出 recv() 的结果的时候就会报异常信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: must be str, not bytes</span><br></pre></td></tr></table></figure>
+<p><strong>解决方案：</strong><br>通过 byte() 函数进行转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">byte = sk.recv(1024)</span><br><span class="line">byte(&apos;utf-8&apos;)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/04/Pre/算法C描述之数据结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1808,154 +1957,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/02/Pre/iOS 问题札记/iOS-开发-Tips/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/02/02/Pre/iOS 问题札记/iOS-开发-Tips/" itemprop="url">iOS 开发 Tips</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-02-02T11:47:34+08:00">
-                2015-02-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记录在开发过程中的一些小技巧的使用</p>
-<h2 id="TableView"><a href="#TableView" class="headerlink" title="TableView"></a>TableView</h2><h3 id="取消-table-view-的-section-悬停"><a href="#取消-table-view-的-section-悬停" class="headerlink" title="取消 table view 的 section 悬停"></a>取消 <em>table view</em> 的 <em>section</em> 悬停</h3><p>有时候，通过使用 <em>sectionView</em> 实现tableView的间隔效果，但是不想让这个间隔悬停。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CGFloat</span> sectionHeaderHeight = <span class="number">12</span>;</span><br><span class="line">    <span class="keyword">if</span> (scrollView.contentOffset.y&lt;=sectionHeaderHeight&amp;&amp;scrollView.contentOffset.y&gt;=<span class="number">0</span>) &#123;</span><br><span class="line">        scrollView.contentInset = <span class="built_in">UIEdgeInsetsMake</span>(-scrollView.contentOffset.y, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (scrollView.contentOffset.y&gt;=sectionHeaderHeight) &#123;</span><br><span class="line">        scrollView.contentInset = <span class="built_in">UIEdgeInsetsMake</span>(-sectionHeaderHeight, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="tableView-中有输入框，键盘隐藏-UITableViewController-的效果"><a href="#tableView-中有输入框，键盘隐藏-UITableViewController-的效果" class="headerlink" title="tableView 中有输入框，键盘隐藏 - UITableViewController 的效果"></a>tableView 中有输入框，键盘隐藏 - UITableViewController 的效果</h3><p>通过实现UITableViewController中控制键盘的效果，又不使用UITableViewController</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">UITableView</span> *)tableView &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_tableView) &#123;</span><br><span class="line"></span><br><span class="line">        _tableView = [[<span class="built_in">UITableView</span> alloc] initWithFrame:<span class="built_in">CGRectZero</span> style:<span class="built_in">UITableViewStylePlain</span>];</span><br><span class="line">        <span class="comment">//处理键盘弹出tableView自动像是移动一段距离</span></span><br><span class="line">        <span class="built_in">UITableViewController</span> *tvc = [[<span class="built_in">UITableViewController</span> alloc] initWithStyle:<span class="built_in">UITableViewStylePlain</span>];</span><br><span class="line">        [<span class="keyword">self</span> addChildViewController:tvc];</span><br><span class="line">        _tableView = tvc.tableView;</span><br><span class="line"></span><br><span class="line">        _tableView.delegate = <span class="keyword">self</span>;</span><br><span class="line">        _tableView.dataSource = <span class="keyword">self</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _tableView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2006,7 +2007,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">94</span>
+                <span class="site-state-item-count">95</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
