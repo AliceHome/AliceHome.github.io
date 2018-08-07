@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="快速排序快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。 过程分析Code复杂度分析">
+<meta name="description" content="快速排序通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据编程有序序列。 过程分析一趟排序过程： 设置两个变量 i、j, 排序开始的时候： i = 0, j = N -1; 以第一个数组元素作为关键数据，赋值给 key：key = A[0]; 从 j 开始向前搜索">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序(二) 快速排序">
 <meta property="og:url" content="http://yoursite.com/2018/08/03/排序-二-快速排序/index.html">
 <meta property="og:site_name" content="Hi, this is Alice Home">
-<meta property="og:description" content="快速排序快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。 过程分析Code复杂度分析">
+<meta property="og:description" content="快速排序通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据编程有序序列。 过程分析一趟排序过程： 设置两个变量 i、j, 排序开始的时候： i = 0, j = N -1; 以第一个数组元素作为关键数据，赋值给 key：key = A[0]; 从 j 开始向前搜索">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-03T05:38:11.419Z">
+<meta property="og:updated_time" content="2018-08-07T14:29:28.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序(二) 快速排序">
-<meta name="twitter:description" content="快速排序快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。 过程分析Code复杂度分析">
+<meta name="twitter:description" content="快速排序通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据编程有序序列。 过程分析一趟排序过程： 设置两个变量 i、j, 排序开始的时候： i = 0, j = N -1; 以第一个数组元素作为关键数据，赋值给 key：key = A[0]; 从 j 开始向前搜索">
 
 
 
@@ -384,8 +384,18 @@
       
 
       
-        <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。</p>
-<h2 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h2><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2>
+        <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据编程有序序列。</p>
+<h2 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h2><h3 id="一趟排序过程："><a href="#一趟排序过程：" class="headerlink" title="一趟排序过程："></a>一趟排序过程：</h3><ol>
+<li>设置两个变量 i、j, 排序开始的时候： i = 0, j = N -1;</li>
+<li>以第一个数组元素作为关键数据，赋值给 key：key = A[0];</li>
+<li>从 j 开始向前搜索，即由后向前开始搜索（j –）, 找到第一个小于 key 的值 A[j]，将 A[j] 和 A[i] 交换；</li>
+<li>从 i 开始向后搜索，即由前向后开始搜索（i ++），找到第一个大于 key 的 A[i], 然后将 A[j] 和 A[i] 交换；</li>
+<li>重复 3、4 步骤，知道 i = j;</li>
+</ol>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>不得不说冒泡排序相对来说比较复杂些，这篇博客也是经过了三四天才写完的，刚开始看别人写的算法实现，不太明白，然后看了下排序的动态图，还是模模糊糊。我觉得，怎么算是掌握了一个算法呢？首先，要知道每一步怎么去操作，比如给一串数字告诉你一个排序算法名字，你可以写出每一步骤怎么做，这是掌握；其次，要写出它的伪代码；最后，代码实现！很多公司会让你说这个算法题奥！</p>
+</blockquote>
+
       
     </div>
     
@@ -437,6 +447,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/08/NSTimer-循环引用/" rel="prev" title="NSTimer 内存泄露">
+                NSTimer 内存泄露 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -513,7 +527,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">95</span>
+                <span class="site-state-item-count">96</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -570,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">1.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程分析"><span class="nav-number">2.</span> <span class="nav-text">过程分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">复杂度分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">1.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程分析"><span class="nav-number">2.</span> <span class="nav-text">过程分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一趟排序过程："><span class="nav-number">2.1.</span> <span class="nav-text">一趟排序过程：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">5.</span> <span class="nav-text">前言</span></a></li></ol></div>
             
 
           </div>
