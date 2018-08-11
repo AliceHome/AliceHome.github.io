@@ -296,6 +296,433 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/" itemprop="url">Hexo (一) fork me on github</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T23:48:25+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><p><img src="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/forkme.png" alt=""></p>
+<p>如上图所示，在 next 主题的基础上，实现 for me on GitHub 的功能，点击右上角的 GitHub 图标可以直接跳转到你的 GitHub 主页上。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="Step-1："><a href="#Step-1：" class="headerlink" title="Step 1："></a>Step 1：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple/themes/next/layout [0:04:41]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">_custom       _partials     archive.swig  page.swig     tag.swig</span><br><span class="line">_layout.swig  _scripts      category.swig post.swig</span><br><span class="line">_macro        _third-party  index.swig    schedule.swig</span><br></pre></td></tr></table></figure>
+<p>进入到你的 Hexo 目录，然后找到文件 <code>_layout.swig</code> 通过文本编辑器打开</p>
+<h3 id="Step-2："><a href="#Step-2：" class="headerlink" title="Step 2："></a>Step 2：</h3><p>找到 <code>_layout.swig</code> 中如下代码（全局搜索：headband ）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"&#123;&#123; container_class &#125;&#125; &#123;% block page_class %&#125;&#123;% endblock %&#125; "</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"headband"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后打开：<a href="https://blog.github.com/2008-12-19-github-ribbons/" target="_blank" rel="noopener">GitHub Ribbons</a> 或者 <a href="http://tholman.com/github-corners/" target="_blank" rel="noopener">GitHub Corners</a></p>
+<p><img src="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/githubCorners.png" alt=""></p>
+<p>复制图标样式旁边的代码粘贴到上面的代码下面，效果如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"&#123;&#123; container_class &#125;&#125; &#123;% block page_class %&#125;&#123;% endblock %&#125; "</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"headband"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://github.com/AliceHome"</span> <span class="attr">class</span>=<span class="string">"github-corner"</span> <span class="attr">aria-label</span>=<span class="string">"View source on Github"</span>&gt;</span><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">"80"</span> <span class="attr">height</span>=<span class="string">"80"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 250 250"</span> <span class="attr">style</span>=<span class="string">"fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"</span> <span class="attr">fill</span>=<span class="string">"currentColor"</span> <span class="attr">style</span>=<span class="string">"transform-origin: 130px 106px;"</span> <span class="attr">class</span>=<span class="string">"octo-arm"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"</span> <span class="attr">fill</span>=<span class="string">"currentColor"</span> <span class="attr">class</span>=<span class="string">"octo-body"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined">.github-corner:hover .octo-arm&#123;animation:octocat-wave 560ms ease-in-out&#125;@keyframes octocat-wave&#123;0%,100%&#123;transform:rotate(0)&#125;20%,60%&#123;transform:rotate(-25deg)&#125;40%,80%&#123;transform:rotate(10deg)&#125;&#125;@media (max-width:500px)</span></span><br><span class="line"><span class="undefined">&#123;.github-corner:hover .octo-arm&#123;animation:none&#125;.github-corner .octo-arm&#123;animation:octocat-wave 560ms ease-in-out&#125;&#125;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="step-3"><a href="#step-3" class="headerlink" title="step 3:"></a>step 3:</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> hexo g</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> hexo s</span></span><br></pre></td></tr></table></figure>
+<p>验证效果，Done!</p>
+<p>感谢简书大神：<br><a href="https://www.jianshu.com/p/f054333ac9e6" target="_blank" rel="noopener">hexo的next主题个性化教程:打造炫酷网站</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/current/June/Hexo-零-问题列表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/19/current/June/Hexo-零-问题列表/" itemprop="url">Hexo(零) 问题列表</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T11:57:19+08:00">
+                2018-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Cannot-set-property-‘lastIndex’-of-undefined"><a href="#Cannot-set-property-‘lastIndex’-of-undefined" class="headerlink" title="Cannot set property ‘lastIndex’ of undefined"></a>Cannot set property ‘lastIndex’ of undefined</h2><h3 id="问题详细："><a href="#问题详细：" class="headerlink" title="问题详细："></a>问题详细：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> maple @ iMac in ~/Maple [11:05:09]</span><br><span class="line">$ hexo g</span><br><span class="line">INFO  Start processing</span><br><span class="line">FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</span><br><span class="line">TypeError: Cannot set property &apos;lastIndex&apos; of undefined</span><br><span class="line">    at highlight (/Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:511:35)</span><br><span class="line">    at /Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:561:21</span><br><span class="line">    at Array.forEach (&lt;anonymous&gt;)</span><br><span class="line">    at Object.highlightAuto (/Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:560:40)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:117:25</span><br><span class="line">    at highlight (/Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:120:7)</span><br><span class="line">    at highlightUtil (/Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:22:14)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo/lib/plugins/filter/before_post_render/backtick_code_block.js:62:15</span><br><span class="line">    at String.replace (&lt;anonymous&gt;)</span><br><span class="line">    at Hexo.backtickCodeBlock (/Users/maple/Maple/node_modules/hexo/lib/plugins/filter/before_post_render/backtick_code_block.js:14:31)</span><br><span class="line">    at Hexo.tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Hexo.&lt;anonymous&gt; (/Users/maple/Maple/node_modules/bluebird/js/release/method.js:15:34)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo/lib/extend/filter.js:68:35</span><br><span class="line">    at tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Object.gotValue (/Users/maple/Maple/node_modules/bluebird/js/release/reduce.js:155:18)</span><br><span class="line">    at Object.gotAccum (/Users/maple/Maple/node_modules/bluebird/js/release/reduce.js:144:25)</span><br><span class="line">    at Object.tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Promise._settlePromiseFromHandler (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:512:31)</span><br><span class="line">    at Promise._settlePromise (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:569:18)</span><br><span class="line">    at Promise._settlePromiseCtx (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:606:10)</span><br><span class="line">    at Async._drainQueue (/Users/maple/Maple/node_modules/bluebird/js/release/async.js:138:12)</span><br><span class="line">    at Async._drainQueues (/Users/maple/Maple/node_modules/bluebird/js/release/async.js:143:10)</span><br></pre></td></tr></table></figure>
+<h3 id="修改方案："><a href="#修改方案：" class="headerlink" title="修改方案："></a>修改方案：</h3><p>在 _config.yml 修改 auto_detect: 的 true 为 false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">highlight:</span><br><span class="line">  enable: true</span><br><span class="line">  line_number: true</span><br><span class="line">  auto_detect: false</span><br><span class="line">  tab_replace:</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/03/Pre/红黑树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/03/Pre/红黑树/" itemprop="url">红黑树</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-03T13:55:13+08:00">
+                2018-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>红黑树，简称 R-B Tree，它是一种二叉查找树。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/02/current/June/细说-iOS-刷新控件-二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1454,508 +1881,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/Pre/iOS-App-内存专项实践/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/11/Pre/iOS-App-内存专项实践/" itemprop="url">iOS App 内存专项实践</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T10:44:01+08:00">
-                2018-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>此篇是学习了 QCon 大会记录</p>
-<p>iOS 是一个封闭的系统，使用的内存检测工具自然而然较少！</p>
-<h2 id="封闭系统下的工具-Instruments"><a href="#封闭系统下的工具-Instruments" class="headerlink" title="封闭系统下的工具 Instruments"></a>封闭系统下的工具 Instruments</h2><p>苹果 Xcode 继承了 Instruments 供调试使用，但是这个工具对于测试人员来说其实并不可用，或者基本上是不可用的。开发者使用起来倒是顺手。</p>
-<h2 id="封闭系统下的自由"><a href="#封闭系统下的自由" class="headerlink" title="封闭系统下的自由"></a>封闭系统下的自由</h2><p> 苹果系统自带的开发工具对于测试而言其实并不友好，苹果推崇的是开发、产品和测试集于一身的人员，而实际上这种倾向只适合于小的项目或者模块，模块一旦大了势必不是单打独头可以完成的，尤其是在大公司一个项目动辄编译半个小时，鉴于此就需要有适合于自动化集成的内存检测工具。</p>
-<h3 id="获取新建对象申请的内存地址和堆栈"><a href="#获取新建对象申请的内存地址和堆栈" class="headerlink" title="获取新建对象申请的内存地址和堆栈"></a>获取新建对象申请的内存地址和堆栈</h3><ul>
-<li>纯 OC 代码： 利用 <em>method_exchangeImplementationse</em> 接管 alloc 和 dealloc</li>
-<li>C++ 内网版本（非纯 OC 代码）： 借用开发工具的权限， malloc_logger 简单直接</li>
-<li>C++ 外网版本： fishhook hook: malloc\calloc\free</li>
-</ul>
-<h3 id="获取指针变量"><a href="#获取指针变量" class="headerlink" title="获取指针变量"></a>获取指针变量</h3><ul>
-<li>堆区</li>
-<li>全局区</li>
-<li>栈区</li>
-</ul>
-<h3 id="剩下问题"><a href="#剩下问题" class="headerlink" title="剩下问题"></a>剩下问题</h3><p>内存泄漏的结果是：内存耗尽，闪退。除了内存泄漏之外还有没有其他的原因会造成闪退呢？</p>
-<ul>
-<li>大内存常驻</li>
-<li>内存越界</li>
-<li>侵略性内存使用，比如一次申请的内存空间很大</li>
-</ul>
-<p><strong>解决思路：</strong></p>
-<ul>
-<li>记录申请的内存大小和堆栈</li>
-<li>记录堆栈内存的释放</li>
-<li>聚合数据</li>
-</ul>
-<p>对上面的记录进行判断：</p>
-<ul>
-<li>单个申请的内存块大雨 50 MB</li>
-<li>申请内存（未释放）的综合大于阈值</li>
-</ul>
-<p>针对内存越界，可以通过 address sanitizer 来进行检测：</p>
-<ul>
-<li>Heap buffer overflow</li>
-<li>Stack buffer overflow</li>
-<li>Global buffer overflow</li>
-<li>dangling pointer</li>
-<li>Use-after-free</li>
-<li>Double-free</li>
-</ul>
-<h3 id="最后记录："><a href="#最后记录：" class="headerlink" title="最后记录："></a>最后记录：</h3><ul>
-<li>工具：Xcode、Address Sanitizer、Instruments</li>
-<li>界面声明周期</li>
-<li>Xcode（malloc_logger)、LLDB</li>
-<li>hook：fishhook、method_exchangeImplementations</li>
-<li>hook 获取源码能力： fishhook 如何遍历 SECT_DATA 获取全局区</li>
-<li>Jetsam<br>Monkey 做自动化</li>
-</ul>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>这是一名测试工程师的分享，虽然没有实际的实现，但是原理已经讲明包括使用的工具以及有哪些方面，后面会慢慢去实践。</p>
-<p>由这次学习有获得了两本书可以看：</p>
-<ol>
-<li>《Mac OS X and iOS Internals 2012》</li>
-<li>《Mac Os X Internals - A Systems Approach》</li>
-</ol>
-<p><strong>参考：</strong><br><a href="http://www.infoq.com/cn/presentations/ios-app-memory-special-practice-the-big-freedom-under-the-closed-system?utm_source=presentations_about_iOS&amp;utm_medium=link&amp;utm_campaign=iOS" target="_blank" rel="noopener">iOS App 内存专项实践</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/10/current/June/LeetCode/LeetCode-四）链表之反转链表/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/10/current/June/LeetCode/LeetCode-四）链表之反转链表/" itemprop="url">LeetCode(四)反转链表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T21:29:23+08:00">
-                2018-06-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>预备知识：<a href="https://alicehome.github.io/2018/07/26/Data-Structure-%E4%B8%80-Linked-List/" target="_blank" rel="noopener">Data Structure(一) Linked List</a><br><a href="https://github.com/AliceHome/LeetCode_linkedList" target="_blank" rel="noopener">代码链接</a><br><a href="https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/43/" target="_blank" rel="noopener">题目题目链接</a></p>
-<h2 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h2><p>反转一个单链表。</p>
-<p><strong>示例:</strong></p>
-<blockquote>
-<p>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
-</blockquote>
-<p><strong>进阶:</strong></p>
-<p>你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
-<h2 id="思路一：-迭代的方式"><a href="#思路一：-迭代的方式" class="headerlink" title="思路一： 迭代的方式"></a>思路一： 迭代的方式</h2><p>通过遍历的方式，核心代码如下</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseList</span><span class="params">(<span class="number">_</span> head: ListNode?)</span></span> -&gt; <span class="type">ListNode</span>? &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> newNode = head</span><br><span class="line">    <span class="keyword">var</span> preNode: <span class="type">ListNode</span>?</span><br><span class="line">    <span class="keyword">while</span> newNode != <span class="literal">nil</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> nextNode: <span class="type">ListNode</span>?</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> node = newNode &#123;</span><br><span class="line">            nextNode = node.next</span><br><span class="line">            node.next = preNode</span><br><span class="line">            preNode = node</span><br><span class="line">        &#125;</span><br><span class="line">        newNode = nextNode</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> preNode</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="思路一：-递归的方式"><a href="#思路一：-递归的方式" class="headerlink" title="思路一： 递归的方式"></a>思路一： 递归的方式</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseList2</span><span class="params">(<span class="number">_</span> head: ListNode?)</span></span> -&gt; <span class="type">ListNode</span>? &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> head?.next == <span class="literal">nil</span>  &#123;</span><br><span class="line">        <span class="keyword">return</span> head</span><br><span class="line">        </span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> temp = head?.next</span><br><span class="line">        head?.next = <span class="literal">nil</span></span><br><span class="line">        <span class="keyword">let</span> node = reverseList(temp)</span><br><span class="line">        temp?.next = head</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> node</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><img src="/2018/06/10/current/June/LeetCode/LeetCode-四）链表之反转链表/result.png" alt=""></p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>看这个问题的时候，对链表还不太熟悉，熟悉了之后再解决这个问题的时候发现，这个反转的过成功根本就看不到链表啊 … 有木有？题目中给出了 Node 的定义，以及 Node 中 value 的类型，其实这就够了，我第一遍做的时候，在 LeetCode 网站上把定义链表的代码也贴上了，然后还加上了 firt、last 以及 description 还有 append(） 方法，虽然正确，但是编译时不通过的，因为 LeetCode 内部已经实现了，只需要写反转算法这块代码就好了，这块儿折腾了一大会儿才反应过来。</p>
-<p>对于思路一，迭代这种方式，在纸上画个草稿，就差不多能写出来了。<br>思路二，是通过递归的方式去解决这个问题的，主要是处理好结束条件</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/10/current/June/LeetCode/LeetCode-三/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/10/current/June/LeetCode/LeetCode-三/" itemprop="url">LeetCode (三) 两个数组交集</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T13:09:34+08:00">
-                2018-06-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/26/" target="_blank" rel="noopener">题目链接</a><br><a href="https://github.com/AliceHome/LeetCode_Array/" target="_blank" rel="noopener">代码链接</a></p>
-<h2 id="两个数组的交集"><a href="#两个数组的交集" class="headerlink" title="两个数组的交集"></a>两个数组的交集</h2><p>给定两个数组，写一个方法来计算它们的交集。</p>
-<p><strong>例如:</strong></p>
-<blockquote>
-<p>给定 nums1 = [1, 2, 2, 1], nums2 = [2, 2], 返回 [2, 2].</p>
-</blockquote>
-<p><strong>注意：</strong></p>
-<blockquote>
-<p>输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。<br>我们可以不考虑输出结果的顺序。</p>
-</blockquote>
-<p><strong>跟进:</strong></p>
-<ul>
-<li>如果给定的数组已经排好序呢？你将如何优化你的算法？</li>
-<li>如果 nums1 的大小比 nums2 小很多，哪种方法更优？</li>
-<li>如果nums2的元素存储在磁盘上，内存是有限的，你不能一次加载所有的元素到内存中，你该怎么办？</li>
-</ul>
-<h2 id="思路一："><a href="#思路一：" class="headerlink" title="思路一："></a>思路一：</h2><ol>
-<li>首先进行排序</li>
-<li>然后根据数组的下标进行遍历</li>
-<li>遍历过过程中进行对比，小的累加，相等保存</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> nums1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">21</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">var</span> nums2 = [<span class="number">21</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">33</span>,<span class="number">2</span>,<span class="number">21</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> nums = <span class="type">Array</span>&lt;<span class="type">Any</span>&gt;()</span><br><span class="line">nums1 = nums1.sorted(by: &lt;)</span><br><span class="line">nums2 = nums2.sorted(by: &lt;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span></span><br><span class="line"><span class="keyword">var</span> j = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> j &lt; nums1.<span class="built_in">count</span> &amp;&amp; i &lt; nums2.<span class="built_in">count</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> nums1[j] &gt; nums2[i] &#123;</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> nums1[j] &lt; nums2[i] &#123;</span><br><span class="line">        j = j + <span class="number">1</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        nums.append(nums1[j])</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">        j = j + <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="结果："><a href="#结果：" class="headerlink" title="结果："></a>结果：</h2><p><img src="/2018/06/10/current/June/LeetCode/LeetCode-三/result.png" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2006,7 +1931,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">96</span>
+                <span class="site-state-item-count">99</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
