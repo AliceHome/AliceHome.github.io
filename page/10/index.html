@@ -296,6 +296,325 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/01/Pre/Learning-SQLite-for-iOS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/01/Pre/Learning-SQLite-for-iOS/" itemprop="url">Learning SQLite for iOS</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-01T17:27:57+08:00">
+                2016-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<h1 id="Chapter-1：介绍-SQL-和-SQLite-这一章节，介绍-SQL（structured-query-Language）-北京和移动数据库-——-SQLite"><a href="#Chapter-1：介绍-SQL-和-SQLite-这一章节，介绍-SQL（structured-query-Language）-北京和移动数据库-——-SQLite" class="headerlink" title="Chapter 1：介绍 SQL 和 SQLite 这一章节，介绍 SQL（structured query Language） 北京和移动数据库 —— SQLite."></a>Chapter 1：介绍 SQL 和 SQLite 这一章节，介绍 SQL（structured query Language） 北京和移动数据库 —— SQLite.</h1><h2 id="About-SQL"><a href="#About-SQL" class="headerlink" title="About SQL"></a>About SQL</h2><h2 id="Where-does-SQLite-stand-in-today‘s-industry"><a href="#Where-does-SQLite-stand-in-today‘s-industry" class="headerlink" title="Where does SQLite stand in today‘s industry ?"></a>Where does SQLite stand in today‘s industry ?</h2><h2 id="iOS-with-SQLite"><a href="#iOS-with-SQLite" class="headerlink" title="iOS with SQLite"></a>iOS with SQLite</h2><h2 id="Embedded-database"><a href="#Embedded-database" class="headerlink" title="Embedded database"></a>Embedded database</h2><h2 id="The-architecture-of-the-SQLite-database"><a href="#The-architecture-of-the-SQLite-database" class="headerlink" title="The architecture of the SQLite database"></a>The architecture of the SQLite database</h2><h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><h2 id="The-advantages-of-using-SQLite"><a href="#The-advantages-of-using-SQLite" class="headerlink" title="The advantages of using SQLite"></a>The advantages of using SQLite</h2><p>SQLite 数据的优点：</p>
+<ul>
+<li>SQLite 有数据限制特性以及编辑或者删除表不需要加载到内存中</li>
+<li>SQLite 的数据存储在硬盘上，速度比 Core Data 慢一些</li>
+<li>Core Data 没有数据限制，需要通过 app 的业务逻辑来限制数据量</li>
+<li><h2 id="Working-with-SQLite"><a href="#Working-with-SQLite" class="headerlink" title="Working with SQLite"></a>Working with SQLite</h2>SQLite 官网：www.sqlite.org，在这个官网上可以下载数据库二进制源码，可以查看文档和源代码。在这里，提供了 SQLite 的共享库以及 DLL，当然还有 CLP（command-line-program)，还支持 TCL 扩展，可以通过它进行数据库的链接和更新。<h2 id="The-examples-of-using-SQLite-with-iOS"><a href="#The-examples-of-using-SQLite-with-iOS" class="headerlink" title="The examples of using SQLite with iOS"></a>The examples of using SQLite with iOS</h2></li>
+</ul>
+<h1 id="Chapter-2：数据库设计概念"><a href="#Chapter-2：数据库设计概念" class="headerlink" title="Chapter 2：数据库设计概念"></a>Chapter 2：数据库设计概念</h1><h1 id="Chapter-3：管理数据库"><a href="#Chapter-3：管理数据库" class="headerlink" title="Chapter 3：管理数据库"></a>Chapter 3：管理数据库</h1><h1 id="Chapter-4：Essentials-of-SQL"><a href="#Chapter-4：Essentials-of-SQL" class="headerlink" title="Chapter 4：Essentials of SQL"></a>Chapter 4：Essentials of SQL</h1><h1 id="Chapter-5：Exposing-C-API"><a href="#Chapter-5：Exposing-C-API" class="headerlink" title="Chapter 5：Exposing C API"></a>Chapter 5：Exposing C API</h1><p>C API 的调用，通过这些 API我们可以很方便的在应用程序中访问数据库。大约有 200 多个 API  供调用。</p>
+<h1 id="Chapter-6：Swift-with-SQLite"><a href="#Chapter-6：Swift-with-SQLite" class="headerlink" title="Chapter 6：Swift with SQLite"></a>Chapter 6：Swift with SQLite</h1><h1 id="Chapter-7："><a href="#Chapter-7：" class="headerlink" title="Chapter 7："></a>Chapter 7：</h1><h1 id="Chapter-8："><a href="#Chapter-8：" class="headerlink" title="Chapter 8："></a>Chapter 8：</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/24/current/June/Copy-（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/24/current/June/Copy-（一）/" itemprop="url">Copy （一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-24T12:53:32+08:00">
+                2016-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Copy/" itemprop="url" rel="index">
+                    <span itemprop="name">Copy</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在 iOS 开发中经常会用到 copy 关键字，主要的应用方面就是 @property 属性的修饰。这篇文章主要关心:</p>
+<blockquote>
+<p>数组（NSArray、NSMutableArray）与 copy</p>
+</blockquote>
+<h2 id="NSMutableArray-作为属性该使用-strong-还是-copy-修饰？"><a href="#NSMutableArray-作为属性该使用-strong-还是-copy-修饰？" class="headerlink" title="NSMutableArray 作为属性该使用 strong 还是 copy 修饰？"></a>NSMutableArray 作为属性该使用 strong 还是 copy 修饰？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@interface</span> Person : NSObject</span><br><span class="line"></span><br><span class="line"><span class="meta">@property</span> (nonatomic, copy) NSMutableArray *catNames;</span><br><span class="line"></span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+<p>比如，这里有个 Person 类，有一个属性是 catNames，用于存放猫的名字, 我们使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person *p = [Person <span class="keyword">new</span>];</span><br><span class="line">p.cats = [NSMutableArray arrayWithCapacity:<span class="number">10</span>];</span><br><span class="line">[p.cats addObject:@<span class="string">"Tom"</span>];</span><br></pre></td></tr></table></figure>
+<p>这段程序运行的结果是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2018-07-24 12:51:11.928550+0800 CopyDemo[5781:3493921] *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[__NSArray0 addObject:]: unrecognized selector sent to instance 0x60400000cdc0'</span><br></pre></td></tr></table></figure>
+<p>crash 了！！！</p>
+<p><strong>为什么会 Crash 呢？</strong><br>首先，crash 的语言是找不到方法（unrecognized selector sent to instance)。<br>其次，我们通过 <code>@property (nonatomic, copy) NSMutableArray *catNames;</code> 做了什么，是让系统自动为我们生成了 setter 和 getter 方法，而 copy 就控制着这些方法的生成细节。如果不修改这段声明的话，可以在 Person 的实现中修改 setter 方法的实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setCats:(NSMutableArray *)cats &#123;</span><br><span class="line">    _cats = [cats mutableCopy];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setCats:(NSMutableArray *)cats &#123;</span><br><span class="line">    _cats = cats;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本质就是：一个 NSMutableArray 的对象，经过 copy 方法生成对象其实是一个 NSArray 对象，也就是上面 <code>p.cats = [NSMutableArray arrayWithCapacity:10];</code> 赋值运算符左侧其实是一个不可变数组了，而右侧是可变数组。</p>
+<p><strong>综上，针对于可变数组，我们使用 strong 来进行修饰，不用 copy。</strong></p>
+<h2 id="NSArray-作为属性该使用-strong-还是-copy-修饰？"><a href="#NSArray-作为属性该使用-strong-还是-copy-修饰？" class="headerlink" title="NSArray 作为属性该使用 strong 还是 copy 修饰？"></a>NSArray 作为属性该使用 strong 还是 copy 修饰？</h2><p>上面已经说明了，针对 NSMutableArray 我们使用 strong 来进行修饰，那么 NSArray 呢？</p>
+<p>首先，我们来看一下，使用 <code>strong</code> 来修饰，会怎样？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@interface</span> Person : NSObject</span><br><span class="line"></span><br><span class="line"><span class="meta">@property</span> (nonatomic, strong) NSArray *phones;</span><br><span class="line"></span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+<p>为 Person 类添加了属性 phones，标识当前人对象拥有的手机，从 API 的定义可以看出，是不可变数组，所以当我们为这个人对象设置了 phones 属性之后，我们不希望手机数量会发生变化，接下来看是具体使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)addPhones &#123;</span><br><span class="line">    </span><br><span class="line">    Person *p = [Person <span class="keyword">new</span>];</span><br><span class="line">    NSMutableArray *phones = [NSMutableArray arrayWithObjects:@<span class="string">"iPhone 5s"</span>,@<span class="string">"iPhone 6"</span>, nil];</span><br><span class="line">    p.phones = phones;<span class="comment">// 多态 p.phones = @[@"iPhone 5s",@"iPhone 6"];</span></span><br><span class="line">    [phones addObject:@<span class="string">"iPhone 6s"</span>];</span><br><span class="line">    NSLog(@<span class="string">"%@"</span>,p.phones);<span class="comment">//("iPhone 5s","iPhone 6","iPhone 6s")</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面可以看出，如果我们通过 strong 来进行修饰的话，就不能空着 NSArray 的不可变性了，所以对于 NSArray 我们使用 copy 来修饰会更好一些，这样可以保证类属性的封装性。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/03/Pre/Python-Tour/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1788,141 +2107,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2013/07/13/Pre/Blog 发布/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2013/07/13/Pre/Blog 发布/" itemprop="url">Blog 发布</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-07-13T20:46:25+08:00">
-                2013-07-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="本地生成"><a href="#本地生成" class="headerlink" title="本地生成"></a>本地生成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="部署到远程"><a href="#部署到远程" class="headerlink" title="部署到远程"></a>部署到远程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1968,7 +2157,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">99</span>
+                <span class="site-state-item-count">101</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
