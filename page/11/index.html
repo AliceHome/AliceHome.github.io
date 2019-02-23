@@ -296,6 +296,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/07/10/Pre/FMDB-源码（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/07/10/Pre/FMDB-源码（一）/" itemprop="url">FMDB 源码（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-07-10T16:21:11+08:00">
+                2014-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index">
+                    <span itemprop="name">Database</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="FMDB-简介"><a href="#FMDB-简介" class="headerlink" title="FMDB 简介"></a>FMDB 简介</h2><h3 id="FMDB-瞎说123"><a href="#FMDB-瞎说123" class="headerlink" title="FMDB 瞎说123"></a>FMDB 瞎说123</h3><p>FMDB 是在 sqlite 的 Objective-C  版本。在 iOS 开发过程中，用到数据库的第三方大部分都会选择这个库，好早之前就用到了，这次抽了时间看看主要实现。</p>
+<p>数据库所做的就是 CRUD 操作，那么 FMDB 要做的便是将 sqlite C API 中的 CRUD 操作以及其他数据库的操作转换成 Objective-C 的 API 。</p>
+<h3 id="为什么看-FMDB-源码？"><a href="#为什么看-FMDB-源码？" class="headerlink" title="为什么看 FMDB 源码？"></a>为什么看 FMDB 源码？</h3><p>(▼へ▼メ)<br>FMDB 的 REAMDME 大体浏览一遍，其对 ARC 环境编译期间的识别，以及其多线程的安全让我想探究一下他们是如何实现的，是通过什么样的技术去做到的，当然还有一部分就是我想看一下 FMDB 的单元测试是怎么做的，大概总结如下</p>
+<ul>
+<li>ARC 和 非 ARC 的编译器区分如何实现</li>
+<li>多线程安全如何实现</li>
+<li>UnitTest 如何去做</li>
+<li>FMDB 如何支持 swift 呢？</li>
+</ul>
+<p>尤其是最后这条，我没有看到 FMDB 有 Swift 的版本，那么他是如何支持 Swift 的呢？</p>
+<h2 id="FMDB-结构"><a href="#FMDB-结构" class="headerlink" title="FMDB 结构"></a>FMDB 结构</h2><ol>
+<li>FMDatabase Class 主要数据库类，线程安全<h2 id="FMDB-之-FMDatabase-Class"><a href="#FMDB-之-FMDatabase-Class" class="headerlink" title="FMDB 之 FMDatabase Class"></a>FMDB 之 FMDatabase Class</h2></li>
+</ol>
+<h2 id="读源码学习知识"><a href="#读源码学习知识" class="headerlink" title="读源码学习知识"></a>读源码学习知识</h2><p>这里记录的是学习到 FMDB 解决某些问题的方式</p>
+<ul>
+<li>ARC 和 非 ARC 区分</li>
+<li>可变参数</li>
+<li>参数约束</li>
+<li>方法丢弃</li>
+</ul>
+<h3 id="FMDB-如何支持-非-ARC-和-ARC"><a href="#FMDB-如何支持-非-ARC-和-ARC" class="headerlink" title="FMDB 如何支持 非 ARC 和 ARC"></a>FMDB 如何支持 非 ARC 和 ARC</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#if ! __has_feature(objc_arc)</span><br><span class="line">    #define FMDBAutorelease(__v) ([__v autorelease]);</span><br><span class="line">    #define FMDBReturnAutoreleased FMDBAutorelease</span><br><span class="line"></span><br><span class="line">    #define FMDBRetain(__v) ([__v retain]);</span><br><span class="line">    #define FMDBReturnRetained FMDBRetain</span><br><span class="line"></span><br><span class="line">    #define FMDBRelease(__v) ([__v release]);</span><br><span class="line"></span><br><span class="line">    #define FMDBDispatchQueueRelease(__v) (dispatch_release(__v));</span><br><span class="line">#else</span><br><span class="line">    // -fobjc-arc</span><br><span class="line">    #define FMDBAutorelease(__v)</span><br><span class="line">    #define FMDBReturnAutoreleased(__v) (__v)</span><br><span class="line"></span><br><span class="line">    #define FMDBRetain(__v)</span><br><span class="line">    #define FMDBReturnRetained(__v) (__v)</span><br><span class="line"></span><br><span class="line">    #define FMDBRelease(__v)</span><br><span class="line"></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<p>上面这部分代码便是如何实现 ARC 和 非 ARC 情况的宏定义，不错，就是通过宏定义来区分的，看一下实现的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+ (instancetype)databaseQueueWithPath:(NSString *)aPath flags:(int)openFlags &#123;</span><br><span class="line">    FMDatabaseQueue *q = [[self alloc] initWithPath:aPath flags:openFlags];</span><br><span class="line">    </span><br><span class="line">    FMDBAutorelease(q);</span><br><span class="line">    </span><br><span class="line">    return q;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在使用的地方，根据 ARC 或者 非 ARC 的情况，因为通过宏定义，如果是使用了 retain 的地方，那么在 ARC 下就是空的，如果使用了自动释放池，那么在 ARC 下便是原样儿不变，除此之外，还有 dealloc 方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (void)dealloc &#123;</span><br><span class="line">    FMDBRelease(_db);</span><br><span class="line">    FMDBRelease(_path);</span><br><span class="line">    FMDBRelease(_vfsName);</span><br><span class="line">    </span><br><span class="line">    if (_queue) &#123;</span><br><span class="line">        FMDBDispatchQueueRelease(_queue);</span><br><span class="line">        _queue = 0x00;</span><br><span class="line">    &#125;</span><br><span class="line">#if ! __has_feature(objc_arc)</span><br><span class="line">    [super dealloc];</span><br><span class="line">#endif</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="FMDB-如何实现-Objective-C-方法可变参数（两种方式）"><a href="#FMDB-如何实现-Objective-C-方法可变参数（两种方式）" class="headerlink" title="FMDB 如何实现 Objective-C 方法可变参数（两种方式）"></a>FMDB 如何实现 Objective-C 方法可变参数（两种方式）</h3><h4 id="没有格式"><a href="#没有格式" class="headerlink" title="没有格式"></a>没有格式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)executeUpdate:(NSString*)sql, ...;</span><br></pre></td></tr></table></figure>
+<p>这个方法是 FMDB 中用来执行 sql 语句的，对于 sql 中的 insert 语句而言可以做如下执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NSString *inputName = @&quot;Tom&quot;;</span><br><span class="line">NSInteger inputAge = 34;</span><br><span class="line">NSInteger selectGender = 1;</span><br><span class="line"></span><br><span class="line">[db executeUpdate:@&quot;insert into Teacher (name,age,sex) values (?, ?, ?)&quot;,</span><br><span class="line"> inputName,</span><br><span class="line"> @(inputAge),</span><br><span class="line"> @(selectGender)];</span><br></pre></td></tr></table></figure>
+<p>这里就是可变参数了，而且参数没有限制。怎么实现的呢 ？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)executeUpdate:(NSString*)sql, ... &#123;</span><br><span class="line">    va_list args;</span><br><span class="line">    va_start(args, sql);</span><br><span class="line">    </span><br><span class="line">    BOOL result = [self executeUpdate:sql error:nil withArgumentsInArray:nil orDictionary:nil orVAList:args];</span><br><span class="line">    </span><br><span class="line">    va_end(args);</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过 va_list 这种宏定义方式进行解析，而且 sql 语句貌似可以直接接受 va_list 参数</p>
+<h4 id="有格式"><a href="#有格式" class="headerlink" title="有格式"></a>有格式</h4><p>什么是有格式呢 ？ </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)executeUpdateWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);</span><br></pre></td></tr></table></figure>
+<p>怎么使用呢 ？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[db executeUpdateWithFormat:@&quot;insert into Teacher (name,age,sex) values (%@, %d, %d)&quot;,inputName,inputAge,selectGender];</span><br></pre></td></tr></table></figure>
+<p>可以看到，这种模式我们并不陌生，我们称之为：格式化字符串。像 NSString 就有这么一个方法，我们经常在用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+ (instancetype)stringWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);</span><br><span class="line">+ (instancetype)localizedStringWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);</span><br></pre></td></tr></table></figure>
+<p>这里是在方法声明的后面添加了 <strong>NS_FORMAT_FUNCTION(1,2)</strong> 一个宏定义便 OK 了，那么如何解析这些参数呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)executeUpdateWithFormat:(NSString*)format, ... &#123;</span><br><span class="line">    va_list args;</span><br><span class="line">    va_start(args, format);</span><br><span class="line">    </span><br><span class="line">    NSMutableString *sql      = [NSMutableString stringWithCapacity:[format length]];</span><br><span class="line">    NSMutableArray *arguments = [NSMutableArray array];</span><br><span class="line">    </span><br><span class="line">    [self extractSQL:format argumentsList:args intoString:sql arguments:arguments];</span><br><span class="line">    </span><br><span class="line">    va_end(args);</span><br><span class="line">    </span><br><span class="line">    return [self executeUpdate:sql withArgumentsInArray:arguments];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>是的和上面的解析方式一样，但是我们要看到如何解析到字符串和数字呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line">- (void)extractSQL:(NSString *)sql argumentsList:(va_list)args intoString:(NSMutableString *)cleanedSQL arguments:(NSMutableArray *)arguments &#123;</span><br><span class="line">    </span><br><span class="line">    NSUInteger length = [sql length];</span><br><span class="line">    unichar last = &apos;\0&apos;;</span><br><span class="line">    for (NSUInteger i = 0; i &lt; length; ++i) &#123;</span><br><span class="line">        id arg = nil;</span><br><span class="line">        unichar current = [sql characterAtIndex:i];</span><br><span class="line">        unichar add = current;</span><br><span class="line">        if (last == &apos;%&apos;) &#123;</span><br><span class="line">            switch (current) &#123;</span><br><span class="line">                case &apos;@&apos;:</span><br><span class="line">                    arg = va_arg(args, id);</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;c&apos;:</span><br><span class="line">                    // warning: second argument to &apos;va_arg&apos; is of promotable type &apos;char&apos;; this va_arg has undefined behavior because arguments will be promoted to &apos;int&apos;</span><br><span class="line">                    arg = [NSString stringWithFormat:@&quot;%c&quot;, va_arg(args, int)];</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;s&apos;:</span><br><span class="line">                    arg = [NSString stringWithUTF8String:va_arg(args, char*)];</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;d&apos;:</span><br><span class="line">                case &apos;D&apos;:</span><br><span class="line">                case &apos;i&apos;:</span><br><span class="line">                    arg = [NSNumber numberWithInt:va_arg(args, int)];</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;u&apos;:</span><br><span class="line">                case &apos;U&apos;:</span><br><span class="line">                    arg = [NSNumber numberWithUnsignedInt:va_arg(args, unsigned int)];</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;h&apos;:</span><br><span class="line">                    i++;</span><br><span class="line">                    if (i &lt; length &amp;&amp; [sql characterAtIndex:i] == &apos;i&apos;) &#123;</span><br><span class="line">                        //  warning: second argument to &apos;va_arg&apos; is of promotable type &apos;short&apos;; this va_arg has undefined behavior because arguments will be promoted to &apos;int&apos;</span><br><span class="line">                        arg = [NSNumber numberWithShort:(short)(va_arg(args, int))];</span><br><span class="line">                    &#125;</span><br><span class="line">                    else if (i &lt; length &amp;&amp; [sql characterAtIndex:i] == &apos;u&apos;) &#123;</span><br><span class="line">                        // warning: second argument to &apos;va_arg&apos; is of promotable type &apos;unsigned short&apos;; this va_arg has undefined behavior because arguments will be promoted to &apos;int&apos;</span><br><span class="line">                        arg = [NSNumber numberWithUnsignedShort:(unsigned short)(va_arg(args, uint))];</span><br><span class="line">                    &#125;</span><br><span class="line">                    else &#123;</span><br><span class="line">                        i--;</span><br><span class="line">                    &#125;</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;q&apos;:</span><br><span class="line">                    i++;</span><br><span class="line">                    if (i &lt; length &amp;&amp; [sql characterAtIndex:i] == &apos;i&apos;) &#123;</span><br><span class="line">                        arg = [NSNumber numberWithLongLong:va_arg(args, long long)];</span><br><span class="line">                    &#125;</span><br><span class="line">                    else if (i &lt; length &amp;&amp; [sql characterAtIndex:i] == &apos;u&apos;) &#123;</span><br><span class="line">                        arg = [NSNumber numberWithUnsignedLongLong:va_arg(args, unsigned long long)];</span><br><span class="line">                    &#125;</span><br><span class="line">                    else &#123;</span><br><span class="line">                        i--;</span><br><span class="line">                    &#125;</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;f&apos;:</span><br><span class="line">                    arg = [NSNumber numberWithDouble:va_arg(args, double)];</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;g&apos;:</span><br><span class="line">                    // warning: second argument to &apos;va_arg&apos; is of promotable type &apos;float&apos;; this va_arg has undefined behavior because arguments will be promoted to &apos;double&apos;</span><br><span class="line">                    arg = [NSNumber numberWithFloat:(float)(va_arg(args, double))];</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;l&apos;:</span><br><span class="line">                    i++;</span><br><span class="line">                    if (i &lt; length) &#123;</span><br><span class="line">                        unichar next = [sql characterAtIndex:i];</span><br><span class="line">                        if (next == &apos;l&apos;) &#123;</span><br><span class="line">                            i++;</span><br><span class="line">                            if (i &lt; length &amp;&amp; [sql characterAtIndex:i] == &apos;d&apos;) &#123;</span><br><span class="line">                                //%lld</span><br><span class="line">                                arg = [NSNumber numberWithLongLong:va_arg(args, long long)];</span><br><span class="line">                            &#125;</span><br><span class="line">                            else if (i &lt; length &amp;&amp; [sql characterAtIndex:i] == &apos;u&apos;) &#123;</span><br><span class="line">                                //%llu</span><br><span class="line">                                arg = [NSNumber numberWithUnsignedLongLong:va_arg(args, unsigned long long)];</span><br><span class="line">                            &#125;</span><br><span class="line">                            else &#123;</span><br><span class="line">                                i--;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        else if (next == &apos;d&apos;) &#123;</span><br><span class="line">                            //%ld</span><br><span class="line">                            arg = [NSNumber numberWithLong:va_arg(args, long)];</span><br><span class="line">                        &#125;</span><br><span class="line">                        else if (next == &apos;u&apos;) &#123;</span><br><span class="line">                            //%lu</span><br><span class="line">                            arg = [NSNumber numberWithUnsignedLong:va_arg(args, unsigned long)];</span><br><span class="line">                        &#125;</span><br><span class="line">                        else &#123;</span><br><span class="line">                            i--;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    else &#123;</span><br><span class="line">                        i--;</span><br><span class="line">                    &#125;</span><br><span class="line">                    break;</span><br><span class="line">                default:</span><br><span class="line">                    // something else that we can&apos;t interpret. just pass it on through like normal</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        else if (current == &apos;%&apos;) &#123;</span><br><span class="line">            // percent sign; skip this character</span><br><span class="line">            add = &apos;\0&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if (arg != nil) &#123;</span><br><span class="line">            [cleanedSQL appendString:@&quot;?&quot;];</span><br><span class="line">            [arguments addObject:arg];</span><br><span class="line">        &#125;</span><br><span class="line">        else if (add == (unichar)&apos;@&apos; &amp;&amp; last == (unichar) &apos;%&apos;) &#123;</span><br><span class="line">            [cleanedSQL appendFormat:@&quot;NULL&quot;];</span><br><span class="line">        &#125;</span><br><span class="line">        else if (add != &apos;\0&apos;) &#123;</span><br><span class="line">            [cleanedSQL appendFormat:@&quot;%C&quot;, add];</span><br><span class="line">        &#125;</span><br><span class="line">        last = current;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>是的，就是这么一个一个的解析出来的</p>
+<h3 id="参数约束"><a href="#参数约束" class="headerlink" title="参数约束"></a>参数约束</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line">+ (instancetype)databaseWithURL:(NSURL * _Nullable)url;</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithPath:(NSString * _Nullable)path;</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithURL:(NSURL * _Nullable)url;</span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
+<p>这一对宏中包含的方法中的参数都是必须传入的，否则会报警告，也就是参数不能为 nil。如果，打算让参数可以为 nil 那么就必须在参数类型后面添加 <strong>_Nullable</strong>, FMDB 初始化方法可以不传入 path ，如上实现。</p>
+<h3 id="方法丢弃"><a href="#方法丢弃" class="headerlink" title="方法丢弃"></a>方法丢弃</h3><p>这在系统 API 中也经常看到，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//.h 声明</span><br><span class="line"></span><br><span class="line">- (BOOL)update:(NSString*)sql withErrorAndBindings:(NSError * _Nullable*)outErr, ...  __deprecated_msg(&quot;Use executeUpdate:withErrorAndBindings: instead&quot;);;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//.m 实现</span><br><span class="line"></span><br><span class="line">#pragma clang diagnostic push</span><br><span class="line">#pragma clang diagnostic ignored &quot;-Wdeprecated-implementations&quot;</span><br><span class="line">- (BOOL)update:(NSString*)sql withErrorAndBindings:(NSError**)outErr, ... &#123;</span><br><span class="line">    va_list args;</span><br><span class="line">    va_start(args, outErr);</span><br><span class="line">    </span><br><span class="line">    BOOL result = [self executeUpdate:sql error:outErr withArgumentsInArray:nil orDictionary:nil orVAList:args];</span><br><span class="line">    </span><br><span class="line">    va_end(args);</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma clang diagnostic pop</span><br></pre></td></tr></table></figure>
+<h3 id="FMDB-如何支持-Swift-呢？"><a href="#FMDB-如何支持-Swift-呢？" class="headerlink" title="FMDB 如何支持 Swift 呢？"></a>FMDB 如何支持 Swift 呢？</h3><h2 id="FMDB-的单元测试"><a href="#FMDB-的单元测试" class="headerlink" title="FMDB 的单元测试"></a>FMDB 的单元测试</h2><h2 id="如何看源码？"><a href="#如何看源码？" class="headerlink" title="如何看源码？"></a>如何看源码？</h2><p>带着问题去看，带着好奇心去看，快乐的看！<br>看源码是一件很痛苦的事情，因为这就像一场陌生的旅游，或者是到了别人家里一样！比如有一天别人说：</p>
+<p>”啊，那么土地真的很美丽，很有魅力，大家都说它多好多好”</p>
+<p>你听说了之后，也不知道自己感不感兴趣，也不知道它哪里美，更不知道你去了要做什么，只知道别人说去过那里的人都很 NB ，所以你去了，这不是一场旅行，这是一场灾难，绝对的，因为你对它太陌生了，陌生到你处处碰壁，无路可走。</p>
+<p>很多时候，我们觉得漫无目的的浏览风光觉得很好，但是，当你意识到生命的短暂，时间的流逝的时候，让你这么做，那绝对绝对是谋杀了。记得以前总觉得自己总是被枷锁锁住，后来我将枷锁打破，然后自己慢慢的静待时光流逝，我以为这种感觉会很好，但是当时间流逝了一段时间之后，我感到疲惫，感到不安，这就如同我们在看源码的时候，漫无目的的去看，都知道这个框架好，那个代码写的优美，但是你真的懂得怎么去欣赏这里的景色了么？</p>
+<p>当你想去买房子的时候，你才会去关注房价，关注房屋设计，关注各个城市之间的区别等等。为此，你猜了解到了，原来房子需要这样那样，原来周边环境也很重要，原来这种材料是一般般的等等的问题。而如果你从未打算去买房子，那么别人邀你一起去看房子，即使那房子再美，我想你看到的也就是那句 “房子不错” 其他的你也许真的真的看不出来了。</p>
+<p>所以，如果你打算去看一个源码，那么最好最好准备，你要得到什么，为什么去看，相信我，如果你知道了这些，真的会事半功倍！</p>
+<p>就如同现在区块链很火，很多人都去看，算法也很火，很多人都去学，我看到好多人都去分享那些xxxx课程，xxxx讲座，xxxx多少天让你了解，我没有去看过，我只在乎那些我需要的东西。</p>
+<p>就如同，我要实现可变参数，我要实现一个库支持 Objective-C 和 Swift 一样，just this！</p>
+<p>还有一个原因就是，你永远不可能知道第三方库为什么要写成这样？真的，第三方库为什么要实现这样或者那样的需求，这些事情要问作者，而作者也不会知道，你我都是 coding 的，我们都知道需求写完了之后的事情就是没有问题我们便会会提起！所以好多东西本来便没有了来源，你再怎么看也是那个样子，所以索性让第三方库围绕着你走，你要什么便到里面去寻找就 OK 了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/06/01/Pre/sqlite-tour/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -856,7 +1055,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-count">104</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
