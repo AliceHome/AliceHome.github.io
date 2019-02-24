@@ -296,6 +296,346 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/NSTimer-循环引用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/08/NSTimer-循环引用/" itemprop="url">NSTimer 内存泄露</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-08T06:31:35+08:00">
+                2018-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="NSTimer-引起-target-不能释放"><a href="#NSTimer-引起-target-不能释放" class="headerlink" title="NSTimer 引起 target 不能释放"></a>NSTimer 引起 target 不能释放</h2><p><strong>NSTimer 是 RunLoop 的一种源，这就注定了其使用过程中与其他类的不同。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (NSTimer * _Nonnull)addTimer &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> [NSTimer scheduledTimerWithTimeInterval:<span class="number">1</span> target:self selector:<span class="meta">@selector</span>(testOne) userInfo:nil repeats:YES];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    [self addTimer];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>上面这个代码是在控制器中加入了 Timer，然后执行 testOne 方法，repeat 为 YES。表现形式就是，当进入这个控制器之后，testOne 方法会在 1 秒间隔重复执行。如果没有其他 timer 有关的方法，那么当控制器 dimiss 之后，这个控制器不会被销毁，testOne 方法还是会一直被调用。</p>
+<h2 id="处理方式一，-调用-invalidate"><a href="#处理方式一，-调用-invalidate" class="headerlink" title="处理方式一， 调用 invalidate"></a>处理方式一， 调用 invalidate</h2><p>出现上面的问题的原因是：</p>
+<blockquote>
+<p>NSTimer 通过 scheduleTimerWithTimeInterval: target: selector: userInfo: repeats: 这个方法创建 timer 之后，这个 timer 会被添加到 runloop 的中，同时，runloop 会对 timer 做一次引用，而 target: 中的 self 又会被 timer 引用一次。runloop 是一直在内存中引用着 timer 的，所以 self 会被一直持有，所以就不会被释放了。</p>
+</blockquote>
+<p>NSTimer 为我们提供了一个将 timer 从它的 runloop 中移除的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)invalidate;</span><br><span class="line">Description	</span><br><span class="line">Stops the timer from ever firing again and requests its removal from its run loop.</span><br><span class="line">This method is the only way to remove a timer from an NSRunLoop object. The NSRunLoop object removes its strong reference to the timer, either just before the invalidate method returns or at some later point.</span><br><span class="line">If it was configured with target and user info objects, the receiver removes its strong references to those objects as well.</span><br></pre></td></tr></table></figure>
+<p>这里指出了 invalidate 是唯一一种移除的方式 … 所以一般的处理方式是在不用到 timer 的时候让其调用 invalidate 这个方法，比如上面的问题我们如下处理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@implementation</span> TimerVC &#123;</span><br><span class="line">    NSTimer *_timer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSTimer * _Nonnull)addTimer &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> [NSTimer scheduledTimerWithTimeInterval:<span class="number">1</span> target:self selector:<span class="meta">@selector</span>(testOne) userInfo:nil repeats:YES];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">     _timer = [self addTimer];</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewWillDisappear:(BOOL)animated &#123;</span><br><span class="line">    </span><br><span class="line">    [_timer invalidate];</span><br><span class="line">    _timer = nil;</span><br><span class="line">    [<span class="keyword">super</span> viewWillDisappear:animated];</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)testOne &#123;</span><br><span class="line">    NSLog(@<span class="string">"HEllo world"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)dealloc &#123;</span><br><span class="line"></span><br><span class="line">    NSLog(@<span class="string">"dealloc ...."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>step:</p>
+<ol>
+<li>首先在当前类中添加全局变量，在 addTimer 的时候为其赋值</li>
+<li>在该类不在使用该 timer 的时候，[_timer invalidate] 和 _timer = nil</li>
+</ol>
+<p>这样就可以避免当前类不释放的问题了。但是 … 有没有觉得很不优雅，当前控制器需要在自己离开的时候照顾这个 runloop 家的宠儿的问题，而且为了它的消亡添加了一个全局变量</p>
+<h2 id="处理方式二：代理对象"><a href="#处理方式二：代理对象" class="headerlink" title="处理方式二：代理对象"></a>处理方式二：代理对象</h2><p>其实，这里的问题就出在 runloop -&gt; timer -&gt; self 这个链中，因为 runloop 的不死，导致了 self 一直被引用。上面的做法是强行将 runloop -&gt; timer 的应用切断。如果有其他方案的话，我们只能去想 timer -&gt; self 这条链了，因为 runloop 是不能死掉的。</p>
+<p>首先，为 timer 添加一个类目：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@interface</span> NSTimer (Weak)</span><br><span class="line">+ (NSTimer *)weakScheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(id)userInfo repeats:(BOOL)yesOrNo;</span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+<p>其次，是在这类目中添加一个 target 类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@interface</span> NSTimerTarget:NSObject</span><br><span class="line"></span><br><span class="line"><span class="meta">@property</span> (nonatomic, weak) id delegate;</span><br><span class="line"><span class="meta">@property</span> (nonatomic, assign) SEL selector;</span><br><span class="line"><span class="meta">@property</span> (nonatomic, weak) NSTimer *timer;</span><br><span class="line">- (<span class="keyword">void</span>)targetSelector;</span><br><span class="line"></span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+<p>接下来看一下实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)targetSelector &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (_delegate) &#123;</span><br><span class="line">        [self.delegate performSelector:_selector withObject:nil];</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        [_timer invalidate];</span><br><span class="line">        _timer = nil;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)dealloc &#123;</span><br><span class="line">    NSLog(@<span class="string">"target is dealloc..."</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@end</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@implementation</span> NSTimer (Weak)</span><br><span class="line"></span><br><span class="line">+ (NSTimer *)weakScheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(id)userInfo repeats:(BOOL)yesOrNo &#123;</span><br><span class="line">    </span><br><span class="line">    NSTimerTarget *target = [NSTimerTarget <span class="keyword">new</span>];</span><br><span class="line">    target.delegate = aTarget;</span><br><span class="line">    target.selector = aSelector;</span><br><span class="line">    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:ti target:target selector:<span class="meta">@selector</span>(targetSelector) userInfo:userInfo repeats:yesOrNo];</span><br><span class="line">    target.timer = timer;</span><br><span class="line">    <span class="keyword">return</span> target.timer;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+<p>在这里，通过一个中间类将外部调用 timer 的类换成了这个中间类，这样 timer 对象就不会持有调用了 NSTimer 方法的对象了，除此之外，这里 target 类还需要将外部类的 selector 方重新再 targetSelector 中调用。</p>
+<p>targetSelector 这个方法在控制器（或者其他写了 NSTimer 启动方法的类）销毁之后其实还会继续调用，所以在内部判断移除 timer 的时机。</p>
+<p>这样，整体上我们就不需要对外部调用 timer 的类做一些特殊的处理了。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>其实，网上还有其他的解决方式，后续会继续看这个问题：</p>
+<ol>
+<li>通过 GCD 实现 timer， <a href="https://github.com/mindsnacks/MSWeakTimer" target="_blank" rel="noopener">NSWeakTimer</a></li>
+<li>通过代理类 实现 timer，<a href="https://github.com/ChatGame/HWWeakTimer" target="_blank" rel="noopener">HWWeakTimer</a></li>
+</ol>
+<p>第一种方式，是彻底将 timer 替换成了 gcd 中的 timer；第二种方式和目前的实现方式类似，但是是引入了新的 timer 类。</p>
+<p>其实，这个问题应该是遇到很久了，大部分都是直接将 timer 移除的方法耦合到了使用的类中，一直没有去深究这问题，这次深究完了发现：</p>
+<ol>
+<li>NSRunloop 的理解加深</li>
+<li>代码的设计上要多动脑</li>
+<li>遇到问题多考虑集中解决方案然后再继续写代码</li>
+<li>代码的优化方式永远不能止步</li>
+</ol>
+<p>最后，<a href="https://github.com/AliceHome/NSTimer" target="_blank" rel="noopener">代码传送带</a>。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/排序-二-快速排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/03/排序-二-快速排序/" itemprop="url">排序(二) 快速排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-03T13:23:36+08:00">
+                2018-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/排序/" itemprop="url" rel="index">
+                    <span itemprop="name">排序</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据编程有序序列。</p>
+<h2 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h2><h3 id="一趟排序过程："><a href="#一趟排序过程：" class="headerlink" title="一趟排序过程："></a>一趟排序过程：</h3><ol>
+<li>设置两个变量 i、j, 排序开始的时候： i = 0, j = N -1;</li>
+<li>以第一个数组元素作为关键数据，赋值给 key：key = A[0];</li>
+<li>从 j 开始向前搜索，即由后向前开始搜索（j –）, 找到第一个小于 key 的值 A[j]，将 A[j] 和 A[i] 交换；</li>
+<li>从 i 开始向后搜索，即由前向后开始搜索（i ++），找到第一个大于 key 的 A[i], 然后将 A[j] 和 A[i] 交换；</li>
+<li>重复 3、4 步骤，知道 i = j;</li>
+</ol>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>不得不说冒泡排序相对来说比较复杂些，这篇博客也是经过了三四天才写完的，刚开始看别人写的算法实现，不太明白，然后看了下排序的动态图，还是模模糊糊。我觉得，怎么算是掌握了一个算法呢？首先，要知道每一步怎么去操作，比如给一串数字告诉你一个排序算法名字，你可以写出每一步骤怎么做，这是掌握；其次，要写出它的伪代码；最后，代码实现！很多公司会让你说这个算法题奥！</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/排序-一-冒泡排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1226,7 +1566,7 @@
 </ul>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//测试</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testLinkedListAppend</span><span class="params">()</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> link = <span class="type">LinkedList</span>()</span><br><span class="line">    link.append(<span class="number">10</span>)</span><br><span class="line">    <span class="built_in">assert</span>(!link.isEmpty, <span class="string">"非空链表"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">assert</span>(link.first?.value == <span class="number">10</span>, <span class="string">"head 节点为 10"</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">10</span>, <span class="string">"tail 节点为 10"</span>)</span><br><span class="line">    link.append(<span class="number">20</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">20</span>, <span class="string">"tail 节点为 20"</span>)</span><br><span class="line">    link.append(<span class="number">30</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">30</span>, <span class="string">"tail 节点为 30"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testLinkedListAppend()</span><br></pre></td></tr></table></figure>
 <h2 id="输出链表"><a href="#输出链表" class="headerlink" title="输出链表"></a>输出链表</h2><p>当我们学会插入节点之后，第一时间就行看看链表中的内容。目前如果只是简单的 print(link) 的话是不能打印出处链表的信息的，为了实现输出链表信息，做如下操作：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LinkedList</span>: <span class="title">CustomStringConvertible</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> description: <span class="type">String</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> text = <span class="string">"["</span></span><br><span class="line">        <span class="keyword">var</span> node = head</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">            text += <span class="string">"<span class="subst">\(node!.value)</span>"</span></span><br><span class="line">            node = node!.next</span><br><span class="line">            <span class="keyword">if</span> node != <span class="literal">nil</span> &#123; text += <span class="string">" -&gt; "</span> &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> text + <span class="string">"]"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LinkedList</span>: <span class="title">CustomStringConvertible</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> description: <span class="type">String</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> text = <span class="string">"["</span></span><br><span class="line">        <span class="keyword">var</span> node = head</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">            text += <span class="string">"\(node!.value)"</span></span><br><span class="line">            node = node!.next</span><br><span class="line">            <span class="keyword">if</span> node != <span class="literal">nil</span> &#123; text += <span class="string">" -&gt; "</span> &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> text + <span class="string">"]"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>说明：</strong></p>
 <ul>
 <li>首先为 LinkedList 声明 extension，然后实现 CustomStringConvertible 协议，这个协议要求你实现 computed property description：String</li>
@@ -1581,327 +1921,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/current/June/GitHub-一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/25/current/June/GitHub-一）/" itemprop="url">GitHub （一） 提交了代码，格子没有变绿色</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-25T14:01:09+08:00">
-                2018-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GitHub/" itemprop="url" rel="index">
-                    <span itemprop="name">GitHub</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这篇就解决一个问题: <strong>为什么在 GitHub 上提交了代码，然而上面的格子却没有变成绿色 ？</strong></p>
-<p>我提交 Git 的时间应该还是算比较频繁的，但是发现一个问题，就是今天提交了，但是格子却没有变成绿色，先前一直没有注意这个问题</p>
-<p><img src="/2018/07/25/current/June/GitHub-一）/Git.png" alt=""></p>
-<p>其实我基本上每天都是有一些提交的，但是就是不显示绿色 …<br>但我还是发现了规律，如果我创建过 Git 仓库，那么那天就会变成绿色，我傻傻的以为，这个格子只有在创建了仓库之后才会变成绿色，😶</p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>原因就一句话：GitHub 上绑定的邮箱和 Git 提交的邮箱不一致，我之前本地因为工作的原因全局设置了 @163 的邮箱，但是 GitHub 上绑定的是 @gmail 邮箱。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
-<li>修改 GitHub 上的邮箱，这个我没有实际修改过，一致就 OK 吧</li>
-<li>修改本地邮箱，git config –global user.email ‘xxxx@gmail.com’(查看本地的直接用 git config user.email)</li>
-</ol>
-<p>修改完成后，提交一下，就可以看到绿色的格子了 … 有些事你还真得多想想！</p>
-<h2 id="Git-命令指南"><a href="#Git-命令指南" class="headerlink" title="Git 命令指南"></a>Git 命令指南</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:30:37]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config user.email</span></span><br><span class="line">18576759510@163.com</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:30:45]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config --global user.email <span class="string">'huidragonaijy@gmail.com'</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:31:08]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config user.email</span></span><br><span class="line">huidragonaijy@gmail.com</span><br></pre></td></tr></table></figure>
-<p>上面的命令：</p>
-<hr>
-<ol>
-<li>查看本地 Git Email 地址；</li>
-<li>修改本地 Git Email 地址；</li>
-<li>再次查看是否修改成功</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/current/June/RunLoop（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/23/current/June/RunLoop（一）/" itemprop="url">RunLoop（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T22:46:19+08:00">
-                2018-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/RunLoop/" itemprop="url" rel="index">
-                    <span itemprop="name">RunLoop</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="故事"><a href="#故事" class="headerlink" title="故事"></a>故事</h2><p>RunLoop ，运行时循环。</p>
-<p>iOS App 启动之后，当前进程开启主线程之后，为了保证主线程一直在运行就在主线程中开启了 RunLoop。RunLoop 在运行过程中，如果有事件（比如 timer、Source、Observe）就会进行处理，如果没有事件就会在一种休眠状态。</p>
-<p>在真正了解 RunLoop 之前，估计我就只能说出上面这一串解释说明了，如果再继续说的话，就应该是响应者链了。但是，经过最近一段时间学习发现 RunLoop 真是无处不在，只不过我们没有注意吧了。</p>
-<p>比如：</p>
-<ol>
-<li>Timer 的运行与 RunLoop 有关，主要是 mode 方面；</li>
-<li>GCD 的 dispatch_get_mainQueue 也与 RunLoop 有关系，毕竟都是在主线程中的事情；</li>
-<li>ScrollView/TextView 的滑动业余 RunLoop 有关，主要是模式之间的切换；</li>
-<li>App 的卡顿与 RunLoop 也有关，这个我倒是还不知道什么事情</li>
-</ol>
-<p>…</p>
-<p>真心发现 RunLoop 是一个很大的模块，之前一直忽略了，这次抽时间好好的细致的了解一下 RunLoop 中的知识。</p>
-<h2 id="RunLoop-API"><a href="#RunLoop-API" class="headerlink" title="RunLoop API"></a>RunLoop API</h2><p>RunLoop 的 API 有两套，一套是 OC 的，名字是 NSRunLoop； 另一套是 C 语言的 CFRunLoop。 后者是开源的</p>
-<p>针对于 NSRunLoop，可以看一下文档介绍，大体意思为：<br>NSRunLoop 是编程接口，这套编程接口主要用来处理输源。<br>一个 NSRunLoop 对象负责处理键盘、鼠标、NSPort、NSConnection 以及 NSTimer 事件。你的应用开发中不能直接创建和管理 NSRunLoop。每一个 NSThread 对象，包括 mainThread 都包含了一个 NSRunLoop 对象，这个对象根据需要自动创建。如果你想要查看当前的 RunLoop 对象，可以通过 currentRunLoop 获取。</p>
-<p>需要注意的是：<br>NSRunLoop 不是线程安全的，所以不要在多线程中使用 NSRunLoop。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1952,7 +1971,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">104</span>
+                <span class="site-state-item-count">106</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1963,7 +1982,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

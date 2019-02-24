@@ -296,6 +296,324 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/02/current/June/细说-iOS-刷新控件-二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/02/current/June/细说-iOS-刷新控件-二）/" itemprop="url">细说 iOS 刷新控件(二）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-02T14:25:52+08:00">
+                2018-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/刷新控件/" itemprop="url" rel="index">
+                    <span itemprop="name">刷新控件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这一片介绍 MJRefresh 刷新控件原理，也不知道需要几篇。</p>
+<h2 id="MJRefresh-如何添加头部试图-？"><a href="#MJRefresh-如何添加头部试图-？" class="headerlink" title="MJRefresh 如何添加头部试图 ？"></a>MJRefresh 如何添加头部试图 ？</h2><p>答：通过类目和 <code>runtime</code> 方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">@class MJRefreshHeader, MJRefreshFooter;</span><br><span class="line"></span><br><span class="line">@interface UIScrollView (MJRefresh)</span><br><span class="line">/** 下拉刷新控件 */</span><br><span class="line">@property (strong, nonatomic) MJRefreshHeader *mj_header;</span><br><span class="line">/** 上拉刷新控件 */</span><br><span class="line">@property (strong, nonatomic) MJRefreshFooter *mj_footer;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>文件 UIScrollView+MJRefresh 中为 UIScrollView 添加了 MJRefresh 的类目<br>接下来看一下 <code>UIScrollView+MJRefresh.m</code> 中设置头部视图的实现，这里本质上是通过 <code>runtime</code> 的 <code>objc_setAssociatedObject</code> 函数为 <code>UIScrollView</code> 绑定了 mj_header 属性对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#pragma mark - header</span><br><span class="line">static const char MJRefreshHeaderKey = &apos;\0&apos;;</span><br><span class="line">- (void)setMj_header:(MJRefreshHeader *)mj_header</span><br><span class="line">&#123;</span><br><span class="line">    if (mj_header != self.mj_header) &#123;</span><br><span class="line">        // 删除旧的，添加新的</span><br><span class="line">        [self.mj_header removeFromSuperview];</span><br><span class="line">        [self insertSubview:mj_header atIndex:0];</span><br><span class="line">        </span><br><span class="line">        // 存储新的</span><br><span class="line">        objc_setAssociatedObject(self, &amp;MJRefreshHeaderKey,</span><br><span class="line">                                 mj_header, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (MJRefreshHeader *)mj_header</span><br><span class="line">&#123;</span><br><span class="line">    return objc_getAssociatedObject(self, &amp;MJRefreshHeaderKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面代码看到，当设定头部视图的时候，首先判断是否一致，然后删除之前的透视图，然后将传入的头部师徒插入到位置 0 ，然后通过 objc_setAssociatedObject() 函数将 mj_header 绑定成 UIScrollView 的对象，同理，当获取头部试图的时候，通过 objc_getAssociatedObject() 就可以得到头部视图 footer 也是一样的操作。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ol>
+<li>下拉刷新的 UI 控件是 UITableView 和 UICollectionView，所以对它们共有的父控件 UIScrollView 采取添加 header 的操作</li>
+<li>类目拓展功能在 iOS 封装组件中常用，比如 SDWebImage 中 UIImageView 的类目方式使用该框架设置图片</li>
+<li>类目不能添加属性，但是可以通过 runtime 的方式做到添加属性，在实现 set/get 放阿飞即可</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/current/June/细说iOS-刷新控件（一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/01/current/June/细说iOS-刷新控件（一/" itemprop="url">细说 iOS 刷新控件（一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T14:20:10+08:00">
+                2018-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/刷新控件/" itemprop="url" rel="index">
+                    <span itemprop="name">刷新控件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://github.com/AliceHome/iOSRefreshDemo" target="_blank" rel="noopener">我是 demo 链接，欢迎点击！！！</a></p>
+<p>刷新数据，是 iOS 开发过程中一个重要的操作，操作频率也非常高！现在一般刷新控件都直接使用 MJRefresh 这个第三方控件，后面将会详细讲解其原理，这一篇首先介绍系统的刷新控件 —— UIRefreshControl</p>
+<h2 id="UIRefreshControl"><a href="#UIRefreshControl" class="headerlink" title="UIRefreshControl"></a>UIRefreshControl</h2><h3 id="UITableViewController-iOS-6-之后的属性-refreshControl"><a href="#UITableViewController-iOS-6-之后的属性-refreshControl" class="headerlink" title="UITableViewController iOS 6 之后的属性 refreshControl"></a>UITableViewController iOS 6 之后的属性 refreshControl</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span> (nonatomic, strong, nullable) UIRefreshControl *<span class="function">refreshControl <span class="title">NS_AVAILABLE_IOS</span><span class="params">(<span class="number">6</span>_0)</span> __TVOS_PROHIBITED</span>;</span><br></pre></td></tr></table></figure>
+<p>这是 UITableViewController 中的声明，由此可知：</p>
+<ol>
+<li>refreshControl 是 UITableViewController 的属性，我们如果使用这个控件，就必须使用 UITableViewController；</li>
+<li>后面的 NS_AVAILABLE_IOS(6_0) 说明是 iOS 6 才会支持这个控件</li>
+</ol>
+<h3 id="UIRefreshControl-1"><a href="#UIRefreshControl-1" class="headerlink" title="UIRefreshControl"></a>UIRefreshControl</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line">    </span><br><span class="line">NS_CLASS_AVAILABLE_IOS(<span class="number">6_0</span>) __TVOS_PROHIBITED <span class="meta">@interface</span> UIRefreshControl : UIControl</span><br><span class="line"></span><br><span class="line"><span class="comment">/* The designated initializer</span></span><br><span class="line"><span class="comment"> * This initializes a UIRefreshControl with a default height and width.</span></span><br><span class="line"><span class="comment"> * Once assigned to a UITableViewController, the frame of the control is managed automatically.</span></span><br><span class="line"><span class="comment"> * When a user has pulled-to-refresh, the UIRefreshControl fires its UIControlEventValueChanged event.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (instancetype)init;</span><br><span class="line"><span class="meta">@property</span> (nonatomic, readonly, getter=isRefreshing) BOOL refreshing;</span><br><span class="line"><span class="meta">@property</span> (null_resettable, nonatomic, strong) UIColor *tintColor;</span><br><span class="line"><span class="meta">@property</span> (nullable, nonatomic, strong) NSAttributedString *attributedTitle UI_APPEARANCE_SELECTOR;</span><br><span class="line"></span><br><span class="line"><span class="comment">// May be used to indicate to the refreshControl that an external event has initiated the refresh action</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="function">beginRefreshing <span class="title">NS_AVAILABLE_IOS</span><span class="params">(<span class="number">6</span>_0)</span></span>;</span><br><span class="line"><span class="comment">// Must be explicitly called when the refreshing has completed</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="function">endRefreshing <span class="title">NS_AVAILABLE_IOS</span><span class="params">(<span class="number">6</span>_0)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@end</span></span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
+<p>这是 UIRefreshControl 的 API，从中可以看出：</p>
+<ol>
+<li>通过 init 方法创建的控件有默认的 height 和 width</li>
+<li>在 UITableViewController 中这个控件 frame 会被自动管理</li>
+<li>当执行下拉刷新动作的时候，UIRefreshControl 会被 UIControlEventValueChanged 事件触发，所以我们可通过 addTarget 监听这个状态来执行相应的刷新方法</li>
+</ol>
+<p>关于该 API 其他的地方可以通过其他的文章查看，比如 NS_ASSUME_NONNULL_BEGIN、NS_ASSUME_NONNULL_END 这一对宏，以及 null_resettable、nullable 这中关键字，还有 UI_APPEARANCE_SELECTOR</p>
+<p>UITableViewController 中刷新控件具体使用参照代码：<a href="https://github.com/AliceHome/iOSRefreshDemo" target="_blank" rel="noopener">https://github.com/AliceHome/iOSRefreshDemo</a></p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>这里控件的使用是非常简单方便的，如果只是简单实现刷新的功能，或者修改下文案可以直接使用这个控件。当然，如果不满足当前项目开发需求，比如要做一些本地化的效果，那么就需要自定义刷新控件了，当然可以直接参照上面开发的 API 去设计自己的刷新控件。除此之外，就是使用其他第三方控件，比如 MJRefresh、EGORefresh（这个库当前也是挺好用的，但是不知不觉就被遗忘了）</p>
+<p>下期预告：将介绍第三方 MJRefresh<br>未来设想：如果有机会有时间可以参照系统的 API 自己实现以下 refresh control</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/Pre/Cocopods-公共仓库创建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1638,250 +1956,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/Pre/App-Extension/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/08/Pre/App-Extension/" itemprop="url">App Extension</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T15:34:43+08:00">
-                2018-06-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/Pre/Node-搭建本地-http-服务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/07/Pre/Node-搭建本地-http-服务/" itemprop="url">Node 搭建本地 http 服务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T12:46:52+08:00">
-                2018-06-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1932,7 +2006,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">104</span>
+                <span class="site-state-item-count">106</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1943,7 +2017,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
