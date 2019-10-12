@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/03/Pre/红黑树/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/Old/current/June/Hexo-三-添加微信二维码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -315,7 +315,620 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/03/Pre/红黑树/" itemprop="url">红黑树</a></h1>
+                <a class="post-title-link" href="/2018/07/21/Old/current/June/Hexo-三-添加微信二维码/" itemprop="url">Hexo(三) 添加微信二维码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T01:13:46+08:00">
+                2018-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> 添加微信二维码，在文章的最后，方便阅读文章的人联系你！<br> 这个功能和上一篇中的设置最后的结束语类似，用到的步骤是上一篇的第三步.</p>
+<h2 id="Step1：修改-config-yml"><a href="#Step1：修改-config-yml" class="headerlink" title="Step1：修改 _config.yml"></a>Step1：修改 _config.yml</h2><p>全局搜索 WeChat ，可以搜索到如下的语句，下面展示的时候删除了注释的代码。 <code>WechatIMG13.jpeg</code> 是图片的名字。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Wechat Subscriber</span><br><span class="line">wechat_subscriber:</span><br><span class="line">  enabled: true</span><br><span class="line">  qcode: /uploads/WechatIMG13.jpeg</span><br><span class="line">  description: 微信公众号还没弄好，先放上二维码吧！</span><br></pre></td></tr></table></figure>
+<h2 id="Step2：添加图片"><a href="#Step2：添加图片" class="headerlink" title="Step2：添加图片"></a>Step2：添加图片</h2><p>从微信中获取到二维码，然后添加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Maple/source/uploads</span><br></pre></td></tr></table></figure>
+<p>博客 source 目录下的 uploads（如果没有这个目录新建一个就是了），然后将图片拷贝进去，测试即可。效果看下面结束语之后</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/Old/current/June/Hexo-二-添加‘文本结束‘-标记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/21/Old/current/June/Hexo-二-添加‘文本结束‘-标记/" itemprop="url">Hexo(二) 添加‘文本结束‘ 标记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T00:24:17+08:00">
+                2018-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>之前在写文章时候，总会在写完的地方，手动写一个 Done 字，标志着这篇博客结束了，这次通过设置在每篇文章中自动添加结束标志，样式如下,看文章的底部就可以了，对，就是这样式的。</p>
+<p>这种结束标识如何实现的呢？</p>
+<h2 id="Step1：创建文件-passage-end-tag-swig"><a href="#Step1：创建文件-passage-end-tag-swig" class="headerlink" title="Step1：创建文件 passage-end-tag.swig"></a>Step1：创建文件 passage-end-tag.swig</h2><p>进入到博客目录的主题目录中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> /Users/maple/Maple/themes/next/layout/_macro</span></span><br></pre></td></tr></table></figure>
+<p>在此目录下创建文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch passage-end-tag.swig</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vim passage-end-tag.swig</span></span><br><span class="line"><span class="meta">#</span><span class="bash">添加内容</span></span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &#123;% if not is_index %&#125;</span><br><span class="line">        &lt;div style="text-align:center;color: #ccc;font-size:14px;"&gt;-------------本文结束&lt;i class="fa fa-paw"&gt;&lt;/i&gt;再接再厉-------------&lt;/div&gt;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Step2：生效"><a href="#Step2：生效" class="headerlink" title="Step2：生效"></a>Step2：生效</h2><p>打开 post.swig 文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">vim /Users/maple/Maple/themes/next/layout/_macro/post.swig</span></span><br></pre></td></tr></table></figure>
+<p>搜索 end post 然后将下图的红色框内代码粘贴上图</p>
+<p><img src="/2018/07/21/Old/current/June/Hexo-二-添加‘文本结束‘-标记/end.png" alt=""></p>
+<p>代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      &#123;% if not is_index %&#125;</span><br><span class="line">        &#123;% include 'passage-end-tag.swig' %&#125;</span><br><span class="line">      &#123;% endif %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Step3-配置-config-yml"><a href="#Step3-配置-config-yml" class="headerlink" title="Step3: 配置 _config.yml"></a>Step3: 配置 _config.yml</h2><p>在文件最底下添加代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 文章末尾添加“本文结束”标记</span><br><span class="line">passage_end_tag:</span><br><span class="line">  enabled: true</span><br></pre></td></tr></table></figure>
+<p>完成之后通过 <code>hexo g</code> 和 <code>hexo d</code> 验证一下即可</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/Old/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/20/Old/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/" itemprop="url">Hexo (一) fork me on github</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T23:48:25+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><p><img src="/2018/07/20/Old/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/forkme.png" alt=""></p>
+<p>如上图所示，在 next 主题的基础上，实现 for me on GitHub 的功能，点击右上角的 GitHub 图标可以直接跳转到你的 GitHub 主页上。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="Step-1："><a href="#Step-1：" class="headerlink" title="Step 1："></a>Step 1：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple/themes/next/layout [0:04:41]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">_custom       _partials     archive.swig  page.swig     tag.swig</span><br><span class="line">_layout.swig  _scripts      category.swig post.swig</span><br><span class="line">_macro        _third-party  index.swig    schedule.swig</span><br></pre></td></tr></table></figure>
+<p>进入到你的 Hexo 目录，然后找到文件 <code>_layout.swig</code> 通过文本编辑器打开</p>
+<h3 id="Step-2："><a href="#Step-2：" class="headerlink" title="Step 2："></a>Step 2：</h3><p>找到 <code>_layout.swig</code> 中如下代码（全局搜索：headband ）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"&#123;&#123; container_class &#125;&#125; &#123;% block page_class %&#125;&#123;% endblock %&#125; "</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"headband"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后打开：<a href="https://blog.github.com/2008-12-19-github-ribbons/" target="_blank" rel="noopener">GitHub Ribbons</a> 或者 <a href="http://tholman.com/github-corners/" target="_blank" rel="noopener">GitHub Corners</a></p>
+<p><img src="/2018/07/20/Old/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/githubCorners.png" alt=""></p>
+<p>复制图标样式旁边的代码粘贴到上面的代码下面，效果如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"&#123;&#123; container_class &#125;&#125; &#123;% block page_class %&#125;&#123;% endblock %&#125; "</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"headband"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://github.com/AliceHome"</span> <span class="attr">class</span>=<span class="string">"github-corner"</span> <span class="attr">aria-label</span>=<span class="string">"View source on Github"</span>&gt;</span><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">"80"</span> <span class="attr">height</span>=<span class="string">"80"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 250 250"</span> <span class="attr">style</span>=<span class="string">"fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"</span> <span class="attr">fill</span>=<span class="string">"currentColor"</span> <span class="attr">style</span>=<span class="string">"transform-origin: 130px 106px;"</span> <span class="attr">class</span>=<span class="string">"octo-arm"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"</span> <span class="attr">fill</span>=<span class="string">"currentColor"</span> <span class="attr">class</span>=<span class="string">"octo-body"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined">.github-corner:hover .octo-arm&#123;animation:octocat-wave 560ms ease-in-out&#125;@keyframes octocat-wave&#123;0%,100%&#123;transform:rotate(0)&#125;20%,60%&#123;transform:rotate(-25deg)&#125;40%,80%&#123;transform:rotate(10deg)&#125;&#125;@media (max-width:500px)</span></span><br><span class="line"><span class="undefined">&#123;.github-corner:hover .octo-arm&#123;animation:none&#125;.github-corner .octo-arm&#123;animation:octocat-wave 560ms ease-in-out&#125;&#125;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="step-3"><a href="#step-3" class="headerlink" title="step 3:"></a>step 3:</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> hexo g</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> hexo s</span></span><br></pre></td></tr></table></figure>
+<p>验证效果，Done!</p>
+<p>感谢简书大神：<br><a href="https://www.jianshu.com/p/f054333ac9e6" target="_blank" rel="noopener">hexo的next主题个性化教程:打造炫酷网站</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/Old/current/June/Hexo-零-问题列表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/19/Old/current/June/Hexo-零-问题列表/" itemprop="url">Hexo(零) 问题列表</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T11:57:19+08:00">
+                2018-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Cannot-set-property-‘lastIndex’-of-undefined"><a href="#Cannot-set-property-‘lastIndex’-of-undefined" class="headerlink" title="Cannot set property ‘lastIndex’ of undefined"></a>Cannot set property ‘lastIndex’ of undefined</h2><h3 id="问题详细："><a href="#问题详细：" class="headerlink" title="问题详细："></a>问题详细：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> maple @ iMac in ~/Maple [11:05:09]</span><br><span class="line">$ hexo g</span><br><span class="line">INFO  Start processing</span><br><span class="line">FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</span><br><span class="line">TypeError: Cannot set property &apos;lastIndex&apos; of undefined</span><br><span class="line">    at highlight (/Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:511:35)</span><br><span class="line">    at /Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:561:21</span><br><span class="line">    at Array.forEach (&lt;anonymous&gt;)</span><br><span class="line">    at Object.highlightAuto (/Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:560:40)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:117:25</span><br><span class="line">    at highlight (/Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:120:7)</span><br><span class="line">    at highlightUtil (/Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:22:14)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo/lib/plugins/filter/before_post_render/backtick_code_block.js:62:15</span><br><span class="line">    at String.replace (&lt;anonymous&gt;)</span><br><span class="line">    at Hexo.backtickCodeBlock (/Users/maple/Maple/node_modules/hexo/lib/plugins/filter/before_post_render/backtick_code_block.js:14:31)</span><br><span class="line">    at Hexo.tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Hexo.&lt;anonymous&gt; (/Users/maple/Maple/node_modules/bluebird/js/release/method.js:15:34)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo/lib/extend/filter.js:68:35</span><br><span class="line">    at tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Object.gotValue (/Users/maple/Maple/node_modules/bluebird/js/release/reduce.js:155:18)</span><br><span class="line">    at Object.gotAccum (/Users/maple/Maple/node_modules/bluebird/js/release/reduce.js:144:25)</span><br><span class="line">    at Object.tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Promise._settlePromiseFromHandler (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:512:31)</span><br><span class="line">    at Promise._settlePromise (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:569:18)</span><br><span class="line">    at Promise._settlePromiseCtx (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:606:10)</span><br><span class="line">    at Async._drainQueue (/Users/maple/Maple/node_modules/bluebird/js/release/async.js:138:12)</span><br><span class="line">    at Async._drainQueues (/Users/maple/Maple/node_modules/bluebird/js/release/async.js:143:10)</span><br></pre></td></tr></table></figure>
+<h3 id="修改方案："><a href="#修改方案：" class="headerlink" title="修改方案："></a>修改方案：</h3><p>在 _config.yml 修改 auto_detect: 的 true 为 false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">highlight:</span><br><span class="line">  enable: true</span><br><span class="line">  line_number: true</span><br><span class="line">  auto_detect: false</span><br><span class="line">  tab_replace:</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/03/Old/Pre/红黑树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/03/Old/Pre/红黑树/" itemprop="url">红黑树</a></h1>
         
 
         <div class="post-meta">
@@ -419,7 +1032,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/02/current/June/细说-iOS-刷新控件-二）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/02/Old/current/June/细说-iOS-刷新控件-二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -438,7 +1051,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/02/current/June/细说-iOS-刷新控件-二）/" itemprop="url">细说 iOS 刷新控件(二）</a></h1>
+                <a class="post-title-link" href="/2018/07/02/Old/current/June/细说-iOS-刷新控件-二）/" itemprop="url">细说 iOS 刷新控件(二）</a></h1>
         
 
         <div class="post-meta">
@@ -574,7 +1187,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/current/June/细说iOS-刷新控件（一/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/Old/current/June/细说iOS-刷新控件（一/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -593,7 +1206,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/01/current/June/细说iOS-刷新控件（一/" itemprop="url">细说 iOS 刷新控件（一)</a></h1>
+                <a class="post-title-link" href="/2018/07/01/Old/current/June/细说iOS-刷新控件（一/" itemprop="url">细说 iOS 刷新控件（一)</a></h1>
         
 
         <div class="post-meta">
@@ -737,7 +1350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/Pre/Cocopods-公共仓库创建/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/Old/Pre/Cocopods-公共仓库创建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -756,7 +1369,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/18/Pre/Cocopods-公共仓库创建/" itemprop="url">Cocopods 公共仓库创建</a></h1>
+                <a class="post-title-link" href="/2018/06/18/Old/Pre/Cocopods-公共仓库创建/" itemprop="url">Cocopods 公共仓库创建</a></h1>
         
 
         <div class="post-meta">
@@ -862,7 +1475,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/15/current/June/LeetCode/LeetCode-五-两数之和/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/15/Old/current/June/LeetCode/LeetCode-五-两数之和/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -881,7 +1494,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/15/current/June/LeetCode/LeetCode-五-两数之和/" itemprop="url">LeetCode(五) 两数之和</a></h1>
+                <a class="post-title-link" href="/2018/06/15/Old/current/June/LeetCode/LeetCode-五-两数之和/" itemprop="url">LeetCode(五) 两数之和</a></h1>
         
 
         <div class="post-meta">
@@ -992,7 +1605,7 @@
 <li>空间复杂度： <em>O(n)</em></li>
 </ol>
 </blockquote>
-<p><strong>结果：</strong><br><img src="/2018/06/15/current/June/LeetCode/LeetCode-五-两数之和/onehash.png" alt=""></p>
+<p><strong>结果：</strong><br><img src="/2018/06/15/Old/current/June/LeetCode/LeetCode-五-两数之和/onehash.png" alt=""></p>
 <h2 id="方案二：一遍-Hash"><a href="#方案二：一遍-Hash" class="headerlink" title="方案二：一遍 Hash"></a>方案二：一遍 Hash</h2><p>上面的方案，我们可以发现，即使一开始 map 没有值，只要我们遍历的时候添加上，后面找到另一个值就会回头对比，所以一遍遍历，一遍向 map 中添加值，然后继续遍历，一次 hash 就可以了</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">map</span> : [<span class="type">Int</span> : <span class="type">Int</span>] = [<span class="type">Int</span> : <span class="type">Int</span>]()</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>  i <span class="keyword">in</span> <span class="number">0</span> ..&lt; nums.<span class="built_in">count</span> &#123;</span><br><span class="line">     <span class="keyword">var</span> result = target - nums[i]</span><br><span class="line">     <span class="keyword">if</span> <span class="keyword">let</span> temp = <span class="built_in">map</span>[result] &#123;</span><br><span class="line">             <span class="keyword">return</span> [i, temp]</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     <span class="built_in">map</span>[nums[i]] = i</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
 <p><strong>复杂度分析：</strong></p>
@@ -1003,7 +1616,7 @@
 </ol>
 </blockquote>
 <p><strong>结果：</strong></p>
-<p><img src="/2018/06/15/current/June/LeetCode/LeetCode-五-两数之和/oneHashone.png" alt=""></p>
+<p><img src="/2018/06/15/Old/current/June/LeetCode/LeetCode-五-两数之和/oneHashone.png" alt=""></p>
 
           
         
@@ -1055,7 +1668,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/14/Pre/重构改善既有代码的设计/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/14/Old/Pre/重构改善既有代码的设计/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -1074,7 +1687,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/14/Pre/重构改善既有代码的设计/" itemprop="url">重构改善既有代码的设计</a></h1>
+                <a class="post-title-link" href="/2018/06/14/Old/Pre/重构改善既有代码的设计/" itemprop="url">重构改善既有代码的设计</a></h1>
         
 
         <div class="post-meta">
@@ -1243,680 +1856,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/Pre/GCD-全面解析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/12/Pre/GCD-全面解析/" itemprop="url">GCD 全面解析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-12T10:38:23+08:00">
-                2018-06-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="GCD-概要"><a href="#GCD-概要" class="headerlink" title="GCD 概要"></a>GCD 概要</h2><p><strong>Grand Central Dispatch</strong> </p>
-<h3 id="GCD-是什么？"><a href="#GCD-是什么？" class="headerlink" title="GCD 是什么？"></a>GCD 是什么？</h3><p>是异步执行任务的技术之一。通过非常简洁的方式，实现了极为复杂的多线程编程。说白了就是为了使得多线程编程更加简洁</p>
-<p>Objective-C</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (void)gcdTest &#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_queue_t queue = dispatch_queue_create(&quot;com.hello.world&quot;, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        //处理耗时操作</span><br><span class="line">        NSLog(@&quot;处理耗时操作 ...&quot;);</span><br><span class="line">        sleep(3);</span><br><span class="line">        dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">            NSLog(@&quot;refresh ui ...&quot;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Swift</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func gcdTestFunction() &#123;</span><br><span class="line">       let queue = DispatchQueue(label: &quot;queue0&quot;, qos: .default, attributes: .concurrent, autoreleaseFrequency: .never, target: nil)</span><br><span class="line">       queue.async &#123;</span><br><span class="line">           /*长时间处理任务*/</span><br><span class="line">           print(&quot;处理耗时操作&quot;)</span><br><span class="line">           sleep(3)</span><br><span class="line">           DispatchQueue.main.async &#123;</span><br><span class="line">               //主线程处理，比如用户界面更新</span><br><span class="line">               print(&quot;refresh ui ... &quot;)</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="多线程编程"><a href="#多线程编程" class="headerlink" title="多线程编程"></a>多线程编程</h3><p>一个 CPU 无分叉的执行一条条的指令路径，即为线程。<br>一个 CPU 在各条指令路径之间进行切换，即为多线程，而如果一个 CPU 有多个核，那么就是真正的同时执行多条指令路径，这就是多线程编程技术。</p>
-<p><strong>缺点：</strong></p>
-<ol>
-<li>数据不一致（数据共享造成）</li>
-<li>消耗资源（寄存器保存上下文，供 CPU 在各个指令路径之间进行切换）</li>
-<li>死锁（多个线程相互等待）</li>
-</ol>
-<p>鉴于上述问题，多线程编程技术就会趋于复杂。</p>
-<p><strong>优点：</strong><br>多线程编程可保证应用程序的响应性能（耗时操作放在子线程中执行，主线程负责 UI 响应）</p>
-<p>通过多线程技术，在执行长时间的处理时仍可保证用户界面的响应性能。<br>GCD 大大简化了偏于复杂的多线程编程源代码。</p>
-<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p><strong>使用 GCD 开发者要做的就是定义要执行的任务然后添加到适当的 Dispatch Queue 中。</strong><br>GCD 为我们提供了 API 供完成队列的创建和任务的添加。</p>
-<h3 id="Dispatch-Queue"><a href="#Dispatch-Queue" class="headerlink" title="Dispatch Queue"></a>Dispatch Queue</h3><p>Dispatch Queue 是执行任务的队列。将任务添加到队列中，任务就会被执行。队列分为两类：</p>
-<ul>
-<li>串行队列：等在当前队列中的任务执行完毕之后，在执行下一个任务</li>
-<li>并发队列：不会等待当前的任务执行完毕，根据系统情况继续执行后面追加的任务。</li>
-</ul>
-<h3 id="Main-Dispatch-Queue-Global-Dispatch-Queue"><a href="#Main-Dispatch-Queue-Global-Dispatch-Queue" class="headerlink" title="Main Dispatch Queue/ Global Dispatch Queue "></a>Main Dispatch Queue/ Global Dispatch Queue </h3><p>创建队列的方式，除了通过 <em>dispatch_create()</em> 之外，系统 API 帮我提供了两个可以直接获取到队列的函数，分别是：</p>
-<ul>
-<li>dispatch_get_main_queue() 获取主队列，向其中添加的任务在主线程的 Runloop 中执行，因此只有一个这种队列，是串行队列</li>
-<li>dispatch_get_global_queue() 获取全局队列，是并发队列</li>
-</ul>
-<h3 id="dispatch-set-target-queue"><a href="#dispatch-set-target-queue" class="headerlink" title="dispatch_set_target_queue"></a>dispatch_set_target_queue</h3><p>修改队列的优先级，因为通过 create 函数创建的队列没有优先级，那么可以通过这个函数来设置优先级。</p>
-<h3 id="dispatch-after"><a href="#dispatch-after" class="headerlink" title="dispatch_after"></a>dispatch_after</h3><p>这个函数是在指定时间后像当前队列中追加任务，至于任务合适执行要看当前的上下文了。</p>
-<h3 id="dispatch-group"><a href="#dispatch-group" class="headerlink" title="dispatch_group"></a>dispatch_group</h3><p>如果一串任务有序列执行，可以直接通过串行队列实现，但是如果多个任务无序执行结束之后，又有一个确定的任务必须等待前面的无序任务执行结束之后再去执行，那么这就需要用到这个函数了： dispatch_group</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">- (void)dispatch_group &#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">    dispatch_group_t group = dispatch_group_create();</span><br><span class="line">    </span><br><span class="line">    dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;one ...&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;two ...&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;three&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    dispatch_group_notify(group, dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        NSLog(@&quot;done&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>one、two、three 三个任务追加到并发队列中，虽然这个三个任务执行顺序不定，但是 done 一定是在最后执行的。</p>
-<h3 id="dispatch-barrier-async"><a href="#dispatch-barrier-async" class="headerlink" title="dispatch_barrier_async"></a>dispatch_barrier_async</h3><p>执行读写任务，读任务是可以并发的，但是写任务相互之间不可以并发，与读任务可以控制着进行并发。<br>下面共有 8 个读取任务，执行完成四个读取任务之后，需要进行一次写任务，这个写入任务必须在前四个读取任务结束之后再执行，那么久可以通过 dispatch_barrier_async() 函数来实现这个操作了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">- (void)dispatch_barrier_async &#123;</span><br><span class="line">    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 1&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 2&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 3&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 4&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_barrier_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;writing ...&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 5&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 6&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 7&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;reading ..... 8&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用 Concurrent Dispatch Queue 和 dispatch_barrier_async 函数可实现高效率的数据库访问和文件访问</p>
-<h3 id="dispatch-sync"><a href="#dispatch-sync" class="headerlink" title="dispatch_sync"></a>dispatch_sync</h3><p>同步追加任务到某个队列中。同步追加方式要等到之前的任务完成之后，才会追加进去，所以容易造成死锁：</p>
-<p>下面这两种方式就会造成死锁：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_sync(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    NSLog(@&quot;one ...&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;one&quot;, NULL);</span><br><span class="line">   dispatch_async(queue, ^&#123;</span><br><span class="line">       NSLog(@&quot;one ...&quot;);</span><br><span class="line">       dispatch_sync(queue, ^&#123;</span><br><span class="line">           NSLog(@&quot;Hello world&quot;);</span><br><span class="line">       &#125;);</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="dispatch-apply"><a href="#dispatch-apply" class="headerlink" title="dispatch_apply"></a>dispatch_apply</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t dispatch_global_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">dispatch_apply(10, dispatch_global_queue, ^(size_t t) &#123;</span><br><span class="line">    NSLog(@&quot;Hello world %zu&quot;, t);</span><br><span class="line">&#125;);</span><br><span class="line">NSLog(@&quot;done --- &quot;);</span><br><span class="line"></span><br><span class="line">dispatch_queue_t dispatch_serial_queue = dispatch_queue_create(&quot;com.maple.www&quot;, NULL);</span><br><span class="line">dispatch_apply(10, dispatch_serial_queue, ^(size_t t) &#123;</span><br><span class="line">    NSLog(@&quot;Hello world serial %zu&quot;, t);</span><br><span class="line">&#125;);</span><br><span class="line">NSLog(@&quot;done&quot;);</span><br></pre></td></tr></table></figure>
-<p>这个函数像是 dispatch_sync 和 dispatch group 的组合版。该函数按照指定次将指定的 Block 追加都队列中，并且等待所有的任务执行完毕。</p>
-<p>可以通过这个函数来访问数组元素：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;one&quot;,@&quot;two&quot;,@&quot;three&quot;,@&quot;four&quot;,@&quot;five&quot;,@&quot;six&quot;];</span><br><span class="line"></span><br><span class="line">dispatch_apply([array count], dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(size_t index) &#123;</span><br><span class="line">    NSLog(@&quot;array[%zu] = %@&quot;,index,array[index]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>因为 dispatch_apply 函数和dispatch_sync 函数相同，所以最好在 dispatch_async 函数中非同步执行 dispatch_apply 函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NSArray *array = @[@&quot;one&quot;,@&quot;two&quot;,@&quot;three&quot;,@&quot;four&quot;,@&quot;five&quot;,@&quot;six&quot;];</span><br><span class="line">dispatch_queue_t dispatch_global_queue =    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line"></span><br><span class="line">dispatch_async(dispatch_global_queue, ^&#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_apply([array count], dispatch_global_queue, ^(size_t index) &#123;</span><br><span class="line">        NSLog(@&quot;array[%zu] = %@&quot;,index,array[index]);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    // 到这里已经处理完所有的事情</span><br><span class="line">    </span><br><span class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        //更新ui</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="dispatch-suspend-dispatch-resume"><a href="#dispatch-suspend-dispatch-resume" class="headerlink" title="dispatch_suspend / dispatch_resume"></a>dispatch_suspend / dispatch_resume</h3><p>挂起和恢复队列</p>
-<h3 id="dispatch-semaphore"><a href="#dispatch-semaphore" class="headerlink" title="dispatch semaphore"></a>dispatch semaphore</h3><p>信号基数，如果我们直接通过 for 循环启动多个异步线程向数组中存入数据，那么会引发内存分配的错误。而 semaphore 是一种信号机制，当我们通过 create 函数创建一个 count 为 1 的信号时候，表示当前只能执行一次任务。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">- (void)semaphore &#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">    </span><br><span class="line">    NSMutableArray *mArray = [[NSMutableArray alloc] init];</span><br><span class="line">    </span><br><span class="line">    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; 100000; i ++) &#123;</span><br><span class="line">        dispatch_async(queue, ^&#123;</span><br><span class="line">            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</span><br><span class="line">            [mArray addObject:[NSNumber numberWithInt:i]];</span><br><span class="line">            dispatch_semaphore_signal(semaphore);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    NSLog(@&quot;over&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="dipatch-once"><a href="#dipatch-once" class="headerlink" title="dipatch_once"></a>dipatch_once</h3><p>在当前应用程序中如果打算只执行一次任务，那么就可以通过 <em>dispatch_once</em> 来实现。一般用来生成单例对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">- (void)dispatch_onceFunc &#123;</span><br><span class="line">    </span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">            NSLog(@&quot;Hello world&quot;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">            NSLog(@&quot;Hello world&quot;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">            NSLog(@&quot;Hello world&quot;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">            NSLog(@&quot;Hello world&quot;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    static int initialized = NO;</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@&quot;Hello this is mine.&quot;);</span><br><span class="line">            initialized = YES;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@&quot;Hello this is mine.&quot;);</span><br><span class="line">            initialized = YES;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@&quot;Hello this is mine.&quot;);</span><br><span class="line">            initialized = YES;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        if (initialized == NO) &#123;</span><br><span class="line">            NSLog(@&quot;Hello this is mine.&quot;);</span><br><span class="line">            initialized = YES;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GCDExample[79831:10334594] Hello world</span><br><span class="line">GCDExample[79831:10334575] Hello this is mine.</span><br><span class="line">GCDExample[79831:10334638] Hello this is mine.</span><br><span class="line">GCDExample[79831:10334639] Hello this is mine.</span><br><span class="line">GCDExample[79831:10334640] Hello this is mine.</span><br></pre></td></tr></table></figure>
-<p>使用 dispatch_once 保证了线程安全。</p>
-<h3 id="Dispatch-I-O"><a href="#Dispatch-I-O" class="headerlink" title="Dispatch I/O"></a>Dispatch I/O</h3><p>当我们读取较大的文件的时候，如果将文件分成合适大小并使用 Global Dispatch Queue 并列读取的话，应该比一般的读取速度会快很多。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>GCD 的 Dispatch Queue 非常方便，那么它究竟是怎么实现的 ？</p>
-<ul>
-<li>用户管理追加 Block 的 C 语言层实现 FIFO 队列</li>
-<li>Atomic 函数中实现的用于排他控制的轻量级信号</li>
-<li>用于管理线程的 C 语言层实现的一些容器</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/Pre/Mac-OS-X-and-iOS-Internals-2012/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/11/Pre/Mac-OS-X-and-iOS-Internals-2012/" itemprop="url">Mac OS X and iOS Internals</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T11:20:27+08:00">
-                2018-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/2018/06/11/Pre/Mac-OS-X-and-iOS-Internals-2012/QQ20180611-112346@2x.png" alt="Mac OS X and iOS Internals"></p>
-<p>除了这本书之外，还有一本类似的书叫做《Mac OS X Internals》 ，这本书相对较早了</p>
-<p>此书分为两部分：</p>
-<ul>
-<li>PART 1：FOR POWER USERS</li>
-<li>PART 2：THE KERNEL</li>
-</ul>
-<h2 id="PART-1-FOR-POWER-USERS"><a href="#PART-1-FOR-POWER-USERS" class="headerlink" title="PART 1 FOR POWER USERS"></a>PART 1 FOR POWER USERS</h2><h3 id="1-Darwinism：-The-Evolution-of-OS-X"><a href="#1-Darwinism：-The-Evolution-of-OS-X" class="headerlink" title="1 Darwinism： The Evolution of OS X"></a>1 Darwinism： The Evolution of OS X</h3><p><a href="https://pan.baidu.com/s/1nuCMkZn" target="_blank" rel="noopener">https://pan.baidu.com/s/1nuCMkZn</a><br><a href="https://www.jianshu.com/u/360a4cffa818" target="_blank" rel="noopener">https://www.jianshu.com/u/360a4cffa818</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/Pre/iOS-App-内存专项实践/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/11/Pre/iOS-App-内存专项实践/" itemprop="url">iOS App 内存专项实践</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T10:44:01+08:00">
-                2018-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>此篇是学习了 QCon 大会记录</p>
-<p>iOS 是一个封闭的系统，使用的内存检测工具自然而然较少！</p>
-<h2 id="封闭系统下的工具-Instruments"><a href="#封闭系统下的工具-Instruments" class="headerlink" title="封闭系统下的工具 Instruments"></a>封闭系统下的工具 Instruments</h2><p>苹果 Xcode 继承了 Instruments 供调试使用，但是这个工具对于测试人员来说其实并不可用，或者基本上是不可用的。开发者使用起来倒是顺手。</p>
-<h2 id="封闭系统下的自由"><a href="#封闭系统下的自由" class="headerlink" title="封闭系统下的自由"></a>封闭系统下的自由</h2><p> 苹果系统自带的开发工具对于测试而言其实并不友好，苹果推崇的是开发、产品和测试集于一身的人员，而实际上这种倾向只适合于小的项目或者模块，模块一旦大了势必不是单打独头可以完成的，尤其是在大公司一个项目动辄编译半个小时，鉴于此就需要有适合于自动化集成的内存检测工具。</p>
-<h3 id="获取新建对象申请的内存地址和堆栈"><a href="#获取新建对象申请的内存地址和堆栈" class="headerlink" title="获取新建对象申请的内存地址和堆栈"></a>获取新建对象申请的内存地址和堆栈</h3><ul>
-<li>纯 OC 代码： 利用 <em>method_exchangeImplementationse</em> 接管 alloc 和 dealloc</li>
-<li>C++ 内网版本（非纯 OC 代码）： 借用开发工具的权限， malloc_logger 简单直接</li>
-<li>C++ 外网版本： fishhook hook: malloc\calloc\free</li>
-</ul>
-<h3 id="获取指针变量"><a href="#获取指针变量" class="headerlink" title="获取指针变量"></a>获取指针变量</h3><ul>
-<li>堆区</li>
-<li>全局区</li>
-<li>栈区</li>
-</ul>
-<h3 id="剩下问题"><a href="#剩下问题" class="headerlink" title="剩下问题"></a>剩下问题</h3><p>内存泄漏的结果是：内存耗尽，闪退。除了内存泄漏之外还有没有其他的原因会造成闪退呢？</p>
-<ul>
-<li>大内存常驻</li>
-<li>内存越界</li>
-<li>侵略性内存使用，比如一次申请的内存空间很大</li>
-</ul>
-<p><strong>解决思路：</strong></p>
-<ul>
-<li>记录申请的内存大小和堆栈</li>
-<li>记录堆栈内存的释放</li>
-<li>聚合数据</li>
-</ul>
-<p>对上面的记录进行判断：</p>
-<ul>
-<li>单个申请的内存块大雨 50 MB</li>
-<li>申请内存（未释放）的综合大于阈值</li>
-</ul>
-<p>针对内存越界，可以通过 address sanitizer 来进行检测：</p>
-<ul>
-<li>Heap buffer overflow</li>
-<li>Stack buffer overflow</li>
-<li>Global buffer overflow</li>
-<li>dangling pointer</li>
-<li>Use-after-free</li>
-<li>Double-free</li>
-</ul>
-<h3 id="最后记录："><a href="#最后记录：" class="headerlink" title="最后记录："></a>最后记录：</h3><ul>
-<li>工具：Xcode、Address Sanitizer、Instruments</li>
-<li>界面声明周期</li>
-<li>Xcode（malloc_logger)、LLDB</li>
-<li>hook：fishhook、method_exchangeImplementations</li>
-<li>hook 获取源码能力： fishhook 如何遍历 SECT_DATA 获取全局区</li>
-<li>Jetsam<br>Monkey 做自动化</li>
-</ul>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>这是一名测试工程师的分享，虽然没有实际的实现，但是原理已经讲明包括使用的工具以及有哪些方面，后面会慢慢去实践。</p>
-<p>由这次学习有获得了两本书可以看：</p>
-<ol>
-<li>《Mac OS X and iOS Internals 2012》</li>
-<li>《Mac Os X Internals - A Systems Approach》</li>
-</ol>
-<p><strong>参考：</strong><br><a href="http://www.infoq.com/cn/presentations/ios-app-memory-special-practice-the-big-freedom-under-the-closed-system?utm_source=presentations_about_iOS&amp;utm_medium=link&amp;utm_campaign=iOS" target="_blank" rel="noopener">iOS App 内存专项实践</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/10/current/June/LeetCode/LeetCode-四）链表之反转链表/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/10/current/June/LeetCode/LeetCode-四）链表之反转链表/" itemprop="url">LeetCode(四)反转链表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T21:29:23+08:00">
-                2018-06-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>预备知识：<a href="https://alicehome.github.io/2018/07/26/Data-Structure-%E4%B8%80-Linked-List/" target="_blank" rel="noopener">Data Structure(一) Linked List</a><br><a href="https://github.com/AliceHome/LeetCode_linkedList" target="_blank" rel="noopener">代码链接</a><br><a href="https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/43/" target="_blank" rel="noopener">题目题目链接</a></p>
-<h2 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h2><p>反转一个单链表。</p>
-<p><strong>示例:</strong></p>
-<blockquote>
-<p>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
-</blockquote>
-<p><strong>进阶:</strong></p>
-<p>你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
-<h2 id="思路一：-迭代的方式"><a href="#思路一：-迭代的方式" class="headerlink" title="思路一： 迭代的方式"></a>思路一： 迭代的方式</h2><p>通过遍历的方式，核心代码如下</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseList</span><span class="params">(<span class="number">_</span> head: ListNode?)</span></span> -&gt; <span class="type">ListNode</span>? &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> newNode = head</span><br><span class="line">    <span class="keyword">var</span> preNode: <span class="type">ListNode</span>?</span><br><span class="line">    <span class="keyword">while</span> newNode != <span class="literal">nil</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> nextNode: <span class="type">ListNode</span>?</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> node = newNode &#123;</span><br><span class="line">            nextNode = node.next</span><br><span class="line">            node.next = preNode</span><br><span class="line">            preNode = node</span><br><span class="line">        &#125;</span><br><span class="line">        newNode = nextNode</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> preNode</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="思路一：-递归的方式"><a href="#思路一：-递归的方式" class="headerlink" title="思路一： 递归的方式"></a>思路一： 递归的方式</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseList2</span><span class="params">(<span class="number">_</span> head: ListNode?)</span></span> -&gt; <span class="type">ListNode</span>? &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> head?.next == <span class="literal">nil</span>  &#123;</span><br><span class="line">        <span class="keyword">return</span> head</span><br><span class="line">        </span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> temp = head?.next</span><br><span class="line">        head?.next = <span class="literal">nil</span></span><br><span class="line">        <span class="keyword">let</span> node = reverseList(temp)</span><br><span class="line">        temp?.next = head</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> node</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><img src="/2018/06/10/current/June/LeetCode/LeetCode-四）链表之反转链表/result.png" alt=""></p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>看这个问题的时候，对链表还不太熟悉，熟悉了之后再解决这个问题的时候发现，这个反转的过成功根本就看不到链表啊 … 有木有？题目中给出了 Node 的定义，以及 Node 中 value 的类型，其实这就够了，我第一遍做的时候，在 LeetCode 网站上把定义链表的代码也贴上了，然后还加上了 firt、last 以及 description 还有 append(） 方法，虽然正确，但是编译时不通过的，因为 LeetCode 内部已经实现了，只需要写反转算法这块代码就好了，这块儿折腾了一大会儿才反应过来。</p>
-<p>对于思路一，迭代这种方式，在纸上画个草稿，就差不多能写出来了。<br>思路二，是通过递归的方式去解决这个问题的，主要是处理好结束条件</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1962,7 +1906,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">107</span>
+                <span class="site-state-item-count">111</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1973,7 +1917,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1984,7 +1928,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

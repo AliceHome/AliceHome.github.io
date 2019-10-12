@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/current/June/iOS-离屏渲染/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/Old/current/June/Swift/Swift-二-swift-中的原型模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -315,7 +315,685 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/25/current/June/iOS-离屏渲染/" itemprop="url">iOS 离屏渲染</a></h1>
+                <a class="post-title-link" href="/2018/07/29/Old/current/June/Swift/Swift-二-swift-中的原型模式/" itemprop="url">Swift (二) swift 中的原型模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-29T10:09:22+08:00">
+                2018-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://github.com/AliceHome/SwiftTips" target="_blank" rel="noopener">代码链接</a></p>
+<h2 id="继承自-NSObject-类"><a href="#继承自-NSObject-类" class="headerlink" title="继承自 NSObject 类"></a>继承自 NSObject 类</h2><p><img src="/2018/07/29/Old/current/June/Swift/Swift-二-swift-中的原型模式/error.png" alt=""> </p>
+<p>可以看到直接调用 copy 方法是可以的，但是程序会报错，这是以为 copy 是 NSObject 的方法，但是 NSObject 类并没有实现 NSCopying 协议，所以：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Person: NSObject, NSCopying &#123;</span><br><span class="line"></span><br><span class="line">    var name: String?</span><br><span class="line">    func copy(with zone: NSZone? = nil) -&gt; Any &#123;</span><br><span class="line">        let newP = Person()</span><br><span class="line">        newP.name = name</span><br><span class="line">        return newP</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let p = Person()</span><br><span class="line">let p2 = p.copy() as! Person</span><br><span class="line">if let name = p2.name  &#123;</span><br><span class="line">   print(name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="非继承自-NSObject"><a href="#非继承自-NSObject" class="headerlink" title="非继承自 NSObject"></a>非继承自 NSObject</h2><p><img src="/2018/07/29/Old/current/June/Swift/Swift-二-swift-中的原型模式/Dog.png" alt=""> </p>
+<p>而向 Dog 却并没有继承自 NSObject，所以程序运行的时候回报出没有 copy 成员的错误</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>: <span class="title">NSCopying</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span>?</span><br><span class="line">    <span class="keyword">var</span> ower: <span class="type">Person</span>?</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">copy</span><span class="params">(with zone: NSZone? = <span class="literal">nil</span>)</span></span> -&gt; <span class="type">Any</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> copyDog = <span class="type">Dog</span>()</span><br><span class="line">        copyDog.name = name</span><br><span class="line">        copyDog.ower = ower</span><br><span class="line">        <span class="keyword">return</span> copyDog</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> dog = <span class="type">Dog</span>()</span><br><span class="line">dog.name = <span class="string">"Tom"</span></span><br><span class="line"><span class="keyword">let</span> newDog = dog.copy() <span class="keyword">as</span>! <span class="type">Dog</span></span><br><span class="line">dog.name</span><br></pre></td></tr></table></figure>
+<h2 id="继承类实现原型模式"><a href="#继承类实现原型模式" class="headerlink" title="继承类实现原型模式"></a>继承类实现原型模式</h2><p><img src="/2018/07/29/Old/current/June/Swift/Swift-二-swift-中的原型模式/tianyuan.png" alt=""> </p>
+<p>这里出现了一个问题，就是 TianYuanDog 类型转换不成功，这是因为在 Dog 的 copy(with zone:) 方法中，我们是生成的 Dog 类，所以这里需要做一下修改</p>
+<p>修改前：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">copy</span><span class="params">(with zone: NSZone? = <span class="literal">nil</span>)</span></span> -&gt; <span class="type">Any</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> copyDog = <span class="type">Dog</span>()</span><br><span class="line">      copyDog.name = name</span><br><span class="line">      copyDog.ower = ower</span><br><span class="line">      <span class="keyword">return</span> copyDog</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><code>let copyDog = Dog()</code> 这里不能直接生成 Dog 对象，否则子类继承的话会出现问题</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">copy</span><span class="params">(with zone: NSZone? = <span class="literal">nil</span>)</span></span> -&gt; <span class="type">Any</span> &#123;</span><br><span class="line"><span class="comment">//        let copyDog = Dog()</span></span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">dynamicType</span> = type(of: <span class="keyword">self</span>)</span><br><span class="line">        <span class="keyword">let</span> copyDog = <span class="keyword">dynamicType</span>.<span class="keyword">init</span>()</span><br><span class="line">        copyDog.name = name</span><br><span class="line">        copyDog.ower = ower</span><br><span class="line">        <span class="keyword">return</span> copyDog</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>同样的，上面 Person 也要做修改：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>: <span class="title">NSObject</span>, <span class="title">NSCopying</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span>?</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">copy</span><span class="params">(with zone: NSZone? = <span class="literal">nil</span>)</span></span> -&gt; <span class="type">Any</span> &#123;</span><br><span class="line"><span class="comment">//        let newP = Person()</span></span><br><span class="line">        <span class="keyword">let</span> personType = type(of: <span class="keyword">self</span>)</span><br><span class="line">        <span class="keyword">let</span> newP = personType.<span class="keyword">init</span>()</span><br><span class="line">        </span><br><span class="line">        newP.name = name</span><br><span class="line">        <span class="keyword">return</span> newP</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">override</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/07/29/Old/current/June/Swift/Swift-二-swift-中的原型模式/tianyuanr.png" alt=""> </p>
+<h2 id="继承类实现原型模式-并添加新的属性"><a href="#继承类实现原型模式-并添加新的属性" class="headerlink" title="继承类实现原型模式, 并添加新的属性"></a>继承类实现原型模式, 并添加新的属性</h2><p>接下来 TianYuanDog 类 需要添加一个 ID 号，这个 ID 号在实例执行 copy 的时候也需要跟随一起 copy 的</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TianYuanDog</span>: <span class="title">Dog</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> idNumber: <span class="type">Int</span>?</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>() &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(number idNumber: <span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.idNumber = idNumber</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">copy</span><span class="params">(with zone: NSZone?)</span></span> -&gt; <span class="type">Any</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> newCopy =  <span class="keyword">super</span>.copy(with: zone) <span class="keyword">as</span>! <span class="type">TianYuanDog</span></span><br><span class="line">        newCopy.idNumber = <span class="keyword">self</span>.idNumber</span><br><span class="line">        <span class="keyword">return</span> newCopy</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> tianyuan = <span class="type">TianYuanDog</span>(number:<span class="number">123</span>)</span><br><span class="line">tianyuan.name = <span class="string">"中华田园犬"</span></span><br><span class="line"><span class="keyword">let</span> newCopy = tianyuan.copy(with: <span class="literal">nil</span>) <span class="keyword">as</span>! <span class="type">TianYuanDog</span></span><br><span class="line">newCopy.name</span><br><span class="line">newCopy.idNumber</span><br></pre></td></tr></table></figure>
+<p>具体操作：</p>
+<ol>
+<li>重写 copy(with:) 方法</li>
+<li>如果需要添加 init() 方法，需要重写 require 的 init 方法</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/Old/current/June/设计模式-一-6-个原则/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/27/Old/current/June/设计模式-一-6-个原则/" itemprop="url">设计模式(一) 6 个原则</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-27T14:38:45+08:00">
+                2018-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design-Pattern/" itemprop="url" rel="index">
+                    <span itemprop="name">Design Pattern</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="总原则：开闭原则"><a href="#总原则：开闭原则" class="headerlink" title="总原则：开闭原则"></a>总原则：开闭原则</h2><p><strong>对扩展开放，对修改关闭</strong></p>
+<h2 id="单一原则"><a href="#单一原则" class="headerlink" title="单一原则"></a>单一原则</h2><p>不存在多于一个导致类变更的原因，也就是说每个类应该实现单一的职责，如果不能，就应该把类进一步拆分</p>
+<h2 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h2><p>任何基类出现的地方，子类一定可以出现。 LSP 是继承复用的基石，只有当衍生类可以替换掉基类，软件单位功能不受到影响，基类才能真正被复用，而衍生类才能在基类的基础上增加新的行为。</p>
+<h2 id="依赖倒转原则"><a href="#依赖倒转原则" class="headerlink" title="依赖倒转原则"></a>依赖倒转原则</h2><p>这个是开闭原则的基础，具体内容：面向接口编程，依赖于抽象而不依赖于具体。写代码时用到具体类时，不与具体类交互，而与具体类的上层接口交互。</p>
+<h2 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h2><p>每个接口中不存在子类用不到却必须实现的方法，如果不然，就要将接口拆分。使用多个接口的隔离，比使用单个接口要好。</p>
+<h2 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h2><p>一个类对自己依赖的类知道的越少越好，也就是说无论被依赖的类多么复杂，都应该讲逻辑封装在方法内部，通过 public 方法提供给外部，这样当被依赖的类发生变化的时候，才能最小的影响该类。</p>
+<h2 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h2><p>原则尽量首先使用合成/聚合的方法，而不是继承</p>
+<h2 id="23-三种设计模式分类："><a href="#23-三种设计模式分类：" class="headerlink" title="23 三种设计模式分类："></a>23 三种设计模式分类：</h2><h3 id="对象创建模式："><a href="#对象创建模式：" class="headerlink" title="对象创建模式："></a>对象创建模式：</h3><ol>
+<li>原型模式</li>
+<li>工厂模式</li>
+<li>抽象工厂模式</li>
+<li>生成器模式</li>
+<li>单例模式</li>
+</ol>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
+<li><a href="https://www.cnblogs.com/geek6/p/3951677.html" target="_blank" rel="noopener">23种设计模式全解析</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/Old/current/June/Data Structure/Data-Structure-一-Linked-List/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/26/Old/current/June/Data Structure/Data-Structure-一-Linked-List/" itemprop="url">Data Structure(一) Linked List</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-26T23:33:37+08:00">
+                2018-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Data-Structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Data Structure</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://github.com/AliceHome/Data-Structure" target="_blank" rel="noopener">代码地址</a></p>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><p>链表是数据结构中经常会用到的一种数据结构，是指一串数据项，每一个数据项称之为节点（Node）。</p>
+<p><strong>链表主要有两种：</strong></p>
+<p><em>单链表</em>，链表中的每个节点只有向后的索引</p>
+<p><img src="/2018/07/26/Old/current/June/Data Structure/Data-Structure-一-Linked-List/singleLinkedList.png" alt=""></p>
+<p><em>双链表</em>，链表除了向后的索引之外，还有指向前一个的索引</p>
+<p><img src="/2018/07/26/Old/current/June/Data Structure/Data-Structure-一-Linked-List/doubleLinkedList.png" alt=""></p>
+<h2 id="定义节点"><a href="#定义节点" class="headerlink" title="定义节点"></a>定义节点</h2><p>链表是有节点组成的，首先定义节点的数据结构： Node</p>
+<ol>
+<li>首先将节点定义为一个类 - Node</li>
+<li>添加值，并添加一个初始化方法</li>
+<li>要有一个指针 next 指向下一个节点，注意这个指针必须是可选类型，因为链表最后的一个 Node 的 next 指针不指向任何 Node</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> val: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">var</span> next: <span class="type">Node</span>?</span><br><span class="line">    <span class="keyword">init</span>(<span class="number">_</span> val: <span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.val = val</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果是双向链表，还需要定义 previous 指针：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Node &#123;</span><br><span class="line">    </span><br><span class="line">    var value: Int</span><br><span class="line">    var next: Node?</span><br><span class="line">    weak var previous: Node?</span><br><span class="line">    </span><br><span class="line">    public init(_ value: Int) &#123;</span><br><span class="line">        self.value = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里 previous 使用 weak 是为了防止循环引用</p>
+<h2 id="定义链表"><a href="#定义链表" class="headerlink" title="定义链表"></a>定义链表</h2><p>定义链表，有两个节点 head  和 tail</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//链表</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="keyword">var</span> head: <span class="type">Node</span>?</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> tail: <span class="type">Node</span>?</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> first: <span class="type">Node</span>? &#123;</span><br><span class="line">        <span class="keyword">return</span> head</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> last: <span class="type">Node</span>? &#123;</span><br><span class="line">        <span class="keyword">return</span> tail</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="空链表"><a href="#空链表" class="headerlink" title="空链表"></a>空链表</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">var</span> isEmpty: <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> head == <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加测试代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//测试</span></span><br><span class="line">testList()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testLinkedList</span> <span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> link = <span class="type">LinkedList</span>()</span><br><span class="line">    <span class="built_in">assert</span>(link.isEmpty, <span class="string">"空链表"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testLinkedList()</span><br></pre></td></tr></table></figure>
+<h2 id="添加节点"><a href="#添加节点" class="headerlink" title="添加节点"></a>添加节点</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">append</span><span class="params">(<span class="number">_</span> value: Int)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> newNode = <span class="type">Node</span>(value)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> tailNode = tail &#123;</span><br><span class="line">        newNode.previous = tailNode</span><br><span class="line">        tailNode.next = newNode</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        head = newNode</span><br><span class="line">    &#125;</span><br><span class="line">    tail = newNode</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>说明：</strong></p>
+<ul>
+<li>首先根据传入的 value， 创建一个新的节点</li>
+<li>如果 tail 不为 nil，就说明当前的链表内有内容，所以执行插入操作</li>
+<li>插入操作：newNode 的 previous 指向 tail，tail 的 next 指针指向 newNode，并且设置 newNode 为新的 tail</li>
+<li>如果 tail 为 nil， 就说明当前链表为空链表，直接设置 head 为 newNode 就可以了，然后设置 tail 为 newNode</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//测试</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testLinkedListAppend</span><span class="params">()</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> link = <span class="type">LinkedList</span>()</span><br><span class="line">    link.append(<span class="number">10</span>)</span><br><span class="line">    <span class="built_in">assert</span>(!link.isEmpty, <span class="string">"非空链表"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">assert</span>(link.first?.value == <span class="number">10</span>, <span class="string">"head 节点为 10"</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">10</span>, <span class="string">"tail 节点为 10"</span>)</span><br><span class="line">    link.append(<span class="number">20</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">20</span>, <span class="string">"tail 节点为 20"</span>)</span><br><span class="line">    link.append(<span class="number">30</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">30</span>, <span class="string">"tail 节点为 30"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testLinkedListAppend()</span><br></pre></td></tr></table></figure>
+<h2 id="输出链表"><a href="#输出链表" class="headerlink" title="输出链表"></a>输出链表</h2><p>当我们学会插入节点之后，第一时间就行看看链表中的内容。目前如果只是简单的 print(link) 的话是不能打印出处链表的信息的，为了实现输出链表信息，做如下操作：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LinkedList</span>: <span class="title">CustomStringConvertible</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> description: <span class="type">String</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> text = <span class="string">"["</span></span><br><span class="line">        <span class="keyword">var</span> node = head</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">            text += <span class="string">"<span class="subst">\(node!.value)</span>"</span></span><br><span class="line">            node = node!.next</span><br><span class="line">            <span class="keyword">if</span> node != <span class="literal">nil</span> &#123; text += <span class="string">" -&gt; "</span> &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> text + <span class="string">"]"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>说明：</strong></p>
+<ul>
+<li>首先为 LinkedList 声明 extension，然后实现 CustomStringConvertible 协议，这个协议要求你实现 computed property description：String</li>
+<li>所以在 extension 内部，声明可计算属性 description，类型为 String，并且该属性是只读属性</li>
+<li>然后在内容通过对 linkedList 的遍历以及字符串拼接，返回需要输出的链表格式</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> link1 = <span class="type">LinkedList</span>()</span><br><span class="line">link1.append(<span class="number">1</span>)</span><br><span class="line">link1.append(<span class="number">2</span>)</span><br><span class="line">link1.append(<span class="number">3</span>)</span><br><span class="line">link1.append(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(link1) <span class="comment">// output: [1 -&gt; 2 -&gt; 3 -&gt; 4]</span></span><br></pre></td></tr></table></figure>
+<p><strong>playground 自动显示</strong></p>
+<p><img src="/2018/07/26/Old/current/June/Data Structure/Data-Structure-一-Linked-List/description.png" alt=""></p>
+<h2 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h2><p>根据输入链表中 node 的位置返回 node object</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">nodeAt</span><span class="params">(<span class="number">_</span> index: Int)</span></span> -&gt; <span class="type">Node</span>? &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> index &gt;= <span class="number">0</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> node = head</span><br><span class="line">        <span class="keyword">var</span> i = index</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span> &#123;<span class="keyword">return</span> node&#125;</span><br><span class="line">            i = i - <span class="number">1</span></span><br><span class="line">            node = node!.next</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>说明：</strong></p>
+<ul>
+<li>首先剔除 index 为负数的情况，返回 nil</li>
+<li>接着通过 node ！= nil 来进行循环，然后通过 index 自减是否为零来进行判断</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testNodeAt</span> <span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> link = <span class="type">LinkedList</span>()</span><br><span class="line">    link.append(<span class="number">0</span>)</span><br><span class="line">    link.append(<span class="number">1</span>)</span><br><span class="line">    link.append(<span class="number">2</span>)</span><br><span class="line">    link.append(<span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">assert</span>(link.nodeAt(<span class="number">0</span>)?.value == <span class="number">0</span>, <span class="string">"node[0] = 0"</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.nodeAt(<span class="number">1</span>)?.value == <span class="number">1</span>, <span class="string">"node[1] = 1"</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.nodeAt(<span class="number">3</span>)?.value == <span class="number">3</span>, <span class="string">"node[3] = 3"</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.nodeAt(<span class="number">8</span>) == <span class="literal">nil</span> , <span class="string">"找不到"</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.nodeAt(-<span class="number">1</span>) == <span class="literal">nil</span> , <span class="string">"找不到"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testNodeAt()</span><br></pre></td></tr></table></figure>
+<h2 id="删除所有节点"><a href="#删除所有节点" class="headerlink" title="删除所有节点"></a>删除所有节点</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">removeAll</span><span class="params">()</span></span> &#123;</span><br><span class="line">    head = <span class="literal">nil</span></span><br><span class="line">    tail = <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testRemoveAll</span> <span class="params">()</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> link = <span class="type">LinkedList</span>()</span><br><span class="line">    link.append(<span class="number">0</span>)</span><br><span class="line">    link.append(<span class="number">1</span>)</span><br><span class="line">    link.append(<span class="number">2</span>)</span><br><span class="line">    link.append(<span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line">    link.removeAll()</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">assert</span>(link.isEmpty, <span class="string">"空"</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.first == <span class="literal">nil</span>, <span class="string">"first"</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.last == <span class="literal">nil</span>, <span class="string">"last"</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.nodeAt(<span class="type">Int</span>(arc4random())) == <span class="literal">nil</span> , <span class="string">"anynoe"</span>)</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testRemoveAll()</span><br></pre></td></tr></table></figure>
+<h2 id="删除指定节点"><a href="#删除指定节点" class="headerlink" title="删除指定节点"></a>删除指定节点</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">remove</span><span class="params">(<span class="number">_</span> node: Node)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> prev = node.previous</span><br><span class="line">    <span class="keyword">let</span> next = node.next</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> prev = prev &#123;</span><br><span class="line">        prev.next = next</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//如果删除的是 first</span></span><br><span class="line">        head = next</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    next?.previous = prev</span><br><span class="line">    <span class="comment">//如果删除的是 last</span></span><br><span class="line">    <span class="keyword">if</span>  next == <span class="literal">nil</span> &#123;</span><br><span class="line">        tail = prev</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    node.previous = <span class="literal">nil</span></span><br><span class="line">    node.next = <span class="literal">nil</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> node.value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testRemove</span> <span class="params">()</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> link = <span class="type">LinkedList</span>()</span><br><span class="line">    link.append(<span class="number">0</span>)</span><br><span class="line">    link.append(<span class="number">1</span>)</span><br><span class="line">    link.append(<span class="number">2</span>)</span><br><span class="line">    link.append(<span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> value = link.remove(link.nodeAt(<span class="number">2</span>)!)</span><br><span class="line">    <span class="built_in">assert</span>(value == <span class="number">2</span>,<span class="string">"删除"</span>)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">3</span>,<span class="string">"删除"</span>)</span><br><span class="line">    link.remove(link.last!)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">1</span>, <span class="string">"删除最后一个node，最后一个node 变为 1"</span>)</span><br><span class="line">    link.remove(link.first!)</span><br><span class="line">    <span class="built_in">assert</span>(link.last?.value == <span class="number">1</span>, <span class="string">"删除第一个node，第一个node 变为 1"</span>)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testRemove()</span><br></pre></td></tr></table></figure>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
+<li><a href="https://www.raywenderlich.com/144083/swift-algorithm-club-swift-linked-list-data-structure" target="_blank" rel="noopener">Swift Algorithm Club: Swift Linked List Data Structure</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/Old/current/June/Swift/Swift-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/26/Old/current/June/Swift/Swift-一/" itemprop="url">Swift (一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-26T22:58:18+08:00">
+                2018-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Swift 访问控制</p>
+<h2 id="private"><a href="#private" class="headerlink" title="private"></a>private</h2><h2 id="filePrivate"><a href="#filePrivate" class="headerlink" title="filePrivate"></a>filePrivate</h2><h2 id="internal"><a href="#internal" class="headerlink" title="internal"></a>internal</h2><h2 id="public"><a href="#public" class="headerlink" title="public"></a>public</h2><h2 id="open"><a href="#open" class="headerlink" title="open"></a>open</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/Old/current/June/iOS-离屏渲染/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/25/Old/current/June/iOS-离屏渲染/" itemprop="url">iOS 离屏渲染</a></h1>
         
 
         <div class="post-meta">
@@ -369,14 +1047,14 @@
           
             <h2 id="什么是离屏渲染"><a href="#什么是离屏渲染" class="headerlink" title="什么是离屏渲染"></a>什么是离屏渲染</h2><p>iOS 的屏幕渲染是通过 GPU 来进行操作的，而在 GPU 渲染 ing 的时候，CPU 为 GPU 准备了渲染的资源，也就是开辟了一块待渲染的缓冲区，这样等当 GPU 渲染接下来的内容的时候直接从缓冲区内取就 OK 了，这便是离屏渲染。</p>
 <p>当然与之对应的就是当前屏幕渲染，我们直接称之为屏幕渲染就好了。在进行 iOS 开发过程中，我们大部分操作的都是 UIKit 中的组件，这些组件正常的渲染都是屏幕渲染，只有在一些特殊的情况下才会使用离屏渲染。比如，在做动画的时候，通过使用屏幕渲染可能速度上会慢，所有就可以通过离屏渲染来加速，而且一旦你的缓存区可以重复利用，那么效率的提高是不是很爽（就如同 UITableViewCell 的重用机制）</p>
-<h2 id="离屏渲染检测"><a href="#离屏渲染检测" class="headerlink" title="离屏渲染检测"></a>离屏渲染检测</h2><p>离屏渲染的检测目前可以通过 Xcode 来进行检测。Xcode 9.x 之后，这部分功能在 Xcode 中集成，之前的是在 Instruments 中的 Core Animation 工具中检测。<br>如图，真机调试，在 Xcode 的 Debug -&gt; View Debugging -&gt; Rendering -&gt; Color OffScreen-Render Yellow 选中<br><img src="/2018/07/25/current/June/iOS-离屏渲染/offScreen.png" alt=""></p>
-<p>然后就可以在手机的 app 中看到开启了离屏渲染的视图，这样我们就可以在实际开发中找到哪些视图开启了离屏渲染<br><img src="/2018/07/25/current/June/iOS-离屏渲染/iPhone.png" alt=""></p>
+<h2 id="离屏渲染检测"><a href="#离屏渲染检测" class="headerlink" title="离屏渲染检测"></a>离屏渲染检测</h2><p>离屏渲染的检测目前可以通过 Xcode 来进行检测。Xcode 9.x 之后，这部分功能在 Xcode 中集成，之前的是在 Instruments 中的 Core Animation 工具中检测。<br>如图，真机调试，在 Xcode 的 Debug -&gt; View Debugging -&gt; Rendering -&gt; Color OffScreen-Render Yellow 选中<br><img src="/2018/07/25/Old/current/June/iOS-离屏渲染/offScreen.png" alt=""></p>
+<p>然后就可以在手机的 app 中看到开启了离屏渲染的视图，这样我们就可以在实际开发中找到哪些视图开启了离屏渲染<br><img src="/2018/07/25/Old/current/June/iOS-离屏渲染/iPhone.png" alt=""></p>
 <p>如果是 Simulator 的话，直接在 Simulator 的 Debug 菜单栏中选中 Color OffScreen-Render Yellow 也可以进行检测。</p>
 <h2 id="哪些操作会引发离屏渲染"><a href="#哪些操作会引发离屏渲染" class="headerlink" title="哪些操作会引发离屏渲染"></a>哪些操作会引发离屏渲染</h2><h4 id="MaskView-的设置"><a href="#MaskView-的设置" class="headerlink" title="MaskView 的设置"></a>MaskView 的设置</h4><p>这是为 iOS 中的一些视图添加蒙版的属性， maskView 的属性是在 UIView 中的，iOS 8.0 + 开放的 API</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UIView  *maskView = [[UIView alloc] initWithFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="number">80</span>, <span class="number">80</span>)];</span><br><span class="line">maskView.alpha = <span class="number">0.5</span>;</span><br><span class="line">maskView.backgroundColor = [UIColor blueColor];</span><br><span class="line">self.icon.maskView = maskView;</span><br></pre></td></tr></table></figure>
 <h3 id="shouldRasterize-YES"><a href="#shouldRasterize-YES" class="headerlink" title="shouldRasterize = YES;"></a>shouldRasterize = YES;</h3><p>这个属性开启之后，也会引起离屏渲染</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.icon.layer.shouldRasterize = YES;</span><br></pre></td></tr></table></figure>
-<p>shouldRasterize 这个属性是称之为 光栅化，如果开启次属性而且缓存区被重复利用，那么效率会有很大提升，这个属性也是可以通过 Xcode 的 Debug -&gt; View Debugging -&gt; Rendering -&gt; Hit Green and Missed Red<br><img src="/2018/07/25/current/June/iOS-离屏渲染/hitGreen.png" alt=""><br><img src="/2018/07/25/current/June/iOS-离屏渲染/hitGreeniPhone.png" alt=""></p>
+<p>shouldRasterize 这个属性是称之为 光栅化，如果开启次属性而且缓存区被重复利用，那么效率会有很大提升，这个属性也是可以通过 Xcode 的 Debug -&gt; View Debugging -&gt; Rendering -&gt; Hit Green and Missed Red<br><img src="/2018/07/25/Old/current/June/iOS-离屏渲染/hitGreen.png" alt=""><br><img src="/2018/07/25/Old/current/June/iOS-离屏渲染/hitGreeniPhone.png" alt=""></p>
 <p>其他的可能会引起离屏渲染的，后面遇到了再进行添加！</p>
 <h3 id="设置阴影"><a href="#设置阴影" class="headerlink" title="设置阴影"></a>设置阴影</h3><p>设置阴影会引起离屏渲染</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.icon.layer.shadowColor = [UIColor blueColor].CGColor;</span><br><span class="line">self.icon.layer.shadowOffset = CGSizeMake(<span class="number">5</span>, <span class="number">5</span>);</span><br><span class="line">self.icon.layer.shadowOpacity = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
@@ -439,7 +1117,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/current/June/GitHub-一）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/Old/current/June/GitHub-一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -458,7 +1136,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/25/current/June/GitHub-一）/" itemprop="url">GitHub （一） 提交了代码，格子没有变绿色</a></h1>
+                <a class="post-title-link" href="/2018/07/25/Old/current/June/GitHub-一）/" itemprop="url">GitHub （一） 提交了代码，格子没有变绿色</a></h1>
         
 
         <div class="post-meta">
@@ -534,7 +1212,7 @@
           
             <p>这篇就解决一个问题: <strong>为什么在 GitHub 上提交了代码，然而上面的格子却没有变成绿色 ？</strong></p>
 <p>我提交 Git 的时间应该还是算比较频繁的，但是发现一个问题，就是今天提交了，但是格子却没有变成绿色，先前一直没有注意这个问题</p>
-<p><img src="/2018/07/25/current/June/GitHub-一）/Git.png" alt=""></p>
+<p><img src="/2018/07/25/Old/current/June/GitHub-一）/Git.png" alt=""></p>
 <p>其实我基本上每天都是有一些提交的，但是就是不显示绿色 …<br>但我还是发现了规律，如果我创建过 Git 仓库，那么那天就会变成绿色，我傻傻的以为，这个格子只有在创建了仓库之后才会变成绿色，😶</p>
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>原因就一句话：GitHub 上绑定的邮箱和 Git 提交的邮箱不一致，我之前本地因为工作的原因全局设置了 @163 的邮箱，但是 GitHub 上绑定的是 @gmail 邮箱。</p>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
@@ -601,7 +1279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/current/June/RunLoop（一）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/Old/current/June/RunLoop（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -620,7 +1298,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/23/current/June/RunLoop（一）/" itemprop="url">RunLoop（一）</a></h1>
+                <a class="post-title-link" href="/2018/07/23/Old/current/June/RunLoop（一）/" itemprop="url">RunLoop（一）</a></h1>
         
 
         <div class="post-meta">
@@ -760,7 +1438,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/current/June/我读过的博客/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/Old/current/June/我读过的博客/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -779,7 +1457,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/23/current/June/我读过的博客/" itemprop="url">我读过的博客</a></h1>
+                <a class="post-title-link" href="/2018/07/23/Old/current/June/我读过的博客/" itemprop="url">我读过的博客</a></h1>
         
 
         <div class="post-meta">
@@ -889,7 +1567,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/current/June/Node-JS-一/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/Old/current/June/Node-JS-一/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -908,7 +1586,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/22/current/June/Node-JS-一/" itemprop="url">Node JS (一)</a></h1>
+                <a class="post-title-link" href="/2018/07/22/Old/current/June/Node-JS-一/" itemprop="url">Node JS (一)</a></h1>
         
 
         <div class="post-meta">
@@ -1011,7 +1689,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/current/June/Hexo-四-添加动态背景效果canvas-nest/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/Old/current/June/Hexo-四-添加动态背景效果canvas-nest/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -1030,7 +1708,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/22/current/June/Hexo-四-添加动态背景效果canvas-nest/" itemprop="url">Hexo(四) 添加动态背景效果canvas-nest</a></h1>
+                <a class="post-title-link" href="/2018/07/22/Old/current/June/Hexo-四-添加动态背景效果canvas-nest/" itemprop="url">Hexo(四) 添加动态背景效果canvas-nest</a></h1>
         
 
         <div class="post-meta">
@@ -1146,624 +1824,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/current/June/Hexo-三-添加微信二维码/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/21/current/June/Hexo-三-添加微信二维码/" itemprop="url">Hexo(三) 添加微信二维码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T01:13:46+08:00">
-                2018-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> 添加微信二维码，在文章的最后，方便阅读文章的人联系你！<br> 这个功能和上一篇中的设置最后的结束语类似，用到的步骤是上一篇的第三步.</p>
-<h2 id="Step1：修改-config-yml"><a href="#Step1：修改-config-yml" class="headerlink" title="Step1：修改 _config.yml"></a>Step1：修改 _config.yml</h2><p>全局搜索 WeChat ，可以搜索到如下的语句，下面展示的时候删除了注释的代码。 <code>WechatIMG13.jpeg</code> 是图片的名字。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Wechat Subscriber</span><br><span class="line">wechat_subscriber:</span><br><span class="line">  enabled: true</span><br><span class="line">  qcode: /uploads/WechatIMG13.jpeg</span><br><span class="line">  description: 微信公众号还没弄好，先放上二维码吧！</span><br></pre></td></tr></table></figure>
-<h2 id="Step2：添加图片"><a href="#Step2：添加图片" class="headerlink" title="Step2：添加图片"></a>Step2：添加图片</h2><p>从微信中获取到二维码，然后添加</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Maple/source/uploads</span><br></pre></td></tr></table></figure>
-<p>博客 source 目录下的 uploads（如果没有这个目录新建一个就是了），然后将图片拷贝进去，测试即可。效果看下面结束语之后</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/current/June/Hexo-二-添加‘文本结束‘-标记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/21/current/June/Hexo-二-添加‘文本结束‘-标记/" itemprop="url">Hexo(二) 添加‘文本结束‘ 标记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T00:24:17+08:00">
-                2018-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>之前在写文章时候，总会在写完的地方，手动写一个 Done 字，标志着这篇博客结束了，这次通过设置在每篇文章中自动添加结束标志，样式如下,看文章的底部就可以了，对，就是这样式的。</p>
-<p>这种结束标识如何实现的呢？</p>
-<h2 id="Step1：创建文件-passage-end-tag-swig"><a href="#Step1：创建文件-passage-end-tag-swig" class="headerlink" title="Step1：创建文件 passage-end-tag.swig"></a>Step1：创建文件 passage-end-tag.swig</h2><p>进入到博客目录的主题目录中：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> /Users/maple/Maple/themes/next/layout/_macro</span></span><br></pre></td></tr></table></figure>
-<p>在此目录下创建文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch passage-end-tag.swig</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vim passage-end-tag.swig</span></span><br><span class="line"><span class="meta">#</span><span class="bash">添加内容</span></span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &#123;% if not is_index %&#125;</span><br><span class="line">        &lt;div style="text-align:center;color: #ccc;font-size:14px;"&gt;-------------本文结束&lt;i class="fa fa-paw"&gt;&lt;/i&gt;再接再厉-------------&lt;/div&gt;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="Step2：生效"><a href="#Step2：生效" class="headerlink" title="Step2：生效"></a>Step2：生效</h2><p>打开 post.swig 文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">vim /Users/maple/Maple/themes/next/layout/_macro/post.swig</span></span><br></pre></td></tr></table></figure>
-<p>搜索 end post 然后将下图的红色框内代码粘贴上图</p>
-<p><img src="/2018/07/21/current/June/Hexo-二-添加‘文本结束‘-标记/end.png" alt=""></p>
-<p>代码如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      &#123;% if not is_index %&#125;</span><br><span class="line">        &#123;% include 'passage-end-tag.swig' %&#125;</span><br><span class="line">      &#123;% endif %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Step3-配置-config-yml"><a href="#Step3-配置-config-yml" class="headerlink" title="Step3: 配置 _config.yml"></a>Step3: 配置 _config.yml</h2><p>在文件最底下添加代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 文章末尾添加“本文结束”标记</span><br><span class="line">passage_end_tag:</span><br><span class="line">  enabled: true</span><br></pre></td></tr></table></figure>
-<p>完成之后通过 <code>hexo g</code> 和 <code>hexo d</code> 验证一下即可</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/" itemprop="url">Hexo (一) fork me on github</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T23:48:25+08:00">
-                2018-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><p><img src="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/forkme.png" alt=""></p>
-<p>如上图所示，在 next 主题的基础上，实现 for me on GitHub 的功能，点击右上角的 GitHub 图标可以直接跳转到你的 GitHub 主页上。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="Step-1："><a href="#Step-1：" class="headerlink" title="Step 1："></a>Step 1：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple/themes/next/layout [0:04:41]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">_custom       _partials     archive.swig  page.swig     tag.swig</span><br><span class="line">_layout.swig  _scripts      category.swig post.swig</span><br><span class="line">_macro        _third-party  index.swig    schedule.swig</span><br></pre></td></tr></table></figure>
-<p>进入到你的 Hexo 目录，然后找到文件 <code>_layout.swig</code> 通过文本编辑器打开</p>
-<h3 id="Step-2："><a href="#Step-2：" class="headerlink" title="Step 2："></a>Step 2：</h3><p>找到 <code>_layout.swig</code> 中如下代码（全局搜索：headband ）</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"&#123;&#123; container_class &#125;&#125; &#123;% block page_class %&#125;&#123;% endblock %&#125; "</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"headband"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>然后打开：<a href="https://blog.github.com/2008-12-19-github-ribbons/" target="_blank" rel="noopener">GitHub Ribbons</a> 或者 <a href="http://tholman.com/github-corners/" target="_blank" rel="noopener">GitHub Corners</a></p>
-<p><img src="/2018/07/20/current/June/hexo-一-右上角或者左上角实现-fork-me-on-github/githubCorners.png" alt=""></p>
-<p>复制图标样式旁边的代码粘贴到上面的代码下面，效果如下</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"&#123;&#123; container_class &#125;&#125; &#123;% block page_class %&#125;&#123;% endblock %&#125; "</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"headband"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://github.com/AliceHome"</span> <span class="attr">class</span>=<span class="string">"github-corner"</span> <span class="attr">aria-label</span>=<span class="string">"View source on Github"</span>&gt;</span><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">"80"</span> <span class="attr">height</span>=<span class="string">"80"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 250 250"</span> <span class="attr">style</span>=<span class="string">"fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"</span> <span class="attr">fill</span>=<span class="string">"currentColor"</span> <span class="attr">style</span>=<span class="string">"transform-origin: 130px 106px;"</span> <span class="attr">class</span>=<span class="string">"octo-arm"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"</span> <span class="attr">fill</span>=<span class="string">"currentColor"</span> <span class="attr">class</span>=<span class="string">"octo-body"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined">.github-corner:hover .octo-arm&#123;animation:octocat-wave 560ms ease-in-out&#125;@keyframes octocat-wave&#123;0%,100%&#123;transform:rotate(0)&#125;20%,60%&#123;transform:rotate(-25deg)&#125;40%,80%&#123;transform:rotate(10deg)&#125;&#125;@media (max-width:500px)</span></span><br><span class="line"><span class="undefined">&#123;.github-corner:hover .octo-arm&#123;animation:none&#125;.github-corner .octo-arm&#123;animation:octocat-wave 560ms ease-in-out&#125;&#125;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="step-3"><a href="#step-3" class="headerlink" title="step 3:"></a>step 3:</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> hexo g</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> hexo s</span></span><br></pre></td></tr></table></figure>
-<p>验证效果，Done!</p>
-<p>感谢简书大神：<br><a href="https://www.jianshu.com/p/f054333ac9e6" target="_blank" rel="noopener">hexo的next主题个性化教程:打造炫酷网站</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/current/June/Hexo-零-问题列表/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/19/current/June/Hexo-零-问题列表/" itemprop="url">Hexo(零) 问题列表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T11:57:19+08:00">
-                2018-07-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Cannot-set-property-‘lastIndex’-of-undefined"><a href="#Cannot-set-property-‘lastIndex’-of-undefined" class="headerlink" title="Cannot set property ‘lastIndex’ of undefined"></a>Cannot set property ‘lastIndex’ of undefined</h2><h3 id="问题详细："><a href="#问题详细：" class="headerlink" title="问题详细："></a>问题详细：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> maple @ iMac in ~/Maple [11:05:09]</span><br><span class="line">$ hexo g</span><br><span class="line">INFO  Start processing</span><br><span class="line">FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</span><br><span class="line">TypeError: Cannot set property &apos;lastIndex&apos; of undefined</span><br><span class="line">    at highlight (/Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:511:35)</span><br><span class="line">    at /Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:561:21</span><br><span class="line">    at Array.forEach (&lt;anonymous&gt;)</span><br><span class="line">    at Object.highlightAuto (/Users/maple/Maple/node_modules/highlight.js/lib/highlight.js:560:40)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:117:25</span><br><span class="line">    at highlight (/Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:120:7)</span><br><span class="line">    at highlightUtil (/Users/maple/Maple/node_modules/hexo-util/lib/highlight.js:22:14)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo/lib/plugins/filter/before_post_render/backtick_code_block.js:62:15</span><br><span class="line">    at String.replace (&lt;anonymous&gt;)</span><br><span class="line">    at Hexo.backtickCodeBlock (/Users/maple/Maple/node_modules/hexo/lib/plugins/filter/before_post_render/backtick_code_block.js:14:31)</span><br><span class="line">    at Hexo.tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Hexo.&lt;anonymous&gt; (/Users/maple/Maple/node_modules/bluebird/js/release/method.js:15:34)</span><br><span class="line">    at /Users/maple/Maple/node_modules/hexo/lib/extend/filter.js:68:35</span><br><span class="line">    at tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Object.gotValue (/Users/maple/Maple/node_modules/bluebird/js/release/reduce.js:155:18)</span><br><span class="line">    at Object.gotAccum (/Users/maple/Maple/node_modules/bluebird/js/release/reduce.js:144:25)</span><br><span class="line">    at Object.tryCatcher (/Users/maple/Maple/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Promise._settlePromiseFromHandler (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:512:31)</span><br><span class="line">    at Promise._settlePromise (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:569:18)</span><br><span class="line">    at Promise._settlePromiseCtx (/Users/maple/Maple/node_modules/bluebird/js/release/promise.js:606:10)</span><br><span class="line">    at Async._drainQueue (/Users/maple/Maple/node_modules/bluebird/js/release/async.js:138:12)</span><br><span class="line">    at Async._drainQueues (/Users/maple/Maple/node_modules/bluebird/js/release/async.js:143:10)</span><br></pre></td></tr></table></figure>
-<h3 id="修改方案："><a href="#修改方案：" class="headerlink" title="修改方案："></a>修改方案：</h3><p>在 _config.yml 修改 auto_detect: 的 true 为 false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">highlight:</span><br><span class="line">  enable: true</span><br><span class="line">  line_number: true</span><br><span class="line">  auto_detect: false</span><br><span class="line">  tab_replace:</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1809,7 +1874,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">107</span>
+                <span class="site-state-item-count">111</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1820,7 +1885,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1831,7 +1896,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
