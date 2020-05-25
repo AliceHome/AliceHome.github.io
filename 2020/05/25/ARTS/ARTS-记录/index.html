@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Swift,">
+  <meta name="keywords" content="arts,">
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="Chapter 11: Structures在写 Objective-C 代码的时候，使用结构体的时候非常少的，但是对于 Swift  而言，结构体却是经常会用到 结构体简介Chapter 14: Class创建类 必须要有初始化方法 所有的属性必须在初始化方法之前有个初始值  12345678910111213141516class Person &amp;#123;    var firstName:">
-<meta name="keywords" content="Swift">
+<meta name="description" content="20200525-0531">
+<meta name="keywords" content="arts">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift Apprentice">
-<meta property="og:url" content="http://yoursite.com/2017/10/14/Pre/2017/Swift Apprentice/Swift-Apprentice/index.html">
+<meta property="og:title" content="ARTS 记录">
+<meta property="og:url" content="http://yoursite.com/2020/05/25/ARTS/ARTS-记录/index.html">
 <meta property="og:site_name" content="Hi, this is Alice Home">
-<meta property="og:description" content="Chapter 11: Structures在写 Objective-C 代码的时候，使用结构体的时候非常少的，但是对于 Swift  而言，结构体却是经常会用到 结构体简介Chapter 14: Class创建类 必须要有初始化方法 所有的属性必须在初始化方法之前有个初始值  12345678910111213141516class Person &amp;#123;    var firstName:">
+<meta property="og:description" content="20200525-0531">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-19T02:24:06.026Z">
+<meta property="og:updated_time" content="2020-05-25T11:54:39.614Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift Apprentice">
-<meta name="twitter:description" content="Chapter 11: Structures在写 Objective-C 代码的时候，使用结构体的时候非常少的，但是对于 Swift  而言，结构体却是经常会用到 结构体简介Chapter 14: Class创建类 必须要有初始化方法 所有的属性必须在初始化方法之前有个初始值  12345678910111213141516class Person &amp;#123;    var firstName:">
+<meta name="twitter:title" content="ARTS 记录">
+<meta name="twitter:description" content="20200525-0531">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/14/Pre/2017/Swift Apprentice/Swift-Apprentice/">
+  <link rel="canonical" href="http://yoursite.com/2020/05/25/ARTS/ARTS-记录/">
 
 
 
 
 
-  <title>Swift Apprentice | Hi, this is Alice Home</title>
+  <title>ARTS 记录 | Hi, this is Alice Home</title>
   
 
 
@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/Pre/2017/Swift Apprentice/Swift-Apprentice/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/25/ARTS/ARTS-记录/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alice">
@@ -313,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Swift Apprentice</h1>
+          <h1 class="post-title" itemprop="name headline">ARTS 记录</h1>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T14:14:31+08:00">
-                2017-10-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-25T19:49:04+08:00">
+                2020-05-25
               </time>
             
 
@@ -348,8 +348,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
+                  <a href="/categories/ARTS/" itemprop="url" rel="index">
+                    <span itemprop="name">ARTS</span>
                   </a>
                 </span>
 
@@ -385,32 +385,7 @@
       
 
       
-        <h2 id="Chapter-11-Structures"><a href="#Chapter-11-Structures" class="headerlink" title="Chapter 11: Structures"></a>Chapter 11: Structures</h2><p>在写 Objective-C 代码的时候，使用结构体的时候非常少的，但是对于 Swift  而言，结构体却是经常会用到</p>
-<h3 id="结构体简介"><a href="#结构体简介" class="headerlink" title="结构体简介"></a>结构体简介</h3><h2 id="Chapter-14-Class"><a href="#Chapter-14-Class" class="headerlink" title="Chapter 14: Class"></a>Chapter 14: Class</h2><h3 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h3><ul>
-<li>必须要有初始化方法</li>
-<li>所有的属性必须在初始化方法之前有个初始值</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> firstName: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> lastName: <span class="type">String</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.firstName = firstName</span><br><span class="line">        <span class="keyword">self</span>.lastName = lastName</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> fullName: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"\(firstName) \(lastName)"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> erik:<span class="type">Person</span> = <span class="type">Person</span>(firstName: <span class="string">"Erik"</span>, lastName: <span class="string">"Keber"</span>)</span><br><span class="line"><span class="built_in">print</span>(erik.fullName)</span><br></pre></td></tr></table></figure>
-<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>类创建的对象是一种引用类型，也就是说当我们通过如下代码创建一个对象的时候</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">Employee</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> var1:<span class="type">Employee</span> = <span class="type">Employee</span>(name: <span class="string">"Jack"</span>)</span><br></pre></td></tr></table></figure>
-<p>实际上，变量存储的是该对象的地址，如果我们通过</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> var2 = var1</span><br></pre></td></tr></table></figure>
-<p>将该变量赋值给另一个变量，此时内存中只有一个对象，两个变量存放着相同的内存地址</p>
-<p>而结构体则是一种值类型，也就是变量存放的不再是地址，而是当前结构体实例的值</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Employee1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> var1 = <span class="type">Employee1</span>(name: <span class="string">"Jack"</span>)</span><br></pre></td></tr></table></figure>
-<p>如果我们通过赋值给另一个变量，其实 copy 了一份新的值给另一个变量</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> var2 = var1</span><br></pre></td></tr></table></figure>
-<p><strong>堆 vs. 栈</strong></p>
-<p>当我们创建一个对象（reference type） 的时候，实际上是存放到了内存的堆区上面，而结构体（value type）则是存放到内存的栈区上面，除非这个 value type 类型的值是对象的一部分。<br>堆区和栈区都是编程中必不可可少的部分，认识堆和栈可以帮助我们了解类和结构体：</p>
-<ul>
-<li>系统使用栈(stack)存放临时的东西，栈里的东西有系统自动管理和优化。比如一个变量在函数开始的时候声明，并存储到栈中，当函数结束的时候这个变量在栈区中的内存就会被自动回收。因此，栈的管理高效、方便、快速</li>
-<li>系统对堆（heap）的管理与栈不同，堆中存放得是一些应用的类型。一般堆的存储都比较大，而且需要应用自己申请和自己释放，当然优化工作也是需要应用自己来处理。所以与栈相比较而言，堆相对比较麻烦和慢。</li>
-</ul>
-<p>到这里有件事情很清晰了：</p>
-<ul>
-<li>通过类创建对象的时候，实际上是通过类的初始化方法在堆中申请了一块内存空间来存放 firstName 和 lastName。而变量和对象的地址则是存放到栈上</li>
-<li>通过结构体创建实例只是在栈上申请空间，与堆区没有任何关系</li>
-</ul>
+        <h1 id="2020"><a href="#2020" class="headerlink" title="2020"></a>2020</h1><p><a href="https://alicehome.github.io/2020/05/25/ARTS-1/" target="_blank" rel="noopener"><strong>0525-0531</strong></a></p>
 
       
     </div>
@@ -447,7 +422,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Swift/" rel="tag"># Swift</a>
+            <a href="/tags/arts/" rel="tag"># arts</a>
           
         </div>
       
@@ -460,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/26/Pre/iOS/LLVM-以及-BitCode-泛谈/" rel="next" title="LLVM 以及 BitCode 泛谈 - Chris Lattner 访谈录">
-                <i class="fa fa-chevron-left"></i> LLVM 以及 BitCode 泛谈 - Chris Lattner 访谈录
+              <a href="/2020/05/25/ARTS/ARTS-1/" rel="next" title="ARTS(1)">
+                <i class="fa fa-chevron-left"></i> ARTS(1)
               </a>
             
           </div>
@@ -469,10 +444,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/01/Pre/Mac /Mac-RAR-解压/" rel="prev" title="Mac RAR 解压">
-                Mac RAR 解压 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -604,7 +575,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-11-Structures"><span class="nav-number">1.</span> <span class="nav-text">Chapter 11: Structures</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体简介"><span class="nav-number">1.1.</span> <span class="nav-text">结构体简介</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-14-Class"><span class="nav-number">2.</span> <span class="nav-text">Chapter 14: Class</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建类"><span class="nav-number">2.1.</span> <span class="nav-text">创建类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型"><span class="nav-number">2.2.</span> <span class="nav-text">引用类型</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2020"><span class="nav-number">1.</span> <span class="nav-text">2020</span></a></li></ol></div>
             
 
           </div>
