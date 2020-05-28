@@ -296,6 +296,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/current/June/GitHub-一）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/25/current/June/GitHub-一）/" itemprop="url">GitHub （一） 提交了代码，格子没有变绿色</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-25T14:01:09+08:00">
+                2018-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/GitHub/" itemprop="url" rel="index">
+                    <span itemprop="name">GitHub</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这篇就解决一个问题: <strong>为什么在 GitHub 上提交了代码，然而上面的格子却没有变成绿色 ？</strong></p>
+<p>我提交 Git 的时间应该还是算比较频繁的，但是发现一个问题，就是今天提交了，但是格子却没有变成绿色，先前一直没有注意这个问题</p>
+<p><img src="/2018/07/25/current/June/GitHub-一）/Git.png" alt=""></p>
+<p>其实我基本上每天都是有一些提交的，但是就是不显示绿色 …<br>但我还是发现了规律，如果我创建过 Git 仓库，那么那天就会变成绿色，我傻傻的以为，这个格子只有在创建了仓库之后才会变成绿色，😶</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>原因就一句话：GitHub 上绑定的邮箱和 Git 提交的邮箱不一致，我之前本地因为工作的原因全局设置了 @163 的邮箱，但是 GitHub 上绑定的是 @gmail 邮箱。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
+<li>修改 GitHub 上的邮箱，这个我没有实际修改过，一致就 OK 吧</li>
+<li>修改本地邮箱，git config –global user.email ‘xxxx@gmail.com’(查看本地的直接用 git config user.email)</li>
+</ol>
+<p>修改完成后，提交一下，就可以看到绿色的格子了 … 有些事你还真得多想想！</p>
+<h2 id="Git-命令指南"><a href="#Git-命令指南" class="headerlink" title="Git 命令指南"></a>Git 命令指南</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:30:37]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config user.email</span></span><br><span class="line">18576759510@163.com</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:30:45]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config --global user.email <span class="string">'huidragonaijy@gmail.com'</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [14:31:08]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config user.email</span></span><br><span class="line">huidragonaijy@gmail.com</span><br></pre></td></tr></table></figure>
+<p>上面的命令：</p>
+<hr>
+<ol>
+<li>查看本地 Git Email 地址；</li>
+<li>修改本地 Git Email 地址；</li>
+<li>再次查看是否修改成功</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/current/June/RunLoop（一）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1577,161 +1739,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/02/current/June/细说-iOS-刷新控件-二）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/02/current/June/细说-iOS-刷新控件-二）/" itemprop="url">细说 iOS 刷新控件(二）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-02T14:25:52+08:00">
-                2018-07-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/刷新控件/" itemprop="url" rel="index">
-                    <span itemprop="name">刷新控件</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这一片介绍 MJRefresh 刷新控件原理，也不知道需要几篇。</p>
-<h2 id="MJRefresh-如何添加头部试图-？"><a href="#MJRefresh-如何添加头部试图-？" class="headerlink" title="MJRefresh 如何添加头部试图 ？"></a>MJRefresh 如何添加头部试图 ？</h2><p>答：通过类目和 <code>runtime</code> 方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">@class MJRefreshHeader, MJRefreshFooter;</span><br><span class="line"></span><br><span class="line">@interface UIScrollView (MJRefresh)</span><br><span class="line">/** 下拉刷新控件 */</span><br><span class="line">@property (strong, nonatomic) MJRefreshHeader *mj_header;</span><br><span class="line">/** 上拉刷新控件 */</span><br><span class="line">@property (strong, nonatomic) MJRefreshFooter *mj_footer;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>文件 UIScrollView+MJRefresh 中为 UIScrollView 添加了 MJRefresh 的类目<br>接下来看一下 <code>UIScrollView+MJRefresh.m</code> 中设置头部视图的实现，这里本质上是通过 <code>runtime</code> 的 <code>objc_setAssociatedObject</code> 函数为 <code>UIScrollView</code> 绑定了 mj_header 属性对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#pragma mark - header</span><br><span class="line">static const char MJRefreshHeaderKey = &apos;\0&apos;;</span><br><span class="line">- (void)setMj_header:(MJRefreshHeader *)mj_header</span><br><span class="line">&#123;</span><br><span class="line">    if (mj_header != self.mj_header) &#123;</span><br><span class="line">        // 删除旧的，添加新的</span><br><span class="line">        [self.mj_header removeFromSuperview];</span><br><span class="line">        [self insertSubview:mj_header atIndex:0];</span><br><span class="line">        </span><br><span class="line">        // 存储新的</span><br><span class="line">        objc_setAssociatedObject(self, &amp;MJRefreshHeaderKey,</span><br><span class="line">                                 mj_header, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (MJRefreshHeader *)mj_header</span><br><span class="line">&#123;</span><br><span class="line">    return objc_getAssociatedObject(self, &amp;MJRefreshHeaderKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从上面代码看到，当设定头部视图的时候，首先判断是否一致，然后删除之前的透视图，然后将传入的头部师徒插入到位置 0 ，然后通过 objc_setAssociatedObject() 函数将 mj_header 绑定成 UIScrollView 的对象，同理，当获取头部试图的时候，通过 objc_getAssociatedObject() 就可以得到头部视图 footer 也是一样的操作。</p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ol>
-<li>下拉刷新的 UI 控件是 UITableView 和 UICollectionView，所以对它们共有的父控件 UIScrollView 采取添加 header 的操作</li>
-<li>类目拓展功能在 iOS 封装组件中常用，比如 SDWebImage 中 UIImageView 的类目方式使用该框架设置图片</li>
-<li>类目不能添加属性，但是可以通过 runtime 的方式做到添加属性，在实现 set/get 放阿飞即可</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1780,7 +1787,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">115</span>
+                <span class="site-state-item-count">116</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
