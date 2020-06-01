@@ -296,6 +296,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/02/Pre/iOS 问题札记/Umeng-劫持-NSSetUncaughtExceptionHandler/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/02/Pre/iOS 问题札记/Umeng-劫持-NSSetUncaughtExceptionHandler/" itemprop="url">Umeng 劫持 NSSetUncaughtExceptionHandler()</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-02T10:07:22+08:00">
+                2018-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS-问题/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS 问题</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>APP 工程中使用了友盟统计信息，导致自己通过<strong>NSSetUncaughtExceptionHandler</strong>收集崩溃信息失败。</p>
+<h2 id="自定义收集崩溃信息"><a href="#自定义收集崩溃信息" class="headerlink" title="自定义收集崩溃信息"></a>自定义收集崩溃信息</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSSetUncaughtExceptionHandler</span> (&amp;MLUncaughtExceptionHandler);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MLUncaughtExceptionHandler(<span class="built_in">NSException</span> *exception) &#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *arr = [exception callStackSymbols];</span><br><span class="line">    <span class="built_in">NSString</span> *reason = [exception reason];</span><br><span class="line">    <span class="built_in">NSString</span> *name = [exception name];</span><br><span class="line">    <span class="comment">//将崩溃原因保存到本地</span></span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] setObject:reason forKey:<span class="string">@"reson"</span>];</span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] synchronize];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上，通过<strong>NSSetUncaughtExceptionHandler()</strong>，参数传入函数地址。当异常发生时，就会将异常信息保存到本地（当然也可发送给后台或者发邮件）。</p>
+<h2 id="问题重现"><a href="#问题重现" class="headerlink" title="问题重现"></a>问题重现</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSSetUncaughtExceptionHandler</span> (&amp;MLUncaughtExceptionHandler);</span><br><span class="line">    <span class="built_in">NSSetUncaughtExceptionHandler</span> (&amp;WMUncaughtExceptionHandler);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MLUncaughtExceptionHandler(<span class="built_in">NSException</span> *exception) &#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *arr = [exception callStackSymbols];</span><br><span class="line">    <span class="built_in">NSString</span> *reason = [exception reason];</span><br><span class="line">    <span class="built_in">NSString</span> *name = [exception name];</span><br><span class="line">    <span class="comment">//将崩溃原因保存到本地</span></span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] setObject:reason forKey:<span class="string">@"reson2"</span>];</span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] synchronize];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> WMUncaughtExceptionHandler(<span class="built_in">NSException</span> *exception) &#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *arr = [exception callStackSymbols];</span><br><span class="line">    <span class="built_in">NSString</span> *reason = [exception reason];</span><br><span class="line">    <span class="built_in">NSString</span> *name = [exception name];</span><br><span class="line">    <span class="comment">//将崩溃原因保存到本地</span></span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] setObject:reason forKey:<span class="string">@"reson"</span>];</span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] synchronize];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码相当于有两个收集崩溃信息的地方 <strong>MLUncaughtExceptionHandler()</strong> 和 <strong>WMUncaughtExceptionHandler()</strong> ,但是当运行程序的时候回发现 <strong>MLUncaughtExceptionHandler()</strong> 不会收集到任何信息。因为 <strong>NSSetUncaughtExceptionHandler()</strong> 传入了两次函数地址，第一次函数的地址被替换掉了。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">NSUncaughtExceptionHandler</span> *_MLHandler;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSSetUncaughtExceptionHandler</span> (&amp;MLUncaughtExceptionHandler);</span><br><span class="line">    <span class="comment">// 保存MLUncaughtExceptionHandler异常的handler</span></span><br><span class="line">    _MLHandler = <span class="built_in">NSGetUncaughtExceptionHandler</span>();</span><br><span class="line">    <span class="comment">// 设置WMUncaughtExceptionHandler异常的handler</span></span><br><span class="line">    <span class="built_in">NSSetUncaughtExceptionHandler</span> (&amp;WMUncaughtExceptionHandler);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MLUncaughtExceptionHandler(<span class="built_in">NSException</span> *exception) &#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *arr = [exception callStackSymbols];</span><br><span class="line">    <span class="built_in">NSString</span> *reason = [exception reason];</span><br><span class="line">    <span class="built_in">NSString</span> *name = [exception name];</span><br><span class="line">    <span class="comment">//将崩溃原因保存到本地</span></span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] setObject:reason forKey:<span class="string">@"reson2"</span>];</span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] synchronize];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> WMUncaughtExceptionHandler(<span class="built_in">NSException</span> *exception) &#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *arr = [exception callStackSymbols];</span><br><span class="line">    <span class="built_in">NSString</span> *reason = [exception reason];</span><br><span class="line">    <span class="built_in">NSString</span> *name = [exception name];</span><br><span class="line">    <span class="comment">//将崩溃原因保存到本地</span></span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] setObject:reason forKey:<span class="string">@"reson"</span>];</span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] synchronize];</span><br><span class="line">    _MLHandler(exception);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将之前对exception处理的handle进行保存，下一次处理的时候，重新调用之前的handle，将异常抛出给他们。</p>
+<h2 id="Umeng-劫持-Exception-问题"><a href="#Umeng-劫持-Exception-问题" class="headerlink" title="Umeng 劫持 Exception 问题"></a>Umeng 劫持 Exception 问题</h2><p>Umeng 应该也是用了上述方式对异常进行的处理，但是并没有将异常进行抛出，所以，当工程中使用了Umeng进行异常统计的时候，我们自己写的异常捕获有可能会失效。如果写在Umeng统计之前就会被Umeng替换掉，异常就无法捕捉。 但是，如果写在Umeng之后，就会造成Umeng统计失效（这个没有去验证）。所以我们就需要使用上面的方式进行处理。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="built_in">NSUncaughtExceptionHandler</span> *_umengHandler;</span><br><span class="line"><span class="comment">// 将Umeng异常处理保存</span></span><br><span class="line">_umengHandler = <span class="built_in">NSGetUncaughtExceptionHandler</span>();</span><br><span class="line"><span class="comment">// 设置自己处理 （UncaughtExceptionHandlerYourself 是你自己处理异常的函数）</span></span><br><span class="line"><span class="built_in">NSSetUncaughtExceptionHandler</span>(&amp;UncaughtExceptionHandlerYourself);</span><br></pre></td></tr></table></figure></p>
+<p>如上，首先保存Umeng的handler UncaughtExceptionHandlerYourself 使我们自己处理异常的handler，然后在自己处理完异常之后，调用一下之前保存的Umeng的handler<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_umengHandler(exception);</span><br></pre></td></tr></table></figure></p>
+<p> <em>· 参考文档  ·</em><br><a href="https://my.oschina.net/zhxx/blog/880909" target="_blank" rel="noopener">iOS友盟和其他崩溃收集库共存时的冲突问题</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/01/Pre/Git/Git-札记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1676,164 +1830,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/23/current/June/Network-一/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/23/current/June/Network-一/" itemprop="url">Network(一)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-23T08:53:14+08:00">
-                2017-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Network/" itemprop="url" rel="index">
-                    <span itemprop="name">Network</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://github.com/AliceHome/Network" target="_blank" rel="noopener">我是demo</a></p>
-<p>iOS 7.0 之后，苹果推出了新的网络 API —— NSURLSession。 <code>NSURLSession supports the HTTP/1.1, SPDY, and HTTP/2 protocols.</code> 从文档这句话中可以看出，新的网络库支持 HTTP 1.0 和 2.0 以及 Google 的 SPDY 网络协议。从这些特性上来讲，目前开发的 APP 都应该将网络库替换成 NSURLSession 了。首先探索下该网络库的使用。</p>
-<h2 id="Node-JS-启动后台服务"><a href="#Node-JS-启动后台服务" class="headerlink" title="Node JS 启动后台服务"></a>Node JS 启动后台服务</h2><p>网络请求就是客户端发起请求，服务端做出响应。作为 iOS 开发，如果没有后台数据的支持，只能到网络上找 API 了，但是我们可以通过 Node JS 实现简单的数据返回。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">var</span> server = http.createServer()</span><br><span class="line"></span><br><span class="line">server.on(<span class="string">'request'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> jsonData = [&#123;</span><br><span class="line">        name:<span class="string">'Jack'</span>,</span><br><span class="line">        age: <span class="number">12</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        name:<span class="string">'Rose'</span>,</span><br><span class="line">        age: <span class="number">13</span></span><br><span class="line">    &#125;]</span><br><span class="line">    res.end(<span class="built_in">JSON</span>.stringify(jsonData))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">9000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'server is running ...'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>上面这段代码解释为：<br>接口：<a href="http://127.0.0.1:9000" target="_blank" rel="noopener">http://127.0.0.1:9000</a><br>数据：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[&#123;</span><br><span class="line">    name:'Jack',</span><br><span class="line">    age: 12</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    name:'Rose',</span><br><span class="line">    age: 13</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
-<p>通过 <code>curl</code> 验证：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> maple @ iMac <span class="keyword">in</span> ~/Maple [8:53:14]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> curl http://127.0.0.1:9000</span></span><br><span class="line">[&#123;"name":"Jack","age":12&#125;,&#123;"name":"Rose","age":13&#125;]%</span><br></pre></td></tr></table></figure>
-<p>OK， 目前为止服务端的数据已经有了。</p>
-<h2 id="NSURLSession-Tour"><a href="#NSURLSession-Tour" class="headerlink" title="NSURLSession Tour"></a>NSURLSession Tour</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)loadData &#123;</span><br><span class="line">    NSURLSession *session = [NSURLSession sharedSession];</span><br><span class="line">    NSURL *url = [NSURL URLWithString:@<span class="string">"http://127.0.0.1:9000"</span>];</span><br><span class="line">    NSURLSessionDataTask *task = [session dataTaskWithURL:url</span><br><span class="line">                                        completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</span><br><span class="line">        </span><br><span class="line">        id obj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves</span><br><span class="line">                                                   error:nil];</span><br><span class="line">        NSLog(@<span class="string">"%@ %@ %@ %@"</span>, obj, response, error, [NSThread currentThread]);</span><br><span class="line">    &#125;];</span><br><span class="line">    [task resume];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过 NSURLSession 请求网络的步骤：</p>
-<p>Step1：创建 NSURLSession 对象；<br>Step2：构造 url；<br>Step3：通过 NSURLSession 的实例方法 dataTaskWithURL: completionHandler: 构造网络请求，返回 NSURLSessionDataTask 对象<br>Step3： NSURLSessionDataTask 对象通过 resume 方法启动网络请求</p>
-<p>这里 <code>id obj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];</code> 实现了 JSON 数据的序列化，obj 的类型是数组。</p>
-<p>操作非常的简单，当然上面的请求是 GET 请求，下一篇看一下 POST 请求。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1882,7 +1878,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">116</span>
+                <span class="site-state-item-count">117</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
