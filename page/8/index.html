@@ -296,6 +296,259 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/01/Pre/CS50/CS50-简介/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/01/Pre/CS50/CS50-简介/" itemprop="url">CS50-简介</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T08:10:43+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS50/" itemprop="url" rel="index">
+                    <span itemprop="name">CS50</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<h1 id="CS-50-简介"><a href="#CS-50-简介" class="headerlink" title="CS 50 简介"></a>CS 50 简介</h1><table>
+<thead>
+<tr>
+<th>Lecture</th>
+<th>Main</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Week 0</td>
+<td>Scratch</td>
+</tr>
+<tr>
+<td>Week 1</td>
+<td>C</td>
+</tr>
+<tr>
+<td></td>
+<td>C，continued</td>
+</tr>
+<tr>
+<td>Week 2</td>
+<td>Algorithms</td>
+</tr>
+<tr>
+<td>Week 3</td>
+<td>Memory</td>
+</tr>
+<tr>
+<td>Week 4</td>
+<td>Data Structures</td>
+</tr>
+<tr>
+<td>Week 5</td>
+<td>HTTP</td>
+</tr>
+<tr>
+<td>Week 6</td>
+<td>Dynamic Programming</td>
+</tr>
+<tr>
+<td></td>
+<td>Python</td>
+</tr>
+<tr>
+<td>Week 7</td>
+<td>Python, continued</td>
+</tr>
+<tr>
+<td>Week 8</td>
+<td>Scratch</td>
+</tr>
+<tr>
+<td>Week 9</td>
+<td>SQL</td>
+</tr>
+<tr>
+<td>Week 10</td>
+<td>JavaScript</td>
+</tr>
+<tr>
+<td>Week 11</td>
+<td>The End</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://docs.cs50.net/2018/x/syllabus.html" target="_blank" rel="noopener">参考-cs50.net</a><br><a href="http://www.project5050.org" target="_blank" rel="noopener"> project5050</a><br><a href="http://cs50.io" target="_blank" rel="noopener">cs50.io</a>, cs50 线上 IDE </p>
+<h2 id="学习途径"><a href="#学习途径" class="headerlink" title="学习途径"></a>学习途径</h2><ul>
+<li>直接在 YouTube 上观看<ul>
+<li>优点： 可以同步中文字幕</li>
+<li>缺点：只有视频而已</li>
+</ul>
+</li>
+<li>edx 上观看<ul>
+<li>优点：有课程大纲以及英文字幕（字幕不是一句一句的，是整个的）</li>
+<li>缺点：没有中文字幕</li>
+</ul>
+</li>
+<li>cs50.tv， 这里有源码、ppt、视频等资源供下载</li>
+</ul>
+<p>OK，主要就是上面的三个资源了。</p>
+<h2 id="CS50-Library"><a href="#CS50-Library" class="headerlink" title="CS50 Library"></a>CS50 Library</h2><p>在学习到第二节课——C语言的时候，需要用到 cs50.h 这个库。最简单的方式质直接登入<a href="http://cs50.io" target="_blank" rel="noopener">cs50.io</a>，线上的 IDE，但是这需要又网络，而且程序必须保存到线上的 IDE 环境中，无法再本地进行编译，那么如何使得在本机上开发也可以引入 cs50.h 呢？</p>
+<ul>
+<li>找到 <a href="https://github.com/cs50/libcs50" target="_blank" rel="noopener">cs50/libcs50</a> git 仓库</li>
+<li>下载 -&gt; 解压 -&gt; cd libcs50 -&gt; sudo make intall（详细安装可以看 git 的 readme 文件)</li>
+<li>安装完成只有，在开发的 c 文件中引入 <em>#include <cs50.h></cs50.h></em> 就 OK 了</li>
+<li>可以通过 <em>man get_string</em> 本地查看文档，也可以通过 <a href="https://reference.cs50.net" target="_blank" rel="noopener">reference.cs50.net/cs50</a> 在线查看文档，推荐线上查看比较清晰</li>
+</ul>
+<p>test.c 内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int number = get_int(&quot;input: &quot;);</span><br><span class="line">    printf(&quot;hello %d&quot;,number);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$clang test.c -lcs50</span><br><span class="line">$./a.out</span><br><span class="line">$input: 12</span><br><span class="line">$hello 12</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<ul>
+<li>头文件引入，按照字母顺序，方便查找</li>
+<li>clang 编译的时候需要加上 <em>-lcs50</em></li>
+<li></li>
+</ul>
+<h2 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h2><ol>
+<li><a href="https://courses.edx.org/courses/course-v1:HarvardX+CS50+X/course/#block-v1:HarvardX+CS50+X+type@chapter+block@d0c88865e9434f17808f54870ea230a1" target="_blank" rel="noopener">edx 学院</a>, 视频，字幕</li>
+<li>[cs50.tv] (<a href="http://cs50.tv/2017/fall/" target="_blank" rel="noopener">http://cs50.tv/2017/fall/</a>) 主要是资源的下载，代码下载</li>
+<li><a href="https://www.youtube.com/channel/UCJw78bnBvSEZBChEWvwWbGQ" target="_blank" rel="noopener">中文解读</a></li>
+<li><a href="https://www.youtube.com/watch?v=uVJ0Il5WvbE&amp;list=PLhQjrBD2T381k8ul4WQ8SQ165XqY149WW" target="_blank" rel="noopener">short</a></li>
+<li><a href="https://www.youtube.com/watch?v=y62zj9ozPOM&amp;list=PLJAZR8XXeiLCqJcINmHVwlGEeWDNeRDhV&amp;index=1" target="_blank" rel="noopener">YouTube</a></li>
+<li><a href="https://manual.cs50.net" target="_blank" rel="noopener">manual.cs50.net</a></li>
+<li><a href="https://reference.cs50.net" target="_blank" rel="noopener">reference.cs50.net/cs50</a></li>
+<li><a href="https://github.com/cs50/libcs50" target="_blank" rel="noopener">github.com/cs50/libcs50</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/Pre/Algorithm/MapReduce-Simplified-Data-Processing-on-Large-Clusters-阅读记录/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1563,192 +1816,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/Pre/Study/阅读列表小计/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/13/Pre/Study/阅读列表小计/" itemprop="url">阅读列表小计</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T11:47:58+08:00">
-                2018-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><table>
-<thead>
-<tr>
-<th>书名(中文）</th>
-<th>书名(英文)</th>
-<th>作者</th>
-<th>源码</th>
-<th>出版时间</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1. Objective-C 编程之道（iOS 设计模式解析）</td>
-<td>Pro Objective-C Design Patterns for iOS</td>
-<td>Carlo Chung</td>
-<td><a href="https://github.com/apress/pro-objective-c-design-patterns-for-ios" target="_blank" rel="noopener">https://github.com/apress/pro-objective-c-design-patterns-for-ios</a></td>
-<td>2011</td>
-</tr>
-<tr>
-<td>2. Effective Objective C 2.0:编写高质量iOS与OS X代码的52个有效方法</td>
-<td>Effective Objective-C 2.0: 52 Specific Ways to Improve Your IOS and OS X Programs</td>
-<td>Carlo Chung</td>
-<td><a href="https://github.com/apress/pro-objective-c-design-patterns-for-ios" target="_blank" rel="noopener">https://github.com/apress/pro-objective-c-design-patterns-for-ios</a></td>
-<td>2011</td>
-</tr>
-<tr>
-<td>1. Objective-C高级编程:iOS与OS X多线程和内存管理</td>
-<td>‘Pro Objective-C Design Patterns for iOS</td>
-<td>Carlo Chung</td>
-<td><a href="https://github.com/apress/pro-objective-c-design-patterns-for-ios" target="_blank" rel="noopener">https://github.com/apress/pro-objective-c-design-patterns-for-ios</a></td>
-<td>2011</td>
-</tr>
-</tbody>
-</table>
-<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h2 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h2><table>
-<thead>
-<tr>
-<th>书名(中文）</th>
-<th>书名(英文)</th>
-<th>作者</th>
-<th>源码</th>
-<th>出版时间</th>
-<th>备注</th>
-<th>阅读时间</th>
-<th>阅读次数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1. 重构改善既有代码的设计</td>
-<td>Refactoring Improving the Design of Existing Code</td>
-<td>Martin Fowler(熊节 译）</td>
-<td></td>
-<td></td>
-<td></td>
-<td>2018</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<h2 id="Git-学习资源"><a href="#Git-学习资源" class="headerlink" title="Git 学习资源"></a>Git 学习资源</h2><ol>
-<li><a href="https://github.com/CyC2018/Interview-Notebook" target="_blank" rel="noopener">CyC2018</a></li>
-<li><a href="http://vdisk.weibo.com/s/uyA1pDHjvMXpq" target="_blank" rel="noopener">网络资源</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1797,7 +1864,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">117</span>
+                <span class="site-state-item-count">118</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

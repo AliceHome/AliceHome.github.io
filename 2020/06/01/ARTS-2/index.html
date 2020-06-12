@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="Hi, this is Alice Home">
 <meta property="og:description" content="上周 ARTS 总结，A 做了很多，但是 RTS 明显时间安排不对，这周需要调整周一： A周二： R周三： T周四： S 周五： 整理总结 ARTS Algorithm题目一： 拥有最多糖果的孩子给你一个数组 candies 和一个整数 extraCandies ，其中 candies[i] 代表第 i 个孩子拥有的糖果数目。 对每一个孩子，检查是否存在一种方案，将额外的 extraCandies">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-02T06:41:40.161Z">
+<meta property="og:updated_time" content="2020-06-02T06:48:50.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ARTS(2)">
 <meta name="twitter:description" content="上周 ARTS 总结，A 做了很多，但是 RTS 明显时间安排不对，这周需要调整周一： A周二： R周三： T周四： S 周五： 整理总结 ARTS Algorithm题目一： 拥有最多糖果的孩子给你一个数组 candies 和一个整数 extraCandies ，其中 candies[i] 代表第 i 个孩子拥有的糖果数目。 对每一个孩子，检查是否存在一种方案，将额外的 extraCandies">
@@ -391,6 +391,7 @@
 <p><strong>代码-Swift:</strong></p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> re = <span class="number">0</span></span><br><span class="line">   <span class="function"><span class="keyword">func</span> <span class="title">sumNums</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">       </span><br><span class="line">       re += n</span><br><span class="line">       <span class="keyword">let</span> <span class="number">_</span> = n == <span class="number">0</span> || sumNums(n - <span class="number">1</span>) &gt; <span class="number">0</span></span><br><span class="line">       <span class="keyword">return</span> re</span><br><span class="line">       </span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h2><p><a href="https://nshipster.com/swift-api-pollution/" target="_blank" rel="noopener">API Pollution in Swift Modules</a></p>
+<p>When you import a module into Swift code, you expect the result to be entirely additive. That is to say: the result to be entirely additive. Taht is to say: the potential for new functionality comes at no expense()</p>
 
       
     </div>
@@ -443,6 +444,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/12/ARTS-3/" rel="prev" title="ARTS(3)">
+                ARTS(3) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -517,7 +522,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">117</span>
+                <span class="site-state-item-count">118</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
