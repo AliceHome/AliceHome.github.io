@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="The Loneliest Whale in the World">
+<meta name="description" content="Algorithm爬楼梯假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1： 输入： 2输出： 2解释： 有两种方法可以爬到楼顶。  1 阶 + 1 阶 2 阶  示例 2： 输入： 3输出： 3解释： 有三种方法可以爬到楼顶。  1 阶 + 1 阶 + 1 阶 1 阶 + 2 阶 2 阶">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ARTS(3)">
 <meta property="og:url" content="http://yoursite.com/2020/06/12/ARTS-3/index.html">
 <meta property="og:site_name" content="Hi, this is Alice Home">
-<meta property="og:description" content="The Loneliest Whale in the World">
+<meta property="og:description" content="Algorithm爬楼梯假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1： 输入： 2输出： 2解释： 有两种方法可以爬到楼顶。  1 阶 + 1 阶 2 阶  示例 2： 输入： 3输出： 3解释： 有三种方法可以爬到楼顶。  1 阶 + 1 阶 + 1 阶 1 阶 + 2 阶 2 阶">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-12T13:47:44.181Z">
+<meta property="og:updated_time" content="2020-06-13T15:56:01.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ARTS(3)">
-<meta name="twitter:description" content="The Loneliest Whale in the World">
+<meta name="twitter:description" content="Algorithm爬楼梯假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1： 输入： 2输出： 2解释： 有两种方法可以爬到楼顶。  1 阶 + 1 阶 2 阶  示例 2： 输入： 3输出： 3解释： 有三种方法可以爬到楼顶。  1 阶 + 1 阶 + 1 阶 1 阶 + 2 阶 2 阶">
 
 
 
@@ -362,7 +362,32 @@
       
 
       
-        
+        <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><h2 id="爬楼梯"><a href="#爬楼梯" class="headerlink" title="爬楼梯"></a>爬楼梯</h2><p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p>
+<p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p>注意：给定 n 是一个正整数。</p>
+<p><strong>示例 1：</strong></p>
+<p>输入： 2<br>输出： 2<br>解释： 有两种方法可以爬到楼顶。</p>
+<ol>
+<li>1 阶 + 1 阶</li>
+<li>2 阶</li>
+</ol>
+<p><strong>示例 2：</strong></p>
+<p>输入： 3<br>输出： 3<br>解释： 有三种方法可以爬到楼顶。</p>
+<ol>
+<li>1 阶 + 1 阶 + 1 阶</li>
+<li>1 阶 + 2 阶</li>
+<li>2 阶 + 1 阶</li>
+</ol>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/climbing-stairs" target="_blank" rel="noopener">https://leetcode-cn.com/problems/climbing-stairs</a></p>
+<p><strong>解析</strong><br>这个题目属于简单一类的，看到题目之后感觉很面熟，但是不会，想到的是排列组合，可能时间长一点会有点想法。没有去想，直接看的官方答案解析：</p>
+<ul>
+<li>首先通过递归，但是没有通过，以为时间复杂度  O(n²)</li>
+<li>对递归进行优化，存储递归中间的值，时间复杂度为 O(n)</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="Swift">
+</code></pre>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><h1 id="Tip"><a href="#Tip" class="headerlink" title="Tip"></a>Tip</h1><h1 id="Share"><a href="#Share" class="headerlink" title="Share"></a>Share</h1>
       
     </div>
     
@@ -469,8 +494,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Alice">
           <p class="site-author-name" itemprop="name">Alice</p>
@@ -483,7 +517,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">119</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -530,6 +564,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#爬楼梯"><span class="nav-number">1.1.</span> <span class="nav-text">爬楼梯</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Review"><span class="nav-number">2.</span> <span class="nav-text">Review</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tip"><span class="nav-number">3.</span> <span class="nav-text">Tip</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Share"><span class="nav-number">4.</span> <span class="nav-text">Share</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

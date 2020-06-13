@@ -296,6 +296,135 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/05/iOS-项目中-1-倍图检索/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/05/iOS-项目中-1-倍图检索/" itemprop="url">iOS  项目中 1 倍图检索</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-05T10:58:52+08:00">
+                2018-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在项目开发的过程中，图片资源有些 1 倍图还存在，但是目前 iOS 开发的版本都支持 iOS 6 以上，甚至大部分只支持到 iOS 8 或者 iOS 9 , 所以这些 1 倍图资源可以直接删除了，可以通过下面的脚本大概检索一下项目中 1 倍图的数量，预估一下工作量</p>
+<p>image delete py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> fnmatch</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">__author__ = <span class="string">'huidragonaijy@gmail.com'</span></span><br><span class="line">__version__ = <span class="string">'0.0.1'</span></span><br><span class="line">__copyright__ = <span class="string">'MIT License'</span></span><br><span class="line"></span><br><span class="line">BLUE = <span class="string">'\033[1;94m'</span></span><br><span class="line">GREEN = <span class="string">'\033[1;92m'</span></span><br><span class="line">ENDC = <span class="string">'\033[0m'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">iter_files</span><span class="params">(path, fnexp)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(path):</span><br><span class="line">        <span class="keyword">for</span> filename <span class="keyword">in</span> fnmatch.filter(files, fnexp):</span><br><span class="line">            <span class="keyword">yield</span> os.path.join(root, filename)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extant_dir</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(x):</span><br><span class="line">        <span class="comment"># Argparse uses the ArgumentTypeError to give a rejection message like:</span></span><br><span class="line">        <span class="comment"># error: argument input: x does not exist</span></span><br><span class="line">        <span class="keyword">raise</span> argparse.ArgumentTypeError(<span class="string">"&#123;0&#125; does not exist"</span>.format(x))</span><br><span class="line">    <span class="keyword">elif</span> <span class="keyword">not</span> os.path.isdir(x):</span><br><span class="line">        <span class="keyword">raise</span> argparse.ArgumentTypeError(<span class="string">"&#123;0&#125; isn't a directory"</span>.format(x))</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(argv=None)</span>:</span></span><br><span class="line">    parser = argparse.ArgumentParser(description=<span class="string">'find all 1x image in the specified directory.'</span>)</span><br><span class="line">    parser.add_argument(<span class="string">'--version'</span>, action=<span class="string">'version'</span>, version=__version__)</span><br><span class="line">    parser.add_argument(<span class="string">'path'</span>, help=<span class="string">'destination directory'</span>, type=extant_dir)</span><br><span class="line">    args = parser.parse_args(argv)</span><br><span class="line"></span><br><span class="line">    total = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> file_path <span class="keyword">in</span> iter_files(args.path, <span class="string">'*@2x.png'</span>):</span><br><span class="line">        file_name = os.path.basename(file_path)</span><br><span class="line">        (name, _) = file_name.split(<span class="string">'@'</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> list(iter_files(args.path, name + <span class="string">'@3x.png'</span>)):</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        imgs_1x = list(iter_files(args.path, name + <span class="string">'.png'</span>))</span><br><span class="line">        <span class="keyword">if</span> imgs_1x:</span><br><span class="line">            total += <span class="number">1</span></span><br><span class="line">            <span class="keyword">print</span> BLUE + <span class="string">'=&gt; '</span> + name + ENDC</span><br><span class="line">            <span class="keyword">for</span> img <span class="keyword">in</span> imgs_1x:</span><br><span class="line">                <span class="keyword">print</span> img</span><br><span class="line">    <span class="keyword">print</span> <span class="string">u'\U0001F37B '</span> + GREEN + <span class="string">'total: %d'</span> % total + ENDC</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="删除注意"><a href="#删除注意" class="headerlink" title="删除注意"></a>删除注意</h2><ol>
+<li>删除图片的时候要查找每一张图片使用的情况</li>
+<li>imageName: 加载图片的时候，最好不要使用 <strong>.png</strong> 后缀，否则只加载了 1 倍图，那么如果将 1 倍图删除了，就会出现问题</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/11/终端浪一浪/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1656,167 +1785,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/current/June/设计模式-一-6-个原则/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/27/current/June/设计模式-一-6-个原则/" itemprop="url">设计模式(一) 6 个原则</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-27T14:38:45+08:00">
-                2018-07-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design-Pattern/" itemprop="url" rel="index">
-                    <span itemprop="name">Design Pattern</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="总原则：开闭原则"><a href="#总原则：开闭原则" class="headerlink" title="总原则：开闭原则"></a>总原则：开闭原则</h2><p><strong>对扩展开放，对修改关闭</strong></p>
-<h2 id="单一原则"><a href="#单一原则" class="headerlink" title="单一原则"></a>单一原则</h2><p>不存在多于一个导致类变更的原因，也就是说每个类应该实现单一的职责，如果不能，就应该把类进一步拆分</p>
-<h2 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h2><p>任何基类出现的地方，子类一定可以出现。 LSP 是继承复用的基石，只有当衍生类可以替换掉基类，软件单位功能不受到影响，基类才能真正被复用，而衍生类才能在基类的基础上增加新的行为。</p>
-<h2 id="依赖倒转原则"><a href="#依赖倒转原则" class="headerlink" title="依赖倒转原则"></a>依赖倒转原则</h2><p>这个是开闭原则的基础，具体内容：面向接口编程，依赖于抽象而不依赖于具体。写代码时用到具体类时，不与具体类交互，而与具体类的上层接口交互。</p>
-<h2 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h2><p>每个接口中不存在子类用不到却必须实现的方法，如果不然，就要将接口拆分。使用多个接口的隔离，比使用单个接口要好。</p>
-<h2 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h2><p>一个类对自己依赖的类知道的越少越好，也就是说无论被依赖的类多么复杂，都应该讲逻辑封装在方法内部，通过 public 方法提供给外部，这样当被依赖的类发生变化的时候，才能最小的影响该类。</p>
-<h2 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h2><p>原则尽量首先使用合成/聚合的方法，而不是继承</p>
-<h2 id="23-三种设计模式分类："><a href="#23-三种设计模式分类：" class="headerlink" title="23 三种设计模式分类："></a>23 三种设计模式分类：</h2><h3 id="对象创建模式："><a href="#对象创建模式：" class="headerlink" title="对象创建模式："></a>对象创建模式：</h3><ol>
-<li>原型模式</li>
-<li>工厂模式</li>
-<li>抽象工厂模式</li>
-<li>生成器模式</li>
-<li>单例模式</li>
-</ol>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
-<li><a href="https://www.cnblogs.com/geek6/p/3951677.html" target="_blank" rel="noopener">23种设计模式全解析</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1865,7 +1833,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">119</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
