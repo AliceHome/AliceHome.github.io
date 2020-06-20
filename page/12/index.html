@@ -296,6 +296,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/01/Pre/Learning-SQLite-for-iOS/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi, this is Alice Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/01/Pre/Learning-SQLite-for-iOS/" itemprop="url">Learning SQLite for iOS</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-01T17:27:57+08:00">
+                2016-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<h1 id="Chapter-1：介绍-SQL-和-SQLite-这一章节，介绍-SQL（structured-query-Language）-北京和移动数据库-——-SQLite"><a href="#Chapter-1：介绍-SQL-和-SQLite-这一章节，介绍-SQL（structured-query-Language）-北京和移动数据库-——-SQLite" class="headerlink" title="Chapter 1：介绍 SQL 和 SQLite 这一章节，介绍 SQL（structured query Language） 北京和移动数据库 —— SQLite."></a>Chapter 1：介绍 SQL 和 SQLite 这一章节，介绍 SQL（structured query Language） 北京和移动数据库 —— SQLite.</h1><h2 id="About-SQL"><a href="#About-SQL" class="headerlink" title="About SQL"></a>About SQL</h2><h2 id="Where-does-SQLite-stand-in-today‘s-industry"><a href="#Where-does-SQLite-stand-in-today‘s-industry" class="headerlink" title="Where does SQLite stand in today‘s industry ?"></a>Where does SQLite stand in today‘s industry ?</h2><h2 id="iOS-with-SQLite"><a href="#iOS-with-SQLite" class="headerlink" title="iOS with SQLite"></a>iOS with SQLite</h2><h2 id="Embedded-database"><a href="#Embedded-database" class="headerlink" title="Embedded database"></a>Embedded database</h2><h2 id="The-architecture-of-the-SQLite-database"><a href="#The-architecture-of-the-SQLite-database" class="headerlink" title="The architecture of the SQLite database"></a>The architecture of the SQLite database</h2><h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><h2 id="The-advantages-of-using-SQLite"><a href="#The-advantages-of-using-SQLite" class="headerlink" title="The advantages of using SQLite"></a>The advantages of using SQLite</h2><p>SQLite 数据的优点：</p>
+<ul>
+<li>SQLite 有数据限制特性以及编辑或者删除表不需要加载到内存中</li>
+<li>SQLite 的数据存储在硬盘上，速度比 Core Data 慢一些</li>
+<li>Core Data 没有数据限制，需要通过 app 的业务逻辑来限制数据量</li>
+<li><h2 id="Working-with-SQLite"><a href="#Working-with-SQLite" class="headerlink" title="Working with SQLite"></a>Working with SQLite</h2>SQLite 官网：www.sqlite.org，在这个官网上可以下载数据库二进制源码，可以查看文档和源代码。在这里，提供了 SQLite 的共享库以及 DLL，当然还有 CLP（command-line-program)，还支持 TCL 扩展，可以通过它进行数据库的链接和更新。<h2 id="The-examples-of-using-SQLite-with-iOS"><a href="#The-examples-of-using-SQLite-with-iOS" class="headerlink" title="The examples of using SQLite with iOS"></a>The examples of using SQLite with iOS</h2></li>
+</ul>
+<h1 id="Chapter-2：数据库设计概念"><a href="#Chapter-2：数据库设计概念" class="headerlink" title="Chapter 2：数据库设计概念"></a>Chapter 2：数据库设计概念</h1><h1 id="Chapter-3：管理数据库"><a href="#Chapter-3：管理数据库" class="headerlink" title="Chapter 3：管理数据库"></a>Chapter 3：管理数据库</h1><h1 id="Chapter-4：Essentials-of-SQL"><a href="#Chapter-4：Essentials-of-SQL" class="headerlink" title="Chapter 4：Essentials of SQL"></a>Chapter 4：Essentials of SQL</h1><h1 id="Chapter-5：Exposing-C-API"><a href="#Chapter-5：Exposing-C-API" class="headerlink" title="Chapter 5：Exposing C API"></a>Chapter 5：Exposing C API</h1><p>C API 的调用，通过这些 API我们可以很方便的在应用程序中访问数据库。大约有 200 多个 API  供调用。</p>
+<h1 id="Chapter-6：Swift-with-SQLite"><a href="#Chapter-6：Swift-with-SQLite" class="headerlink" title="Chapter 6：Swift with SQLite"></a>Chapter 6：Swift with SQLite</h1><h1 id="Chapter-7："><a href="#Chapter-7：" class="headerlink" title="Chapter 7："></a>Chapter 7：</h1><h1 id="Chapter-8："><a href="#Chapter-8：" class="headerlink" title="Chapter 8："></a>Chapter 8：</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/24/current/June/Copy-（一）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1954,141 +2107,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2013/07/13/Pre/Blog 发布/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi, this is Alice Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2013/07/13/Pre/Blog 发布/" itemprop="url">Blog 发布</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-07-13T20:46:25+08:00">
-                2013-07-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="本地生成"><a href="#本地生成" class="headerlink" title="本地生成"></a>本地生成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="部署到远程"><a href="#部署到远程" class="headerlink" title="部署到远程"></a>部署到远程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2132,7 +2155,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-count">121</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2154,7 +2177,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
